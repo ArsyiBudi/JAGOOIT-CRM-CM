@@ -6,7 +6,18 @@ export default {
         "./resources/js/**/*.vue",
     ],
     theme: {
-        extend: {},
+        extend: {
+            colors: {
+                primary: "#272829",
+                secondary: "#EC512E",
+                darkSecondary: "#202020",
+                grey: "#555555",
+                delete: "#AB1E1E",
+            },
+            fontFamily: {
+                quicksand: ["Quicksand"],
+            },
+        },
     },
     plugins: [],
 };
