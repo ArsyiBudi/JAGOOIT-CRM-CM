@@ -13,6 +13,40 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
+// Client
 Route::get('/', function () {
-    return view('welcome');
+    return view('clients.landing');
 });
+
+Route::get('/track', function () {
+    return view('admin.track');
+});
+// Client End
+
+
+// Admin 
+Route::get('/login', function () {
+    return view('admin.login');
+});
+
+Route::get('/leads/menu', function () {
+    return view('admin.leads.menu');
+});
+
+Route::get('/leads/create', function () {
+    return view('admin.leads.create');
+});
+
+Route::get('/leads/detail', function () {
+    return view('admin.leads.detail');
+});
+
+Route::get('/leads/activity/create', function () {
+    return view('admin.leads.create');
+});
+
+Route::get('/leads/offer/create', function () {
+    return view('admin.leads.offer');
+});
+// Admin End
