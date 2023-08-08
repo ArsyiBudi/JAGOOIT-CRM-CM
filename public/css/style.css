@@ -1,1 +1,5 @@
 /* FOR CUSTOM STYLING PURPOSE */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
