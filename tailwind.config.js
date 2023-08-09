@@ -13,11 +13,12 @@ export default {
                 darkSecondary: "#202020",
                 grey: "#555555",
                 delete: "#AB1E1E",
+                layoutBg: "#323232",
             },
             fontFamily: {
                 quicksand: ["Quicksand"],
             },
         },
     },
-    plugins: [],
+    plugins: [require("daisyui")],
 };

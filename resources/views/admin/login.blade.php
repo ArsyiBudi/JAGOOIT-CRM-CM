@@ -20,7 +20,7 @@
             </div>
             <div class="mt-3 relative">
                 <p>Password</p>
-                <input required id="passwordInput" type="password" class="outline-none text-black font-bold rounded-lg bg-white p-2 w-full md:w-[400px] mt-2" >
+                <input  id="passwordInput" type="password" class="outline-none text-black font-bold rounded-lg bg-white p-2 w-full md:w-[400px] mt-2" >
             <div id="eyeOpen" class="absolute top-10 right-3 cursor-pointer" onclick="showPass()">
                 <i class="ri-eye-fill text-black text-opacity-70"></i>
             </div>
