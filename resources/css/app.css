@@ -11,7 +11,7 @@
     } CONTOH  */
 
     .navbar {
-        @apply py-5 px-6;
+        @apply pt-2 md:pt-7 px-5 md:px-10;
     }
 
     .menu li {
