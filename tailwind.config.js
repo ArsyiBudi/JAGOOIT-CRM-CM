@@ -13,6 +13,7 @@ export default {
                 darkSecondary: "#202020",
                 grey: "#555555",
                 delete: "#AB1E1E",
+                layoutBg: "#323232",
                 lightGrey: "#D9D9D9",
             },
             fontFamily: {
@@ -20,5 +21,5 @@ export default {
             },
         },
     },
-    plugins: [],
+    plugins: [require("daisyui")],
 };
