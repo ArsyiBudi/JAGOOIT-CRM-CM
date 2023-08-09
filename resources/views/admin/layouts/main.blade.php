@@ -10,10 +10,10 @@
     <title>Document</title>
 </head>
 <body>
-    <div class="flex items-center gap-5 bg-layoutBg font-quicksand text-white">
+    <div class="flex items-center gap-5 bg-layoutBg font-quicksand text-white h-screen">
         
         @include('admin.partials.sidebar')
-        <div class="container mr-8 pt-14 pl-[18%] mb-12">
+        <div class="container mr-8 pt-14 pl-[20%] mb-12">
             @yield('container')
         </div>
     </div>
