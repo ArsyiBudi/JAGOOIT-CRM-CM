@@ -14,6 +14,7 @@ export default {
                 grey: "#555555",
                 delete: "#AB1E1E",
                 layoutBg: "#323232",
+                lightGrey: "#D9D9D9",
             },
             fontFamily: {
                 quicksand: ["Quicksand"],
