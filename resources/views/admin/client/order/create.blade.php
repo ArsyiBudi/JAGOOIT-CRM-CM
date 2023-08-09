@@ -7,7 +7,7 @@
     @vite('resources/css/app.css')
     <title>Create Order</title>
 </head>
-<body class="font-quicksand bg-layoutBg" >
-    <h1 class="text-white text-center mt-10;">Create Order</h1> 
+<body class="font-quicksand bg-layoutBg h-screen" >
+    <h1 class="text-white text-center pt-10">Create Order</h1> 
 </body>
 </html>
