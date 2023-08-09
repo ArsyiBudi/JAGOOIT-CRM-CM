@@ -52,30 +52,23 @@
     </div>
 </div>
 
-<script>
-    function dropDown() {
-        document.querySelector('.submenu').classList.toggle('hidden');
-        document.querySelector('.panahBwh').classList.toggle('rotate-180');
-    }
-</script>
 
 
 
 {{-- Mobile --}}
-<div class="drawer fixed md:hidden top-5">
+<div class="drawer fixed md:hidden top-8">
   <input id="my-drawer" type="checkbox" class="drawer-toggle" />
   <div class="drawer-content bg-black">
-    <!-- Page content here -->
     <label for="my-drawer" class=" drawer-button"><i class="ri-menu-line text-3xl absolute right-5"></i></label>
   </div> 
+
   <div class="drawer-side">
     <label for="my-drawer" class="drawer-overlay"></label>
     <div class=" bg-darkSecondary w-screen md:w-[18%] pt-11  h-screen flex flex-col items-center fixed top-0 left-0 ">
 
-    <div class=" flex items-center justify-between w-full">
-        <div class="rounded-lg py-1 px-8 mx-8 flex items-center mb-9 bg-lightGrey">
+    <div class=" flex items-center justify-between w-full px-5">
+        <div class="rounded-lg py-1 px-8 ml-5 flex items-center bg-lightGrey">
             <img src="/jagoLogo.png" alt="JagooIT" class=" w-24">
-            
         </div>
         <input id="my-drawer" type="checkbox" class="drawer-toggle" />
             <div class="drawer-content">
@@ -83,7 +76,7 @@
             </div> 
     </div>
 
-    <div class="flex gap-4 items-center mb-9">
+    <div class="flex gap-4 pl-8 items-start mt-9 w-full">
         <img src="/bgRusdi.jpeg" alt="bgRusdi" class="rounded-full w-[54px] h-[54px]">
         <div class="flex flex-col ">
             <h6 class="text-white font-bold text-[14px]">Herman Maritim</h6>
@@ -93,7 +86,7 @@
 
 
 
-    <div class="flex flex-col gap-4 items-center w-full ">
+    <div class="flex flex-col gap-4 items-center w-full mt-5">
         <div class="items-center flex gap-2 py-2 text-white px-8  {{ request()->is('dashboard') ? 'bg-secondary' : '' }} w-full">
             <i class="ri-dashboard-line text-3xl"></i>
             <a href="/dashboard">Dashboard</a>
@@ -131,7 +124,16 @@
   </div>
 </div>
 
+
+
 {{-- Mobile --}}
 
+
+<script>
+    function dropDown() {
+        document.querySelector('.submenu').classList.toggle('hidden');
+        document.querySelector('.panahBwh').classList.toggle('rotate-180');
+    }
+</script>
 
 
