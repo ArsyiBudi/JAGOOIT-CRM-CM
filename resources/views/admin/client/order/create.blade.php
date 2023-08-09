@@ -62,7 +62,7 @@
                     
                     <div class="mt-4">
                         <h4 class="mb-1">Kriteria Karakteristik</h4>
-                        <input type="text" class="text-black rounded-lg h-[133px] w-[740px]">
+                        <input type="text" class="text-black rounded-lg h-[133px] w-[504px]">
                     </div>
                 </div>
             </div>
