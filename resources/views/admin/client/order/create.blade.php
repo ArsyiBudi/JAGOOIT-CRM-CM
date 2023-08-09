@@ -32,7 +32,7 @@
 
                     <div class="mt-4">
                         <h4 class="mb-1">Due Date</h4>
-                        <input type="text" class="text-black rounded-lg h-[38px] w-[295%]">
+                        <input type="text" class="text-black rounded-lg h-[38px] w-[302%]">
                     </div>
                 </div>
 
@@ -42,30 +42,31 @@
             </div>
 
             <div class="flex">
-                <div class="flex flex-col">
+                <div class="flex flex-col items-start">
                     <div class="mt-4">
                         <h4>Kriteria Keterampilan</h4>
-                        <input type="text" class="text-black rounded-lg mt-1 h-[108px] w-[280%]">
+                        <input type="text" class="text-black rounded-lg mt-1 h-[108px] w-[400px]">
                     </div>
-        
+                    
                     <div class="mt-4">
                         <h4 class="mb-1">File TOR</h4>
-                        <input type="text" class="text-black rounded-lg h-[79px] w-[280%]">
+                        <input type="text" class="text-black rounded-lg h-[79px] w-[400px]">
                     </div>
                 </div>
-
-                <div class="flex flex-col">
+            
+                <div class="flex flex-col items-start ml-9">
                     <div class="mt-4">
                         <h4>Anggaran</h4>
-                        <input type="text" class="text-black rounded-lg mt-1 h-[108px] w-[337px]">
+                        <input type="text" class="text-black rounded-lg mt-1 h-[44px] w-[740px]">
                     </div>
-        
+                    
                     <div class="mt-4">
                         <h4 class="mb-1">Kriteria Karakteristik</h4>
-                        <input type="text" class="text-black rounded-lg h-[79px] w-[377px]">
+                        <input type="text" class="text-black rounded-lg h-[133px] w-[740px]">
                     </div>
                 </div>
             </div>
+            
 
             <div class="mt-4 flex justify-end">
                 <button class="bg-secondary text-white rounded-md px-4 py-2 mr-2 h-[37px] w-[97px]">Cancel</button>
