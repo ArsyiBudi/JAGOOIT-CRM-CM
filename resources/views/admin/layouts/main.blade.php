@@ -9,13 +9,11 @@
 
     <title>Document</title>
 </head>
-<body>
-    <div class="flex items-center gap-5 bg-layoutBg font-quicksand text-white h-screen">
-        
+<body class="flex gap-5 bg-layoutBg font-quicksand text-white h-screen">
         @include('admin.partials.sidebar')
-        <div class="container mr-8 pt-14 pl-[20%] mb-12">
+        <div class="pl-[18%]"></div>
+        <div class="container mr-8 pt-14 mb-12">
             @yield('container')
         </div>
-    </div>
 </body>
 </html>
