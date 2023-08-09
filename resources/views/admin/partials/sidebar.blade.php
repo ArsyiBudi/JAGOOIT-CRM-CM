@@ -58,9 +58,17 @@
 {{-- Mobile --}}
 <div class="drawer fixed md:hidden top-8">
   <input id="my-drawer" type="checkbox" class="drawer-toggle" />
-  <div class="drawer-content bg-black">
-    <label for="my-drawer" class=" drawer-button"><i class="ri-menu-line text-3xl absolute right-5"></i></label>
-  </div> 
+
+  <div class=" flex justify-between items-center px-5 absolute right-0 w-full">
+
+    <div class="rounded-lg py-1 px-8  flex items-center bg-lightGrey">
+        <img src="/jagoLogo.png" alt="JagooIT" class=" w-20">
+    </div>
+
+    <div class="drawer-content ">
+        <label for="my-drawer" class=" drawer-button"><i class="ri-menu-line text-3xl"></i></label>
+    </div> 
+  </div>
 
   <div class="drawer-side">
     <label for="my-drawer" class="drawer-overlay"></label>
