@@ -16,11 +16,11 @@
             <div class="block w-52 mx-auto h-1 bg-white rounded-xl mt-3"></div>
             <div class="mt-5 md:mt-3">
                 <p>Username</p>
-                <input type="text" class="outline-none text-black rounded-xl mt-2 bg-white p-2 w-full md:w-[400px] font-bold" >
+                <input required type="text" class="outline-none text-black rounded-xl mt-2 bg-white p-2 w-full md:w-[400px] font-bold" >
             </div>
             <div class="mt-3 relative">
                 <p>Password</p>
-                <input id="passwordInput" type="password" class="outline-none text-black font-bold rounded-lg bg-white p-2 w-full md:w-[400px] mt-2" >
+                <input required id="passwordInput" type="password" class="outline-none text-black font-bold rounded-lg bg-white p-2 w-full md:w-[400px] mt-2" >
             <div id="eyeOpen" class="absolute top-10 right-3 cursor-pointer" onclick="showPass()">
                 <i class="ri-eye-fill text-black text-opacity-70"></i>
             </div>
