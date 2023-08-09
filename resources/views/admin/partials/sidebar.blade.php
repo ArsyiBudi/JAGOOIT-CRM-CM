@@ -86,7 +86,7 @@
 
 
 
-    <div class="flex flex-col gap-4 items-center w-full mt-5">
+    <div class="flex flex-col gap-4  w-full mt-5">
         <div class="items-center flex gap-2 py-2 text-white px-8  {{ request()->is('dashboard') ? 'bg-secondary' : '' }} w-full">
             <i class="ri-dashboard-line text-3xl"></i>
             <a href="/dashboard">Dashboard</a>
@@ -104,7 +104,7 @@
             
             <i class="ri-arrow-up-s-line cursor-pointer text-sm panahBwh " onclick="dropDown()"></i>
         </div>
-        <div class="submenu -mt-5 mr-2">
+        <div class="submenu pl-[62px]">
             <div class="items-center flex gap-2 py-2  {{ request()->is('client/order') ? 'text-secondary fill-secondary' : 'text-white fill-white' }}  w-full">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="32" height="32" class=""><path d="M19.1643 12.0001L12.9572 5.79297L11.543 7.20718L16.3359 12.0001L11.543 16.793L12.9572 18.2072L19.1643 12.0001ZM13.5144 12.0001L7.30728 5.79297L5.89307 7.20718L10.686 12.0001L5.89307 16.793L7.30728 18.2072L13.5144 12.0001Z" ></path></svg>
                 <a href="/client/order">Ongoing</a>
