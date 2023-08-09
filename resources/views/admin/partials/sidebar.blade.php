@@ -1,4 +1,4 @@
-<div class="bg-darkSecondary w-[23%] pt-11  h-screen flex flex-col items-center">
+<div class="bg-darkSecondary w-[16%] pt-11  h-screen flex flex-col items-center fixed top-0 left-0 ">
 
     <div class="rounded-lg py-1 px-8 mx-8 flex items-center mb-9 bg-lightGrey">
         <img src="/jagoLogo.png" alt="JagooIT">
