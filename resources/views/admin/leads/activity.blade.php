@@ -23,7 +23,7 @@
     </style>
 </head>
 <body>
-<h6 class="text-2xl font-semibold mb-4 ml-24">Create Activity</h6>
+<h6 class="text-2xl font-semibold mb-4 ml-36">Create Activity</h6>
 <div class="bg-gray-500 p-6 rounded-lg shadow-lg mx-auto w-[900px] h-[500px]"> 
         
         <select id="formSelector" class="mb-4 bg-gray-500 border border-none rounded-md py-1">Appointment
@@ -34,7 +34,7 @@
         <div class="flex">
             <div id="formContainer" class="w-full">
                 <form id="form1" class="hidden">
-                    <textarea name="judul" id="judul" class="bg-gray-300 mb-2 p-2 border rounded w-full" placeholder="judul"></textarea> <!-- Menggunakan w-full untuk mengisi textarea secara penuh -->
+                    <textarea name="judul" id="judul" class="bg-gray-300 mb-2 p-2 border rounded w-full" placeholder="Judul"></textarea> <!-- Menggunakan w-full untuk mengisi textarea secara penuh -->
                     <div class="flex mb-5">
                         <textarea name="lokasi" id="lokasi" class="bg-gray-300 p-2 border rounded mr-2 flex-1" placeholder="lokasi"></textarea>
                         <textarea name="waktu" id="waktu" class="bg-gray-300 p-2 border rounded flex-1" placeholder="waktu"></textarea>
