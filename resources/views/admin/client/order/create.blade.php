@@ -47,33 +47,35 @@
             <input id="job-description" type="text" class="text-black rounded-lg px-2 py-1 w-full bg-white">
         </div>
 
-        <div class="flex items-center gap-4">
+        <div class="flex gap-4">
 
         
-        <div class="flex flex-wrap gap-4 md:w-1/2">
-            <div class="w-full  mb-4">
-                <label for="kriteria-keterampilan" class="text-sm text-white">Kriteria Keterampilan</label>
-                <input id="kriteria-keterampilan" type="text" class="text-black rounded-lg px-2 py-4 h-32 w-full bg-white">
+            <div class="flex flex-col gap-4 md:w-1/2">
+                <div class="w-full  ">
+                    <label for="kriteria-keterampilan" class="text-sm text-white">Kriteria Keterampilan</label>
+                    <input id="kriteria-keterampilan" type="text" class="text-black rounded-lg px-2 py-4 h-32 w-full bg-white">
+                </div>
+                
+                <div class="w-full  mb-4">
+                    <label for="file-tor" class="text-sm text-white">File TOR</label>
+                    <input id="file-tor" type="text" class="text-black rounded-lg px-2 py-4 h-24  w-full bg-white">
+                </div>
             </div>
             
-            <div class="w-full  mb-4">
-                <label for="file-tor" class="text-sm text-white">File TOR</label>
-                <input id="file-tor" type="text" class="text-black rounded-lg px-2 py-10 h-18 w-full bg-white">
+            <div class="flex flex-col gap-4 md:w-1/2">
+                <div class="w-full">
+                    <label for="anggaran" class="text-sm text-white">Anggaran</label>
+                    <input id="anggaran" type="text" class="text-black rounded-lg px-2 py-4 w-full bg-white">
+                </div>
+                
+                <div class="w-full mb-4">
+                    <label for="kriteria-karakteristik" class="text-sm text-white">Kriteria Karakteristik</label>
+                    <input id="kriteria-karakteristik" type="text" class="text-black rounded-lg px-2 py-4 w-full h-[10.5rem] bg-white">
+                </div>
             </div>
         </div>
-        
-        <div class="flex flex-wrap gap-4 md:w-1/2">
-            <div class="w-full mb-4">
-                <label for="anggaran" class="text-sm text-white">Anggaran</label>
-                <input id="anggaran" type="text" class="text-black rounded-lg px-2 py-1 w-full bg-white">
-            </div>
-            
-            <div class="w-full mb-4">
-                <label for="kriteria-karakteristik" class="text-sm text-white">Kriteria Karakteristik</label>
-                <input id="kriteria-karakteristik" type="text" class="text-black rounded-lg px-2 py-1 w-full bg-white">
-            </div>
-        </div>
-    </div>
+
+
         <div class="flex justify-end mt-6">
             <button class="bg-secondary text-white rounded-md px-4 py-2 mr-2">Cancel</button>
             <button class="bg-secondary text-white rounded-md px-4 py-2">Create</button>
