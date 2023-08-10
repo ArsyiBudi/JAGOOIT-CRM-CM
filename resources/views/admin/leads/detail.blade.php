@@ -1,7 +1,7 @@
 @extends('admin.layouts.main')
 
 @section('container')
-    <div class="bg-primary flex flex-col text-lightGrey p-8 rounded-md space-y-2">
+    <div class="bg-primary flex flex-col text-lightGrey p-8 rounded-md space-y-2 w-full">
         <div class="text-2xl">Detail Leads</div>
         <div class="flex flex-row text-xs space-x-2">
             <Button class="bg-secondary rounded-md p-1">Create Activity</Button>
