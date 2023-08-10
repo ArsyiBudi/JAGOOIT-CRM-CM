@@ -13,7 +13,7 @@
 <body class="flex items-center justify-center gap-0 md:gap-5 bg-layoutBg font-quicksand text-white h-screen overflow-hidden">
         @include('admin.partials.sidebar')
         <div class=" pl-0 md:pl-[18%]"></div>
-        <div class="container mr-0 md:mr-8 pt-0 md:pt-14 mb-0 md:mb-12 w-full md:w-auto overflow-auto">
+        <div class="container mr-0 md:mr-8 pt-0 md:pt-14 mb-0 md:mb-12 overflow-auto">
             @yield('container')
         </div>
 </body>
