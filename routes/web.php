@@ -28,7 +28,7 @@ Route::get('/', function () {
 });
 
 Route::get('/track', function () {
-    return view('admin.track');
+    return view('clients.track');
 });
 // Client End
 
