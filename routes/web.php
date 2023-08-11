@@ -3,6 +3,25 @@
 use Illuminate\Support\Facades\Route;
 
 
+//set active
+function set_active($routes) {
+    $currentPath = $_SERVER['REQUEST_URI'];
+
+    if (is_array($routes)) {
+        foreach ($routes as $route) {
+            if (strpos($currentPath, $route) === 0) {
+                return 'bg-secondary';
+            }
+        }
+    } else {
+        if ($currentPath == $routes) {
+            return 'bg-secondary';
+        }
+    }
+
+    return '';
+}
+
 // Client
 Route::get('/', function () {
     return view('clients.landing');
