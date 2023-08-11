@@ -5,8 +5,121 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Track Your Order</title>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.2.0/fonts/remixicon.css" rel="stylesheet">
+    @vite('resources/css/app.css')
+
+    <style>
+.hide-scrollbar::-webkit-scrollbar {
+    width: 0.4em; /* Width of the scrollbar */
+}
+
+.hide-scrollbar::-webkit-scrollbar-thumb {
+    background-color: #555555; /* Color of the scrollbar thumb */
+    border-radius: 8px; /* Rounded corners for the scrollbar thumb */
+}
+
+.hide-scrollbar::-webkit-scrollbar-thumb:hover {
+    background-color: #777777; /* Color of the scrollbar thumb on hover */
+}
+
+.hide-scrollbar::-webkit-scrollbar-track {
+    background-color: #555555;
+}
+
+.hide-scrollbar::-webkit-scrollbar-track:hover {
+    background-color: #666666; 
+}
+
+.hide-scrollbar {
+    scrollbar-width: thin;
+    scrollbar-color: #555555 #333333;
+}
+
+.hide-scrollbar::-webkit-scrollbar-thumb:vertical {
+    background-color: #fff; 
+}
+
+.date-text {
+    white-space: nowrap; 
+    overflow: hidden;    
+    text-overflow: ellipsis; /* Show ellipsis (...) if text overflows */
+    max-width: 100%; /* Optional: Restrict the width of the element */
+}
+
+</style>
+
 </head>
-<body>
-    
+<body class=" bg-primary font-quicksand text-white min-h-screen hide-scrollbar">
+     @include('admin.partials.navbar')
+     <div class=" pt-28">
+        <h1 class=" text-center text-3xl font-bold">Tracking Your Order</h1>
+        <p class=" text-center pt-3">Order ID 00123456789</p>
+     </div>
+     <div class=" flex items-start justify-between px-10 mt-10 w-full">
+        <div class=" bg-darkSecondary border-white border-2 rounded-lg py-5 pr-20 pl-5 mt-5">
+            <h1 class=" text-xl font-bold">Keterangan</h1>
+            <div class=" flex items-center gap-4 my-4">
+                <div class="bg-secondary rounded-full px-[5px]">
+                    <p class=" text-center">✓</p>
+                </div>
+                <p class=" font-semibold">Selesai</p>
+            </div>
+             <div class=" flex items-center gap-4 my-4">
+                <div class="bg-secondary rounded-full w-5 h-5"></div>
+                <p class=" font-semibold">Dalam Proses</p>
+            </div>
+             <div class=" flex items-center gap-4 my-4">
+                <div class="bg-white rounded-full w-5 h-5"></div>
+                <p class=" font-semibold">Proses Selanjutnya</p>
+            </div>
+        </div>
+
+
+        <div class=" w-96 flex items-center justify-center ">
+        <ul class="steps steps-vertical ">
+            <li data-content="✓" class="step step-primary">
+                <div class=" relative ">
+                    <h1>Recruitment</h1> 
+                    <p class=" absolute text-xs  text-left date-text">Start Date : 8 desember 2022 </p>
+                    <p class="absolute top-10 text-xs py-4">End Date : </p>
+                </div> 
+            </li>
+            <li  class="step step-primary">
+                <div class=" relative">
+                    <h1>Training</h1> 
+                  <p class=" absolute text-xs  text-left">Start Date : 8 desember 2022 </p>
+                    <p class="absolute top-10 text-xs py-4">End Date : </p>
+                </div> 
+            </li>
+            <li class="step">
+                <div class=" relative">
+                    <h1>Penawaran</h1> 
+                      <p class=" absolute text-xs  text-left">Start Date : 8 desember 2022 </p>
+                    <p class="absolute top-10 text-xs py-4">End Date : </p>
+                </div>
+            </li>
+            <li class="step">
+                <div class=" relative">
+                    <h1>User Interview</h1> 
+                     <p class=" absolute text-xs  text-left">Start Date : 8 desember 2022 </p>
+                    <p class="absolute top-10 text-xs py-4">End Date : </p>
+                </div>
+            </li>
+            <li class="step">
+                <div class=" relative">
+                    <h1>PO & PKS</h1> 
+                       <p class=" absolute text-xs  text-left">Start Date : 8 desember 2022 </p>
+                    <p class="absolute top-10 text-xs py-4">End Date : </p>
+                </div>
+            </li>
+            <li class="step">Onboarding     </li>
+        </ul>
+        </div>
+
+        <div class=" w-96  h-96 bg-black opacity-0">
+            <h1>halo</h1>
+        </div>
+     </div>
+  
 </body>
 </html>

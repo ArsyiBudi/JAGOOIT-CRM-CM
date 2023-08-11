@@ -17,4 +17,19 @@
     .menu li {
         @apply hover:text-secondary;
     }
+
+    .steps .step-primary + .step-primary:before,
+    .steps .step-primary:after {
+        @apply bg-secondary;
+    }
+
+    .steps .step-primary + .step-primary:before {
+        @apply w-1;
+        @apply h-24;
+    }
+
+    .steps-vertical .step:before {
+        @apply w-1;
+        @apply h-24;
+    }
 }
