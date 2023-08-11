@@ -4,7 +4,8 @@
     <div class="bg-primary flex flex-col text-lightGrey p-8 rounded-md space-y-2 w-full">
         <div class="text-2xl">Detail Leads</div>
         <div class="flex flex-row text-xs space-x-2">
-            <Button class="bg-secondary rounded-md p-1">Create Activity</Button>
+            <a href="/leads/activity/create">
+            <Button class="bg-secondary rounded-md p-1">Create Activity</Button></a>
             <Button class="bg-secondary rounded-md p-1">Create Offer</Button>
         </div>
         <div class="divide-y divide-slate-50">

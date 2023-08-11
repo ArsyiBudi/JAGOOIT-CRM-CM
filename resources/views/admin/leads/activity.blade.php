@@ -23,10 +23,17 @@
     </style>
 </head>
 <body>
+<<<<<<< HEAD
+
+<div class="bg-darkSecondary p-6 rounded-lg shadow-lg mx-auto w-[900px] h-[500px]"> 
+        <h6 class="text-2xl font-semibold mb-4 ml-2">Create Activity</h6>
+        <select id="formSelector" class="mb-4 ml-2 bg-primary border border-none rounded-md py-1">Appointment
+=======
 <h6 class="text-2xl font-semibold mb-4 ml-36">Create Activity</h6>
 <div class="bg-gray-500 p-6 rounded-lg shadow-lg mx-auto w-[900px] h-[500px]"> 
         
         <select id="formSelector" class="mb-4 bg-gray-500 border border-none rounded-md py-1">Appointment
+>>>>>>> 70542059cf8a4f3f1de638eca4b748afad03c809
             <option value="form1">Appointment</option>
             <option value="form2">Note</option>
             <option value="form3">Report</option>
@@ -34,7 +41,11 @@
         <div class="flex">
             <div id="formContainer" class="w-full">
                 <form id="form1" class="hidden">
+<<<<<<< HEAD
+                    <textarea name="judul" id="judul" class="bg-whitey mb-2 p-2 border rounded w-full" placeholder="judul"></textarea> <!-- Menggunakan w-full untuk mengisi textarea secara penuh -->
+=======
                     <textarea name="judul" id="judul" class="bg-gray-300 mb-2 p-2 border rounded w-full" placeholder="Judul"></textarea> <!-- Menggunakan w-full untuk mengisi textarea secara penuh -->
+>>>>>>> 70542059cf8a4f3f1de638eca4b748afad03c809
                     <div class="flex mb-5">
                         <textarea name="lokasi" id="lokasi" class="bg-gray-300 p-2 border rounded mr-2 flex-1" placeholder="lokasi"></textarea>
                         <textarea name="waktu" id="waktu" class="bg-gray-300 p-2 border rounded flex-1" placeholder="waktu"></textarea>
@@ -56,7 +67,7 @@
                     <textarea name="deskripsireport" id="deskripsireport" class="bg-gray-300 mt-5 mb-2 p-2 border rounded w-full h-[100px]" placeholder="deskripsi"></textarea> 
                     <div class="w-[97px] mx-auto">
                         <input type="submit" class="bg-secondary text-white rounded-md mt-4 mr-3 px-4 py-2 h-[37px]">
-                    </div>
+                    </div>  
                 </form>
             </div>
         </div>
