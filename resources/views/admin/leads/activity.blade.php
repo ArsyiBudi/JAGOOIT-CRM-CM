@@ -1,4 +1,5 @@
 @extends('admin.layouts.main')
+
 @section('container')
 <!DOCTYPE html>
 <html lang="en">
@@ -34,7 +35,6 @@
             <option value="form2" class='font-quicksand'>Note</option>
             <option value="form3" class='font-quicksand'>Report</option>
         </select>
-        <div class="flex">
             <div id="formContainer" class="w-full">
                 <form id="form1" class="hidden">
                     <textarea name="judul" id="judul" class="bg-white font-quicksand text-black mb-2 p-2 border rounded w-full" placeholder="judul"></textarea> <!-- Menggunakan w-full untuk mengisi textarea secara penuh -->
@@ -62,8 +62,7 @@
                     </div>  
                 </form>
             </div>
-        </div>
-    </div>
+</div>
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             const formSelector = document.getElementById("formSelector");
@@ -87,6 +86,4 @@
             document.getElementById("form1").style.display = "block";
         });
     </script>
-</body>
-</html>
 @endsection
