@@ -47,35 +47,35 @@
                 <div class="kiri flex flex-col items-start">
                     <div class="mt-8">
                         <h4>Nama Perusahaan</h4>
-                        <input type="text" class="text-black rounded-lg mt-1 w-full md:w-96 py-3 px-3 outline-none">
+                        <input type="text" class="text-white rounded-lg mt-1 w-full md:w-96 py-3 px-3 outline-none">
                     </div>
                     
                     <div class="mt-8">
                         <h4 class="mb-1">Alamat Perusahaan</h4>
-                        <input type="text" class="text-black rounded-lg w-full md:w-96 py-6 px-3 outline-none">
+                        <input type="text" class="text-white rounded-lg w-full md:w-96 py-6 px-3 outline-none">
                     </div>
 
                     <div class="mt-8">
                         <h4 class="mb-1">Nama PIC</h4>
-                        <input type="text" class="text-black rounded-lg w-full md:w-96 py-3 px-3 outline-none">
+                        <input type="text" class="text-white rounded-lg w-full md:w-96 py-3 px-3 outline-none">
                     </div>
                 </div>
             
                 <div class="flex flex-col items-end ml-10">
                     <div class="mt-8">
                         <h4>Email</h4>
-                        <input type="text" class="text-black rounded-lg mt-1 w-full md:w-96 py-3 px-3 outline-none">
+                        <input type="text" class="text-white rounded-lg mt-1 w-full md:w-96 py-3 px-3 outline-none">
                     </div>
                     
                     <div class="mt-8">
                         <h4 class="mb-1">Bidang</h4>
-                        <input type="text" class="text-black rounded-lg w-full md:w-96 py-6 px-3 outline-none">
+                        <input type="text" class="text-white rounded-lg w-full md:w-96 py-6 px-3 outline-none">
 
                     </div>
 
                     <div class="mt-8">
                         <h4 class="mb-1">Nomor Kontakk PIC</h4>
-                        <input type="text" class="text-black rounded-lg mt-1 w-full md:w-96 py-3 px-3 outline-none">
+                        <input type="text" class="text-white rounded-lg mt-1 w-full md:w-96 py-3 px-3 outline-none">
 
                     </div>
                 </div>
