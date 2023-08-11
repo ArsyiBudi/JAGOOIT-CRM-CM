@@ -7,9 +7,11 @@
             <h3 class="text-white font-semibold text-3xl">Data Clients</h3>
         </div>
 
-        <button class="bg-secondary w-[143px] rounded-lg py-2 flex items-center justify-center">
-            Create Orders 
-        </button>
+        <a href="/client/create">
+            <button class="bg-secondary w-[143px] rounded-lg py-2 flex items-center justify-center">
+                Create Orders 
+            </button>
+        </a>
 
         <div class="flex items-center justify-between mt-3 mb-12">
             <div class="flex gap-3 items-center">

@@ -37,7 +37,7 @@
      <script>
         let show = false;
 
-        const showPass = () => {
+        const showPass = () => {     
             show = !show;            
             const eyeOpen = document.getElementById('eyeOpen');
             const eyeClose = document.getElementById('eyeClose');
