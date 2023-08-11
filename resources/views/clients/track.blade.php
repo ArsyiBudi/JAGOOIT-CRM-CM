@@ -55,70 +55,68 @@
         <h1 class=" text-center text-3xl font-bold">Tracking Your Order</h1>
         <p class=" text-center pt-3">Order ID 00123456789</p>
      </div>
-     <div class=" flex items-start justify-between px-10 mt-10 w-full">
-        <div class=" bg-darkSecondary border-white border-2 rounded-lg py-5 pr-20 pl-5 mt-5">
+     <div class=" block md:flex items-start gap-5 md:gap-40 px-10 mt-10 w-full">
+        <div class=" bg-darkSecondary border-white border-2 rounded-lg py-5 pr-20 pl-5 mt-5 w-full md:w-auto">
             <h1 class=" text-xl font-bold">Keterangan</h1>
             <div class=" flex items-center gap-4 my-4">
                 <div class="bg-secondary rounded-full px-[5px]">
                     <p class=" text-center">✓</p>
                 </div>
-                <p class=" font-semibold">Selesai</p>
+                <p class=" font-semibold text-sm md:text-[16px]">Selesai</p>
             </div>
              <div class=" flex items-center gap-4 my-4">
                 <div class="bg-secondary rounded-full w-5 h-5"></div>
-                <p class=" font-semibold">Dalam Proses</p>
+                <p class=" font-semibold text-sm md:text-[16px]">Dalam Proses</p>
             </div>
              <div class=" flex items-center gap-4 my-4">
                 <div class="bg-white rounded-full w-5 h-5"></div>
-                <p class=" font-semibold">Proses Selanjutnya</p>
+                <p class=" font-semibold text-sm md:text-[16px] ">Proses Selanjutnya</p>
             </div>
         </div>
 
 
-        <div class=" w-96 flex items-center justify-center ">
-        <ul class="steps steps-vertical ">
-            <li data-content="✓" class="step step-primary">
-                <div class=" relative ">
-                    <h1>Recruitment</h1> 
-                    <p class=" absolute text-xs  text-left date-text">Start Date : 8 desember 2022 </p>
-                    <p class="absolute top-10 text-xs py-4">End Date : </p>
-                </div> 
-            </li>
-            <li  class="step step-primary">
-                <div class=" relative">
-                    <h1>Training</h1> 
-                  <p class=" absolute text-xs  text-left">Start Date : 8 desember 2022 </p>
-                    <p class="absolute top-10 text-xs py-4">End Date : </p>
-                </div> 
-            </li>
-            <li class="step">
-                <div class=" relative">
-                    <h1>Penawaran</h1> 
-                      <p class=" absolute text-xs  text-left">Start Date : 8 desember 2022 </p>
-                    <p class="absolute top-10 text-xs py-4">End Date : </p>
-                </div>
-            </li>
-            <li class="step">
-                <div class=" relative">
-                    <h1>User Interview</h1> 
-                     <p class=" absolute text-xs  text-left">Start Date : 8 desember 2022 </p>
-                    <p class="absolute top-10 text-xs py-4">End Date : </p>
-                </div>
-            </li>
-            <li class="step">
-                <div class=" relative">
-                    <h1>PO & PKS</h1> 
-                       <p class=" absolute text-xs  text-left">Start Date : 8 desember 2022 </p>
-                    <p class="absolute top-10 text-xs py-4">End Date : </p>
-                </div>
-            </li>
-            <li class="step">Onboarding     </li>
-        </ul>
+        <div class=" w-96 flex items-center justify-center">
+            <ul class="steps steps-vertical w-full">
+                <li data-content="✓" class="step step-primary">
+                    <div class=" relative w-full">
+                        <h1 class=" text-left pb-2 text-lg">Recruitment</h1> 
+                        <p class=" absolute text-xs  text-left date-text">Start Date : 8 desember 2022 </p>
+                        <p class="absolute top-12 text-xs py-4 text-left date-text">End Date : 8 desember 2022 </p>
+                    </div> 
+                </li>
+                <li  class="step step-primary">
+                    <div class=" relative w-full">
+                        <h1 class=" text-left text-lg pb-2">Training</h1> 
+                        <p class=" absolute text-xs  text-left date-text">Start Date : 8 desember 2022 </p>
+                        <p class="absolute top-12 text-xs py-4 text-left date-text">End Date : 8 desember 2022 </p>
+                    </div> 
+                </li>
+                <li class="step">
+                    <div class=" relative w-full">
+                        <h1 class=" text-left text-lg pb-2">Penawaran</h1> 
+                        <p class=" absolute text-xs  text-left date-text">Start Date : 8 desember 2022 </p>
+                        <p class="absolute top-12 text-xs py-4 text-left date-text">End Date : 8 desember 2022 </p>
+                    </div>
+                </li>
+                <li class="step">
+                    <div class=" relative w-full">
+                        <h1 class=" text-left text-lg pb-2">User Interview</h1> 
+                        <p class=" absolute text-xs  text-left date-text">Start Date : 8 desember 2022 </p>
+                        <p class="absolute top-12 text-xs py-4 text-left date-text">End Date : 8 desember 2022 </p>
+                    </div>
+                </li>
+                <li class="step">
+                    <div class=" relative w-full">
+                        <h1 class=" text-left text-lg pb-2">PO & PKS</h1> 
+                        <p class=" absolute text-xs  text-left date-text">Start Date : 8 desember 2022 </p>
+                        <p class="absolute top-12 text-xs py-4 text-left date-text">End Date : 8 desember 2022 </p>
+                    </div>
+                </li>
+                <li class="step">Onboarding</li>
+            </ul>
         </div>
 
-        <div class=" w-96  h-96 bg-black opacity-0">
-            <h1>halo</h1>
-        </div>
+        
      </div>
   
 </body>
