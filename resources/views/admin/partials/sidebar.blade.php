@@ -17,15 +17,15 @@
 
 
     <div class="flex flex-col gap-4 items-center w-full ">
-        <div class="items-center flex gap-2 py-2 text-white px-8  {{ request()->is('dashboard') ? 'bg-secondary' : '' }} w-full">
+        <div class="items-center flex gap-2 py-2 text-white px-8  {{ set_active(['/dashboard']) }} w-full">
             <i class="ri-dashboard-line text-3xl"></i>
             <a href="/dashboard">Dashboard</a>
         </div>
-        <div class="items-center flex gap-2 py-2  text-white px-8 {{ request()->is('leads/menu') ? 'bg-secondary' : '' }} w-full">
+        <div class="items-center flex gap-2 py-2  text-white px-8 {{ set_active(['/leads']) }} w-full">
             <img src="/leads.png" class="w-[30px] h-[30px] " alt="leads">
             <a href="/leads/menu" class="">Leads</a>
         </div>
-        <div class="items-center flex gap-2 py-2 px-8 justify-between {{ request()->is('client/menu') ? 'bg-secondary' : '' }} text-white w-full">
+        <div class="items-center flex gap-2 py-2 px-8 justify-between {{ set_active(['/client']) }} text-white w-full">
             <div class="flex gap-2 items-center">
 
                 <i class="ri-user-line text-3xl"></i>
