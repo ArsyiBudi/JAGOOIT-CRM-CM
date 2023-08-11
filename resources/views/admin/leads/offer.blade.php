@@ -7,7 +7,6 @@
 @section('container')
 <div id="formContainer">
 
-
     <form class="mt-10 hidden" id="form3">
         <h1 class="text-3xl font-semibold text-white">Create Order</h1>
         <div class="bg-primary rounded shadow-lg mt-6 p-6 h-[calc(50vh-50px)] overflow-y-auto hide-scrollbar">
@@ -82,6 +81,7 @@
             </div>
         </div>
     </form>
+    
 </div>
 
 <h6 class=" font-normal mb-4 text-4xl">Create Offer</h6>
@@ -132,11 +132,11 @@
         document.addEventListener("DOMContentLoaded", function () {
             const formSelector = document.getElementById("formSelector");
             const formContainer = document.getElementById("formContainer");
-            const createSection = document.getElementById("createSection");
 
             formSelector.addEventListener("change", function () {
                 const selectedForm = formSelector.value;
                 const forms = formContainer.getElementsByTagName("form");
+                const createSection = document.getElementById("createSection");
 
                 // Sembunyikan semua formulir
                 for (const form of forms) {
@@ -149,6 +149,7 @@
 
                 if (selectedForm === "form3") {
                     createSection.classList.add("h-fit");
+                    
                 } else {
                     createSection.classList.remove("h-fit");
                 }
