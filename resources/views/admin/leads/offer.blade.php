@@ -5,11 +5,11 @@
     }
 </style>
 @section('container')
-<div id="formContainer">
+{{-- <div id="formContainer"> --}}
 
     <form class="mt-10 hidden" id="form3">
         <h1 class="text-3xl font-semibold text-white">Create Order</h1>
-        <div class="bg-primary rounded shadow-lg mt-6 p-6 h-[calc(50vh-50px)] overflow-y-auto hide-scrollbar">
+        <div class="bg-primary rounded shadow-lg mt-6 p-6 h-[calc(95vh-95px)] overflow-y-auto hide-scrollbar">
             
             <div class="border-b pb-3 mb-6">
                 <h2 class="text-2xl font-semibold text-white">New Order</h2>
@@ -76,15 +76,15 @@
     
     
             <div class="flex justify-end mt-6">
-                <button class="bg-secondary text-white rounded-md px-4 py-2 mr-2">Cancel</button>
+                <button class="bg-secondary text-white rounded-md px-4 py-2 mr-2" onclick="dropDownBack()">Cancel</button>
                 <button class="bg-secondary text-white rounded-md px-4 py-2">Create</button>
             </div>
         </div>
     </form>
     
-</div>
+{{-- </div> --}}
 
-<h6 class=" font-normal mb-4 text-4xl">Create Offer</h6>
+<h6 class=" font-normal mb-4 text-4xl" id="offerTitle">Create Offer</h6>
 <div class="bg-grey p-9 rounded-lg border-2 border-white  w-full h-[500px] overflow-y-scroll hide-scrollbar" id="createSection"> 
         
         <select id="formSelector" class="mb-4 bg-transparent border outline-none border-none rounded-md py-1 text-3xl">
@@ -101,7 +101,7 @@
                         <textarea name="deskripsinote" id="deskripsinote" class="bg-transparent p-2 outline-none text-black w-full h-full resize-none" placeholder="Deskripsi"></textarea> <!-- Menggunakan w-full untuk mengisi textarea secara penuh -->
                     </div>
                     <div class="w-[97px] mx-auto">
-                        <input type="submit" class="bg-secondary text-white rounded-md px-4 mt-5 py-2 h-[37px]">
+                        <input type="submit" class="bg-secondary text-white rounded-md px-4 mt-5 py-2 h-[37px] cursor-pointer">
                     </div>
                 </form>
                 <form id="form2" class="hidden">
@@ -121,22 +121,24 @@
                         <textarea name="deskripsi" id="deskripsi" class="bg-transparent outline-none p-2 text-black resize-none h-full w-full" placeholder="Deskripsi"></textarea> <!-- Menggunakan w-full untuk mengisi textarea secara penuh -->
                     </div>
                     <div class="w-[97px] mx-auto">
-                        <input type="submit" class="bg-secondary  text-white rounded-md px-4 py-2 h-[37px] mt-11">
+                        <input type="submit" class="bg-secondary  text-white rounded-md px-4 py-2 h-[37px] mt-11 cursor-pointer">
                     </div>
                 </form>
-                
+                {{-- <form id="form3" class="hidden"></form> --}}
                       
             </div>
 </div>
     <script>
-        document.addEventListener("DOMContentLoaded", function () {
+
+
+    document.addEventListener("DOMContentLoaded", function () {
             const formSelector = document.getElementById("formSelector");
             const formContainer = document.getElementById("formContainer");
-
+            
             formSelector.addEventListener("change", function () {
+                const offerTitle = document.getElementById("offerTitle");
                 const selectedForm = formSelector.value;
                 const forms = formContainer.getElementsByTagName("form");
-                const createSection = document.getElementById("createSection");
 
                 // Sembunyikan semua formulir
                 for (const form of forms) {
@@ -148,16 +150,22 @@
                 selectedFormElement.style.display = "block";
 
                 if (selectedForm === "form3") {
-                    createSection.classList.add("h-fit");
-                    
+                    createSection.style.display = "none";
+                    offerTitle.style.display = "none";
                 } else {
-                    createSection.classList.remove("h-fit");
+                    createSection.style.display = "block";
+                    offerTitle.style.display = "block";
                 }
             });
             
+            function dropDownBack() {
+                document.getElementById("form3").style.display = "block";
+                document.getElementById("form1").style.display = "block";
+            }
+
             // Inisialisasi dengan menampilkan Formulir 1 secara default
             document.getElementById("form1").style.display = "block";
-            
         });
+ 
     </script>
 @endsection
