@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('order_details', function (Blueprint $table) {
-            $table->id();
+            $table->integer('id', true);
             $table->integer('talent_id');
             $table->string('order_id');
             $table->integer('pre_score') -> nullable();

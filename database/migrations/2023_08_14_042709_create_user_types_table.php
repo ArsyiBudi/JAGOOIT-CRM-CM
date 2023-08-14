@@ -11,11 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('order_details', function($table){
-            $table->foreign('order_id')->references('id')->on('orders');
-        });
-        Schema::table('order', function($table){
-            $table->foreign('order_id')->references('id')->on('orders');
+        Schema::create('user_types', function (Blueprint $table) {
+            $table->integer('id', true);
+            $table->string('description');
         });
     }
 
@@ -24,6 +22,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        //
+        Schema::dropIfExists('user_types');
     }
 };

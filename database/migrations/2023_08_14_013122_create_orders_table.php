@@ -12,9 +12,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('orders', function (Blueprint $table) {
-            $table->string('id');
+            $table->string('id')->primary();
             $table->integer('leads_id');
             $table->integer('offer_letter_id')->nullable();
+            $table->integer('popks_letter_id')->nullable();
             $table->integer('order_status')->default(1);
             $table->integer('desired_position');
             $table->integer('needed_qty');
