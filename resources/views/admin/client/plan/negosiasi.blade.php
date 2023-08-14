@@ -39,12 +39,12 @@
     </style>
 
     @section('container')
-        <div class=" overflow-y-auto overflow-x-hidden mt-28 md:mt-0 px-10 ">
+        <div class=" overflow-y-auto overflow-x-hidden pt-28 md:pt-0 px-5 md:px-10 h-screen ">
             <h1 class=" text-4xl">Appointment Negosiasi</h1>
             <p class=" text-[16px] font-medium pt-3">Silakan set appointment</p>
 
             <div class=" mt-5  w-full ">
-                <ul class=" mx-auto steps steps-horizontal w-full ml-14">
+                <ul class=" mx-auto steps steps-horizontal w-full ml-0 md:ml-14">
                     <li  class="step step-primary">
                     </li>
                     <li  class="step step-primary">
@@ -63,17 +63,16 @@
                 <form action="">
                     <div class=" block md:flex justify-between">
                         <div class=" relative w-full md:w-auto">
-                            <input type="text"  class=" bg-[#D9D9D9] outline-none rounded-md text-black py-1  px-8">
+                            <input type="text"  class=" bg-[#D9D9D9] outline-none rounded-md text-black py-1  px-8 w-full md:w-auto">
                             <i class="ri-search-line absolute top-1 left-2 text-black"></i>
                         </div>
-                        <div class="flex gap-3 items-center w-full md:w-auto">
-                            <label for="endDate">End Date: </label>
-                            <input type="date" id="endDate" class=" custom-date-input rounded-md bg-primary py-2 px-5 text-white outline-none border-[1px] border-white">
+                        <div class="block md:flex gap-3 items-center w-full md:w-auto mt-3 md:mt-0">
+                            <label for="endDate">End Date: </label> <br class=" block md:hidden">
+                            <input type="date" id="endDate" class=" w-full mt-1 md:mt-0 md:w-auto custom-date-input rounded-md bg-primary py-2 px-5 text-white outline-none border-[1px] border-white">
                         </div>
                     </div>
 
-                    <div class="bg-grey p-9 mt-6 rounded-lg border-2 border-white  w-full h-[240px] overflow-y-scroll hide-scrollbar" id="createSection"> 
-                    <form id="form2" class="w-full">
+                    <div class="bg-grey p-9 mt-6 rounded-lg border-2 border-white  w-full h-[360px] overflow-y-scroll hide-scrollbar" id="createSection"> 
                         <div class="bg-white opacity-70 mb-4 p-2 rounded-md w-full">
                             <textarea name="judul" id="judul" class="text-black opacity-100 w-full p-2 bg-transparent outline-none resize-none" placeholder="Judul"></textarea> <!-- Menggunakan w-full untuk mengisi textarea secara penuh -->
                         </div>
@@ -92,19 +91,19 @@
                         <div class="w-[97px] mx-auto">
                             <input type="submit" class="bg-secondary  text-white rounded-md px-4 py-2 h-[39px] mt-11 cursor-pointer">
                         </div>
-                    </form>
-                    </div>
-
-
-                    <div>
-                        <button class="bg-secondary text-white rounded-md px-4 py-2 mr-2">Back</button>
-                    </div>
-                    <div class="flex justify-end">
-                            <button class="bg-secondary text-white rounded-md px-4 py-2 mr-2">Save</button>
-            
-                        <button class="bg-secondary text-white rounded-md px-4 py-2">Continue</button>
                     </div>
                 </form> 
+
+                <div class="flex justify-between items-center">
+                    <div>
+                        <button class="bg-secondary text-white rounded-md px-4 py-2 mr-2 md:w-[168px]">Back</button>
+                    </div>
+                    <div class="">
+                        <button class="bg-secondary text-white rounded-md px-4 py-2 mr-2 md:w-[100px]">Save</button>
+            
+                        <button class="bg-secondary text-white rounded-md px-4 py-2 md:w-[168px]">Continue</button>
+                    </div>
+                </div>
             </div>
         </div>
     @endsection

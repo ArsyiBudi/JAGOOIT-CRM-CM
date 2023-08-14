@@ -24,7 +24,7 @@ function set_active($routes)
 }
 
 // Client
-Route::get('/', function () {
+Route::any('/', function () {
     return view('clients.landing');
 });
 
@@ -32,7 +32,6 @@ Route::get('/track', function () {
     return view('clients.track');
 });
 // Client End
-
 
 // Admin 
 Route::get('/login', function () {
