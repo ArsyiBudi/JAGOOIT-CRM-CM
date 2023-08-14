@@ -1,7 +1,7 @@
 
 
 
-<div class=" hidden bg-darkSecondary w-screen md:w-[18%] pt-11  h-screen md:flex flex-col items-center fixed top-0 left-0 ">
+<div class=" hidden bg-darkSecondary w-screen lg:w-[18%] pt-11  h-screen lg:flex flex-col items-center fixed top-0 left-0 ">
 
     <div class="rounded-lg py-1 px-8 mx-8 flex items-center mb-9 bg-lightGrey">
         <img src="/jagoLogo.png" alt="JagooIT">
@@ -63,7 +63,7 @@
 
 
 {{-- Mobile --}}
-<div class="drawer fixed md:hidden top-8 z-50">
+<div class="drawer fixed lg:hidden top-8 z-50">
   <input id="my-drawer" type="checkbox" class="drawer-toggle" />
 
   <div class=" flex justify-between items-center px-5 absolute right-0 w-full">
@@ -79,7 +79,7 @@
 
   <div class="drawer-side">
     <label for="my-drawer" class="drawer-overlay"></label>
-    <div class=" bg-darkSecondary w-screen md:w-[18%] pt-11  h-screen flex flex-col items-center fixed top-0 left-0 ">
+    <div class=" bg-darkSecondary w-screen lg:w-[18%] pt-11  h-screen flex flex-col items-center fixed top-0 left-0 ">
 
     <div class=" flex items-center justify-between w-full px-5">
         <div class="rounded-lg py-1 px-8 ml-5 flex items-center bg-lightGrey">

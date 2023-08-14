@@ -10,10 +10,10 @@
 
     <title>{{ $title }}</title>
 </head>
-<body class="flex items-center justify-center gap-0 md:gap-5 bg-layoutBg font-quicksand text-white min-h-screen overflow-hidden">
+<body class="flex items-center justify-center gap-0 lg:gap-5 bg-layoutBg font-quicksand text-white min-h-screen overflow-hidden">
         @include('admin.partials.sidebar')
-        <div class=" pl-0 md:pl-[18%]"></div>
-        <div class="container mr-0 md:mr-8 pt-0 md:pt-14 mb-0 md:mb-12 overflow-auto">
+        <div class=" pl-0 lg:pl-[18%]"></div>
+        <div class="container mr-0 lg:mr-8 pt-0 lg:pt-14 mb-0 lg:mb-12 overflow-auto">
             @yield('container')
         </div>
 </body>
