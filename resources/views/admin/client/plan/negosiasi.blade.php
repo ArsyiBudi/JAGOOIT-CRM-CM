@@ -40,8 +40,8 @@
 
     @section('container')
         <div class=" overflow-y-auto overflow-x-hidden mt-28 md:mt-0 px-10 ">
-            <h1 class=" text-4xl">Recruitment</h1>
-            <p class=" text-[16px] font-medium pt-3">Silakan pilih kandidat dengan jumlah melebihi yang dibutuhkan <br> untuk cadangan</p>
+            <h1 class=" text-4xl">Appointment Negosiasi</h1>
+            <p class=" text-[16px] font-medium pt-3">Silakan set appointment</p>
 
             <div class=" mt-5  w-full ">
                 <ul class=" mx-auto steps steps-horizontal w-full ml-14">

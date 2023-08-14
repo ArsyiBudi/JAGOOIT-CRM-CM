@@ -136,9 +136,9 @@ Route::get('/client/plan/create/negosiasi', function () {
     ]);
 });
 
-Route::get('/client/plan/create/interview', function () {
-    return view('admin.client.plan.interview', [
-        "title" => "Plan | Interview",
+Route::get('/client/plan/create/percobaan', function () {
+    return view('admin.client.plan.percobaan', [
+        "title" => "Plan | Percobaan",
     ]);
 });
 
