@@ -39,12 +39,12 @@
 </style>
 
 @section('container')
-    <div class=" overflow-y-auto overflow-x-hidden mt-28 md:mt-0 px-10 ">
+    <div class=" overflow-y-auto overflow-x-hidden pt-28 md:pt-0 px-5 md:px-10 h-screen">
         <h1 class=" text-4xl">Recruitment</h1>
-        <p class=" text-[16px] font-medium pt-3">Silakan pilih kandidat dengan jumlah melebihi yang dibutuhkan <br> untuk cadangan</p>
+        <p class=" text-sm md:text-[16px] font-medium pt-3">Silakan pilih kandidat dengan jumlah melebihi yang dibutuhkan <br class=" hidden md:block"> untuk cadangan</p>
 
         <div class=" mt-5  w-full ">
-            <ul class=" mx-auto steps steps-horizontal w-full ml-14">
+            <ul class=" mx-auto steps steps-horizontal w-full ml-0 md:ml-14">
                 <li  class="step step-primary">
                 </li>
                 <li  class="step ">
@@ -63,12 +63,12 @@
             <form action="">
                 <div class=" block md:flex justify-between">
                     <div class=" relative w-full md:w-auto">
-                        <input type="text"  class=" bg-[#D9D9D9] outline-none rounded-md text-black py-1  px-8">
+                        <input type="text"  class=" bg-[#D9D9D9] outline-none rounded-md text-black py-1  px-8 w-full md:w-auto">
                         <i class="ri-search-line absolute top-1 left-2 text-black"></i>
                     </div>
-                    <div class="flex gap-3 items-center w-full md:w-auto">
-                        <label for="endDate">End Date: </label>
-                        <input type="date" id="endDate" class=" custom-date-input rounded-md bg-primary py-2 px-5 text-white outline-none border-[1px] border-white">
+                    <div class=" block md:flex gap-3 items-center w-full md:w-auto mt-3 md:mt-0">
+                        <label for="endDate">End Date: </label> <br class=" block md:hidden">
+                        <input type="date" id="endDate" class=" w-full mt-1 md:mt-0 md:w-auto custom-date-input rounded-md bg-primary py-2 px-5 text-white outline-none border-[1px] border-white">
                     </div>
                 </div>
                 <div class=" bg-grey w-full p-3 rounded-md mt-4 overflow-auto h-72 hide-scrollbar">
@@ -219,13 +219,16 @@
                         </table>
                     </div>
                 </div>
-                <div class=" flex justify-between items-center">
+                <div class=" flex justify-between items-center gap-1 md:gap-0">
                     <div>
-                        <button class=" bg-secondary text-white text-sm text-center py-1 px-14 rounded-md font-bold">Save</button>
+                        <button class=" bg-secondary text-white text-sm text-center py-1 px-3 md:px-14 rounded-md font-bold">
+                          <p class=" hidden md:block">Save</p>
+                          <i class="ri-save-3-line block md:hidden"></i>  
+                        </button>
                     </div>
                     <div class=" flex items-center gap-3">
                         <div class="">
-                            <button class=" bg-secondary py-1 px-5 rounded-md cursor-pointer hover:scale-95 my-5">Prev</button>
+                            <button class=" bg-secondary py-1 px-3 md:px-5 rounded-md cursor-pointer hover:scale-95 my-5">Prev</button>
                         </div>
                         <div class=" bg-grey p-1 rounded-md w-8 text-center">
                             <p>1</p>
@@ -234,12 +237,15 @@
                             <p>10</p>
                         </div>
                         <div class="">
-                            <button class=" bg-secondary py-1 px-5 rounded-md cursor-pointer hover:scale-95 my-5">Next</button>
+                            <button class="  bg-secondary py-1 px-3 md:px-5 rounded-md cursor-pointer hover:scale-95 my-5">Next</button>
                         </div>
                         
                     </div>
                       <div>
-                        <button class=" bg-secondary text-white text-sm text-center py-1 px-14 rounded-md font-bold">Continue</button>
+                        <button class=" bg-secondary text-white text-sm text-center py-1 px-2 md:px-14 rounded-md font-bold">
+                            <p class=" hidden md:block">Continue</p>
+                            <i class="ri-arrow-right-s-line block md:hidden"></i>
+                        </button>
                     </div>
                 </div>
             </form> 
