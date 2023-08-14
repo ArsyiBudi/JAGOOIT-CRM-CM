@@ -1,7 +1,7 @@
 @extends('admin.layouts.main')
 
 @section('container')
-<h6 class=" font-normal mb-4 text-4xl">Create Activity</h6>
+<h6 class="mt-24 md:mt-0 text-center md:text-left font-normal mb-4 text-4xl">Create Activity</h6>
 <div class="bg-grey p-9 rounded-lg border-2 border-white  w-full h-[500px]"> 
         
         <select id="formSelector" class="mb-4 bg-transparent border outline-none border-none rounded-md py-1 text-3xl">
