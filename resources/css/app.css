@@ -23,10 +23,10 @@
         @apply bg-secondary;
     }
 
-    .steps .step-primary + .step-primary:before {
+    /* .steps .step-primary + .step-primary:before {
         @apply w-1;
         @apply h-24;
-    }
+    } */
 
     .steps-vertical .step:before {
         @apply w-1;
