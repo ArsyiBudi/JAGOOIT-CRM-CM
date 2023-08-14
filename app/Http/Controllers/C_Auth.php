@@ -16,7 +16,7 @@ class C_Auth extends Controller
         ]);
 
         //Checking email
-        $user = User::where('name', $field['username']) -> first();
+        $user = User::where('username', $field['username']) -> first();
 
         //Checking Password
         if(!$user ||  !User::where('password', $field['password']) -> first()){
