@@ -9,7 +9,7 @@
 
     <form class="mt-10 hidden" id="form3">
         <h1 class="text-3xl font-semibold text-white">Create Order</h1>
-        <div class="bg-primary rounded shadow-lg mt-6 p-6 h-[calc(95vh-95px)] overflow-y-auto hide-scrollbar">
+        <div class="bg-primary rounded shadow-lg mt-6 p-6 h-[calc(85vh-85px)] overflow-y-auto hide-scrollbar">
             
             <div class="border-b pb-3 mb-6">
                 <h2 class="text-2xl font-semibold text-white">New Order</h2>

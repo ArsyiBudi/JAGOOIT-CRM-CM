@@ -48,6 +48,7 @@
                     <td class="py-4 font-medium">7 Agustus 2023</td>
                     <td class="py-4 font-medium">Selesai</td>
                     <td class="py-4 font-medium">
+                        <i class="ri-checkbox-circle-line text-2xl"></i>
                         <i class="ri-calendar-todo-fill text-2xl"></i>
                         <i class="ri-information-line text-2xl"></i>
                         <i class="ri-delete-bin-2-line text-2xl text-red-600"></i>
