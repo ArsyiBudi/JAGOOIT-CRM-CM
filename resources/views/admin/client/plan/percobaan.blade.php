@@ -222,8 +222,8 @@
                 <div class=" flex justify-between items-center gap-1 md:gap-0">
                     <div>
                         <button class=" bg-secondary text-white text-sm text-center py-1 px-3 md:px-14 rounded-md font-bold">
-                          <p class=" hidden md:block">Save</p>
-                          <i class="ri-save-3-line block md:hidden"></i>  
+                          <p class=" hidden md:block">Back</p>
+                          <i class="ri-arrow-left-line block md:hidden"></i>  
                         </button>
                     </div>
                     <div class=" flex items-center gap-3">
@@ -241,7 +241,11 @@
                         </div>
                         
                     </div>
-                      <div>
+                    <div class="flex gap-1">
+                        <button class=" bg-secondary text-white text-sm text-center py-1 px-3 md:px-14 rounded-md font-bold">
+                            <p class=" hidden md:block">Save</p>
+                            <i class="ri-save-3-line block md:hidden"></i>  
+                          </button>
                         <button class=" bg-secondary text-white text-sm text-center py-1 px-2 md:px-14 rounded-md font-bold">
                             <p class=" hidden md:block">Continue</p>
                             <i class="ri-arrow-right-s-line block md:hidden"></i>
