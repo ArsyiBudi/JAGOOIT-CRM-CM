@@ -36,7 +36,7 @@
 </style>
 
 @section('container')
-    <div class=" overflow-auto mt-28 md:mt-0">
+    <div class=" overflow-auto pt-28 md:mt-0 h-screen">
         {{-- <div class=" mt-64 mb-5">
             <h1>Leads / <span>Menu</span></h1>
         </div> --}}

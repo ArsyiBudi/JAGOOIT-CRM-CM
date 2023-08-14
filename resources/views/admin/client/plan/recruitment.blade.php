@@ -63,7 +63,7 @@
             <form action="">
                 <div class=" block md:flex justify-between">
                     <div class=" relative w-full md:w-auto">
-                        <input type="text"  class=" bg-[#D9D9D9] outline-none rounded-md text-black py-1  px-8 w-full md:w-auto">
+                        <input type="text"  class=" bg-[#D9D9D9] outline-none rounded-md text-black py-1  px-8 w-full md:w-auto" placeholder="Search">
                         <i class="ri-search-line absolute top-1 left-2 text-black"></i>
                     </div>
                     <div class=" block md:flex gap-3 items-center w-full md:w-auto mt-3 md:mt-0">
