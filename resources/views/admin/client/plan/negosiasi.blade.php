@@ -39,12 +39,12 @@
     </style>
 
     @section('container')
-        <div class=" overflow-y-auto overflow-x-hidden mt-28 md:mt-0 px-10 ">
+        <div class=" overflow-y-auto overflow-x-hidden pt-28 md:pt-0 px-5 md:px-10 h-screen ">
             <h1 class=" text-4xl">Appointment Negosiasi</h1>
             <p class=" text-[16px] font-medium pt-3">Silakan set appointment</p>
 
             <div class=" mt-5  w-full ">
-                <ul class=" mx-auto steps steps-horizontal w-full ml-14">
+                <ul class=" mx-auto steps steps-horizontal w-full ml-0 md:ml-14">
                     <li  class="step step-primary">
                     </li>
                     <li  class="step step-primary">
@@ -63,12 +63,12 @@
                 <form action="">
                     <div class=" block md:flex justify-between">
                         <div class=" relative w-full md:w-auto">
-                            <input type="text"  class=" bg-[#D9D9D9] outline-none rounded-md text-black py-1  px-8">
+                            <input type="text"  class=" bg-[#D9D9D9] outline-none rounded-md text-black py-1  px-8 w-full md:w-auto">
                             <i class="ri-search-line absolute top-1 left-2 text-black"></i>
                         </div>
-                        <div class="flex gap-3 items-center w-full md:w-auto">
-                            <label for="endDate">End Date: </label>
-                            <input type="date" id="endDate" class=" custom-date-input rounded-md bg-primary py-2 px-5 text-white outline-none border-[1px] border-white">
+                        <div class="block md:flex gap-3 items-center w-full md:w-auto mt-3 md:mt-0">
+                            <label for="endDate">End Date: </label> <br class=" block md:hidden">
+                            <input type="date" id="endDate" class=" w-full mt-1 md:mt-0 md:w-auto custom-date-input rounded-md bg-primary py-2 px-5 text-white outline-none border-[1px] border-white">
                         </div>
                     </div>
 
@@ -96,12 +96,12 @@
 
                 <div class="flex justify-between items-center">
                     <div>
-                        <button class="bg-secondary text-white rounded-md px-4 py-2 mr-2 w-[168px]">Back</button>
+                        <button class="bg-secondary text-white rounded-md px-4 py-2 mr-2 md:w-[168px]">Back</button>
                     </div>
                     <div class="">
-                        <button class="bg-secondary text-white rounded-md px-4 py-2 mr-2 w-[100px]">Save</button>
+                        <button class="bg-secondary text-white rounded-md px-4 py-2 mr-2 md:w-[100px]">Save</button>
             
-                        <button class="bg-secondary text-white rounded-md px-4 py-2 w-[168px]">Continue</button>
+                        <button class="bg-secondary text-white rounded-md px-4 py-2 md:w-[168px]">Continue</button>
                     </div>
                 </div>
             </div>
