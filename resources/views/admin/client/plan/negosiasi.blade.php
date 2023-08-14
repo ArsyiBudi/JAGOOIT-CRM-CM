@@ -72,8 +72,7 @@
                         </div>
                     </div>
 
-                    <div class="bg-grey p-9 mt-6 rounded-lg border-2 border-white  w-full h-[240px] overflow-y-scroll hide-scrollbar" id="createSection"> 
-                    <form id="form2" class="w-full">
+                    <div class="bg-grey p-9 mt-6 rounded-lg border-2 border-white  w-full h-[360px] overflow-y-scroll hide-scrollbar" id="createSection"> 
                         <div class="bg-white opacity-70 mb-4 p-2 rounded-md w-full">
                             <textarea name="judul" id="judul" class="text-black opacity-100 w-full p-2 bg-transparent outline-none resize-none" placeholder="Judul"></textarea> <!-- Menggunakan w-full untuk mengisi textarea secara penuh -->
                         </div>
@@ -92,19 +91,19 @@
                         <div class="w-[97px] mx-auto">
                             <input type="submit" class="bg-secondary  text-white rounded-md px-4 py-2 h-[39px] mt-11 cursor-pointer">
                         </div>
-                    </form>
-                    </div>
-
-
-                    <div>
-                        <button class="bg-secondary text-white rounded-md px-4 py-2 mr-2">Back</button>
-                    </div>
-                    <div class="flex justify-end">
-                            <button class="bg-secondary text-white rounded-md px-4 py-2 mr-2">Save</button>
-            
-                        <button class="bg-secondary text-white rounded-md px-4 py-2">Continue</button>
                     </div>
                 </form> 
+
+                <div class="flex justify-between items-center">
+                    <div>
+                        <button class="bg-secondary text-white rounded-md px-4 py-2 mr-2 w-[168px]">Back</button>
+                    </div>
+                    <div class="">
+                        <button class="bg-secondary text-white rounded-md px-4 py-2 mr-2 w-[100px]">Save</button>
+            
+                        <button class="bg-secondary text-white rounded-md px-4 py-2 w-[168px]">Continue</button>
+                    </div>
+                </div>
             </div>
         </div>
     @endsection
