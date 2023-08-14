@@ -129,9 +129,15 @@ Route::get('/client/plan/create/penawaran', function () {
     ]);
 });
 
-Route::get('/client/plan/create/interview', function () {
-    return view('admin.client.plan.interview', [
-        "title" => "Plan | Interview",
+Route::get('/client/plan/create/negosiasi', function () {
+    return view('admin.client.plan.negosiasi', [
+        "title" => "Plan | Negosiasi",
+    ]);
+});
+
+Route::get('/client/plan/create/percobaan', function () {
+    return view('admin.client.plan.percobaan', [
+        "title" => "Plan | Percobaan",
     ]);
 });
 
