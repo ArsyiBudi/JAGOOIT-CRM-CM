@@ -1,6 +1,7 @@
 @extends('admin.layouts.main')
 
 @section('container')
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -34,6 +35,15 @@
             <option value="form1" class='font-quicksand'>Appointment</option>  
             <option value="form2" class='font-quicksand'>Note</option>
             <option value="form3" class='font-quicksand'>Report</option>
+=======
+<h6 class="mt-24 md:mt-0 text-center md:text-left font-normal mb-4 text-4xl">Create Activity</h6>
+<div class="bg-grey p-9 rounded-lg border-2 border-white  w-full h-[500px]"> 
+        
+        <select id="formSelector" class="mb-4 bg-transparent border outline-none border-none rounded-md py-1 text-3xl">
+            <option value="form1" class="bg-grey">Appointment</option>
+            <option value="form2" class="bg-grey">Note</option>
+            <option value="form3" class="bg-grey">Report</option>
+>>>>>>> 7ca59ff71bf99d8a064f00bb3f26a9aa9b114801
         </select>
             <div id="formContainer" class="w-full">
                 <form id="form1" class="hidden">

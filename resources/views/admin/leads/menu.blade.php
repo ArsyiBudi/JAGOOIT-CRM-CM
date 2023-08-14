@@ -40,7 +40,7 @@
         {{-- <div class=" mt-64 mb-5">
             <h1>Leads / <span>Menu</span></h1>
         </div> --}}
-        <div class="w-full bg-darkSecondary py-10 px-8 rounded-md mt-5 ">
+        <div class="w-full bg-darkSecondary py-10 px-8 rounded-md ">
 
             <div class="border-b border-white w-full pb-3 mb-3">
                 <h3 class="text-white font-semibold text-3xl">Data Leads</h3>

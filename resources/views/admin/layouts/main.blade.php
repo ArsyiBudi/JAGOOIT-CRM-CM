@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="css/style.css">
     @vite('resources/css/app.css')
 
-    <title>Document</title>
+    <title>{{ $title }}</title>
 </head>
 <body class="flex items-center justify-center gap-0 md:gap-5 bg-layoutBg font-quicksand text-white min-h-screen overflow-hidden">
         @include('admin.partials.sidebar')
