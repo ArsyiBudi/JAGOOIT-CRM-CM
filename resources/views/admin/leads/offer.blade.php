@@ -7,7 +7,7 @@
 @section('container')
 {{-- <div id="formContainer"> --}}
 
-    <form class=" hidden mt-24 md:mt-0 text-center md:text-left" id="form3">
+    <form class=" hidden mt-24 md:mt-0 text-center lg:text-left" id="form3">
         <h1 class="text-3xl font-semibold text-white">Create Order</h1>
         <div class="bg-primary rounded shadow-lg mt-6 p-6 h-[calc(85vh-85px)] overflow-y-auto hide-scrollbar">
             
@@ -84,7 +84,7 @@
     
 {{-- </div> --}}
 
-<h6 class="mt-24 md:mt-0 text-center md:text-left font-normal mb-4 text-4xl" id="offerTitle">Create Offer</h6>
+<h6 class="mt-24 md:mt-0 text-center lg:text-left font-normal mb-4 text-4xl" id="offerTitle">Create Offer</h6>
 <div class="bg-grey p-9 rounded-lg border-2 border-white  w-full h-[500px] overflow-y-scroll hide-scrollbar" id="createSection"> 
         
         <select id="formSelector" class="mb-4 bg-transparent border outline-none border-none rounded-md py-1 text-3xl">

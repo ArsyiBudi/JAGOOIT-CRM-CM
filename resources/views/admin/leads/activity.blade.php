@@ -18,7 +18,7 @@
         </div>
     </form>
 </div> --}}
-<h6 class=" font-normal mb-4 text-4xl md:mt-0 mt-24 md:pl-0 pl-4">Create Activity</h6>
+<h6 class=" font-normal mb-4 text-4xl md:mt-20 mt-24 md:pl-0 pl-4 lg:text-left text-center">Create Activity</h6>
 <div class="bg-grey md:p-9 p-4 rounded-lg border-2 border-white  w-full h-[500px]"> 
         
         <select id="formSelector" class="mb-4 bg-transparent border outline-none border-none rounded-md py-1 text-3xl">
