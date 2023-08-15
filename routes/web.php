@@ -35,12 +35,8 @@ Route::get('/track', function () {
 // Client End
 
 // Admin 
-Route::get('/login', function () {
-    return view('admin.login');
-});
-
+Route::view('/login', 'admin.login');
 Route::post('/login', [C_Auth::class, 'login']);
-
 
 Route::prefix('leads')->group(function(){
     Route::get('/', function () {
@@ -61,13 +57,13 @@ Route::prefix('leads')->group(function(){
         ]);
     });
 
-    Route::get('/activity/create', function () {
+    Route::get('/activity', function () {
         return view('admin.leads.activity', [
             "title" => "Leads | Create Activity",
         ]);
     });
     
-    Route::get('/offer/create', function () {
+    Route::get('/offer', function () {
         return view('admin.leads.offer', [
             "title" => "Leads | Create Offer",
         ]);
@@ -75,7 +71,7 @@ Route::prefix('leads')->group(function(){
 });
 
 Route::prefix('client')->group(function(){
-    Route::get('/menu', function () {
+    Route::get('/', function () {
         return view('admin.client.menu', [
             "title" => "Client | Menu",
         ]);
@@ -84,79 +80,82 @@ Route::prefix('client')->group(function(){
     Route::get('/detail', function () {
         return view('admin.client.detail', [
             "title" => "Client | Detail",
-    
         ]);
     });
     
-    Route::get('/order', function () {
-        return view('admin.client.order.list', [
-            "title" => "Client | Order List",
-        ]);
-    });
-    
-    Route::get('/create', function () {
-        return view('admin.client.order.create', [
-            "title" => "Client | Create Order",
-        ]);
-    });
-    
-    Route::prefix('history')->group(function(){
+    Route::prefix('order')->group(function(){
         Route::get('/', function () {
-            return view('admin.client.order.history', [
-                "title" => "Client | Order History",
+            return view('admin.client.order.list', [
+                "title" => "Client | Order List",
             ]);
         });
         
-        Route::get('/detail', function () {
-            return view('admin.client.order.detail', [
-                "title" => "Client | Detail Order",
+        Route::get('/create', function () {
+            return view('admin.client.order.create', [
+                "title" => "Client | Create Order",
             ]);
         });
         
-        Route::get('/detail/timeline', function () {
-            return view('admin.client.order.timeline', [
-                "title" => "Client | Order Timeline",
-            ]);
-        });
-    });
-    
-    
-    Route::prefix('plan')->group(function(){
-        Route::get('/create/recruitment', function () {
-            return view('admin.client.plan.recruitment', [
-                "title" => "Plan | Recruitment",
-            ]);
-        });
-        
-        Route::get('/create/training', function () {
-            return view('admin.client.plan.training', [
-                "title" => "Plan | Training",
-            ]);
-        });
-        
-        Route::get('/create/penawaran', function () {
-            return view('admin.client.plan.penawaran', [
-                "title" => "Plan | Penawaran",
-            ]);
+        Route::prefix('history')->group(function(){
+            Route::get('/', function () {
+                return view('admin.client.order.history', [
+                    "title" => "Client | Order History",
+                ]);
+            });
+            
+            Route::prefix('detail')->group(function(){
+                Route::get('/', function () {
+                    return view('admin.client.order.detail', [
+                        "title" => "Client | Detail Order",
+                    ]);
+                });
+                
+                Route::get('/timeline', function () {
+                    return view('admin.client.order.timeline', [
+                        "title" => "Client | Order Timeline",
+                    ]);
+                });
+            });
         });
         
-        Route::get('/create/negosiasi', function () {
-            return view('admin.client.plan.negosiasi', [
-                "title" => "Plan | Negosiasi",
-            ]);
-        });
         
-        Route::get('/create/percobaan', function () {
-            return view('admin.client.plan.percobaan', [
-                "title" => "Plan | Percobaan",
-            ]);
-        });
-        
-        Route::get('/create/popks', function () {
-            return view('admin.client.plan.popks', [
-                "title" => "Plan | PO & PKS",
-            ]);
-        });
+        Route::prefix('plan')->group(function(){
+            Route::get('/recruitment', function () {
+                return view('admin.client.plan.recruitment', [
+                    "title" => "Plan | Recruitment",
+                ]);
+            });
+            
+            Route::get('/training', function () {
+                return view('admin.client.plan.training', [
+                    "title" => "Plan | Training",
+                ]);
+            });
+            
+            Route::get('/penawaran', function () {
+                return view('admin.client.plan.penawaran', [
+                    "title" => "Plan | Penawaran",
+                ]);
+            });
+            
+            Route::get('/negosiasi', function () {
+                return view('admin.client.plan.negosiasi', [
+                    "title" => "Plan | Negosiasi",
+                ]);
+            });
+            
+            Route::get('/percobaan', function () {
+                return view('admin.client.plan.percobaan', [
+                    "title" => "Plan | Percobaan",
+                ]);
+            });
+            
+            Route::get('/popks', function () {
+                return view('admin.client.plan.popks', [
+                    "title" => "Plan | PO & PKS",
+                ]);
+            });
+        });  
     });
 });
 
