@@ -1,41 +1,6 @@
 @extends('admin.layouts.main')
 
 @section('container')
-<<<<<<< HEAD
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Create Activity</title>
-    <style>
-    input::placeholder,
-    textarea::placeholder {
-        color: black;
-        font-family: quicksand;
-        font-size: 15px;
-}
-    textarea {
-        display: block;
-        width: 100%;
-        padding: 8px;
-        margin: 10px;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-        resize: vertical; /* Agar dapat diresize secara vertikal */
-    }
-    </style>
-</head>
-<body>
-
-<div class="bg-darkSecondary p-6 rounded-lg shadow-lg mx-auto w-[900px] h-[500px]"> 
-        <h6 class="text-2xl font-semibold mb-4 ml-2">Create Activity</h6>
-        <select id="formSelector" class="mb-4 ml-2 bg-primary font-quicksand border border-none rounded-md py-1">Appointment
-            <option value="form1" class='font-quicksand'>Appointment</option>  
-            <option value="form2" class='font-quicksand'>Note</option>
-            <option value="form3" class='font-quicksand'>Report</option>
-=======
 <h6 class="mt-24 md:mt-0 text-center md:text-left font-normal mb-4 text-4xl">Create Activity</h6>
 <div class="bg-grey p-9 rounded-lg border-2 border-white  w-full h-[500px]"> 
         
@@ -43,7 +8,6 @@
             <option value="form1" class="bg-grey">Appointment</option>
             <option value="form2" class="bg-grey">Note</option>
             <option value="form3" class="bg-grey">Report</option>
->>>>>>> 7ca59ff71bf99d8a064f00bb3f26a9aa9b114801
         </select>
             <div id="formContainer" class="w-full">
                 <form id="form1" class="hidden">
