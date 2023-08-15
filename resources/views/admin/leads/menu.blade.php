@@ -36,10 +36,7 @@
 </style>
 
 @section('container')
-    <div class=" overflow-auto mt-28 md:mt-0 h-screen">
-        {{-- <div class=" mt-64 mb-5">
-            <h1>Leads / <span>Menu</span></h1>
-        </div> --}}
+    <div class=" overflow-auto pt-28 md:pt-0 h-screen">
         <div class="w-full bg-darkSecondary py-10 px-8 rounded-md ">
 
             <div class="border-b border-white w-full pb-3 mb-3">

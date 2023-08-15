@@ -1,7 +1,7 @@
 @extends('admin.layouts.main')
 
 @section('container')
-    <div class=" overflow-auto pt-28 md:mt-0 h-screen">
+    <div class=" overflow-auto pt-28 md:pt-0 h-screen">
         <div class=" py-10 px-8 bg-primary flex flex-col text-lightGrey p-8 rounded-md space-y-2 w-full h-full">
             <div class="text-2xl">Detail Leads</div>
             <div class="flex flex-row text-xs space-x-2">
