@@ -13,40 +13,24 @@ class TalentDetailsSeeder extends Seeder
      */
     public function run(): void
     {
-        $talent_position = [
-            'Frontend Dev', 'Backend Dev', 'Full-Stack Dev', 'IT Support', 'Dev Ops', 'Data Analyst'
-        ];
-        $talent_skill = [
-            'CPP', 'PHP', 'JS', 'Python', 'HTML + CSS'
-        ];
-        $talent_academy = [
-            'SMA-SMK', 'S1', 'S2', 'S3', 'D2', 'D3'
-        ];
-
-
-        foreach(range(1,10)  as $count){
-            $callPosition = random_int(0, count($talent_position) - 1);
-            DB::table('talent_details')->insert([
-                'id_talent' => $count,
-                'id_talent_details' => 1,
-                'description' => $talent_position = $callPosition
-            ]);
-        }
-        foreach(range(1,10)  as $count){
-            $callSkill = random_int(0, count($talent_skill) - 1);
-            DB::table('talent_details')->insert([
-                'id_talent' => $count,
-                'id_talent_details' => 1,
-                'description' => $talent_skill = $callSkill
-            ]);
-        }
-        foreach(range(1,10)  as $count){
-            $callAcademy = random_int(0, count($talent_academy) - 1);
-            DB::table('talent_details')->insert([
-                'id_talent' => $count,
-                'id_talent_details' => 1,
-                'description' => $talent_academy = $callAcademy
-            ]);
+        $description_value = array(
+            array('Frontend Dev', 'Backend Dev', 'Full-Stack Dev', 'IT Support', 'Dev Ops', 'Data Analyst'), // Position
+            array('CPP', 'PHP', 'JS', 'Python', 'HTML + CSS'), // Keterampilan
+            array('SMA-SMK', 'S1', 'S2', 'S3', 'D2', 'D3') // Pendidikan 
+        );
+    
+        foreach (range(1, 10) as $count) {
+            foreach (range(0, 2) as $count_desc) {
+                $id_talent_details = 1;
+                if ($count_desc == 1) $id_talent_details = 4;
+                if ($count_desc == 2) $id_talent_details = 5; 
+    
+                DB::table('talent_details')->insert([
+                    'id_talent' => $count,
+                    'id_talent_details' => $id_talent_details,
+                    'description' => $description_value[$count_desc][random_int(0, count($description_value[$count_desc]) - 1)]
+                ]);
+            }
         }
     }
 }
