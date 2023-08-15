@@ -6,6 +6,7 @@ namespace Database\Seeders;
 use App\Models\Talent;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use UserType;
 
 class DatabaseSeeder extends Seeder
 {
@@ -16,7 +17,9 @@ class DatabaseSeeder extends Seeder
     {
        $this -> call([
         TalentSeeder::class,
-        UserSeeder::class
+        UserTypeSeeder::class,
+        UserSeeder::class,
+        LeadSeeder::class
        ]);
     }
 }

@@ -14,11 +14,11 @@ class UserTypeSeeder extends Seeder
      */
     public function run(): void
     {
-        DB::table('user_types')->insert([
-            'id' => 1,
-            ''
-        ],[
-            
-        ]);
+        $user_type = array("Admin", "Karyawan", "Client");
+        foreach(range(0, count($user_type) - 1)  as $count){
+            DB::table('user_types')->insert([
+                'description' => $user_type[$count]
+            ]);
+        }
     }
 }
