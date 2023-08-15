@@ -56,8 +56,10 @@
                     <td class="py-4 font-medium">Selesai</td>
                     <td class="py-4 font-medium">-</td>
                     <td class="py-4 font-medium">
-                        <i class="ri-information-line text-2xl"></i>
-                        <i class="ri-delete-bin-2-line text-2xl text-red-600"></i>
+                        <a href="/client/detail">
+                            <i class=" text-2xl cursor-pointer ri-information-line"></i>
+                        </a>
+                        <i class=" text-2xl cursor-pointer ri-delete-bin-2-line text-red-600"></i>
                     </td>
                 </tr>
                 <tr class="text-center bg-grey mt-4">
@@ -70,8 +72,10 @@
                     <td class="py-4 font-medium">Selesai</td>
                     <td class="py-4 font-medium">-</td>
                     <td class="py-4 font-medium">
-                        <i class="ri-information-line text-2xl"></i>
-                        <i class="ri-delete-bin-2-line text-2xl text-red-600"></i>
+                        <a href="/client/detail">
+                            <i class=" text-2xl cursor-pointer ri-information-line"></i>
+                        </a>
+                        <i class=" text-2xl cursor-pointer ri-delete-bin-2-line text-red-600"></i>
                     </td>
                 </tr>
                 <tr class="text-center bg-grey mt-4">
@@ -84,8 +88,10 @@
                     <td class="py-4 font-medium">Selesai</td>
                     <td class="py-4 font-medium">-</td>
                     <td class="py-4 font-medium">
-                        <i class="ri-information-line text-2xl"></i>
-                        <i class="ri-delete-bin-2-line text-2xl text-red-600"></i>
+                        <a href="/client/detail">
+                            <i class=" text-2xl cursor-pointer ri-information-line"></i>
+                        </a>
+                        <i class=" text-2xl cursor-pointer ri-delete-bin-2-line text-red-600"></i>
                     </td>
                 </tr>
                 <tr class="text-center bg-grey mt-4">
@@ -98,8 +104,10 @@
                     <td class="py-4 font-medium">Selesai</td>
                     <td class="py-4 font-medium">-</td>
                     <td class="py-4 font-medium">
-                        <i class="ri-information-line text-2xl"></i>
-                        <i class="ri-delete-bin-2-line text-2xl text-red-600"></i>
+                        <a href="/client/detail">
+                            <i class=" text-2xl cursor-pointer ri-information-line"></i>
+                        </a>
+                        <i class=" text-2xl cursor-pointer ri-delete-bin-2-line text-red-600"></i>
                     </td>
                 </tr>
                 <tr class="text-center bg-grey mt-4">
@@ -112,8 +120,10 @@
                     <td class="py-4 font-medium">Selesai</td>
                     <td class="py-4 font-medium">-</td>
                     <td class="py-4 font-medium">
-                        <i class="ri-information-line text-2xl"></i>
-                        <i class="ri-delete-bin-2-line text-2xl text-red-600"></i>
+                        <a href="/client/detail">
+                            <i class=" text-2xl cursor-pointer ri-information-line"></i>
+                        </a>
+                        <i class=" text-2xl cursor-pointer ri-delete-bin-2-line text-red-600"></i>
                     </td>
                 </tr>
             </tbody>
@@ -123,7 +133,7 @@
 
             <div class="flex gap-3 items-center">
                 <button class="bg-secondary w-[69px] rounded-lg flex items-center justify-center py-2">Prev</button>
-                <div class="rounded-lg p-2 w-[32px] bg-grey flex items-center justify-center">
+                <div class="rounded-lg p-2 w-[32px] bg-grey flex items-center justify-center" onclick="{{ url('/client/detail') }}">
                     <p>1</p>
                 </div>
                 <div class="rounded-lg p-2 w-[32px] bg-grey flex items-center justify-center">
