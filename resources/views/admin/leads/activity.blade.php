@@ -34,7 +34,6 @@
             <option value="form1" class='font-quicksand'>Appointment</option>  
             <option value="form2" class='font-quicksand'>Note</option>
             <option value="form3" class='font-quicksand'>Report</option>
-=======
 <h6 class="mt-24 md:mt-0 text-center md:text-left font-normal mb-4 text-4xl">Create Activity</h6>
 <div class="bg-grey p-9 rounded-lg border-2 border-white  w-full h-[500px]"> 
         
