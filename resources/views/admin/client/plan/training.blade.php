@@ -88,14 +88,34 @@
                 justify-content: center; /* Membuat tombol prev dan next berada di tengah */
                 gap: 10px;
             }
+            @media (max-width: 768px) {
+            /* Ubah gaya elemen-elemen di sini untuk tampilan mobile */
+            /* Contoh: */
+            .table {
+                max-width: 100%; /* Mengisi lebar layar pada perangkat mobile */
+            }
+
+            /* ... (lanjutkan dengan perubahan lainnya) ... */
+        }
+
+        /* Aturan media query untuk lebar layar kurang dari atau sama dengan 992px */
+        @media (max-width: 992px) {
+            /* Ubah gaya elemen-elemen di sini untuk tampilan tablet */
+            /* Contoh: */
+            .table {
+                max-width: 80%; /* Ukuran tabel lebih besar pada tablet */
+            }
+        }
         </style>
     </head>
     <body>
-        <h1 class='font-quicksand text-3xl mb-5'>Training</h1>
-        <h4 class='font-quicksand'>silakan pilih kandidat</h4>
-    <ul class="steps steps-vertical lg:steps-horizontal ">
+    <div class="px-4 py-6 sm:px-6 lg:px-8">
+        <h1 class="text-3xl font-semibold text-white mb-3">Training</h1>
+        <h4 class="text-white">Silakan pilih kandidat</h4>
+    </div>
+    <ul class="mx-auto steps steps-horizontal w-full ml-0 md:ml-14">
         <li class="step step-primary"></li>
-        <li class="step"></li>
+        <li class="step step-primary"></li>
         <li class="step"></li>
         <li class="step"></li>
         <li class="step"></li>
