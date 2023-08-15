@@ -9,10 +9,11 @@
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>Create Plan | Training</title>
         <style>
-            /* Hapus garis pada kepala tabel */
+            /* Hapus garis pada kepala tabel
             body {
-                overflow-y: auto; /* Membuat halaman dapat di-scroll vertikal jika kontennya melebihi tinggi layar */
-            }
+                overflow-y: auto;
+                overflow-x: auto; /* Membuat halaman dapat di-scroll vertikal jika kontennya melebihi tinggi layar 
+} */
             .table thead tr th {
                 border: none;
                 text-align: center;
@@ -43,7 +44,7 @@
                 background-color: #555555;
                 box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
                 min-height: 400px; /* Atur minimum tinggi kontainer */
-                overflow-y: auto; /* Aktifkan scrolling jika kontennya melebihi tinggi kontainer */
+                overflow-y: hidden; /* Aktifkan scrolling jika kontennya melebihi tinggi kontainer */
             }
             
             .table {
@@ -52,7 +53,7 @@
                 margin: 20px auto; /* Membuat tabel berada di tengah */
                 border-collapse: collapse; /* Menggabungkan garis antara sel-sel */
                 border-radius: 8px; /* Membuat border melengkung pada tabel */
-                overflow: hidden; /* Mengatasi sudut border yang tumpul */
+                overflow: auto; /* Mengatasi sudut border yang tumpul */
             }
     
             .table td, .table th {
@@ -108,9 +109,9 @@
         }
         </style>
     </head>
-    <body>
+    <body class='overflow-y-auto overflow-x-auto'>
     <div class="px-4 py-6 sm:px-6 lg:px-8">
-        <h1 class="text-3xl font-semibold text-white mb-3">Training</h1>
+        <h1 class="text-3xl font-quicksand font-semibold text-white mb-3">Training</h1>
         <h4 class="text-white">Silakan pilih kandidat</h4>
     </div>
     <ul class="mx-auto steps steps-horizontal w-full ml-0 md:ml-14">
@@ -125,10 +126,10 @@
         <h1>End Date:</h1>
         <textarea name="enddata" id="enddate"></textarea>
     </div>
-    <div class="table-container">
-        <table class="table mt-10">
+    <div class="table-container overflow-y-auto overflow-x-auto">
+        <table class="table mt-10 overflow-y-auto">
         <!-- head -->
-        <thead>
+        <thead class='border-none'>
             <tr class=''>
             <th class='text-white font-quicksand'>No</th>
             <th class='text-white font-quicksand'>Nama Talent</th>
@@ -175,12 +176,13 @@
             <td><input id='rata-rata3' name='rata-rata' type="number" class='text-black font-quicksand' placeholder='nilai' ></td>
             <td><input type="submit" class="bg-secondary text-white font-quicksand rounded-md px-4 py-2 h-[37px]"></td>
             </tr>
+            
         </tbody>
         </table>
     </div>
     <div class="button-container">
     <button class='bg-secondary text-white font-quicksand rounded-md px-4 py-2 h-[37px]'>back</button>
-    <div class="center-buttons">
+    <div class="center-buttons display-flex justify-center flex-grow-1 gap: 10px;">
         <button type="submit" class='bg-secondary text-white font-quicksand rounded-md px-4 py-2 h-[37px]'>prev</button>
         <button type="submit" class='bg-darkSecondary text-white font-quicksand rounded-md px-4 py-2 h-[37px]'>1</button>
         <button type="submit" class='bg-darkSecondary text-white font-quicksand rounded-md px-4 py-2 h-[37px]'>10</button>
