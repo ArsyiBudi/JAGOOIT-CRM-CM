@@ -1,41 +1,8 @@
 @extends('admin.layouts.main')
-
 <style>
-.hide-scrollbar::-webkit-scrollbar {
-    width: 0.4em; /* Width of the scrollbar */
-}
-
-.hide-scrollbar::-webkit-scrollbar-thumb {
-    background-color: #555555; /* Color of the scrollbar thumb */
-    border-radius: 8px; /* Rounded corners for the scrollbar thumb */
-}
-
-.hide-scrollbar::-webkit-scrollbar-thumb:hover {
-    background-color: #777777; /* Color of the scrollbar thumb on hover */
-}
-
-.hide-scrollbar::-webkit-scrollbar-track {
-    background-color: #555555; /* Color of the scrollbar track */
-}
-
-.hide-scrollbar::-webkit-scrollbar-track:hover {
-    background-color: #666666; /* Color of the scrollbar track on hover */
-}
-
-/* Customize the appearance of the scrollbar wheel */
-.hide-scrollbar {
-    scrollbar-width: thin;
-    scrollbar-color: #555555 #333333;
-}
-
-/* Customize the appearance of the scrollbar thumb icon */
-.hide-scrollbar::-webkit-scrollbar-thumb:vertical {
-    background-color: #fff; /* Color of the scrollbar thumb icon */
-}
-
-.custom-date-input::-webkit-calendar-picker-indicator {
-    filter: invert(1); /* This inverts the icon color */
-}
+    .hide-scrollbar::-webkit-scrollbar {
+        width: 0; /* Width of the scrollbar */
+    }
 </style>
 
 @section('container')
@@ -99,12 +66,12 @@
             </div>
     
             <div class="flex gap-4">
-                <div>
+                <div class="md:w-3/4">
                     <label for="ditawarkan" class="text-sm text-white">Hal yang Ditawarkan</label>
                     <input id="ditawarkan" type="text" class="text-black rounded-lg px-2 py-1 w-full bg-white" placeholder="Hal yang Ditawarkan">
                 </div>
 
-                <div>
+                <div class="md:w-1/4">
                     <label for="jumlah" class="text-sm text-white">Jumlah Talent</label>
                     <input id="jumlah" type="text" class="text-black rounded-lg px-2 py-1 w-full bg-white" placeholder="Jumlah">
                 </div>
@@ -117,34 +84,51 @@
                 </div>
             </div>
 
-            <div>
-                <p class="mt-4">Biaya Overtime (perjam)</p>
-                <div class="flex gap-4 mt-4">
-                    <div>
-                        <label for="weekday" class="text-sm text-white">Weekday</label>
-                        <input id="weekday" type="text" class="text-black rounded-lg px-2 py-1 mt-2 w-full bg-white">
+            <p class="mt-4">Biaya Overtime (perjam)</p>
+            
+            <div class="flex gap-4 mt-4 justify-between w-full">
+                <div class="md:w-1/2">
+                    <label for="weekday" class="text-sm text-white">Weekday</label>
+                    <div class="bg-white w-full flex items-center rounded-lg">
+                        <div class="border-r border-grey px-2 py-1 h-full">
+                            <p class="text-grey">Rp.</p>
+                        </div>
+                        <input id="weekend" type="text" class="text-black rounded-lg px-2 py-2 mt-2 w-full bg-transparent outline-none">
                     </div>
-                    <div>
-                        <label for="weekend" class="text-sm text-white">Weekend</label>
-                        <input id="weekend" type="text" class="text-black rounded-lg px-2 py-1 mt-2 w-full bg-white">
+                </div>
+                <div class="md:w-1/2">
+                    <label for="weekend" class="text-sm text-white">Weekend</label>
+                    <div class="bg-white w-full flex items-center rounded-lg">
+                        <div class="border-r border-grey px-2 py-1 h-full">
+                            <p class="text-grey">Rp.</p>
+                        </div>
+                        <input id="weekend" type="text" class="text-black rounded-lg px-2 py-2 mt-2 w-full bg-transparent outline-none">
                     </div>
                 </div>
             </div>
 
-            <div>
-                <p class="mt-4">Biaya Dinas Luar Kota</p>
-                <div class="flex gap-4 mt-4">
-                    <div>
-                        <label for="konsumsi" class="text-sm text-white">Konsumsi (perhari)</label>
-                        <input id="konsumsi" type="text" class="text-black rounded-lg px-2 py-1 mt-2 w-full bg-white">
+            <p class="mt-4">Biaya Dinas Luar Kota</p>
+            <div class="flex gap-4 mt-4 justify-between w-full">
+                <div class="md:w-1/2">
+                    <label for="weekday" class="text-sm text-white">Konsumsi (perhari)</label>
+                    <div class="bg-white w-full flex items-center rounded-lg">
+                        <div class="border-r border-grey px-2 py-1 h-full">
+                            <p class="text-grey">Rp.</p>
+                        </div>
+                        <input id="weekend" type="text" class="text-black rounded-lg px-2 py-2 mt-2 w-full bg-transparent outline-none">
                     </div>
-                    <div>
-                        <label for="transport" class="text-sm text-white">Transport Pulang-Pergi Standar JKT-BDG</label>
-                        <input id="transport" type="text" class="text-black rounded-lg px-2 py-1 mt-2 w-full bg-white">
+                </div>
+                <div class="md:w-1/2">
+                    <label for="weekend" class="text-sm text-white">Transport Pulang-Pergi Standar JKT-BDG</label>
+                    <div class="bg-white w-full flex items-center rounded-lg">
+                        <div class="border-r border-grey px-2 py-1 h-full">
+                            <p class="text-grey">Rp.</p>
+                        </div>
+                        <input id="weekend" type="text" class="text-black rounded-lg px-2 py-2 mt-2 w-full bg-transparent outline-none">
                     </div>
                 </div>
             </div>
-
+            
             <div class="mt-4 flex justify-end">
                 <button class="bg-secondary text-white text-sm text-center w-[188px] h-[37px] rounded-md">Create</button>
             </div>
@@ -173,7 +157,7 @@
             </div>
         </div>
 
-        <div class=" flex justify-between items-center">
+        <div class=" flex justify-between items-center mt-4">
             <div>
                 <button class=" bg-secondary text-white text-sm text-center py-1 px-14 rounded-md font-bold">Back</button>
             </div>
