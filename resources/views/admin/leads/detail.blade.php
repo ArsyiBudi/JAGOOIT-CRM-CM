@@ -1,14 +1,14 @@
 @extends('admin.layouts.main')
 
 @section('container')
-    <div class=" overflow-auto pt-28 md:pt-0 h-screen">
+<div class="bg-primary flex flex-col text-lightGrey p-8 rounded-md space-y-2 w-full mt-20">
         <div class=" py-10 px-8 bg-primary flex flex-col text-lightGrey p-8 rounded-md space-y-2 w-full h-full">
             <div class="text-2xl">Detail Leads</div>
             <div class="flex flex-row text-xs space-x-2">
                 <a class="bg-secondary rounded-md px-3 md:px-4 py-1 md:py-2 hover:scale-95 duration-200">Create Activity</a>
                 <a class="bg-secondary rounded-md px-3 md:px-4 py-1 md:py-2 hover:scale-95 duration-200">Create Offer</a>
             </div>
-            <div class="divide-y divide-slate-50">
+            <div class="divide-y divide-slate-50 gap-4 flex flex-col">
                 <div class="pt-3">
                     <p>
                         Nama Perusahaan
