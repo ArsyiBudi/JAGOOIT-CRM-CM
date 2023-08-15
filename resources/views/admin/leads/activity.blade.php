@@ -1,7 +1,6 @@
 @extends('admin.layouts.main')
 
 @section('container')
-<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -43,7 +42,6 @@
             <option value="form1" class="bg-grey">Appointment</option>
             <option value="form2" class="bg-grey">Note</option>
             <option value="form3" class="bg-grey">Report</option>
->>>>>>> 7ca59ff71bf99d8a064f00bb3f26a9aa9b114801
         </select>
             <div id="formContainer" class="w-full">
                 <form id="form1" class="hidden">
