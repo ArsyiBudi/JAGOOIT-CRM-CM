@@ -48,7 +48,7 @@
 <body class="flex items-center justify-center gap-0 lg:gap-5 bg-layoutBg font-quicksand text-white min-h-screen overflow-hidden">
         @include('admin.partials.sidebar')
         <div class=" pl-0 lg:pl-[18%]"></div>
-        <div class="container mr-0 lg:pr-4  pt-0 lg:pt-14 mb-0 lg:mb-12 overflow-y-scroll overflow-x-hidden h-screen hide-scrollbar">
+        <div class="container mr-0 lg:pr-4  pt-0 lg:pt-14 mb-0 lg:mb-12 overflow-y-scroll overflow-x-hidden hide-scrollbar">
             @yield('container')
         </div>
 </body>
