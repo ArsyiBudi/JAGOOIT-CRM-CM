@@ -5,7 +5,7 @@
         <div class="text-2xl">Detail Leads</div>
         <div class="flex flex-row text-xs space-x-2">
             <a class="bg-secondary rounded-md px-4 py-2">Create Activity</a>
-            <a class="bg-secondary rounded-md px-4 py-2">Create Offer</a>
+            <a class="bg-secondary rounded-md px-4 py-2" href="{{ url('/leads/offer')}}">Create Offer</a>
         </div>
         <div class="divide-y divide-slate-50">
             <div class="pt-3">

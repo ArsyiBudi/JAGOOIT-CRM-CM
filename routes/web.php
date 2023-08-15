@@ -95,6 +95,10 @@ Route::prefix('client')->group(function(){
                 "title" => "Client | Create Order",
             ]);
         });
+
+        Route::post('/create', function (){
+            return redirect('/client/order');
+        });
         
         Route::prefix('history')->group(function(){
             Route::get('/', function () {

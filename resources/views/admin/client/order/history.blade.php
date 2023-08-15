@@ -47,7 +47,7 @@
                     <td class="py-4 font-medium">Selesai</td>
                     <td class="py-4 font-medium">
                         <i class="ri-calendar-todo-fill text-2xl"></i>
-                        <i class="ri-information-line text-2xl"></i>
+                        <a href="{{ url('/client/order/history/detail')}}"><i class="ri-information-line text-2xl"></i></a>
                         <i class="ri-delete-bin-2-line text-2xl text-red-600"></i>
                     </td>
             </tbody>
