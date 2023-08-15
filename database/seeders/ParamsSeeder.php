@@ -15,11 +15,13 @@ class ParamsSeeder extends Seeder
     public function run(): void
     {
         $params = array(
-            "Recruitment", "Training", "Penawaran", "Appointment Negoisasi", "Masa Percobaan", "PO & PKS",
+            "Recruitment", "Training", "Penawaran", "Appointment Negoisasi", "Masa Percobaan", "PO & PKS", //order_status
+            "Appointment", "Notes", "Report", //activity_type
+            "New", "Offering", "Interested", "Order" //lead_status
         );
         foreach(range(0, count($params) - 1)  as $count){
             DB::table('global_params')->insert([
-                'description' => $params[$count]
+                'params_name' => $params[$count]
             ]);
         }
     }

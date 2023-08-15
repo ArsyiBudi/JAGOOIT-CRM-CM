@@ -15,11 +15,14 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-       $this -> call([
+    $this -> call([
+        ParamsSeeder::class,
+        TalentDetailTypesSeeder::class,
         TalentSeeder::class,
+        TalentDetailsSeeder::class,
         UserTypeSeeder::class,
         UserSeeder::class,
         LeadSeeder::class
-       ]);
+    ]);
     }
 }
