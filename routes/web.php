@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\C_Auth;
+use App\Http\Controllers\C_Orders;
 use Illuminate\Support\Facades\Route;
 
 
@@ -32,11 +33,14 @@ Route::any('/', function () {
 Route::get('/track', function () {
     return view('clients.track');
 });
+Route::post('/track', [C_Orders::class, 'track']);
 // Client End
 
 // Admin 
-Route::view('/login', 'admin.login');
-Route::post('/login', [C_Auth::class, 'login']);
+Route::prefix('login')->group(function(){
+    Route::view('/', 'admin.login');
+    Route::post('/', [C_Auth::class, 'login']);
+});
 
 Route::prefix('leads')->group(function(){
     Route::get('/', function () {
