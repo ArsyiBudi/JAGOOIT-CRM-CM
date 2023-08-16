@@ -1,7 +1,7 @@
 @extends('admin.layouts.main')
 
 @section('container')
-    <div class="bg-primary rounded-md flex py-6 flex-col px-7 h-full ">
+    <div class="bg-primary rounded-md flex py-6 flex-col px-7 h-[calc(90vh-90px)] overflow-y-auto hide-scrollbar ">
         <div class="flex flex-col text-lightGrey space-y-2">
             <div class="flex flex-row justify-between">
                 <div class="text-2xl">Detail Order</div>
