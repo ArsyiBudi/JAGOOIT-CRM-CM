@@ -15,11 +15,11 @@
 
 @section('container')
     <form class="">
-        <div class="hide-scrollbar overflow-x-hidden overflow-y-auto pt-28 h-screen md:pr-5 px-5 md:px-0">
+        <div class="hide-scrollbar overflow-x-hidden overflow-y-auto pt-28  h-screen md:pr-5 px-5 md:px-0">
                    <h1 class=" text-4xl">Penawaran</h1>
                 <p class=" text-[16px] font-medium pt-3">Silakan pilih kandidat</p>
 
-                <div class=" mt-5  w-full overflow-auto ">
+                <div class=" mt-5  w-full overflow-auto md:overflow-hidden">
                     <ul class=" mx-0 md:mx-auto steps steps-horizontal w-full ml-0 md:ml-14">
                         <li  class="step step-primary">
                         </li>
@@ -138,7 +138,7 @@
                         </div>
                             
                             <div class="mt-4 flex justify-end">
-                                <button type="submit" name="createWord" class=" w-full md:w-auto bg-secondary text-white text-sm text-center w-[188px] h-[37px] rounded-md hover:scale-95 duration-200">Create</button>
+                                <button type="submit" name="createWord" class=" w-full  md:w-[188px] bg-secondary text-white text-sm text-center h-[37px] rounded-md hover:scale-95 duration-200">Create</button>
                             </div>
                     </div>
 
@@ -161,11 +161,11 @@
                         </div>
 
                         <div class="mt-4 flex justify-end">
-                            <button type="submit" name="sendCV" class="bg-secondary text-white text-sm text-center w-[188px] h-[37px] rounded-md hover:scale-95 duration-200">Send</button>
+                            <button type="submit" name="sendCV" class="bg-secondary text-white text-sm text-center w-full md:w-[188px] h-[37px] rounded-md hover:scale-95 duration-200">Send</button>
                         </div>
                     </div>
 
-                    <div class=" flex justify-between items-center mt-4 mb-5 md:mb-0">
+                    <div class=" flex justify-between items-center pt-4 mb-5 md:mb-0">
                         <div>
                             <button class=" bg-secondary text-white text-sm text-center py-1 px-3 md:px-14 rounded-md font-bold hover:scale-95 duration-200">
                                 <p class=" hidden md:block">Back</p>        
