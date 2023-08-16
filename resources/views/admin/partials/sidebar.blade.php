@@ -1,7 +1,7 @@
 
 
 
-<div class=" hidden bg-darkSecondary w-screen md:w-[18%] pt-11  h-screen md:flex flex-col items-center fixed top-0 left-0 ">
+<div class=" hidden bg-darkSecondary w-screen lg:w-[18%] pt-11  h-screen lg:flex flex-col items-center fixed top-0 left-0 ">
 
     <div class="rounded-lg py-1 px-8 mx-8 flex items-center mb-9 bg-lightGrey">
         <img src="/jagoLogo.png" alt="JagooIT">
@@ -167,4 +167,6 @@
         document.querySelector('.submenuMobile').classList.toggle('hidden');
         document.querySelector('.panahBwhMobile').classList.toggle('rotate-180');
     }
+
+    dropDown();
 </script>
