@@ -39,7 +39,7 @@
     </style>
 
 @section('container')
-<div class=" overflow-y-auto overflow-x-hidden pt-28 md:pt-0 px-5 md:px-10 h-screen">
+<div class=" overflow-y-auto overflow-x-hidden pt-28 lg:pt-0 px-5 md:px-10 h-screen">
     <h1 class=" text-4xl">Training</h1>
     <p class=" text-sm md:text-[16px] font-medium pt-3">Silakan nilai kandidat</p>
 
@@ -125,11 +125,12 @@
                     </table>
                 </div>
             </div>
+
             <div class=" flex justify-between items-center gap-1 md:gap-0">
                 <div>
-                    <button class=" bg-secondary text-white text-sm text-center py-1 px-3 md:px-14 rounded-md font-bold">
-                      <p class=" hidden md:block">Back</p>
-                      <i class="ri-arrow-left-line block md:hidden"></i>  
+                    <button class=" bg-secondary text-white text-sm text-center py-1 px-3 lg:px-14 rounded-md font-bold">
+                      <p class=" hidden lg:block">Back</p>
+                      <i class="ri-arrow-left-line block lg:hidden"></i>  
                     </button>
                 </div>
                 <div class=" flex items-center gap-3">
@@ -148,13 +149,13 @@
                     
                 </div>
                 <div class="flex gap-1">
-                    <button class=" bg-secondary text-white text-sm text-center py-1 px-3 md:px-14 rounded-md font-bold">
-                        <p class=" hidden md:block">Save</p>
-                        <i class="ri-save-3-line block md:hidden"></i>  
+                    <button class=" bg-secondary text-white text-sm text-center py-1 px-3 lg:px-14 rounded-md font-bold">
+                        <p class=" hidden lg:block">Save</p>
+                        <i class="ri-save-3-line block lg:hidden"></i>  
                       </button>
-                    <button class=" bg-secondary text-white text-sm text-center py-1 px-2 md:px-14 rounded-md font-bold">
-                        <p class=" hidden md:block">Continue</p>
-                        <i class="ri-arrow-right-s-line block md:hidden"></i>
+                    <button class=" bg-secondary text-white text-sm text-center py-1 px-2 lg:px-14 rounded-md font-bold">
+                        <p class=" hidden lg:block">Continue</p>
+                        <i class="ri-arrow-right-s-line block lg:hidden"></i>
                     </button>
                 </div>
             </div>
