@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('business_sector');
             $table->text('address');
             $table->string('pic_name');
-            $table->integer('pic_contact_number');
+            $table->string('pic_contact_number');
             $table->boolean('client_indicator')->default(false);
             $table->integer('lead_status')->default(11);
             $table->timestamps();
