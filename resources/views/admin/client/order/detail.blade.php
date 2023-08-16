@@ -38,7 +38,7 @@
 @section('container')
     <div class="pt-20 lg:pt-0">
     </div>
-    <div class="overflow-auto pt-0 h-[90vh] w-full rounded-md">
+    <div class="overflow-auto pt-0 h-[90vh] w-full rounded-md hide-scrollbar">
         <div class="bg-darkSecondary flex flex-col px-8 py-10">
             <div class="flex flex-col text-lightGrey space-y-2">
                 <div class="flex flex-row justify-between">
@@ -57,8 +57,8 @@
                 </div>
             </div>
     
-            <div class="w-full mt-10 h-72 overflow-auto">
-                <table class="text-lightGrey  w-full h-full">
+            <div class="w-full mt-10 h-72 overflow-auto hide-scrollbar">
+                <table class="text-lightGrey  w-full h-full ">
                     <thead class="border-white">
                         <tr class="">
                             <th class="p-4 font-bold">No</th>
