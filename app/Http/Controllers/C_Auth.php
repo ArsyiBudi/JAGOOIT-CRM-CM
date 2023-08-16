@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Nette\Utils\DateTime;
 
 class C_Auth extends Controller
 {
@@ -24,7 +25,17 @@ class C_Auth extends Controller
                 'message' => 'Bad Creds'
             ], 401);
         };
+
+        $user_permission = User::where('username', $field['username'])->where('password', $field['password'])->orderBy('username')->orderBy('password')->first();
+        if ($user_permission) {
+            $user_type = $user_permission->user_type_id;
+            if($user_type == 3){
+                return response([
+                    'message' => 'Bad Creds'
+                ], 401);
+            }
+            return redirect('/leads');
+        }
         // $token = $user -> createToken('myapptoken')->plainTextToken;
-        return redirect('/leads');
     }
 }
