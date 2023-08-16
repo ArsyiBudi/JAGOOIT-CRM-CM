@@ -128,7 +128,7 @@ Route::prefix('client')->group(function(){
         
         
         Route::prefix('plan')->group(function(){
-            Route::get('/recruitment', function () {
+            Route::get('/recru  itment', function () {
                 return view('admin.client.plan.recruitment', [
                     "title" => "Plan | Recruitment",
                 ]);
