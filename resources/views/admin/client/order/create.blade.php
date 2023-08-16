@@ -15,6 +15,8 @@
             <h2 class="text-2xl font-semibold text-white">New Order</h2>
         </div>
 
+        <form action="{{ url ('client/order/create') }}" method="POST">
+            @csrf
         <div class="mb-4 flex items-center gap-4">
             <label for="order-id" class="text-sm text-white">Order/Request ID</label>
             <input id="order-id" type="text" disabled class="text-black rounded-lg px-2 py-1 bg-gary">
@@ -86,12 +88,13 @@
 
 
         <div class="flex justify-end mt-6">
-            <a href="/client/menu">
+            <a href="/client">
                 <button class="bg-secondary text-white rounded-md px-4 py-2 mr-2">Cancel</button>
             </a>
 
-            <button class="bg-secondary text-white rounded-md px-4 py-2">Create</button>
+            <button class="bg-secondary text-white rounded-md px-4 py-2" type='submit'>Create</button>
         </div>
+        </form>
     </div>
 </div>      
 @endsection
