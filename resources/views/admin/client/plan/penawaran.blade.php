@@ -15,8 +15,9 @@
 
 @section('container')
     <form class="">
-        <div class="hide-scrollbar overflow-x-hidden overflow-y-auto pt-28  h-screen md:pr-5 px-5 md:px-0">
-                   <h1 class=" text-4xl">Penawaran</h1>
+        <div class="hide-scrollbar overflow-x-hidden overflow-y-auto  pt-28  h-screen md:pr-5 px-5 md:px-0">
+            <div class="">
+                <h1 class=" text-4xl">Penawaran</h1>
                 <p class=" text-[16px] font-medium pt-3">Silakan pilih kandidat</p>
 
                 <div class=" mt-5  w-full overflow-auto md:overflow-hidden">
@@ -186,6 +187,7 @@
                             </div>
                         </div>
                     </div>
+                </div>
         </div>
     </form>
 
