@@ -26,16 +26,14 @@ class C_Auth extends Controller
             ], 401);
         };
 
-        $user_permission = User::where('username', $field['username'])->where('password', $field['password'])->orderBy('username')->orderBy('password')->first();
-        if ($user_permission) {
-            $user_type = $user_permission->user_type_id;
-            if($user_type == 3){
-                return response([
-                    'message' => 'Bad Creds'
-                ], 401);
-            }
-            return redirect('/leads');
+        $user_type = $user->user_type_id;
+        if($user_type == 3){
+            return response([
+                'message' => 'Bad Creds'
+            ], 401);
         }
+        return redirect('/leads');
+
         // $token = $user -> createToken('myapptoken')->plainTextToken;
     }
 }
