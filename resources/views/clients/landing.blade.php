@@ -34,7 +34,7 @@
         <form action="{{ url('track') }}" method="POST">
           @csrf
             <h1 class=" text-center text-lg font-bold">Masukan Order ID</h1>
-            <input type="text" name="order_id" id="" class=" my-5 w-full rounded-xl p-2 outline-none text-black font-semibold">
+            <input type="text" name="order_id" id="" class=" my-5 w-full rounded-xl p-2 outline-none text-black bg-white font-semibold">
             <div class=" mt-5 hover:scale-95 duration-200">
                 <button type="submit" class=" bg-secondary py-1 px-8 rounded-lg font-bold block mx-auto">Cek</button>
             </div>
