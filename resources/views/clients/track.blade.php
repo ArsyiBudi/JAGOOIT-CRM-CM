@@ -55,7 +55,9 @@
      @include('admin.partials.navbar')
      <div class=" pt-28">
         <h1 class=" text-center text-3xl font-bold">Tracking Your Order</h1>
-        <p class=" text-center pt-3">Order ID 00123456789</p>
+        @foreach($data as $row)
+        <p class=" text-center pt-3">{{ $row -> id }}</p>
+        @endforeach
      </div>
      <div class=" block md:flex items-start gap-5 md:gap-40 px-10 mt-10 w-full">
         <div class=" bg-darkSecondary border-white border-2 rounded-lg py-5 pr-20 pl-5 mt-5 w-full md:w-auto">

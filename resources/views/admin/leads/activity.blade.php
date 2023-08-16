@@ -1,25 +1,43 @@
 @extends('admin.layouts.main')
 
 @section('container')
-{{-- <div id="formContainer">
-    <form id="form3" class="hidden">
-        <div class="bg-white opacity-70 rounded-md w-full mb-4 p-2">
-            <textarea name="judulreport" id="judulreport" class="bg-transparent outline-none w-full p-2 resize-none text-black" placeholder="Judul"></textarea>
-        </div>
-        <div class="bg-white opacity-70 rounded-md w-full mb-4 p-4">
-            <input type="file" name="file" id="file" class="hidden w-full" placeholder="file"></input>
-            <label for="file" class="text-grey w-full block">File</label>
-        </div>
-        <div class="bg-white opacity-70 rounded-md w-full mb-4 p-2 h-[100px]">
-            <textarea name="deskripsireport" id="deskripsireport" class="bg-transparent outline-none p-2  rounded w-full h-full resize-none text-black" placeholder="Deskripsi"></textarea> 
-        </div>
-        <div class="w-[97px] mx-auto">
-            <input type="submit" class="bg-secondary text-white rounded-md mt-5 mr-3 px-4 py-2 h-[37px]">
-        </div>
-    </form>
-</div> --}}
-<h6 class=" font-normal mb-4 text-4xl md:mt-20 mt-24 md:pl-0 pl-4 lg:text-left text-center">Create Activity</h6>
-<div class="bg-grey md:p-9 p-4 rounded-lg border-2 border-white  w-full h-[500px]"> 
+<<<<<<< HEAD
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Create Activity</title>
+    <style>
+    input::placeholder,
+    textarea::placeholder {
+        color: black;
+        font-family: quicksand;
+        font-size: 15px;
+}
+    textarea {
+        display: block;
+        width: 100%;
+        padding: 8px;
+        margin: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        resize: vertical; /* Agar dapat diresize secara vertikal */
+    }
+    </style>
+</head>
+<body>
+
+<div class="bg-darkSecondary p-6 rounded-lg shadow-lg mx-auto w-[900px] h-[500px]"> 
+        <h6 class="text-2xl font-semibold mb-4 ml-2">Create Activity</h6>
+        <select id="formSelector" class="mb-4 ml-2 bg-primary font-quicksand border border-none rounded-md py-1">Appointment
+            <option value="form1" class='font-quicksand'>Appointment</option>  
+            <option value="form2" class='font-quicksand'>Note</option>
+            <option value="form3" class='font-quicksand'>Report</option>
+=======
+<h6 class="mt-24 md:mt-0 text-center md:text-left font-normal mb-4 text-4xl">Create Activity</h6>
+<div class="bg-grey p-9 rounded-lg border-2 border-white  w-full h-[500px]"> 
         
         <select id="formSelector" class="mb-4 bg-transparent border outline-none border-none rounded-md py-1 text-3xl">
             <option value="form1" class="bg-grey">Appointment</option>

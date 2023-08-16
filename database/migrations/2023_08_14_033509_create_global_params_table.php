@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('global_params', function (Blueprint $table) {
             $table->integer('id_params', true);
             $table->string('params_name');
-            $table->integer('id_params_type');
-            $table->string('params_type');
+            $table->integer('id_params_type')->nullable();
+            $table->string('params_type')->nullable();
         });
     }
 
