@@ -39,7 +39,7 @@
 </style>
 
 @section('container')
-    <div class=" overflow-y-auto overflow-x-hidden pt-28 md:pt-0 px-5 md:px-10 h-screen">
+    <div class=" overflow-y-auto overflow-x-hidden pt-28 lg:pt-0 px-5 lg:px-10 h-screen">
         <h1 class=" text-4xl">Recruitment</h1>
         <p class=" text-sm md:text-[16px] font-medium pt-3">Silakan pilih kandidat dengan jumlah melebihi yang dibutuhkan <br class=" hidden md:block"> untuk cadangan</p>
 

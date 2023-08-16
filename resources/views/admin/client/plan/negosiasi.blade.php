@@ -39,12 +39,12 @@
     </style>
 
     @section('container')
-        <div class=" overflow-y-auto overflow-x-hidden pt-28 md:pt-0 px-5 md:px-10 h-screen ">
+        <div class="overflow-y-auto overflow-x-hidden pt-28 lg:pt-0 px-5 lg:px-10 h-screen">
             <h1 class=" text-4xl">Appointment Negosiasi</h1>
             <p class=" text-[16px] font-medium pt-3">Silakan set appointment</p>
 
-            <div class=" mt-5  w-full ">
-                <ul class=" mx-auto steps steps-horizontal w-full ml-0 md:ml-14">
+            <div class=" mt-5  w-full overflow">
+                <ul class=" mx-auto steps steps-horizontal w-full ml-0 md:ml-5">
                     <li  class="step step-primary">
                     </li>
                     <li  class="step step-primary">
@@ -95,15 +95,23 @@
                 </form> 
 
                 <div class="flex justify-between items-center">
-                    <div>
-                        <button class="bg-secondary text-white rounded-md px-4 py-2 mr-2 md:w-[168px]">Back</button>
-                    </div>
-                    <div class="">
-                        <button class="bg-secondary text-white rounded-md px-4 py-2 mr-2 md:w-[100px]">Save</button>
-            
-                        <button class="bg-secondary text-white rounded-md px-4 py-2 md:w-[168px]">Continue</button>
-                    </div>
+                    <a href="/client/order/plan/penawaran" class="bg-secondary text-white rounded-md px-4 py-2 mr-2">
+                        <p class="hidden md:inline">Back</p>
+                        <i class="ri-arrow-left-line inline md:hidden"></i>
+                    </a>
+                    
+                <div class="flex">
+                    <button class="bg-secondary text-white rounded-md px-4 py-2">
+                        <p class="hidden md:block">Save</p>
+                        <i class="ri-save-line block md:hidden"></i>
+                    </button>
+                <div class="mx-2"></div> <!-- Jarak antara tombol Save dan Continue -->
+                    <button class="bg-secondary text-white rounded-md px-4 py-2">
+                        <p class="hidden md:block">Continue</p>
+                        <i class="ri-arrow-right-line block md:hidden"></i>
+                    </button>
                 </div>
             </div>
         </div>
-    @endsection
+    </div>
+@endsection
