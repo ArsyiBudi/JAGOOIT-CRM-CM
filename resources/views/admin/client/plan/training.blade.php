@@ -168,10 +168,10 @@
 
             <div class=" flex justify-between items-center gap-1 md:gap-0">
                 <div>
-                    <button class=" bg-secondary text-white text-sm text-center py-1 px-3 lg:px-14 rounded-md font-bold">
-                      <p class=" hidden lg:block">Back</p>
-                      <i class="ri-arrow-left-line block lg:hidden"></i>  
-                    </button>
+                    <a href="/client/order/plan/recruitment" class=" bg-secondary text-white text-sm text-center py-1 px-3 lg:px-14 rounded-md font-bold">
+                      <p class=" hidden lg:inline">Back</p>
+                      <i class="ri-arrow-left-line inline lg:hidden"></i>  
+                    </a>
                 </div>
                 <div class=" flex items-center gap-3">
                     <div class="">
