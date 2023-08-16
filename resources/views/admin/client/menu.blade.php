@@ -62,7 +62,7 @@
             </div>
         </form>
 
-          <div class=" hide-scrollbar w-full h-72 overflow-auto pr-2">
+        <div class=" hide-scrollbar w-full h-72 overflow-auto pr-2">
                 <table class=" w-full text-xs md:text-sm font-bold ">
                     <thead>
                         <tr >  
@@ -197,9 +197,9 @@
 
         <div class="flex items-center justify-center w-full">
 
-            <div class="flex gap-3 items-center mt-7">
+        <div class="flex gap-3 items-center mt-7">
                 <button class="bg-secondary hover:scale-95 duration-200 w-[69px] rounded-lg flex items-center justify-center py-2">Prev</button>
-                <div class="rounded-lg p-2 w-[32px] bg-grey flex items-center justify-center">
+                <div class="rounded-lg p-2 w-[32px] bg-grey flex items-center justify-center" onclick="{{ url('/client/detail') }}">
                     <p>1</p>
                 </div>
                 <div class="rounded-lg p-2 w-[32px] bg-grey flex items-center justify-center">
