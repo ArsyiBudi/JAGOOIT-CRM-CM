@@ -38,6 +38,7 @@
 
         <div class="overflow-auto bg-darkSecondary mt-5 justify-between flex flex-col text-lightGrey px-8 py-10 rounded-md gap-y-3">
         <form action="{{ route('save_popks') }}" method="post">
+            
             @csrf
             <div class="text-xl">JagoIT:</div>
             <div class="flex flex-row flex-wrap gap-2">
@@ -154,9 +155,15 @@
                 </div>
             </div>
 
+<<<<<<<<< Temporary merge branch 1
             
             <div class="mt-4 flex justify-end">
                 <button type="submit" name="createWord" class=" w-full  md:w-[188px] bg-secondary text-white text-sm text-center h-[37px] rounded-md hover:scale-95 duration-200">Create</button>
+=========
+            <div class="mt-4 space-x-2 flex justify-end">
+                <button class="bg-secondary text-white text-sm text-center w-[188px] h-[37px] rounded-md">PDF</button>
+                <button type="submit" class="bg-secondary text-white text-sm text-center w-[188px] h-[37px] rounded-md">Create</button>
+>>>>>>>>> Temporary merge branch 2
             </div>
 
         </div>
