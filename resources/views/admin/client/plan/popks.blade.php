@@ -1,7 +1,7 @@
 @extends('admin.layouts.main')
 
 @section('container')
-    <div class="pt-20 lg:pt-0">
+    <div class="pt-20 pb-2 lg:pt-0">
     </div>
     <div class="overflow-auto pt-0 h-[90vh] w-full rounded-md hide-scrollbar overflow-x-hidden">
         <h1 class="pl-4 text-4xl">PO & PKS</h1>
