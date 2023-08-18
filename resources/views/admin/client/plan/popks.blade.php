@@ -152,10 +152,11 @@
                 </div>
             </div>
 
-            <div class="mt-4 space-x-2 flex justify-end">
-                <button class="bg-secondary text-white text-sm text-center w-[188px] h-[37px] rounded-md">PDF</button>
-                <button class="bg-secondary text-white text-sm text-center w-[188px] h-[37px] rounded-md">Create</button>
+            
+            <div class="mt-4 flex justify-end">
+                <button type="submit" name="createWord" class=" w-full  md:w-[188px] bg-secondary text-white text-sm text-center h-[37px] rounded-md hover:scale-95 duration-200">Create</button>
             </div>
+            
         </div>
 
         <div class="overflow-auto bg-darkSecondary mt-5 justify-between flex flex-col text-lightGrey px-8 py-10 rounded-md space-y-3">
