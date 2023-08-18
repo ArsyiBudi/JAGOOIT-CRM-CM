@@ -89,14 +89,14 @@
                             <td align="center" class=" p-4">-</td>
                             <td align="center" class=" p-4"> 
                                 <div class=" flex justify-center items-center gap-2">
-                                    <i class="ri-checkbox-circle-line text-2xl"></i>
+                                    <i class="ri-checkbox-circle-line text-2xl cursor-pointer" title="Complete Manual"></i>
                                     <a href="/client/order/plan/recruitment">
-                                        <i class="ri-calendar-todo-fill text-2xl"></i>
+                                        <i class="ri-calendar-todo-fill text-2xl" title="Plan"></i>
                                     </a>
                                     <a href="/client/detail">
-                                        <i class="ri-information-line text-2xl"></i>
+                                        <i class="ri-information-line text-2xl" title="Detail"></i>
                                     </a>
-                                    <i class="ri-delete-bin-2-line text-2xl text-delete"></i>
+                                    <i class="ri-delete-bin-2-line text-2xl text-delete cursor-pointer" title="Delete"></i>
                                 </div> 
                             </td>
                         </tr>
@@ -112,14 +112,14 @@
                             <td align="center" class=" p-4">-</td>
                             <td align="center" class=" p-4">
                                 <div class=" flex justify-center items-center gap-2">
-                                    <i class="ri-checkbox-circle-line text-2xl"></i>
+                                    <i class="ri-checkbox-circle-line text-2xl cursor-pointer" title="Complete Manual"></i>
                                     <a href="/client/order/plan/recruitment">
-                                        <i class="ri-calendar-todo-fill text-2xl"></i>
+                                        <i class="ri-calendar-todo-fill text-2xl" title="Plan"></i>
                                     </a>
                                     <a href="/client/detail">
-                                        <i class="ri-information-line text-2xl"></i>
+                                        <i class="ri-information-line text-2xl" title="Detail"></i>
                                     </a>
-                                    <i class="ri-delete-bin-2-line text-2xl text-delete"></i>
+                                    <i class="ri-delete-bin-2-line text-2xl text-delete cursor-pointer" title="Delete"></i>
                                 </div> 
                             </td>
                         </tr>
@@ -135,14 +135,14 @@
                             <td align="center" class=" p-4">-</td>
                             <td align="center" class=" p-4">
                                 <div class=" flex justify-center items-center gap-2">
-                                    <i class="ri-checkbox-circle-line text-2xl"></i>
+                                    <i class="ri-checkbox-circle-line text-2xl cursor-pointer" title="Complete Manual"></i>
                                     <a href="/client/order/plan/recruitment">
-                                        <i class="ri-calendar-todo-fill text-2xl"></i>
+                                        <i class="ri-calendar-todo-fill text-2xl" title="Plan"></i>
                                     </a>
                                     <a href="/client/detail">
-                                        <i class="ri-information-line text-2xl"></i>
+                                        <i class="ri-information-line text-2xl" title="Detail"></i>
                                     </a>
-                                    <i class="ri-delete-bin-2-line text-2xl text-delete"></i>
+                                    <i class="ri-delete-bin-2-line text-2xl text-delete cursor-pointer" title="Delete"></i>
                                 </div> 
                             </td>
                         </tr>
@@ -158,14 +158,14 @@
                             <td align="center" class=" p-4">-</td>
                             <td align="center" class=" p-4">
                                 <div class=" flex justify-center items-center gap-2">
-                                    <i class="ri-checkbox-circle-line text-2xl"></i>
+                                    <i class="ri-checkbox-circle-line text-2xl cursor-pointer" title="Complete Manual"></i>
                                     <a href="/client/order/plan/recruitment">
-                                        <i class="ri-calendar-todo-fill text-2xl"></i>
+                                        <i class="ri-calendar-todo-fill text-2xl" title="Plan"></i>
                                     </a>
                                     <a href="/client/detail">
-                                        <i class="ri-information-line text-2xl"></i>
+                                        <i class="ri-information-line text-2xl" title="Detail"></i>
                                     </a>
-                                    <i class="ri-delete-bin-2-line text-2xl text-delete"></i>
+                                    <i class="ri-delete-bin-2-line text-2xl text-delete cursor-pointer" title="Delete"></i>
                                 </div> 
                             </td>
                         </tr>
@@ -181,14 +181,14 @@
                             <td align="center" class=" p-4">-</td>
                             <td align="center" class=" p-4">
                                 <div class=" flex justify-center items-center gap-2">
-                                    <i class="ri-checkbox-circle-line text-2xl"></i>
+                                    <i class="ri-checkbox-circle-line text-2xl cursor-pointer" title="Complete Manual"></i>
                                     <a href="/client/order/plan/recruitment">
-                                        <i class="ri-calendar-todo-fill text-2xl"></i>
+                                        <i class="ri-calendar-todo-fill text-2xl" title="Plan"></i>
                                     </a>
                                     <a href="/client/detail">
-                                        <i class="ri-information-line text-2xl"></i>
+                                        <i class="ri-information-line text-2xl" title="Detail"></i>
                                     </a>
-                                    <i class="ri-delete-bin-2-line text-2xl text-delete"></i>
+                                    <i class="ri-delete-bin-2-line text-2xl text-delete cursor-pointer" title="Delete"></i>
                                 </div> 
                             </td>
                         </tr>
@@ -204,14 +204,14 @@
                             <td align="center" class=" p-4">-</td>
                             <td align="center" class=" p-4">
                                 <div class=" flex justify-center items-center gap-2">
-                                    <i class="ri-checkbox-circle-line text-2xl"></i>
+                                    <i class="ri-checkbox-circle-line text-2xl cursor-pointer" title="Complete Manual"></i>
                                     <a href="/client/order/plan/recruitment">
-                                        <i class="ri-calendar-todo-fill text-2xl"></i>
+                                        <i class="ri-calendar-todo-fill text-2xl" title="Plan"></i>
                                     </a>
                                     <a href="/client/detail">
-                                        <i class="ri-information-line text-2xl"></i>
+                                        <i class="ri-information-line text-2xl" title="Detail"></i>
                                     </a>
-                                    <i class="ri-delete-bin-2-line text-2xl text-delete"></i>
+                                    <i class="ri-delete-bin-2-line text-2xl text-delete cursor-pointer" title="Delete"></i>
                                 </div> 
                             </td>
                         </tr>
