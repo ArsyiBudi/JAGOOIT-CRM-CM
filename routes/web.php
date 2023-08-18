@@ -27,6 +27,25 @@ function set_active($routes)
     return '';
 }
 
+function set_child_active($routes)
+{
+    $currentPath = $_SERVER['REQUEST_URI'];
+
+    if (is_array($routes)) {
+        foreach ($routes as $route) {
+            if (strpos($currentPath, $route) === 0) {
+                return 'text-secondary fill-secondary';
+            }
+        }
+    } else {
+        if ($currentPath == $routes) {
+            return 'text-secondary fill-secondary';
+        }
+    }
+
+    return 'text-white fill-white';
+}
+
 // Client
 Route::any('/', function () {
     return view('clients.landing');

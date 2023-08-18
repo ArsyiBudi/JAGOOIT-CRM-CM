@@ -14,8 +14,8 @@
 </style>
 
 @section('container')
+    <div class="hide-scrollbar overflow-x-hidden overflow-y-auto pt-28 h-screen md:pr-5 px-5 md:px-0">
     <form class="">
-        <div class="hide-scrollbar overflow-x-hidden overflow-y-auto  pt-28  h-screen md:pr-5 px-5 md:px-0">
             <div class="">
                 <h1 class=" text-4xl">Penawaran</h1>
                 <p class=" text-[16px] font-medium pt-3">Silakan pilih kandidat</p>
@@ -94,8 +94,8 @@
                                         <span>
                                             <i class=" text-lg cursor-pointer ri-delete-bin-2-line text-delete"></i>
                                         </span>
-                                    <button>                                 
-                                    <button type="button" class="bg-white text-darkSecondary text-opacity-50 text-sm text-center py-2 px-3  rounded-md font-bold hover:scale-95 duration-200">Add Detail +<button>                                 
+                                    <button>                                  
+                                    <button type="button" class="btn bg-white text-darkSecondary text-opacity-50 text-sm text-center py-2 px-3  rounded-md font-bold hover:scale-95 duration-200" onclick="my_modal_5.showModal()">Add Detail +</button>
                                 </div>
                             </div>
                         </div>
@@ -168,10 +168,13 @@
 
                     <div class=" flex justify-between items-center pt-4 mb-5 md:mb-0">
                         <div>
-                            <button class=" bg-secondary text-white text-sm text-center py-1 px-3 md:px-14 rounded-md font-bold hover:scale-95 duration-200">
-                                <p class=" hidden md:block">Back</p>        
-                                <i class="ri-arrow-left-line block md:hidden"></i>  
-                            </button>
+                            <div>
+                                <a href="/client/order/plan/training" class="bg-secondary text-white text-sm text-center py-1 px-2 md:px-14 rounded-md font-bold flex items-center">
+                                    <p class="hidden md:block">back</p>
+                                    <i class="ri-arrow-left-line block md:hidden ml-1"></i>
+                                </a>
+                        </div>
+
                         </div>
                         
                         <div class="flex gap-4">
@@ -180,15 +183,29 @@
                             </div>
                 
                             <div>
-                                <button class=" bg-secondary text-white text-sm text-center py-1 px-3 md:px-14 rounded-md font-bold hover:scale-95 duration-200">
-                                  <p class=" hidden md:block">Continue</p> 
-                                  <i class="ri-arrow-right-line block md:hidden"></i>
-                                </button>
+                            <div>
+                                <a href="/client/order/plan/negosiasi" class="bg-secondary text-white text-sm text-center py-1 px-2 md:px-14 rounded-md font-bold flex items-center">
+                                    <p class="hidden md:block">Continue</p>
+                                    <i class="ri-arrow-right-line block md:hidden ml-1"></i>
+                                </a>
+                            </div>
+
                             </div>
                         </div>
                     </div>
                 </div>
-        </div>
-    </form>
+        </form>
+    </div>
+
+    <dialog id="my_modal_5" class="modal modal-bottom sm:modal-middle">
+        <form method="dialog" class="modal-box">
+            <h3 class="font-bold text-lg">Hello!</h3>
+            <p class="py-4">Press ESC key or click the button below to close</p>
+            <div class="modal-action">
+            <!-- if there is a button in form, it will close the modal -->
+            <button class="btn">Close</button>
+            </div>
+        </form>
+    </dialog>
 
 @endsection
