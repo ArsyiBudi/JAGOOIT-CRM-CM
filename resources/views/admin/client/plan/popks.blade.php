@@ -32,11 +32,13 @@
                         <input type="date" id="endDate" class=" custom-date-input rounded-md bg-primary py-2 px-5 text-white outline-none border-[1px] border-white">
                     </div>
                 </div>
+            </form>
         </div>
 
 
         <div class="overflow-auto bg-darkSecondary mt-5 justify-between flex flex-col text-lightGrey px-8 py-10 rounded-md space-y-3">
-        
+        <form action="{{ route('save_popks') }}" method="post">
+            @csrf
             <div>JagoIT:</div>
             <div class="flex flex-row space-x-2">
                 <div class="flex-auto flex flex-col">
@@ -154,9 +156,10 @@
 
             <div class="mt-4 space-x-2 flex justify-end">
                 <button class="bg-secondary text-white text-sm text-center w-[188px] h-[37px] rounded-md">PDF</button>
-                <button class="bg-secondary text-white text-sm text-center w-[188px] h-[37px] rounded-md">Create</button>
+                <button type="submit" class="bg-secondary text-white text-sm text-center w-[188px] h-[37px] rounded-md">Create</button>
             </div>
         </div>
+    </form>
 
         <div class="overflow-auto bg-darkSecondary mt-5 justify-between flex flex-col text-lightGrey px-8 py-10 rounded-md space-y-3">
             <div>File PKS (1 file, pdf)</div>

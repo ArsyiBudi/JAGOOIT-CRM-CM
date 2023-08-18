@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Controllers\C_Auth;
+use App\Http\Controllers\C_Leads;
 use App\Http\Controllers\C_Orders;
+use App\Http\Controllers\C_Plan;
 use Illuminate\Support\Facades\Route;
 
 
@@ -49,10 +51,13 @@ Route::prefix('leads')->group(function(){
         ]);
     });
 
-    Route::get('/create', function () {
-        return view('admin.leads.create', [
-            "title" => "Leads | Create",
-        ]);
+    Route::prefix('create') -> group(function(){
+        Route::get('/', function(){
+            return view('admin.leads.create', [
+                "title" => "Leads | Create"
+            ]);
+        });
+        Route::post('/', [C_Leads::class, 'create']) -> name('create_order');
     });
     
     Route::get('/detail', function () {
@@ -158,11 +163,16 @@ Route::prefix('client')->group(function(){
                 ]);
             });
             
-            Route::get('/popks', function () {
-                return view('admin.client.plan.popks', [
-                    "title" => "Plan | PO & PKS",
-                ]);
-            });
+            Route::prefix('popks') -> group(function(){
+                Route::get('/', function(){
+                    return view('admin.client.plan.popks', [
+                        "title" => "Plan | PO & PKS",
+                    ]);
+                });
+
+                Route::post('/', [C_Plan::class, 'popks_save']) -> name('save_popks');
+
+            }); 
         });  
     });
 });
