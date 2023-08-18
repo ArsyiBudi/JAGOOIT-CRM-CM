@@ -95,21 +95,24 @@
                 </form> 
 
                 <div class="flex justify-between items-center">
-                    <a href="/client/order/plan/penawaran" class="bg-secondary text-white rounded-md px-4 py-2 mr-2">
+                    <a href="/client/order/plan/penawaran" class="bg-secondary text-white text-sm text-center py-1 px-2 md:px-14 rounded-md font-bold flex items-center">
                         <p class="hidden md:inline">Back</p>
                         <i class="ri-arrow-left-line inline md:hidden"></i>
                     </a>
                     
                 <div class="flex">
-                    <button class="bg-secondary text-white rounded-md px-4 py-2">
+                    <button class="bg-secondary text-white text-sm text-center py-1 px-2 md:px-14 rounded-md font-bold flex items-center">
                         <p class="hidden md:block">Save</p>
                         <i class="ri-save-line block md:hidden"></i>
                     </button>
                 <div class="mx-2"></div> <!-- Jarak antara tombol Save dan Continue -->
-                    <button class="bg-secondary text-white rounded-md px-4 py-2">
+                <div>
+                    <a href="/client/order/plan/percobaan" class="bg-secondary text-white text-sm text-center py-1 px-2 md:px-14 rounded-md font-bold flex items-center">
                         <p class="hidden md:block">Continue</p>
-                        <i class="ri-arrow-right-line block md:hidden"></i>
-                    </button>
+                        <i class="ri-arrow-right-line block md:hidden ml-hidden"></i>
+                        </a>
+                    </div>
+
                 </div>
             </div>
         </div>
