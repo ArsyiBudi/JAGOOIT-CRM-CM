@@ -86,11 +86,12 @@
                                 </td>
                                 <td align="center" class=" p-4"> 
                                     <div class=" flex items-center gap-2 justify-center">
-                                        <i class="ri-checkbox-circle-line text-lg"></i>
-                                        <a href="/leads/detail">
-                                            <i class=" text-lg cursor-pointer ri-information-line"></i>
+                                        <i class="ri-checkbox-circle-line text-lg cursor-pointer" title="Complete Manual"></i>
+
+                                        <a href="/client/order/history/detail/">
+                                            <i class=" text-lg cursor-pointer ri-information-line" title="Detail"></i>
                                         </a>
-                                        <i class=" text-lg cursor-pointer ri-delete-bin-2-line text-delete"></i>
+                                        <i class=" text-lg cursor-pointer ri-delete-bin-2-line text-delete" title="Delete"></i>
                                     </div> 
                                 </td>
                             </tr>
@@ -107,11 +108,12 @@
                                 </td>
                                 <td align="center" class=" p-4"> 
                                     <div class=" flex items-center gap-2 justify-center">
-                                        <i class="ri-checkbox-circle-line text-lg"></i>
-                                        <a href="/leads/detail">
-                                            <i class=" text-lg cursor-pointer ri-information-line"></i>
+                                        <i class="ri-checkbox-circle-line text-lg cursor-pointer" title="Complete Manual"></i>
+
+                                        <a href="/client/order/history/detail/">
+                                            <i class=" text-lg cursor-pointer ri-information-line" title="Detail"></i>
                                         </a>
-                                        <i class=" text-lg cursor-pointer ri-delete-bin-2-line text-delete"></i>
+                                        <i class=" text-lg cursor-pointer ri-delete-bin-2-line text-delete" title="Delete"></i>
                                     </div> 
                                 </td>
                             </tr>
@@ -127,11 +129,12 @@
                                 </td>
                                 <td align="center" class=" p-4"> 
                                     <div class=" flex items-center gap-2 justify-center">
-                                        <i class="ri-checkbox-circle-line text-lg"></i>
-                                        <a href="/leads/detail">
-                                            <i class=" text-lg cursor-pointer ri-information-line"></i>
+                                        <i class="ri-checkbox-circle-line text-lg cursor-pointer" title="Complete Manual"></i>
+
+                                        <a href="/client/order/history/detail/">
+                                            <i class=" text-lg cursor-pointer ri-information-line" title="Detail"></i>
                                         </a>
-                                        <i class=" text-lg cursor-pointer ri-delete-bin-2-line text-delete"></i>
+                                        <i class=" text-lg cursor-pointer ri-delete-bin-2-line text-delete" title="Delete"></i>
                                     </div> 
                                 </td>
                             </tr>
@@ -147,11 +150,12 @@
                                 </td>
                                 <td align="center" class=" p-4"> 
                                     <div class=" flex items-center gap-2 justify-center">
-                                        <i class="ri-checkbox-circle-line text-lg"></i>
-                                        <a href="/leads/detail">
-                                            <i class=" text-lg cursor-pointer ri-information-line"></i>
+                                        <i class="ri-checkbox-circle-line text-lg cursor-pointer" title="Complete Manual"></i>
+
+                                        <a href="/client/order/history/detail/">
+                                            <i class=" text-lg cursor-pointer ri-information-line" title="Detail"></i>
                                         </a>
-                                        <i class=" text-lg cursor-pointer ri-delete-bin-2-line text-delete"></i>
+                                        <i class=" text-lg cursor-pointer ri-delete-bin-2-line text-delete" title="Delete"></i>
                                     </div> 
                                 </td>
                             </tr>
@@ -167,11 +171,12 @@
                                 </td>
                                 <td align="center" class=" p-4"> 
                                     <div class=" flex items-center gap-2 justify-center">
-                                        <i class="ri-checkbox-circle-line text-lg"></i>
-                                        <a href="/leads/detail">
-                                            <i class=" text-lg cursor-pointer ri-information-line"></i>
+                                        <i class="ri-checkbox-circle-line text-lg cursor-pointer" title="Complete Manual"></i>
+
+                                        <a href="/client/order/history/detail/">
+                                            <i class=" text-lg cursor-pointer ri-information-line" title="Detail"></i>
                                         </a>
-                                        <i class=" text-lg cursor-pointer ri-delete-bin-2-line text-delete"></i>
+                                        <i class=" text-lg cursor-pointer ri-delete-bin-2-line text-delete" title="Delete"></i>
                                     </div> 
                                 </td>
                             </tr>
@@ -187,11 +192,12 @@
                                 </td>
                                 <td align="center" class=" p-4"> 
                                     <div class=" flex items-center gap-2 justify-center">
-                                        <i class="ri-checkbox-circle-line text-lg"></i>
-                                        <a href="/leads/detail">
-                                            <i class=" text-lg cursor-pointer ri-information-line"></i>
+                                        <i class="ri-checkbox-circle-line text-lg cursor-pointer" title="Complete Manual"></i>
+
+                                        <a href="/client/order/history/detail/">
+                                            <i class=" text-lg cursor-pointer ri-information-line" title="Detail"></i>
                                         </a>
-                                        <i class=" text-lg cursor-pointer ri-delete-bin-2-line text-delete"></i>
+                                        <i class=" text-lg cursor-pointer ri-delete-bin-2-line text-delete" title="Delete"></i>
                                     </div> 
                                 </td>
                             </tr>
@@ -207,11 +213,11 @@
                                 </td>
                                 <td align="center" class=" p-4"> 
                                     <div class=" flex items-center gap-2 justify-center">
-                                        <i class="ri-checkbox-circle-line text-lg"></i>
-                                        <a href="/leads/detail">
-                                            <i class=" text-lg cursor-pointer ri-information-line"></i>
+                                        <i class="ri-checkbox-circle-line text-lg cursor-pointer" title="Complete Manual"></i>
+                                        <a href="/client/order/history/detail/">
+                                            <i class=" text-lg cursor-pointer ri-information-line" title="Detail"></i>
                                         </a>
-                                        <i class=" text-lg cursor-pointer ri-delete-bin-2-line text-delete"></i>
+                                        <i class=" text-lg cursor-pointer ri-delete-bin-2-line text-delete" title="Delete"></i>
                                     </div> 
                                 </td>
                             </tr>
