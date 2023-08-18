@@ -103,6 +103,18 @@
                 </div>
             </div>
 
+            <div>Biaya Dinas</div>
+            <div class="flex flex-row space-x-2">
+                <div class="flex-auto flex flex-col">
+                    <div>Konsumsi (perhari)</div>
+                    <input type="text" class="rounded-md">
+                </div>
+                <div class="flex-auto flex flex-col">
+                    Transport Pulang-Pergi Standar JKT-BDG
+                    <input type="text" class="rounded-md h-full">
+                </div>
+            </div>
+
             <div>Invoice Tagihan</div>
             <div class="flex flex-row space-x-2">
                 Tanggal 
