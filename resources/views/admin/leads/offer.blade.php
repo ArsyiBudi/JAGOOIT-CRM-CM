@@ -76,8 +76,8 @@
     
     
             <div class="flex justify-end mt-6">
-                <button class="bg-secondary text-white rounded-md px-4 py-2 mr-2" onclick="dropDownBack()">Cancel</button>
-                <button class="bg-secondary text-white rounded-md px-4 py-2">Create</button>
+                <button class="bg-secondary text-white rounded-md px-4 py-2 mr-2 hover:scale-95 duration-200" onclick="dropDownBack()">Cancel</button>
+                <button class="bg-secondary text-white rounded-md px-4 py-2 hover:scale-95 duration-200" >Create</button>
             </div>
         </div>
     </form>
@@ -101,7 +101,7 @@
                         <textarea name="deskripsinote" id="deskripsinote" class="bg-transparent p-2 outline-none text-black w-full h-full resize-none" placeholder="Deskripsi"></textarea> <!-- Menggunakan w-full untuk mengisi textarea secara penuh -->
                     </div>
                     <div class="w-[97px] mx-auto">
-                        <input type="submit" class="bg-secondary text-white rounded-md px-4 mt-5 py-2 h-[37px] cursor-pointer">
+                        <input type="submit" class="bg-secondary text-white rounded-md px-4 mt-5 py-2 h-[37px] cursor-pointer hover:scale-95 duration-200">
                     </div>
                 </form>
                 <form id="form2" class="hidden">
@@ -121,7 +121,7 @@
                         <textarea name="deskripsi" id="deskripsi" class="bg-transparent outline-none p-2 text-black resize-none h-full w-full" placeholder="Deskripsi"></textarea> <!-- Menggunakan w-full untuk mengisi textarea secara penuh -->
                     </div>
                     <div class="w-[97px] mx-auto">
-                        <input type="submit" class="bg-secondary  text-white rounded-md px-4 py-2 h-[37px] mt-11 cursor-pointer">
+                        <input type="submit" class="bg-secondary  text-white rounded-md px-4 py-2 h-[37px] mt-11 cursor-pointer hover:scale-95 duration-200">
                     </div>
                 </form>
                 {{-- <form id="form3" class="hidden"></form> --}}
