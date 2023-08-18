@@ -180,8 +180,31 @@
                 <input type="text" class="rounded-md h-14">
             </div>
 
-            <div class="mt-4 space-x-2 flex justify-end">
-                <button class="bg-secondary text-white text-sm text-center w-[188px] h-[37px] rounded-md">Send</button>
+            <div class="mt-4 flex justify-end">
+                <button type="submit" name="Send" class=" w-full  md:w-[188px] bg-secondary text-white text-sm text-center h-[37px] rounded-md hover:scale-95 duration-200">Send</button>
+            </div>
+        </div>
+
+        <div class=" flex justify-between items-center pt-4 mb-10 md:mb-0">
+            <div>
+                <button class=" bg-secondary text-white text-sm text-center py-1 px-3 md:px-14 rounded-md font-bold hover:scale-95 duration-200">
+                    <p class=" hidden md:block">Back</p>        
+                    <i class="ri-arrow-left-line block md:hidden"></i>  
+                </button>
+            </div>
+            
+            <div class="flex gap-4 max-sm:w-full max-sm:justify-between">
+                <div></div>
+                <div>
+                    <button type="submit" name="save" class=" w-full bg-secondary text-white text-sm text-center py-1 px-14 rounded-md font-bold hover:scale-95 duration-200">Save</button>
+                </div>
+    
+                <div>
+                    <button class=" bg-secondary text-white text-sm text-center py-1 px-3 md:px-14 rounded-md font-bold hover:scale-95 duration-200">
+                      <p class=" hidden md:block">Continue</p> 
+                      <i class="ri-arrow-right-line block md:hidden"></i>
+                    </button>
+                </div>
             </div>
         </div>
     </div>
