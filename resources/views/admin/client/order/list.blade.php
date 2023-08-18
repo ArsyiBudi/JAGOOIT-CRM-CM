@@ -40,7 +40,7 @@
     <div class="w-full bg-darkSecondary py-10 px-8 flex  flex-col rounded-md">
 
         <div class="border-b border-white w-full pb-3 mb-3">
-            <h3 class="text-white font-semibold text-3xl">Data Order</h3>
+            <h3 class="text-white font-semibold text-3xl">Daftar Order</h3>
         </div>
 
         <form class=" block md:flex items-start my-4 justify-between mb-8 w-full">
@@ -53,7 +53,7 @@
                     <p class="text-white text-xs md:text-sm">entries</p>
                 </div>
                 <div class="md:mt-5">
-                        <a class=" bg-secondary font-semibold text-sm md:text-[16px] py-1 px-3 md:px-5 rounded-lg mt-0 md:mt-7 hover:scale-95 duration-200" href="/client/order/create">New Orders</a>  
+                        <a class=" bg-secondary text-sm md:text-[16px] py-1 px-3 md:px-5 rounded-lg mt-0 md:mt-7 hover:scale-95 duration-200" href="/client/order/create">New Orders</a>  
                 </div>
             </div>
             <div class=" flex items-center gap-5 mt-5 md:mt-0">
@@ -88,10 +88,14 @@
                             <td align="center" class=" p-4">Selesai</td>
                             <td align="center" class=" p-4">-</td>
                             <td align="center" class=" p-4"> 
-                                <div class=" flex items-center gap-2">
+                                <div class=" flex justify-center items-center gap-2">
                                     <i class="ri-checkbox-circle-line text-2xl"></i>
-                                    <i class="ri-calendar-todo-fill text-2xl"></i>
-                                    <i class="ri-information-line text-2xl"></i>
+                                    <a href="/client/order/plan/recruitment">
+                                        <i class="ri-calendar-todo-fill text-2xl"></i>
+                                    </a>
+                                    <a href="/client/detail">
+                                        <i class="ri-information-line text-2xl"></i>
+                                    </a>
                                     <i class="ri-delete-bin-2-line text-2xl text-delete"></i>
                                 </div> 
                             </td>
@@ -107,10 +111,14 @@
                             <td align="center" class=" p-4">Selesai</td>
                             <td align="center" class=" p-4">-</td>
                             <td align="center" class=" p-4">
-                                <div class=" flex items-center gap-2">
+                                <div class=" flex justify-center items-center gap-2">
                                     <i class="ri-checkbox-circle-line text-2xl"></i>
-                                    <i class="ri-calendar-todo-fill text-2xl"></i>
-                                    <i class="ri-information-line text-2xl"></i>
+                                    <a href="/client/order/plan/recruitment">
+                                        <i class="ri-calendar-todo-fill text-2xl"></i>
+                                    </a>
+                                    <a href="/client/detail">
+                                        <i class="ri-information-line text-2xl"></i>
+                                    </a>
                                     <i class="ri-delete-bin-2-line text-2xl text-delete"></i>
                                 </div> 
                             </td>
@@ -126,10 +134,14 @@
                             <td align="center" class=" p-4">Selesai</td>
                             <td align="center" class=" p-4">-</td>
                             <td align="center" class=" p-4">
-                                <div class=" flex items-center gap-2">
+                                <div class=" flex justify-center items-center gap-2">
                                     <i class="ri-checkbox-circle-line text-2xl"></i>
-                                    <i class="ri-calendar-todo-fill text-2xl"></i>
-                                    <i class="ri-information-line text-2xl"></i>
+                                    <a href="/client/order/plan/recruitment">
+                                        <i class="ri-calendar-todo-fill text-2xl"></i>
+                                    </a>
+                                    <a href="/client/detail">
+                                        <i class="ri-information-line text-2xl"></i>
+                                    </a>
                                     <i class="ri-delete-bin-2-line text-2xl text-delete"></i>
                                 </div> 
                             </td>
@@ -145,10 +157,14 @@
                             <td align="center" class=" p-4">Selesai</td>
                             <td align="center" class=" p-4">-</td>
                             <td align="center" class=" p-4">
-                                <div class=" flex items-center gap-2">
+                                <div class=" flex justify-center items-center gap-2">
                                     <i class="ri-checkbox-circle-line text-2xl"></i>
-                                    <i class="ri-calendar-todo-fill text-2xl"></i>
-                                    <i class="ri-information-line text-2xl"></i>
+                                    <a href="/client/order/plan/recruitment">
+                                        <i class="ri-calendar-todo-fill text-2xl"></i>
+                                    </a>
+                                    <a href="/client/detail">
+                                        <i class="ri-information-line text-2xl"></i>
+                                    </a>
                                     <i class="ri-delete-bin-2-line text-2xl text-delete"></i>
                                 </div> 
                             </td>
@@ -164,10 +180,14 @@
                             <td align="center" class=" p-4">Selesai</td>
                             <td align="center" class=" p-4">-</td>
                             <td align="center" class=" p-4">
-                                <div class=" flex items-center gap-2">
+                                <div class=" flex justify-center items-center gap-2">
                                     <i class="ri-checkbox-circle-line text-2xl"></i>
-                                    <i class="ri-calendar-todo-fill text-2xl"></i>
-                                    <i class="ri-information-line text-2xl"></i>
+                                    <a href="/client/order/plan/recruitment">
+                                        <i class="ri-calendar-todo-fill text-2xl"></i>
+                                    </a>
+                                    <a href="/client/detail">
+                                        <i class="ri-information-line text-2xl"></i>
+                                    </a>
                                     <i class="ri-delete-bin-2-line text-2xl text-delete"></i>
                                 </div> 
                             </td>
@@ -183,10 +203,14 @@
                             <td align="center" class=" p-4">Selesai</td>
                             <td align="center" class=" p-4">-</td>
                             <td align="center" class=" p-4">
-                                <div class=" flex items-center gap-2">
+                                <div class=" flex justify-center items-center gap-2">
                                     <i class="ri-checkbox-circle-line text-2xl"></i>
-                                    <i class="ri-calendar-todo-fill text-2xl"></i>
-                                    <i class="ri-information-line text-2xl"></i>
+                                    <a href="/client/order/plan/recruitment">
+                                        <i class="ri-calendar-todo-fill text-2xl"></i>
+                                    </a>
+                                    <a href="/client/detail">
+                                        <i class="ri-information-line text-2xl"></i>
+                                    </a>
                                     <i class="ri-delete-bin-2-line text-2xl text-delete"></i>
                                 </div> 
                             </td>
