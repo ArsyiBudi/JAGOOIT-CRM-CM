@@ -38,7 +38,8 @@
 
 @section('container')
     <div class=" overflow-auto pt-28 lg:pt-0 h-screen">
-        <form class=" w-full bg-darkSecondary py-10 px-8 rounded-md">
+        <form class=" w-full bg-darkSecondary py-10 px-8 rounded-md" action="{{ route('create_order') }}" method="post">
+            @csrf
             <div class="px-0 md:px-5 py-0 md:py-4 overflow-auto">
                 <div class="mb-2 text-3xl pb-5 border-white border-b "> 
                     <h1>Create Leads</h1> 
@@ -48,7 +49,7 @@
                     <div class=" block md:flex w-full justify-between gap-5 mt-2 md:mt-0">
                         <div class="">
                             <h4 class=" text-sm md:text-[16px]">Nama Perusahaan</h4>
-                            <input type="text" class="text-black bg-white rounded-lg mt-1 w-full md:w-96  py-3 px-3 outline-none">
+                            <input type="text" name="business_name" class="text-black bg-white rounded-lg mt-1 w-full md:w-96  py-3 px-3 outline-none">
                         </div>
 
                         <div class=" mt-3 md:mt-0">
@@ -60,24 +61,24 @@
                     <div class=" block md:flex w-full justify-between gap-5">
                         <div class="">
                             <h4 class="mb-1 text-sm md:text-[16px]">Alamat Perusahaan</h4>
-                            <input type="text" class="text-black bg-white rounded-lg w-full md:w-96  py-6 px-3 outline-none">
+                            <input type="text" name="address" class="text-black bg-white rounded-lg w-full md:w-96  py-6 px-3 outline-none">
                         </div>
 
                         <div class=" mt-3 md:mt-0">
                             <h4 class="mb-1 text-sm md:text-[16px]">Bidang</h4>
-                            <input type="text" class="bg-white text-black rounded-lg w-full md:w-80 lg:w-96  py-6 px-3 outline-none">
+                            <input type="text" name="business_sector" class="bg-white text-black rounded-lg w-full md:w-80 lg:w-96  py-6 px-3 outline-none">
                         </div>
                     </div>
 
                     <div class=" block md:flex w-full justify-between gap-5">
                         <div class="">
                             <h4 class="mb-1 text-sm md:text-[16px]">Nama PIC</h4>
-                            <input type="text" class="bg-white text-black rounded-lg w-full md:w-96  py-3 px-3 outline-none">
+                            <input type="text" name="pic_name" class="bg-white text-black rounded-lg w-full md:w-96  py-3 px-3 outline-none">
                         </div>
 
                         <div class=" mt-3 md:mt-0">
                             <h4 class="mb-1 text-sm md:text-[16px]">Nomor Kontak PIC</h4>
-                            <input type="text" class="bg-white text-black rounded-lg mt-1 w-full md:w-80 lg:w-96  py-3 px-3 outline-none">
+                            <input type="text" name="pic_contact_number" class="bg-white text-black rounded-lg mt-1 w-full md:w-80 lg:w-96  py-3 px-3 outline-none">
                         </div>
                     </div>
                 </div>
