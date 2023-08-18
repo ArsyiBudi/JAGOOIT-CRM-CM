@@ -61,11 +61,7 @@
             </div>
             <div class=" mt-5">
                 <form action="">
-                    <div class=" block md:flex justify-between">
-                        <div class=" relative w-full md:w-auto">
-                            <input type="text"  class=" bg-[#D9D9D9] outline-none rounded-md text-black py-1  px-8 w-full md:w-auto">
-                            <i class="ri-search-line absolute top-1 left-2 text-black"></i>
-                        </div>
+                    <div class=" block md:flex justify-between"><div></div>
                         <div class="block md:flex gap-3 items-center w-full md:w-auto mt-3 md:mt-0">
                             <label for="endDate">End Date: </label> <br class=" block md:hidden">
                             <input type="date" id="endDate" class=" w-full mt-1 md:mt-0 md:w-auto custom-date-input rounded-md bg-primary py-2 px-5 text-white outline-none border-[1px] border-white">
