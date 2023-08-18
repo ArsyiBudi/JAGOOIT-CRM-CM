@@ -15,7 +15,7 @@ class TalentDetailsSeeder extends Seeder
     {
         $description_value = array(
             array('Frontend Dev', 'Backend Dev', 'Full-Stack Dev', 'IT Support', 'Dev Ops', 'Data Analyst'), // Position
-            array('CPP', 'PHP', 'JS', 'Python', 'HTML + CSS'), // Keterampilan
+            array('C++', 'PHP', 'JS', 'Python', 'HTML + CSS'), // Keterampilan
             array('SMA-SMK', 'S1', 'S2', 'S3', 'D2', 'D3') // Pendidikan 
         );
     

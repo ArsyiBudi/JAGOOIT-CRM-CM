@@ -15,6 +15,7 @@ return new class extends Migration
             $table->integer('id', true);
             $table->string('letter_number');
             $table->date('date');
+            $table->string('location');
             $table->string('offer_subject');
             $table->string('recipient_name');
             $table->string('context');
