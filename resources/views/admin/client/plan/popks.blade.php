@@ -154,16 +154,9 @@
                     <input type="text" class="rounded-md">
                 </div>
             </div>
-
-<<<<<<<<< Temporary merge branch 1
             
             <div class="mt-4 flex justify-end">
                 <button type="submit" name="createWord" class=" w-full  md:w-[188px] bg-secondary text-white text-sm text-center h-[37px] rounded-md hover:scale-95 duration-200">Create</button>
-=========
-            <div class="mt-4 space-x-2 flex justify-end">
-                <button class="bg-secondary text-white text-sm text-center w-[188px] h-[37px] rounded-md">PDF</button>
-                <button type="submit" class="bg-secondary text-white text-sm text-center w-[188px] h-[37px] rounded-md">Create</button>
->>>>>>>>> Temporary merge branch 2
             </div>
 
         </div>
