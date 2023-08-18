@@ -68,6 +68,7 @@
 
 {{-- Mobile --}}
 <div class="drawer fixed lg:hidden top-0 z-50">
+    
   <input id="my-drawer" type="checkbox" class="drawer-toggle" />
 
     <div class=" flex justify-between items-center px-5 pt-8 pb-5 absolute top-0 right-0 w-full bg-layoutBg">
