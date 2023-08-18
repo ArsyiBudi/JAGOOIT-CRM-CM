@@ -82,9 +82,11 @@
                     </div>
                 </div>
 
-                <div class="mt-8 flex justify-between gap-5 md:gap-0 w-full"> <!-- Menggunakan kelas justify-between untuk mengatur posisi tombol -->
-                    <button class="bg-secondary text-white rounded-md px-4 py-2 h-[37px] w-[97px]">Back</button>
-                    <input type="submit"  value="Create" class="bg-secondary text-white rounded-md px-4 py-2 h-[37px] w-[198px]"></input>
+                <div class="mt-8 flex justify-between gap-5 md:gap-0 w-full"> 
+                    <a href="/leads">
+                        <button type="button" class="bg-secondary text-white rounded-md px-4 py-2 h-[37px] w-[97px] hover:scale-95 duration-200">Back</button>
+                    </a>
+                    <input type="submit"  value="Create" class="bg-secondary text-white rounded-md px-4 py-2 h-[37px] w-[198px]  hover:scale-95 duration-200"/>
                 </div>
             </div>
         </form>
