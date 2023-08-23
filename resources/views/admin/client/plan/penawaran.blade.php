@@ -172,7 +172,7 @@
             <div>
                 <div>
                     <a href="/client/order/plan/training" class="bg-secondary text-white text-sm text-center py-1 px-2 md:px-14 rounded-md font-bold flex items-center">
-                        <p class="hidden md:block">back</p>
+                        <p class="hidden md:block">Back</p>
                         <i class="ri-arrow-left-line block md:hidden ml-1"></i>
                     </a>
             </div>

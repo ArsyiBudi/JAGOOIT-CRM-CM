@@ -73,8 +73,11 @@
                 <div class="bg-white opacity-70 rounded-md w-full mb-4 p-2 h-[100px]">
                     <textarea name="deskripsireport" id="deskripsireport" class="bg-transparent outline-none p-2  rounded w-full h-full resize-none text-black" placeholder="Deskripsi"></textarea> 
                 </div>
-                <div class="w-[97px] mx-auto">
-                    <input type="submit" class="bg-secondary text-white rounded-md mt-5 mr-3 px-4 py-2 h-[37px] hover:scale-95 duration-200">
+                <div class="flex justify-center">
+                    <div class="space-x-5">
+                        <input type="submit" class="bg-secondary text-white rounded-md px-4 py-2 h-[37px] hover:scale-95 duration-200 mt-4" value="Edit">
+                        <input type="submit" class="bg-secondary text-white rounded-md px-4 py-2 h-[37px] hover:scale-95 duration-200 mt-4" value="Submit">
+                    </div>
                 </div>
             </form>
         </div>
