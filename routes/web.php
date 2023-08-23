@@ -64,11 +64,7 @@ Route::prefix('login')->group(function(){
 });
 
 Route::prefix('leads')->group(function(){
-    Route::get('/', function () {
-        return view('admin.leads.menu', [
-            "title" => "Leads | Menu",
-        ]);
-    });
+    Route::get('/', [C_Leads::class, 'fetch']);
 
     Route::prefix('create') -> group(function(){
         Route::get('/', function(){

@@ -21,7 +21,7 @@ class C_Auth extends Controller
         $user = User::where('username', $field['username']) -> first();
 
         //Checking Password
-        if(!$user ||  !User::where('password', $field['password']) -> first() ){
+        if(!$user ||  !User::where('password', $field['password']) -> first()){
             return response([
                 'message' => 'Bad Creds'
             ], 401);
@@ -29,12 +29,14 @@ class C_Auth extends Controller
 
         $user_type = $user->user_type_id;
         if($user_type == 3){
-            return response([
-                'message' => 'Bad Creds'
-            ], 401);
+            Auth::attempt([
+                'username' => $field['username'],
+                'password' => $field['password'],
+            ], true);
+            return response(['message' => 'bad creds']);
         }
-
-        // $token = $user -> createToken('jagoit')->plainTextToken;
+        
+        $token = $user -> createToken('jagoit')->plainTextToken;
         // return response()->json(['token' => $token]);
         // return response()->json(['message' => 'Unauthorized'], 401);
         // $token = $user -> createToken('myapptoken')->plainTextToken;
