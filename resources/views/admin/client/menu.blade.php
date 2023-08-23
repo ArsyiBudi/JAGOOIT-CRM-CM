@@ -36,8 +36,10 @@
 </style>
 
 @section('container')
-  <div class=" overflow-auto pt-28 lg:pt-0 h-[90vh] rounded-md">
-    <div class="w-full bg-darkSecondary px-8 flex flex-col">
+    <div class="pt-20 pb-2 lg:pt-0">
+    </div>
+  <div class="overflow-auto bg-darkSecondary lg:pt-0 h-[90vh] rounded-md">
+    <div class="w-full px-8 flex flex-col">
         <div class="sticky top-0 pt-10 bg-darkSecondary">
             <div class="border-b border-white w-full pb-3 mb-3">
                 <h3 class="text-white font-semibold text-3xl">Data Clients</h3>
@@ -197,7 +199,7 @@
                 </table>
             </div>
 
-        <div class="sticky bottom-0 pb-3 bg-darksecondary flex items-center justify-center w-full">
+        <div class="sticky bottom-0 pb-10 bg-darksecondary flex items-center justify-center w-full">
 
             <div class="flex gap-3 items-center mt-7">
                 <button class="bg-secondary hover:scale-95 duration-200 w-[69px] rounded-lg flex items-center justify-center py-2">Prev</button>
