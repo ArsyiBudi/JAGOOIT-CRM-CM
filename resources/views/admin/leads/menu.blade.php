@@ -107,7 +107,7 @@
                 </tbody>
             </table>
         </div>
-        <div class="sticky bottom-0 flex justify-center items-center gap-3">
+        <div class="sticky bottom-0 bg-darksecondary flex justify-center items-center gap-3">
             {{ $leads -> links('vendor.pagination.custom-pagination') }}
         </div>
     </div>
