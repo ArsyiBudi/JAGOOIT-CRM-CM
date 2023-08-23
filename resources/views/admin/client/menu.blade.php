@@ -53,7 +53,7 @@
                     <p class="text-white text-xs md:text-sm">entries</p>
                 </div>
                 <div class="md:mt-5">
-                        <a class=" bg-secondary font-semibold text-sm md:text-[16px] py-1 px-3 md:px-5 rounded-lg mt-0 md:mt-7 hover:scale-95 duration-200" href="/client/order/create">Create Orders</a>  
+                        <a class=" bg-secondary font-semibold text-sm md:text-[16px] py-1 px-3 md:px-5 rounded-lg mt-0 md:mt-7 hover:scale-95 duration-200 " href="/client/order/create">Create Orders</a>  
                 </div>
             </div>
             <div class=" flex items-center gap-5 mt-5 md:mt-0">
@@ -89,7 +89,7 @@
                             <td align="center" class=" p-4">-</td>
                             <td align="center" class=" p-4"> 
                                 <div class=" flex items-center gap-2">
-                                    <a href="/leads/detail">
+                                    <a href="/client/detail">
                                         <i class="text-lg cursor-pointer ri-information-line"></i>
                                     </a>
                                     <i class=" text-lg cursor-pointer ri-delete-bin-2-line text-delete"></i>
@@ -108,10 +108,10 @@
                             <td align="center" class=" p-4">-</td>
                             <td align="center" class=" p-4">
                                 <div class=" flex items-center gap-2">
-                                    <a href="/leads/detail">
-                                        <i class=" text-lg cursor-pointer ri-information-line"></i>
+                                    <a href="/client/detail">
+                                        <i class=" text-lg cursor-pointer ri-information-line" title="Detail"></i>
                                     </a>
-                                    <i class=" text-lg cursor-pointer ri-delete-bin-2-line text-delete"></i>
+                                    <i class=" text-lg cursor-pointer ri-delete-bin-2-line text-delete" title="Delete"></i>
                                 </div> 
                             </td>
                         </tr>
@@ -127,10 +127,10 @@
                             <td align="center" class=" p-4">-</td>
                             <td align="center" class=" p-4">
                                 <div class=" flex items-center gap-2">
-                                    <a href="/leads/detail">
-                                        <i class=" text-lg cursor-pointer ri-information-line"></i>
+                                    <a href="/client/detail">
+                                        <i class=" text-lg cursor-pointer ri-information-line" title="Detail"></i>
                                     </a>
-                                    <i class=" text-lg cursor-pointer ri-delete-bin-2-line text-delete"></i>
+                                    <i class=" text-lg cursor-pointer ri-delete-bin-2-line text-delete" title="Delete"></i>
                                 </div> 
                             </td>
                         </tr>
@@ -146,10 +146,10 @@
                             <td align="center" class=" p-4">-</td>
                             <td align="center" class=" p-4">
                                 <div class=" flex items-center gap-2">
-                                    <a href="/leads/detail">
-                                        <i class=" text-lg cursor-pointer ri-information-line"></i>
+                                    <a href="/client/detail">
+                                        <i class=" text-lg cursor-pointer ri-information-line" title="Detail"></i>
                                     </a>
-                                    <i class=" text-lg cursor-pointer ri-delete-bin-2-line text-delete"></i>
+                                    <i class=" text-lg cursor-pointer ri-delete-bin-2-line text-delete" title="Delete"></i>
                                 </div> 
                             </td>
                         </tr>
@@ -165,10 +165,10 @@
                             <td align="center" class=" p-4">-</td>
                             <td align="center" class=" p-4">
                                 <div class=" flex items-center gap-2">
-                                    <a href="/leads/detail">
-                                        <i class=" text-lg cursor-pointer ri-information-line"></i>
+                                    <a href="/client/detail">
+                                        <i class=" text-lg cursor-pointer ri-information-line" title="Detail"></i>
                                     </a>
-                                    <i class=" text-lg cursor-pointer ri-delete-bin-2-line text-delete"></i>
+                                    <i class=" text-lg cursor-pointer ri-delete-bin-2-line text-delete" title="Delete"></i>
                                 </div> 
                             </td>
                         </tr>
@@ -184,10 +184,10 @@
                             <td align="center" class=" p-4">-</td>
                             <td align="center" class=" p-4">
                                 <div class=" flex items-center gap-2">
-                                    <a href="/leads/detail">
-                                        <i class=" text-lg cursor-pointer ri-information-line"></i>
+                                    <a href="/client/detail">
+                                        <i class=" text-lg cursor-pointer ri-information-line" title="Detail"></i>
                                     </a>
-                                    <i class=" text-lg cursor-pointer ri-delete-bin-2-line text-delete"></i>
+                                    <i class=" text-lg cursor-pointer ri-delete-bin-2-line text-delete" title="Delete"></i>
                                 </div> 
                             </td>
                         </tr>
