@@ -199,7 +199,7 @@
 
     <dialog id="my_modal_5" class="modal  text-white">
         <form method="dialog" class="modal-box bg-grey border-2 border-white w-11/12 max-w-4xl">
-            <table class=" w-full">
+            <table class=" w-full">2
                 <thead>
                     <tr class=" border-b-[1px] border-white">
                         <td align="center" class="p-3" >No</td>

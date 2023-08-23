@@ -46,7 +46,7 @@
                 </div>
 
                 <div class="flex flex-col w-full gap-5 md:gap-8">
-                    <div class=" block md:flex w-full justify-between gap-5 mt-2 md:mt-0">
+                    <div class=" block md:flex w-full gap-14 mt-2 md:mt-0" >
                         <div class="">
                             <h4 class=" text-sm md:text-[16px]">Nama Perusahaan</h4>
                             <input type="text" name="business_name" class="text-black bg-white rounded-lg mt-1 w-full md:w-96  py-3 px-3 outline-none">
@@ -54,11 +54,18 @@
 
                         <div class=" mt-3 md:mt-0">
                             <h4  class=" text-sm md:text-[16px]">Email</h4>
-                            <input type="text" class="bg-white text-black rounded-lg mt-1 w-full md:w-80 lg:w-96  py-3 px-3 outline-none">
+                            <div class=" flex items-center gap-5">
+                                <div id="inputContainer">
+                                    <input type="text" class="bg-white text-black rounded-lg mt-1 w-full md:w-80 lg:w-96  py-2 px-3 outline-none">
+                                </div>
+                                <div class=" bg-secondary py-2 px-4 rounded-md hover:scale-95 duration-200 cursor-pointer" id="addInputBtn">
+                                    <i class="ri-add-line"></i>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
-                    <div class=" block md:flex w-full justify-between gap-5">
+                    <div class=" block md:flex w-full  gap-14">
                         <div class="">
                             <h4 class="mb-1 text-sm md:text-[16px]">Alamat Perusahaan</h4>
                             <input type="text" name="address" class="text-black bg-white rounded-lg w-full md:w-96  py-6 px-3 outline-none">
@@ -70,7 +77,7 @@
                         </div>
                     </div>
 
-                    <div class=" block md:flex w-full justify-between gap-5">
+                      <div class=" block md:flex w-full  gap-14">
                         <div class="">
                             <h4 class="mb-1 text-sm md:text-[16px]">Nama PIC</h4>
                             <input type="text" name="pic_name" class="bg-white text-black rounded-lg w-full md:w-96  py-3 px-3 outline-none">
@@ -92,4 +99,40 @@
             </div>
         </form>
     </div>
+
+    <script>
+        let inputData = [ 
+            {
+                id: 1,
+            }, 
+        ];
+
+        function generateInputFields() {
+            const inputContainer = document.getElementById('inputContainer');
+            inputContainer.innerHTML = '';
+
+            inputData.forEach(data => {
+                const inputField = document.createElement('input');
+                inputField.type = 'text';
+                inputField.name = `input_${data.id}`;
+                inputField.placeholder = `Input ${data.id}`;
+                inputField.id = `${data.id}`
+                inputField.className = 'text-black bg-white rounded-lg mt-1 w-full md:w-96 py-3 px-3 outline-none';
+                
+                inputContainer.appendChild(inputField);
+            });
+        }
+
+        function addNewInput() {
+            const newId = inputData.length + 1;
+            inputData.push({ id: newId });
+            generateInputFields();
+        }
+
+        document.getElementById('addInputBtn').addEventListener('click', addNewInput);
+
+        // Call the function to generate input fields initially
+        generateInputFields();
+    </script>
+
 @endsection
