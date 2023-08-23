@@ -197,15 +197,37 @@
         </form>
     </div>
 
-    <dialog id="my_modal_5" class="modal modal-bottom sm:modal-middle">
-        <form method="dialog" class="modal-box">
-            <h3 class="font-bold text-lg">Hello!</h3>
-            <p class="py-4">Press ESC key or click the button below to close</p>
+    <dialog id="my_modal_5" class="modal  text-white">
+        <form method="dialog" class="modal-box bg-grey border-2 border-white w-11/12 max-w-4xl">
+            <table class=" w-full">
+                <thead>
+                    <tr class=" border-b-[1px] border-white">
+                        <td align="center" class="p-3" >No</td>
+                        <td align="center" class="p-3" >Deskirpsi</td>
+                        <td align="center" class="p-3" >Qty</td>
+                        <td align="center" class="p-3" >Durasi Kontrak (max 12 bulan)</td>
+                    </tr>
+                </thead>
+                <tbody >
+                    <tr class=" bg-[#202020]/50">
+                        <td class=" p-5 mt-2" align="center">1</td>
+                        <td class=" p-5" align="center"><input id="deskripsi" type="text" class=" outline-none rounded-md text-black p-2 placeholder:text-[#202020]/50" placeholder="Outsourcing IT Support"></td>
+                        <td class=" p-5" align="center"><input id="qty" type="text" class=" outline-none rounded-md text-black p-2 placeholder:text-[#202020]/50" placeholder="12"></td>
+                        <td class=" p-5" align="center"><input id="lamaKontrak" type="text" class=" outline-none rounded-md text-black p-2 placeholder:text-[#202020]/50" placeholder="11 Bulan"></td>
+                    </tr>
+                </tbody>
+            </table>
             <div class="modal-action">
-            <!-- if there is a button in form, it will close the modal -->
-            <button class="btn">Close</button>
+                <button class="btn bg-secondary text-white border-none hover:bg-secondary/50 hover:text-white/80">Kembali</button>
+                <button class="btn bg-secondary text-white border-none hover:bg-secondary/50 hover:text-white/80">Save  </button>
             </div>
         </form>
     </dialog>
+
+    <script>
+        // alert('halo')
+        let outsourcing = {}
+
+    </script>
 
 @endsection

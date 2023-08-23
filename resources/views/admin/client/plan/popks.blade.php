@@ -1,9 +1,9 @@
 @extends('admin.layouts.main')
 
 @section('container')
-    <div class="pt-20 lg:pt-0">
+    <div class="pt-20 pb-2 lg:pt-0">
     </div>
-    <div class="overflow-auto pt-0 h-[90vh] w-full rounded-md hide-scrollbar overflow-x-hidden">
+    <div class="overflow-auto pt-0 h-[90vh] pb-10 w-full rounded-md hide-scrollbar overflow-x-hidden">
         <h1 class="pl-4 text-4xl">PO & PKS</h1>
         <p class=" text-[16px] font-medium pl-4 pt-3">Silakan input data kontrak</p>
 
@@ -38,6 +38,7 @@
 
         <div class="overflow-auto bg-darkSecondary mt-5 justify-between flex flex-col text-lightGrey px-8 py-10 rounded-md gap-y-3">
         <form action="{{ route('save_popks') }}" method="post">
+            
             @csrf
             <div class="text-xl">JagoIT:</div>
             <div class="flex flex-row flex-wrap gap-2">
@@ -153,7 +154,6 @@
                     <input type="text" class="rounded-md">
                 </div>
             </div>
-
             
             <div class="mt-4 flex justify-end">
                 <button type="submit" name="createWord" class=" w-full  md:w-[188px] bg-secondary text-white text-sm text-center h-[37px] rounded-md hover:scale-95 duration-200">Create</button>
@@ -188,7 +188,7 @@
             </div>
         </div>
 
-        <div class=" flex justify-between items-center pt-4 mb-10 md:mb-0">
+        <div class=" flex justify-between items-center pt-4 md:mb-0">
             <div>
                 <a href="/client/order/plan/percobaan" class=" bg-secondary text-white text-sm text-center py-1 px-3 md:px-14 rounded-md font-bold hover:scale-95 duration-200">
                     <p class=" hidden md:inline">Back</p>        
