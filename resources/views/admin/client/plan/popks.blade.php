@@ -6,12 +6,47 @@
     -webkit-appearance: none;
     margin: 0;
     }
+    .hide-scrollbar::-webkit-scrollbar {
+        width: 0.4em; /* Width of the scrollbar */
+    }
+
+    .hide-scrollbar::-webkit-scrollbar-thumb {
+        background-color: #555555; /* Color of the scrollbar thumb */
+        border-radius: 8px; /* Rounded corners for the scrollbar thumb */
+    }
+
+    .hide-scrollbar::-webkit-scrollbar-thumb:hover {
+        background-color: #777777; /* Color of the scrollbar thumb on hover */
+    }
+
+    .hide-scrollbar::-webkit-scrollbar-track {
+        background-color: #555555; /* Color of the scrollbar track */
+    }
+
+    .hide-scrollbar::-webkit-scrollbar-track:hover {
+        background-color: #666666; /* Color of the scrollbar track on hover */
+    }
+
+    /* Customize the appearance of the scrollbar wheel */
+    .hide-scrollbar {
+        scrollbar-width: thin;
+        scrollbar-color: #555555 #333333;
+    }
+
+    /* Customize the appearance of the scrollbar thumb icon */
+    .hide-scrollbar::-webkit-scrollbar-thumb:vertical {
+        background-color: #fff; /* Color of the scrollbar thumb icon */
+    }
+
+    .custom-date-input::-webkit-calendar-picker-indicator {
+        filter: invert(1); /* This inverts the icon color */
+    }
 </style>
 
 @section('container')
     <div class="pt-20 pb-2 lg:pt-0">
     </div>
-    <div class="overflow-y-auto overflow-x-hidden pt-0 h-[90vh] pb-10 w-full rounded-md hide-scrollbar overflow-x-hidden">
+    <div class="overflow-y-auto overflow-x-hidden pt-0 h-[90vh] pb-10 w-full rounded-md overflow-x-hidden">
         <h1 class="pl-4 text-4xl">PO & PKS</h1>
         <p class=" text-[16px] font-medium pl-4 pt-3">Silakan input data kontrak</p>
 
