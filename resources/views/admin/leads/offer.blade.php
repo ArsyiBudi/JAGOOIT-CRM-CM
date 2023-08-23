@@ -100,9 +100,9 @@
 <div class="bg-grey p-9 rounded-lg border-2 border-white  w-full h-[500px] overflow-y-scroll hide-scrollbar" id="createSection"> 
         <div class='dropdown'>
         <select id="formSelector" class="mb-4 bg-transparent border m-1 btn p-2 outline-none border-spacing-1 rounded-md py-1 text-1xl hover:bg-gray-300 hover:text-darkSecondary text-white">
-            <option value="form1" class="bg-grey hover:bg-black">Send Email</option>
-            <option value="form2" class="bg-grey hover:bg-black">Appointment</option>
-            <option value="form3" class="bg-grey hover:bg-black">New Order</option>
+            <option value="form1" class="bg-grey hover:bg-gray-300 hover:text-darkSecondary">Send Email</option>
+            <option value="form2" class="bg-grey hover:bg-gray-300 hover:text-darkSecondary">Appointment</option>
+            <option value="form3" class="bg-grey hover:bg-gray-300 hover:text-darkSecondary">New Order</option>
         </select>
         </div>
             <div id="formContainer" class="w-full">
