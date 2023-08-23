@@ -1,9 +1,9 @@
 @extends('admin.layouts.main')
 
 @section('container')
-    <div class="pt-20 lg:pt-0">
+    <div class="pt-20 pb-2 lg:pt-0">
     </div>
-    <div class="overflow-auto pt-0 h-[90vh] w-full rounded-md hide-scrollbar overflow-x-hidden">
+    <div class="overflow-auto pt-0 h-[90vh] pb-10 w-full rounded-md hide-scrollbar overflow-x-hidden">
         <h1 class="pl-4 text-4xl">PO & PKS</h1>
         <p class=" text-[16px] font-medium pl-4 pt-3">Silakan input data kontrak</p>
 
@@ -154,16 +154,9 @@
                     <input type="text" class="rounded-md">
                 </div>
             </div>
-
-<<<<<<<<< Temporary merge branch 1
             
             <div class="mt-4 flex justify-end">
                 <button type="submit" name="createWord" class=" w-full  md:w-[188px] bg-secondary text-white text-sm text-center h-[37px] rounded-md hover:scale-95 duration-200">Create</button>
-=========
-            <div class="mt-4 space-x-2 flex justify-end">
-                <button class="bg-secondary text-white text-sm text-center w-[188px] h-[37px] rounded-md">PDF</button>
-                <button type="submit" class="bg-secondary text-white text-sm text-center w-[188px] h-[37px] rounded-md">Create</button>
->>>>>>>>> Temporary merge branch 2
             </div>
 
         </div>
@@ -195,7 +188,7 @@
             </div>
         </div>
 
-        <div class=" flex justify-between items-center pt-4 mb-10 md:mb-0">
+        <div class=" flex justify-between items-center pt-4 md:mb-0">
             <div>
                 <button class=" bg-secondary text-white text-sm text-center py-1 px-3 md:px-14 rounded-md font-bold hover:scale-95 duration-200">
                     <p class=" hidden md:block">Back</p>        
