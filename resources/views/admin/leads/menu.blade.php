@@ -36,7 +36,7 @@
 </style>
 
 @section('container')
-<div class=" overflow-auto pt-28 lg:pt-0 h-screen">
+<div class=" overflow-auto pt-28 lg:pt-0 h-[90vh]">
     <div class="w-full bg-darkSecondary py-10 px-8 rounded-md ">
 
             <div class="border-b border-white w-full pb-3 mb-3">
@@ -64,7 +64,7 @@
 
             <div class=" border-b border-white w-full rounded-lg mt-4"></div>
 
-            <div class=" hide-scrollbar w-full mt-5 h-72 overflow-auto pr-2">
+            <div class=" hide-scrollbar w-full mt-5 h-full overflow-auto pr-2">
                 <table class=" w-full text-xs md:text-sm font-bold ">
                     <thead>
                         <tr >
@@ -190,7 +190,7 @@
                 </table>
             </div>
 
-            <div class=" flex justify-center items-center gap-3">
+            <div class="flex sticky bg-darkSecondary bottom-0 justify-center items-center gap-3">
                 <div class="">
                     <button class=" bg-secondary py-1 px-5 rounded-md cursor-pointer hover:scale-95 my-5">Prev</button>
                 </div>
