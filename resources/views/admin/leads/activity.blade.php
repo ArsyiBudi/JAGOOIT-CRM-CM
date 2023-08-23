@@ -18,14 +18,16 @@
         </div>
     </form>
 </div> --}}
-<h6 class=" font-normal mb-4 text-4xl md:mt-20 mt-24 md:pl-0 pl-4 lg:text-left text-center">Create Activity</h6>
-<div class="bg-grey md:p-9 p-4 rounded-lg border-2 border-white  w-full h-[500px]"> 
-        
-        <select id="formSelector" class="mb-4 bg-transparent border outline-none border-none rounded-md py-1 text-3xl">
-            <option value="form1" class="bg-grey">Appointment</option>
-            <option value="form2" class="bg-grey">Note</option>
-            <option value="form3" class="bg-grey">Report</option>
-        </select>
+<h6 class=" font-normal mb-4 text-2xl md:mt-20 mt-24 md:pl-0 pl-4 lg:text-left text-center">Create Activity</h6>
+<div class="bg-grey overflow-auto overflow-x-hidden md:p-9 p-4 rounded-lg border-2 border-white  w-full h-[500px]"> 
+<div class='dropdown'>
+    <select id="formSelector" class="mb-3 bg-transparent border m-1 btn p-2 outline-none border-spacing-1 rounded-md py-1 text-1xl text-white font-quicksand hover:bg-gray-300">
+        <option value="form1" class="bg-grey hover:bg-gray-300">Appointment</option>
+        <option value="form2" class="bg-grey hover:bg-gray-300">Note</option>
+        <option value="form3" class="bg-grey hover:bg-gray-300">Report</option>
+    </select>
+</div>
+
             <div id="formContainer" class="w-full">
                 <form id="form1" class="hidden">
                     <div class="bg-white opacity-70 mb-4 p-2 rounded-md w-full">
