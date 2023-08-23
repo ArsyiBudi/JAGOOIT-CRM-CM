@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\M_Leads;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Symfony\Component\HttpKernel\Event\ResponseEvent;
 
 use function PHPUnit\Framework\returnSelf;
@@ -32,5 +33,13 @@ class C_Leads extends Controller
         ]);
 
         return redirect('/leads');
+    }
+
+    public function fetch(Request $request){
+        $data = DB::table('leads')->paginate(3);
+        return view('admin.leads.menu', [
+            "title" => "Leads | Menu",
+            "leads" => $data
+        ]);
     }
 }

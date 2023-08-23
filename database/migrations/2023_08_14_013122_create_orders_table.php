@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->string('id')->primary();
             $table->integer('leads_id');
+            $table->integer('appoinment_activity_id')->nullable();
             $table->integer('offer_letter_id')->nullable();
             $table->integer('popks_letter_id')->nullable();
             $table->integer('order_status')->default(1);
@@ -38,7 +39,9 @@ return new class extends Migration
             $table->timestamp('end_popks')  -> nullable();
             $table->string('tor_file') ->nullable();
             $table->string('cv_file') ->nullable();
+            $table->string('cv_description') ->nullable();
             $table->string('po_file') ->nullable();
+            $table->string('po_description') ->nullable();
             $table->timestamps();
         });
     }
