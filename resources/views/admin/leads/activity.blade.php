@@ -47,8 +47,8 @@
                     </div>
                     <div class="flex justify-center">
                              <div class="space-x-5">
-                          <input type="submit" class="bg-secondary text-white rounded-md px-4 py-2 h-[37px] hover:scale-95 duration-200 mb-4" value="Edit">
-                          <input type="submit" class="bg-secondary text-white rounded-md px-4 py-2 h-[37px] hover:scale-95 duration-200 mb-4" value="Submit">
+                          <input type="submit" class="bg-secondary text-white rounded-md px-4 py-2 h-[37px] hover:scale-95 duration-200 mt-4" value="Edit">
+                          <input type="submit" class="bg-secondary text-white rounded-md px-4 py-2 h-[37px] hover:scale-95 duration-200 mt-4" value="Submit">
                              </div>
                     </div>
 
