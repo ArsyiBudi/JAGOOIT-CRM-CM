@@ -73,12 +73,12 @@
                         <input type="date" id="endDate" class=" w-full mt-1 md:mt-0 md:w-auto custom-date-input rounded-md bg-primary py-2 px-5 text-white outline-none border-[1px] border-white">
                     </div>
                 </div>
-                <div class=" bg-grey w-full px-3 rounded-md mt-4 overflow-auto h-3/4 hide-scrollbar">
+                <div class=" bg-darkSecondary w-full px-3 rounded-md mt-4 overflow-auto hide-scrollbar">
                     <div class="overflow-auto ">
                         <table class="table overflow-auto">
                             <!-- head -->
                             <thead>
-                                <tr class=" text-white">
+                                <tr class="text-white">
                                     <th>
                                         <label>
                                             <input type="checkbox" class="checkbox opacity-0 cursor-default"/>
@@ -95,11 +95,11 @@
                             <tbody>
                                 <!-- row 1 -->
                                 <tr>
-                                    <th>
+                                    <td>
                                         <label>
                                             <input type="checkbox" class="checkbox border-white border-2" />
                                         </label>
-                                    </th>
+                                    </td>
                                     <td align="center">1</td>
                                     <td align="center">Rustari Fuad</td>
                                     <td align="center">Kurang Tahu</td>
@@ -116,11 +116,11 @@
                                 </tr>
                                 <!-- row 2 -->
                                 <tr>
-                                    <th>
+                                    <td>
                                         <label>
                                             <input type="checkbox" class="checkbox border-white border-2" />
                                         </label>
-                                    </th>
+                                    </td>
                                     <td align="center">1</td>
                                     <td align="center">Rustari Fuad</td>
                                     <td align="center">Kurang Tahu</td>
@@ -137,11 +137,11 @@
                                 </tr>
                                 <!-- row 3 -->
                                 <tr>
-                                    <th>
+                                    <td>
                                         <label>
                                             <input type="checkbox" class="checkbox border-white border-2" />
                                         </label>
-                                    </th>
+                                    </td>
                                     <td align="center">1</td>
                                     <td align="center">Rustari Fuad</td>
                                     <td align="center">Kurang Tahu</td>
@@ -158,11 +158,11 @@
                                 </tr>
                                 <!-- row 4 -->
                                 <tr>
-                                    <th>
+                                    <td>
                                         <label>
                                             <input type="checkbox" class="checkbox border-white border-2" />
                                         </label>
-                                    </th>
+                                    </td>
                                     <td align="center">1</td>
                                     <td align="center">Rustari Fuad</td>
                                     <td align="center">Kurang Tahu</td>
@@ -178,11 +178,11 @@
                                     </td>
                                 </tr>
                                   <tr>
-                                    <th>
+                                    <td>
                                         <label>
                                             <input type="checkbox" class="checkbox border-white border-2" />
                                         </label>
-                                    </th>
+                                    </td>
                                     <td align="center">1</td>
                                     <td align="center">Rustari Fuad</td>
                                     <td align="center">Kurang Tahu</td>
@@ -198,11 +198,11 @@
                                     </td>
                                 </tr>
                                   <tr>
-                                    <th>
+                                    <td>
                                         <label>
                                             <input type="checkbox" class="checkbox border-white border-2" />
                                         </label>
-                                    </th>
+                                    </td>
                                     <td align="center">1</td>
                                     <td align="center">Rustari Fuad</td>
                                     <td align="center">Kurang Tahu</td>
@@ -220,7 +220,7 @@
                             </tbody>
                         </table>
                     </div>
-                    <div class="sticky bottom-0 pb-2 bg-grey flex items-center justify-center w-full">
+                    <div class="sticky bottom-0 pb-1 text-sm bg-darkSecondary flex items-center justify-center w-full">
 
                         <div class="flex gap-3 items-center">
                             <button class="bg-secondary hover:scale-95 duration-200 py-1 px-3 md:px-5 rounded-lg flex items-center justify-center my-5">Prev</button>
@@ -230,7 +230,7 @@
                             <div class="rounded-lg p-1 w-8 bg-grey flex items-center justify-center">
                                 <p>10</p>
                             </div>
-                            <button class="bg-secondary hover:scale-95 duration-200 rounded-lg w-[69px] flex items-center justify-center py-2">Next</button>
+                            <button class="bg-secondary hover:scale-95 duration-200 py-1 px-3 md:px-5 rounded-lg flex items-center justify-center my-5">Next</button>
                         </div>
                     </div>
                 </div>

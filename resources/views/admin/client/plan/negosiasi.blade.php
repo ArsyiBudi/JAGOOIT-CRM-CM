@@ -39,7 +39,9 @@
     </style>
 
     @section('container')
-        <div class="overflow-y-auto overflow-x-hidden pt-28 pb-5 lg:pt-0 px-5 lg:px-10 h-[90vh]">
+    <div class="pt-20 pb-2 lg:pt-0">
+    </div>
+        <div class="overflow-y-auto overflow-x-hidden pt-0 pb-10 lg:pt-0 px-5 lg:px-10 h-[90vh]">
             <h1 class=" text-4xl">Appointment Negosiasi</h1>
             <p class=" text-[16px] font-medium pt-3">Silakan set appointment</p>
 
