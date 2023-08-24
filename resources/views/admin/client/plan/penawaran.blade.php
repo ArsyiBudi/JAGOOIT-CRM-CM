@@ -37,7 +37,8 @@
             </ul>
         </div>
 
-    <form class="">
+    <form class="" action="{{ route('penawaran.download') }}" method="POST">
+        @csrf
         <div class=" mt-5">
             <div class=" block md:flex justify-end">
                 <div class="flex gap-3 items-center w-full md:w-auto">
@@ -54,35 +55,35 @@
         
             <div class="mb-4">
                 <label for="perihal" class="text-sm text-white">Perihal</label>
-                <input id="perihal" type="text" class="mt-1 text-black rounded-md px-2 py-2 w-full bg-white" placeholder="Perihal">
+                <input id="perihal" type="text" class="mt-1 text-black rounded-md px-2 py-2 w-full bg-white" placeholder="Perihal" name="perihal">
             </div>
         
             <div class=" block md:flex items-center gap-4">
                 <div class="w-full md:w-1/2 mb-4">
                     <label for="kepada" class="text-sm text-white">Kepada</label>
-                    <input id="kepada" type="text" class=" mt-1 text-black rounded-md px-2 py-2  w-full bg-white" placeholder="Kepada">
+                    <input id="kepada" type="text" class=" mt-1 text-black rounded-md px-2 py-2  w-full bg-white" placeholder="Kepada" name="kepada">
                 </div>
         
                 <div class="w-full md:w-1/4 mb-4">
                     <label for="tempat" class="text-sm text-white">Tempat</label>
-                    <input id="tempat" type="text" class=" mt-1 text-black rounded-md px-2 py-2  w-full bg-white" placeholder="Bandung">
+                    <input id="tempat" type="text" class=" mt-1 text-black rounded-md px-2 py-2  w-full bg-white" placeholder="Bandung" name="tempat">
                 </div>
         
                 <div class="w-full md:w-1/4 mb-4">
                     <label for="tanggal" class="text-sm text-white">Tanggal</label>
-                    <input id="tanggal" type="text" class=" mt-1 text-black rounded-md px-2 py-2  w-full bg-white" placeholder="03 Agustus 2023">
+                    <input id="tanggal" type="text" class=" mt-1 text-black rounded-md px-2 py-2  w-full bg-white" placeholder="03 Agustus 2023" name="tanggal">
                 </div>
             </div>
         
             <div class=" block md:flex items-center gap-4">
                 <div class=" w-full md:w-3/4">
                     <label for="ditawarkan" class="text-sm text-white">Hal yang Ditawarkan</label>
-                    <input id="ditawarkan" type="text" class=" mt-1 text-black rounded-md px-2 py-2  w-full bg-white" placeholder="Hal yang Ditawarkan">
+                    <input id="ditawarkan" type="text" class=" mt-1 text-black rounded-md px-2 py-2  w-full bg-white" placeholder="Hal yang Ditawarkan" name="ditawarkan">
                 </div>
 
                 <div class=" w-full md:w-1/4 mt-2 md:mt-0">
                     <label for="jumlah" class="text-sm text-white">Jumlah Talent</label>
-                    <input id="jumlah" type="text" class=" mt-1 text-black rounded-md px-2 py-2  w-full bg-white" placeholder="Jumlah">
+                    <input id="jumlah" type="text" class=" mt-1 text-black rounded-md px-2 py-2  w-full bg-white" placeholder="Jumlah" name="jumlahTalent">
                 </div>
             </div>
 
@@ -108,14 +109,14 @@
                     <label for="weekday" class="text-sm text-white">Weekday</label>
                     <div class=" mt-2 flex items-center gap-0">
                         <label for="weekday" class=" bg-white p-2 rounded-tl-md rounded-bl-md text-black border-grey border-r-[1px] w-10">RP.</label>
-                        <input type="number" id="weekday" name="weekday" placeholder="Weekday Overtime" class=" text-black w-full p-2 outline-none rounded-tr-md rounded-br-md">
+                        <input type="number" id="weekday"  placeholder="Weekday Overtime" class="bg-white text-black w-full p-2 outline-none rounded-tr-md rounded-br-md" name="weekday">
                     </div>
                 </div>
                 <div class=" w-full md:w-1/2 mt-2 md:mt-0">
                     <label for="Weekend" class="text-sm text-white">Weekend</label>
                     <div class=" mt-2 flex items-center gap-0">
-                        <label for="Weekend" class=" bg-white p-2 rounded-tl-md rounded-bl-md text-black border-grey border-r-[1px] w-10">RP.</label>
-                        <input type="number" id="Weekend" name="Weekend" placeholder="Weekend Overtime" class=" text-black w-full p-2 outline-none rounded-tr-md rounded-br-md">
+                        <label for="weekend" class=" bg-white p-2 rounded-tl-md rounded-bl-md text-black border-grey border-r-[1px] w-10">RP.</label>
+                        <input type="number" id="Weekend"  placeholder="Weekend Overtime" class="bg-white text-black w-full p-2 outline-none rounded-tr-md rounded-br-md" name="weekend">
                     </div>
                 </div>
             </div>
@@ -127,14 +128,14 @@
                     <label for="konsumsi" class="text-sm text-white">Konsumsi (perhari)</label>
                     <div class=" mt-2 flex items-center gap-0">
                         <label for="konsumsi" class=" bg-white p-2 rounded-tl-md rounded-bl-md text-black border-grey border-r-[1px] w-10">RP.</label>
-                        <input type="number" id="konsumsi" name="konsumsi" placeholder="Konsumsi" class=" text-black w-full p-2 outline-none rounded-tr-md rounded-br-md">
+                        <input type="number" id="konsumsi" placeholder="Konsumsi" class=" text-black bg-white w-full p-2 outline-none rounded-tr-md rounded-br-md" name="konsumsi">
                     </div>
                 </div>
                 <div class=" w-full md:w-1/2 mt-2 md:mt-0">
                     <label for="transport" class="text-sm text-white">Transport Pulang-Pergi Standar JKT-BDG</label>
                     <div class=" mt-2 flex items-center gap-0">
                         <label for="transport" class=" bg-white p-2 rounded-tl-md rounded-bl-md text-black border-grey border-r-[1px] w-10">RP.</label>
-                        <input type="number" id="transport" name="transport" placeholder="Transport" class=" text-black w-full p-2 outline-none rounded-tr-md rounded-br-md">
+                        <input type="number" id="transport" placeholder="Transport" class=" text-black bg-white w-full p-2 outline-none rounded-tr-md rounded-br-md" name="transPP">
                     </div>
                 </div>
             </div>
@@ -143,8 +144,9 @@
                     <button type="submit" name="createWord" class=" w-full  md:w-[188px] bg-secondary text-white text-sm text-center h-[37px] rounded-md hover:scale-95 duration-200">Create</button>
                 </div>
         </div>
+    </form>
 
-
+    <form action="">
         <div class="bg-grey rounded shadow-lg mt-6 p-6">
             <div class="w-full  mb-4 ">
                 <label for="file-tor" class="text-sm text-white">File Surat Penawaran + CV (1 file, pdf)</label>
@@ -195,9 +197,8 @@
                 </div>
             </div>
         </div>
-    </form>
     </div>
-
+</form>
 
     <!--modal outsourcing-->
     <dialog id="my_modal_5" class="modal  text-white">
