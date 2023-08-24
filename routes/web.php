@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\C_Activity;
 use App\Http\Controllers\C_Auth;
 use App\Http\Controllers\C_Orders;
+use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Route;
 
 
@@ -72,6 +74,12 @@ Route::prefix('leads')->group(function(){
             "title" => "Leads | Create Offer",
         ]);
     });
+    Route::post('/appointment',
+    [C_Activity::class, 'appointment'])->name('activity.appointment');
+    Route::post('/note',
+    [C_Activity::class, 'note'])->name('activity.note');
+    Route::post('/report',
+    [C_Activity::class, 'report'])->name('activity.report');
 });
 
 Route::prefix('client')->group(function(){
