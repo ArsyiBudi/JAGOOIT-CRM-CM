@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\C_Auth;
 use App\Http\Controllers\C_Leads;
+use App\Http\Controllers\C_Offer;
 use App\Http\Controllers\C_Orders;
 use App\Http\Controllers\C_Plan;
 use Illuminate\Support\Facades\Route;
@@ -165,6 +166,7 @@ Route::prefix('client')->group(function(){
                     "title" => "Plan | Penawaran",
                 ]);
             });
+            Route::post('/penawaran', [C_Offer::class, 'create']) -> name('create_offer');
             
             Route::get('/negosiasi', function () {
                 return view('admin.client.plan.negosiasi', [
