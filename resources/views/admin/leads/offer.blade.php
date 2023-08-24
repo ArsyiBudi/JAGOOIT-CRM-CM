@@ -17,12 +17,12 @@
 
             <div class="mb-4 block md:flex items-center gap-4">
                 <label for="order-id" class="text-sm text-white">Order/Request ID</label> <br class=" block md:hidden">
-                <input id="order-id" type="text" disabled class="text-black rounded-lg px-2 py-1 bg-gary w-full md:w-auto mt-2 outline-none">
+                <input required id="order-id" type="text" disabled class="text-black rounded-lg px-2 py-1 bg-gary w-full md:w-auto mt-2 outline-none">
         </div>
 
         <div class="mb-4">
             <label for="nama-perusahaan" class="text-sm text-white">Nama Perusahaan</label>
-              <select name="order-id" id="" class=" w-full rounded-md mt-2 bg-white py-2 px-3 outline-none text-black">
+              <select required name="order-id" id="" class=" w-full rounded-md mt-2 bg-white py-2 px-3 outline-none text-black">
                 <option value="">Pilih Perusahaan</option>
                 <option value="pt-fuad">PT Fuad</option>
                 <option value="Ambaaksesoris">Amba Aksesoris</option>
@@ -32,23 +32,23 @@
         <div class=" flex flex-wrap md:flex-nowrap  gap-4">
             <div class="w-full md:w-1/2 mb-4">
                 <label for="posisi" class="text-sm text-white">Posisi yang Dibutuhkan</label>
-                <input id="posisi" type="text" class="text-black rounded-lg px-2 py-1 w-full bg-white mt-2">
+                <input required id="posisi" type="text" class="text-black rounded-lg px-2 py-1 w-full bg-white mt-1">
             </div>
 
             <div class="w-1/5 md:w-1/2 mb-4">
                 <label for="jumlah" class="text-sm text-white">Jumlah</label>
-                <input id="jumlah" type="number" class="text-black rounded-lg px-2 py-1 w-full bg-white mt-1 md:mt-0">
+                <input required id="jumlah" type="number" class="text-black rounded-lg px-2 py-1 w-full bg-white mt-1 md:mt-0">
             </div>
 
             <div class=" w-1/2 md:w-1/2 mb-4">
                 <label for="due-date" class="text-sm text-white">Due Date</label>
-                <input id="due-date" type="text" class="text-black rounded-lg px-2 py-1 w-full bg-white mt-1 md:mt-0">
+                <input required id="due-date" type="text" class="text-black rounded-lg px-2 py-1 w-full bg-white mt-1 md:mt-0">
             </div>
         </div>
 
         <div class="mb-4">
             <label for="job-description" class="text-sm text-white">Job Description</label>
-            <input id="job-description" type="text" class="text-black rounded-lg px-2 py-1 w-full bg-white mt-2">
+            <input required id="job-description" type="text" class="text-black rounded-lg px-2 py-1 w-full bg-white mt-2">
         </div>
         
         <div class=" block md:flex gap-4">
@@ -56,14 +56,14 @@
                     <div class="w-full">
                         <label for="kriteria-keterampilan" class="text-sm text-white">Kriteria Keterampilan</label>
                         <div class="rounded-lg px-2 py-4 h-32 w-full bg-white mt-2">
-                            <textarea id="kriteria-keterampilan" type="text" class="text-black bg-transparent  h-full w-full hide-scrollbar resize-none"></textarea>
+                            <textarea required id="kriteria-keterampilan" type="text" class="text-black bg-transparent  h-full w-full hide-scrollbar resize-none"></textarea>
                         </div>
                     </div>
                     
                     <div class="w-full  mb-4 ">
                         <label for="file-tor" class="text-sm text-white">File TOR</label>
-                        <label for="file-tor" class="flex justify-center items-center bg-white py-4 rounded-lg px-2 h-24 mt-2">
-                            <input id="file-tor" type="file" class="text-black rounded-lg px-2 py-4 h-24 hidden w-full bg-white" name="tor">
+                        <label for="file-tor" class="flex justify-center items-center bg-white py-4 rounded-lg px-2 h-24 mt-2 cursor-pointer">
+                            <input required id="file-tor" type="file" class="text-black rounded-lg px-2 py-4 h-24 hidden w-full bg-white" name="tor">
                             <label for="file-tor" class="cursor-pointer">
                                 <i class="ri-upload-2-fill text-3xl text-black"></i>
                             </label>
@@ -74,13 +74,13 @@
                 <div class="flex flex-col gap-4 md:w-1/2">
                     <div class="w-full">
                         <label for="anggaran" class="text-sm text-white">Anggaran</label>
-                        <input id="anggaran" type="text" class="text-black rounded-lg px-2 py-4 w-full bg-white mt-2">
+                        <input required id="anggaran" type="text" class="text-black rounded-lg px-2 py-4 w-full bg-white mt-2">
                     </div>
                     
                     <div class="w-full mb-4">
                         <label for="kriteria-karakteristik" class="text-sm text-white">Kriteria Karakteristik</label>
                         <div class="rounded-lg px-2 py-4 w-full h-[10.5rem] bg-white mt-2">
-                            <textarea id="kriteria-karakteristik" type="text" class="text-black bg-transparent  h-full w-full hide-scrollbar resize-none    "></textarea>
+                            <textarea required id="kriteria-karakteristik" type="text" class="text-black bg-transparent  h-full w-full hide-scrollbar resize-none    "></textarea>
                         </div>
                     </div>
                 </div>
@@ -108,30 +108,30 @@
             <div id="formContainer" class="w-full">
                 <form id="form1" class="hidden">
                     <div class="bg-white opacity-70 rounded-md w-full mb-4 p-2">
-                        <textarea name="subjek" id="subjek" class="bg-transparent p-2 outline-none text-black w-full resize-none" placeholder="Subjek"></textarea>
+                        <textarea required name="subjek" id="subjek" class="bg-transparent p-2 outline-none text-black w-full resize-none" placeholder="Subjek"></textarea>
                     </div>
                     <div class="bg-white opacity-70 rounded-md w-full mb-2 p-2 h-[200px]">
-                        <textarea name="deskripsinote" id="deskripsinote" class="bg-transparent p-2 outline-none text-black w-full h-full resize-none" placeholder="Deskripsi"></textarea>
+                        <textarea required name="deskripsinote" id="deskripsinote" class="bg-transparent p-2 outline-none text-black w-full h-full resize-none" placeholder="Deskripsi"></textarea>
                     </div>
                     <div class="w-[97px] mx-auto">
-                        <input type="submit" class="bg-secondary text-white rounded-md px-4 mt-5 py-2 h-[37px] cursor-pointer hover:scale-95 duration-200">
+                        <input required type="submit" class="bg-secondary text-white rounded-md px-4 mt-5 py-2 h-[37px] cursor-pointer hover:scale-95 duration-200">
                     </div>
                 </form>
                 <form id="form2" class="hidden">
                     <div class="bg-white opacity-70 mb-4 p-2 rounded-md w-full">
-                        <textarea name="judul" id="judul" class="text-black opacity-100 w-full p-2 bg-transparent outline-none resize-none" placeholder="Judul"></textarea> <!-- Menggunakan w-full untuk mengisi textarea secara penuh -->
+                        <textarea required name="judul" id="judul" class="text-black opacity-100 w-full p-2 bg-transparent outline-none resize-none" placeholder="Judul"></textarea> <!-- Menggunakan w-full untuk mengisi textarea secara penuh -->
                     </div>
                     <div class="flex gap-2 mb-4 w-full">
                         <div class="bg-white opacity-70 rounded-md mr-2 w-1/2 p-2">
-                            <textarea name="lokasi" id="lokasi" class="bg-transparent text-black p-2 w-full outline-none resize-none" placeholder="Lokasi"></textarea>
+                            <textarea required name="lokasi" id="lokasi" class="bg-transparent text-black p-2 w-full outline-none resize-none" placeholder="Lokasi"></textarea>
                         </div>
                         <div class="bg-white opacity-70 rounded-md  w-1/2 p-2">
-                            <textarea name="waktu" id="waktu" class="bg-transparent text-black p-2 w-full outline-none resize-none" placeholder="Waktu"></textarea>
+                            <textarea required name="waktu" id="waktu" class="bg-transparent text-black p-2 w-full outline-none resize-none" placeholder="Waktu"></textarea>
                         </div>
                         
                     </div>
                     <div class="bg-white opacity-70 rounded-md w-full p-2 h-[100px]">
-                        <textarea name="deskripsi" id="deskripsi" class="bg-transparent outline-none p-2 text-black resize-none h-full w-full" placeholder="Deskripsi"></textarea> <!-- Menggunakan w-full untuk mengisi textarea secara penuh -->
+                        <textarea required name="deskripsi" id="deskripsi" class="bg-transparent outline-none p-2 text-black resize-none h-full w-full" placeholder="Deskripsi"></textarea> <!-- Menggunakan w-full untuk mengisi textarea secara penuh -->
                     </div>
                     <div class="flex justify-center">
                             <div class="space-x-5">
