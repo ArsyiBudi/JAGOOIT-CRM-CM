@@ -246,10 +246,10 @@
                             <p class=" hidden lg:block">Save</p>
                             <i class="ri-save-3-line block lg:hidden"></i>  
                         </button>
-                        <button class=" bg-secondary text-white text-sm text-center py-1 px-2 lg:px-14 rounded-md font-bold">
-                            <p class=" hidden lg:block">Continue</p>
-                            <i class="ri-arrow-right-s-line block lg:hidden"></i>
-                        </button>
+                        <a href="/client/order/plan/popks" class=" bg-secondary text-white text-sm text-center py-1 px-3 lg:px-14 rounded-md font-bold">
+                            <p class=" hidden lg:inline">continue</p>
+                            <i class="ri-arrow-right-line inline lg:hidden"></i>  
+                        </a>
                     </div>
                 </div>
             </form> 

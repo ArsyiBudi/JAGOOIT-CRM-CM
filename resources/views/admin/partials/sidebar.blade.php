@@ -43,9 +43,9 @@
 
 
             </div>
-            <div class="items-center flex gap-2 py-2  {{ request()->is('client/history') ? 'text-secondary fill-secondary' : 'text-white fill-white' }}  w-full">
+            <div class="items-center flex gap-2 py-2  {{ set_child_active(['/client/order/'])  }}  w-full">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="32" height="32">
-                    <path d="M12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12H4C4 16.4183 7.58172 20 12 20C16.4183 20 20 16.4183 20 12C20 7.58172 16.4183 4 12 4C9.25022 4 6.82447 5.38734 5.38451 7.50024L8 7.5V9.5H2V3.5H4L3.99989 5.99918C5.82434 3.57075 8.72873 2 12 2ZM13 7L12.9998 11.585L16.2426 14.8284L14.8284 16.2426L10.9998 12.413L11 7H13Z" fill="rgba(255,255,255,1)"></path>
+                    <path d="M12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12H4C4 16.4183 7.58172 20 12 20C16.4183 20 20 16.4183 20 12C20 7.58172 16.4183 4 12 4C9.25022 4 6.82447 5.38734 5.38451 7.50024L8 7.5V9.5H2V3.5H4L3.99989 5.99918C5.82434 3.57075 8.72873 2 12 2ZM13 7L12.9998 11.585L16.2426 14.8284L14.8284 16.2426L10.9998 12.413L11 7H13Z"></path>
                 </svg>
                 <a href="/client/order/history">History</a>
 
@@ -67,10 +67,11 @@
 
 
 {{-- Mobile --}}
-<div class="drawer fixed lg:hidden top-8 z-50">
+<div class="drawer fixed lg:hidden top-0 z-50">
+    
   <input id="my-drawer" type="checkbox" class="drawer-toggle" />
 
-    <div class=" flex justify-between items-center px-5 absolute right-0 w-full">
+    <div class=" flex justify-between items-center px-5 pt-8 pb-5 absolute top-0 right-0 w-full bg-layoutBg">
 
         <div class="rounded-lg py-1 px-8  flex items-center bg-lightGrey">
             <img src="/jagoLogo.png" alt="JagooIT" class=" w-20">
