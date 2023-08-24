@@ -37,10 +37,10 @@
             </select>
         </div>
 
-        <div class=" flex flex-wrap md:flex-nowrap  gap-4">
+        <div class=" flex flex-wrap md:flex-nowrap gap-4">
             <div class="w-full md:w-1/2 mb-4">
                 <label for="posisi" class="text-sm text-white">Posisi yang Dibutuhkan</label>
-                <input id="posisi" type="text" class="text-black rounded-lg px-2 py-1 w-full bg-white mt-2">
+                <input id="posisi" type="text" class="text-black rounded-lg px-2 py-1 w-full bg-white mt-1 md:mt-0">
             </div>
 
             <div class="w-1/5 md:w-1/2 mb-4">
