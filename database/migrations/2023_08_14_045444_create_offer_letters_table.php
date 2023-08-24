@@ -14,16 +14,16 @@ return new class extends Migration
         Schema::create('offer_letters', function (Blueprint $table) {
             $table->integer('id', true);
             $table->string('letter_number');
-            $table->date('date');
-            $table->string('location');
             $table->string('offer_subject');
             $table->string('recipient_name');
+            $table->string('location');
+            $table->date('date');
             $table->string('context');
             $table->integer('talent_total');
             $table->integer('weekday_cost');
             $table->integer('weekend_cost');
-            $table->double('consumtion_cost');
-            $table->double('transportation_cost');
+            $table->integer('consumption_cost');
+            $table->integer('transportation_cost');
             $table->timestamps();
         });
     }

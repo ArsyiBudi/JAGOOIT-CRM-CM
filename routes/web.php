@@ -3,6 +3,7 @@
 use App\Http\Controllers\C_Activity;
 use App\Http\Controllers\C_Auth;
 use App\Http\Controllers\C_Leads;
+use App\Http\Controllers\C_Offer;
 use App\Http\Controllers\C_Orders;
 use App\Http\Controllers\C_Plan;
 use App\Http\Controllers\PenawaranWordController;
