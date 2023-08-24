@@ -43,7 +43,7 @@ function set_child_active($routes)
         }
     }
 
-    return 'text-white fill-white';
+    return 'text-white fill-white';
 }
 
 // Client
@@ -185,8 +185,8 @@ Route::prefix('client')->group(function(){
                     ]);
                 });
 
-                Route::post('/', [C_Plan::class, 'popks_save']) -> name('save_popks');
-
+                Route::post('/', [C_Plan::class, 'popks_create']) -> name('create_popks');
+                // Route::post('/', [C_Plan::class, 'popks_send']) -> name('send_popks');
             }); 
         });  
     });

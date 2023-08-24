@@ -22,6 +22,8 @@ return new class extends Migration
             $table->integer('talent_total');
             $table->integer('weekday_cost');
             $table->integer('weekend_cost');
+            $table->double('consumtion_cost');
+            $table->double('transportation_cost');
             $table->timestamps();
         });
     }
