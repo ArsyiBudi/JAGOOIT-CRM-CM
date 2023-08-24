@@ -18,7 +18,7 @@
             <div class="mb-4 block md:flex items-center gap-4">
                 <label for="order-id" class="text-sm text-white">Order/Request ID</label> <br class=" block md:hidden">
                 <input required id="order-id" type="text" disabled class="text-black rounded-lg px-2 py-1 bg-gary w-full md:w-auto mt-2 outline-none">
-        </div>
+            </div>
 
         <div class="mb-4">
             <label for="nama-perusahaan" class="text-sm text-white">Nama Perusahaan</label>
@@ -88,8 +88,8 @@
     
     
             <div class="flex justify-end mt-6">
-                <button class="bg-secondary text-white rounded-md px-4 py-2 mr-2 hover:scale-95 duration-200" onclick="dropDownBack()">Cancel</button>
-                <button class="bg-secondary text-white rounded-md px-4 py-2 hover:scale-95 duration-200" >Create</button>
+                <button type="button" class="bg-secondary text-white rounded-md px-4 py-2 mr-2 hover:scale-95 duration-200" onclick="dropDownBack()">Cancel</button>
+                <button type="submit" class="bg-secondary text-white rounded-md px-4 py-2 hover:scale-95 duration-200" >Create</button>
             </div>
         </div>
     </form>
