@@ -83,15 +83,15 @@
                 <div class="flex flex-row flex-wrap gap-2">
                     <div class="flex-auto flex flex-col">
                         Nama
-                        <input class="rounded-md text-black" type="text" name="" id="">
+                        <input class="rounded-md text-black bg-white" type="text" name="" id="">
                     </div>
                     <div class="flex-auto flex flex-col ">
                         Jabatan
-                        <input class="rounded-md text-black" type="text" name="" id="">
+                        <input class="rounded-md text-black bg-white" type="text" name="" id="">
                     </div>
                     <div class="flex-auto flex flex-col">
                         Alamat
-                        <input class="rounded-md text-black" type="text" name="" id="">
+                        <input class="rounded-md text-black bg-white" type="text" name="" id="">
                     </div>
                 </div>
         
@@ -99,35 +99,35 @@
                 <div class="flex flex-row flex-wrap gap-2">
                     <div class="flex-auto flex flex-col">
                         Nama
-                        <input class="rounded-md text-black" type="text" name="" id="">
+                        <input class="rounded-md text-black bg-white" type="text" name="" id="">
                     </div>
                     <div class="flex-auto flex flex-col">
                         Jabatan
-                        <input class="rounded-md text-black" type="text" name="" id="">
+                        <input class="rounded-md text-black bg-white" type="text" name="" id="">
                     </div>
                     <div class="flex-auto flex flex-col">
                         Alamat
-                        <input class="rounded-md text-black" type="text" name="" id="">
+                        <input class="rounded-md text-black bg-white" type="text" name="" id="">
                     </div>
                 </div>
         
                 <div class="text-xl mt-7">Jangka Waktu Kontrak:</div>
                 <div class="flex flex-row flex-wrap gap-2">
                     <div>Dari</div>
-                    <input class="rounded-md flex-auto text-black" type="text" name="" id="">
+                    <input class="rounded-md flex-auto text-black bg-white" type="text" name="" id="">
                     <div>Sampai</div>
-                    <input class="rounded-md flex-auto text-black" type="text" name="" id="">
+                    <input class="rounded-md flex-auto text-black bg-white" type="text" name="" id="">
                 </div>
         
                 <div class="text-xl mt-7">Biaya Kontrak</div>
                 <div class="flex flex-row flex-wrap gap-2">
                     <div class="flex-auto flex flex-col">
                         Termasuk Biaya
-                        <input type="text" class="rounded-md text-black">
+                        <input type="text" class="rounded-md text-black bg-white">
                     </div>
                     <div class="flex-auto flex flex-col">
                         Nominal
-                        <input type="text" class="rounded-md text-black">
+                        <input type="text" class="rounded-md text-black bg-white">
                     </div>
                 </div>
 
@@ -135,13 +135,13 @@
                 <div class="flex flex-row flex-wrap gap-2">
                     <div class="flex-auto flex flex-col">
                         <div>Weekday</div>
-                        <input type="text" class="rounded-md text-black">
+                        <input type="text" class="rounded-md text-black bg-white">
                         <div>Weekend</div>
-                        <input type="text" class="rounded-md text-black">
+                        <input type="text" class="rounded-md text-black bg-white">
                     </div>
                     <div class="flex-auto flex flex-col">
                         <label for="catatan-popks">Catatan</label>
-                        <textarea id="catatan-popks" type="text" class=" text-black rounded-md h-full hide-scrollbar resize-none"></textarea>
+                        <textarea id="catatan-popks" type="text" class=" text-black rounded-md h-full hide-scrollbar resize-none bg-white"></textarea>
                     </div>
                 </div>
 
@@ -149,20 +149,20 @@
                 <div class="flex flex-row flex-wrap gap-2">
                     <div class="flex-auto flex flex-col">
                         <div>Konsumsi (perhari)</div>
-                        <input type="text" class="rounded-md text-black">
+                        <input type="text" class="rounded-md text-black bg-white">
                     </div>
                     <div class="flex-auto flex flex-col">
                         Transport Pulang-Pergi Standar JKT-BDG
-                        <input type="text" class="rounded-md h-full text-black">
+                        <input type="text" class="rounded-md h-full text-black bg-white">
                     </div>
                 </div>
 
                 <div class="text-xl mt-7">Invoice Tagihan</div>
                 <div class="flex flex-row flex-wrap gap-2">
                     Tanggal 
-                    <input type="date" class="w-10 text-black rounded-md">
+                    <input type="date" class="w-10 text-black rounded-md bg-white">
                     Setiap Bulan dan Pembayaran Selambat-Lambatnya
-                    <input type="number" class="text-black rounded-md">
+                    <input type="number" class="text-black rounded-md bg-white">
                     Hari
                 </div>
 
@@ -170,27 +170,27 @@
                 <div class="flex flex-row flex-wrap gap-2">
                     <div class="flex-auto flex flex-col">
                         Atas Nama
-                        <input type="text" class="rounded-md text-black">
+                        <input type="text" class="rounded-md text-black  bg-white">
                     </div>
                     <div class="flex-auto flex flex-col">
                         Nama Bank
-                        <input type="text" class="rounded-md text-black">
+                        <input type="text" class="rounded-md text-black bg-white">
                     </div>
                 </div>
                 <div class="flex-auto flex flex-col">
                     No. Rekening
-                    <input type="text" class="rounded-md text-black">
+                    <input type="text" class="rounded-md text-black bg-white">
                 </div>
 
                 <div class="text-xl mt-7">Mengetahui</div>
                 <div class="flex flex-row flex-wrap gap-2">
                     <div class="flex-auto flex flex-col">
                         Direktur JagooIT
-                        <input type="text" class="rounded-md text-black">
+                        <input type="text" class="rounded-md text-black bg-white">
                     </div>
                     <div class="flex-auto flex flex-col">
                         Direktur Klien
-                        <input type="text" class="rounded-md text-black">
+                        <input type="text" class="rounded-md text-black bg-white">
                     </div>
                 </div>
                 
@@ -218,7 +218,7 @@
 
                 <div class="flex-auto flex flex-col">
                     <label for="desk-popks">Deskripsi</label>
-                    <textarea id="desk-popks" type="text" class="rounded-md h-[70px] text-black hide-scrollbar resize-none"></textarea>
+                    <textarea id="desk-popks" type="text" class="rounded-md h-[70px] text-black hide-scrollbar resize-none bg-white"></textarea>
                 </div>
 
                 <div class="mt-4 flex justify-end">

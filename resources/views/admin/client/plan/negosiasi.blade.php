@@ -70,18 +70,18 @@
 
                     <div class="flex flex-col bg-grey p-9 mt-6 rounded-lg gap-2 border-2 border-white  w-full" id="createSection"> 
                         <div class="bg-white opacity-70 p-2 rounded-md w-full">
-                            <textarea name="judul" id="judul" class="text-black opacity-100 w-full p-2 bg-transparent outline-none resize-none" placeholder="Judul"></textarea> <!-- Menggunakan w-full untuk mengisi textarea secara penuh -->
+                            <textarea name="judul" id="judul" class="text-black opacity-100 w-full p-2 bg-transparent outline-none resize-none" placeholder="Judul" required></textarea> <!-- Menggunakan w-full untuk mengisi textarea secara penuh -->
                         </div>
                         <div class="flex flex-row max-sm:flex-wrap gap-2 w-full">
                             <div class="bg-white opacity-70 rounded-md flex-auto p-2">
-                                <textarea name="lokasi" id="lokasi" class="bg-transparent text-black p-2 w-full outline-none resize-none" placeholder="Lokasi"></textarea>
+                                <textarea name="lokasi" id="lokasi" class="bg-transparent text-black p-2 w-full outline-none resize-none" placeholder="Lokasi" required></textarea>
                             </div>
                             <div class="bg-white opacity-70 rounded-md flex-auto p-2">
-                                <textarea name="waktu" id="waktu" class="bg-transparent text-black p-2 w-full outline-none resize-none" placeholder="Waktu"></textarea>
+                                <textarea required name="waktu" id="waktu" class="bg-transparent text-black p-2 w-full outline-none resize-none" placeholder="Waktu"></textarea>
                             </div>  
                         </div>
                         <div class="bg-white opacity-70 rounded-md w-full p-2">
-                            <textarea name="deskripsi" id="deskripsi" class="bg-transparent outline-none p-2 text-black resize-none" placeholder="Deskripsi"></textarea> <!-- Menggunakan w-full untuk mengisi textarea secara penuh -->
+                            <textarea required name="deskripsi" id="deskripsi" class="bg-transparent outline-none p-2 text-black resize-none" placeholder="Deskripsi"></textarea> <!-- Menggunakan w-full untuk mengisi textarea secara penuh -->
                         </div>
                         <div class="w-[97px] mx-auto mt-2">
                             <input type="submit" class="bg-secondary  text-white rounded-md px-4 py-2 h-10 cursor-pointer">
@@ -91,7 +91,7 @@
 
                 <div class="flex justify-between items-center pt-4 md:mb-0">
                     <div>
-                        <a href="/client/order/plan/percobaan">
+                        <a href="/client/order/plan/penawaran">
                             <div class="bg-secondary text-white text-sm text-center py-1 px-3 md:px-14 rounded-md font-bold hover:scale-95 duration-200">
                                 <p class=" hidden md:inline">Back</p>        
                                 <i class="ri-arrow-left-line inline md:hidden"></i>  
@@ -109,11 +109,12 @@
                         </div>
             
                         <div>
-                            <a href="/client/order"></a>
-                            <div class=" bg-secondary text-white text-sm text-center py-1 px-3 md:px-14 rounded-md font-bold hover:scale-95 duration-200">
-                                <p class="hidden md:inline">Finish</p> 
+                            <a href="/client/order/plan/percobaan">
+                            <div class=" bg-secondary text-white cursor-pointer text-sm text-center py-1 px-3 md:px-14 rounded-md font-bold hover:scale-95 duration-200">
+                                <p class="hidden md:inline">Continue</p> 
                                 <i class="ri-check-line block md:hidden"></i>
                             </div>
+                        </a>
                         </div>
                     </div>
                 </div>
