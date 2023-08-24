@@ -39,7 +39,9 @@
     </style>
 
     @section('container')
-        <div class="overflow-y-auto overflow-x-hidden pt-28 lg:pt-0 px-5 lg:px-10 h-screen">
+    <div class="pt-20 pb-2 lg:pt-0">
+    </div>
+        <div class="overflow-y-auto overflow-x-hidden pt-0 pb-10 lg:pt-0 px-5 lg:px-10 h-[90vh]">
             <h1 class=" text-4xl">Appointment Negosiasi</h1>
             <p class=" text-[16px] font-medium pt-3">Silakan set appointment</p>
 
@@ -68,49 +70,56 @@
                         </div>
                     </div>
 
-                    <div class="bg-grey p-9 mt-6 rounded-lg border-2 border-white  w-full h-[360px] overflow-y-scroll hide-scrollbar" id="createSection"> 
-                        <div class="bg-white opacity-70 mb-4 p-2 rounded-md w-full">
-                            <textarea name="judul" id="judul" class="text-black opacity-100 w-full p-2 bg-transparent outline-none resize-none" placeholder="Judul"></textarea> <!-- Menggunakan w-full untuk mengisi textarea secara penuh -->
+                    <div class="flex flex-col bg-grey p-9 mt-6 rounded-lg gap-2 border-2 border-white  w-full" id="createSection"> 
+                        <div class="bg-white opacity-70 p-2 rounded-md w-full">
+                            <textarea name="judul" id="judul" class="text-black opacity-100 w-full p-2 bg-transparent outline-none resize-none" placeholder="Judul" required></textarea> <!-- Menggunakan w-full untuk mengisi textarea secara penuh -->
                         </div>
-                        <div class="flex gap-2 mb-4 w-full">
-                            <div class="bg-white opacity-70 rounded-md mr-2 w-1/2 p-2">
-                                <textarea name="lokasi" id="lokasi" class="bg-transparent text-black p-2 w-full outline-none resize-none" placeholder="Lokasi"></textarea>
+                        <div class="flex flex-row max-sm:flex-wrap gap-2 w-full">
+                            <div class="bg-white opacity-70 rounded-md flex-auto p-2">
+                                <textarea name="lokasi" id="lokasi" class="bg-transparent text-black p-2 w-full outline-none resize-none" placeholder="Lokasi" required></textarea>
                             </div>
-                            <div class="bg-white opacity-70 rounded-md  w-1/2 p-2">
-                                <textarea name="waktu" id="waktu" class="bg-transparent text-black p-2 w-full outline-none resize-none" placeholder="Waktu"></textarea>
-                            </div>
-                            
+                            <div class="bg-white opacity-70 rounded-md flex-auto p-2">
+                                <textarea required name="waktu" id="waktu" class="bg-transparent text-black p-2 w-full outline-none resize-none" placeholder="Waktu"></textarea>
+                            </div>  
                         </div>
-                        <div class="bg-white opacity-70 rounded-md w-full p-2 h-[100px]">
-                            <textarea name="deskripsi" id="deskripsi" class="bg-transparent outline-none p-2 text-black resize-none h-full w-full" placeholder="Deskripsi"></textarea> <!-- Menggunakan w-full untuk mengisi textarea secara penuh -->
+                        <div class="bg-white opacity-70 rounded-md w-full p-2">
+                            <textarea required name="deskripsi" id="deskripsi" class="bg-transparent outline-none p-2 text-black resize-none" placeholder="Deskripsi"></textarea> <!-- Menggunakan w-full untuk mengisi textarea secara penuh -->
                         </div>
-                        <div class="w-[97px] mx-auto">
-                            <input type="submit" class="bg-secondary  text-white rounded-md px-4 py-2 h-[39px] mt-11 cursor-pointer">
+                        <div class="w-[97px] mx-auto mt-2">
+                            <input type="submit" class="bg-secondary  text-white rounded-md px-4 py-2 h-10 cursor-pointer">
                         </div>
                     </div>
                 </form> 
 
-                <div class="flex justify-between items-center">
-                    <a href="/client/order/plan/penawaran" class="bg-secondary text-white text-sm text-center py-1 px-2 md:px-14 rounded-md font-bold flex items-center">
-                        <p class="hidden md:inline">Back</p>
-                        <i class="ri-arrow-left-line inline md:hidden"></i>
-                    </a>
-                    
-                <div class="flex">
-                    <button class="bg-secondary text-white text-sm text-center py-1 px-2 md:px-14 rounded-md font-bold flex items-center">
-                        <p class="hidden md:block">Save</p>
-                        <i class="ri-save-line block md:hidden"></i>
-                    </button>
-                <div class="mx-2"></div> <!-- Jarak antara tombol Save dan Continue -->
-                <div>
-                    <a href="/client/order/plan/percobaan" class="bg-secondary text-white text-sm text-center py-1 px-2 md:px-14 rounded-md font-bold flex items-center">
-                        <p class="hidden md:block">Continue</p>
-                        <i class="ri-arrow-right-line block md:hidden ml-hidden"></i>
+                <div class="flex justify-between items-center pt-4 md:mb-0">
+                    <div>
+                        <a href="/client/order/plan/penawaran">
+                            <div class="bg-secondary text-white text-sm text-center py-1 px-3 md:px-14 rounded-md font-bold hover:scale-95 duration-200">
+                                <p class=" hidden md:inline">Back</p>        
+                                <i class="ri-arrow-left-line inline md:hidden"></i>  
+                            </div>
                         </a>
                     </div>
-
+                    
+                    <div class="flex gap-4 max-sm:w-full max-sm:justify-between">
+                        <div></div>
+                        <div>
+                            <button type="submit" name="save" class=" w-full bg-secondary text-white text-sm text-center py-1 px-14 rounded-md font-bold hover:scale-95 duration-200">
+                            <p class="hidden md:block">Save</p>
+                            <i class="ri-save-line block md:hidden"></i>
+                            </button>
+                        </div>
+            
+                        <div>
+                            <a href="/client/order/plan/percobaan">
+                            <div class=" bg-secondary text-white text-sm text-center py-1 px-3 md:px-14 rounded-md font-bold hover:scale-95 duration-200">
+                                <p class="hidden md:inline">continue</p> 
+                                <i class="ri-arrow-right-line block md:hidden"></i>
+                            </div>
+                            </a>
+                        </div>
+                    </div>
                 </div>
-            </div>
         </div>
     </div>
 @endsection

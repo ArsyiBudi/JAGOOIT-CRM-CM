@@ -46,7 +46,9 @@
     </style>
 
 @section('container')
-<div class=" overflow-y-auto overflow-x-hidden pt-28 lg:pt-0 px-5 md:px-10 h-screen">
+<div class="pt-20 pb-2 lg:pt-0">
+</div>
+<div class=" overflow-y-auto overflow-x-hidden pt-0 pb-10 lg:pt-0 px-5 md:px-10 h-[90vh]">
     <h1 class=" text-4xl">Training</h1>
     <p class=" text-sm md:text-[16px] font-medium pt-3">Silakan nilai kandidat</p>
 
@@ -80,7 +82,7 @@
                 </div>
             </div>
 
-            <div class=" bg-grey w-full p-3 rounded-md mt-4 overflow-auto h-72 hide-scrollbar">
+            <div class=" bg-darksecondary w-full px-3 rounded-md mt-4 overflow-auto hide-scrollbar">
                 <div class="overflow-auto ">
                     <table class="table overflow-auto">
                         <!-- head -->
@@ -164,42 +166,48 @@
                             </tbody>
                     </table>
                 </div>
+                <div class="sticky bottom-0 pb-1 text-sm bg-darkSecondary flex items-center justify-center w-full">
+
+                    <div class="flex gap-3 items-center">
+                        <button class="bg-secondary hover:scale-95 duration-200 py-1 px-3 md:px-5 rounded-lg flex items-center justify-center my-5">Prev</button>
+                        <div class="rounded-lg p-1 w-8 bg-grey flex items-center justify-center" onclick="{{ url('/client/detail') }}">
+                            <p>1</p>
+                        </div>
+                        <div class="rounded-lg p-1 w-8 bg-grey flex items-center justify-center">
+                            <p>10</p>
+                        </div>
+                        <button class="bg-secondary hover:scale-95 duration-200 py-1 px-3 md:px-5 rounded-lg flex items-center justify-center my-5">Next</button>
+                    </div>
+                </div>
             </div>
 
-            <div class=" flex justify-between items-center gap-1 md:gap-0">
+            <div class="mt-2 flex justify-between items-center gap-1 md:gap-0">
                 <div>
-                    <a href="/client/order/plan/recruitment" class=" bg-secondary text-white text-sm text-center py-1 px-3 lg:px-14 rounded-md font-bold">
-                      <p class=" hidden lg:inline">Back</p>
-                      <i class="ri-arrow-left-line inline lg:hidden"></i>  
-                    </a>
+                    <div>
+                        <a href="/client/order/plan/recruitment" class="bg-secondary text-white text-sm text-center py-1 px-2 md:px-14 rounded-md font-bold flex items-center hover:scale-95 duration-200">
+                            <p class="hidden md:block">Back</p>
+                            <i class="ri-arrow-left-line block md:hidden ml-1"></i>
+                        </a>
+                    </div>
+    
                 </div>
-                <div class=" flex items-center gap-3">
-                    <div class="">
-                        <button class=" bg-secondary py-1 px-3 md:px-5 rounded-md cursor-pointer hover:scale-95 my-5">Prev</button>
+                <div class="flex gap-4 max-sm:w-full max-sm:justify-between">
+                    <div></div>
+                    <div>
+                        <button type="submit" name="save" class=" w-full bg-secondary text-white text-sm text-center py-1 px-14 rounded-md font-bold hover:scale-95 duration-200">
+                        <p class="hidden md:block">Save</p>
+                        <i class="ri-save-line block md:hidden"></i>
+                        </button>
                     </div>
-                    <div class=" bg-grey p-1 rounded-md w-8 text-center">
-                        <p>1</p>
-                    </div>
-                    <div class=" bg-grey p-1 rounded-md w-8 text-center">
-                        <p>10</p>
-                    </div>
-                    <div class="">
-                        <button class="  bg-secondary py-1 px-3 md:px-5 rounded-md cursor-pointer hover:scale-95 my-5">Next</button>
-                    </div>
-                    
-                </div>
-                <div class="flex gap-1">
-                    <button class=" bg-secondary text-white text-sm text-center py-1 px-3 lg:px-14 rounded-md font-bold">
-                        <p class=" hidden lg:block">Save</p>
-                        <i class="ri-save-3-line block lg:hidden"></i>  
-                      </button>
-                      <div>
-                        <a href="/client/order/plan/penawaran" class="bg-secondary text-white text-sm text-center py-1 px-2 md:px-14 rounded-md font-bold flex items-center">
-                            <p class="hidden md:block">Continue</p>
-                            <i class="ri-arrow-right-line block md:hidden ml-1"></i>
-                            </a>
+        
+                    <div>
+                        <a href="/client/order/plan/penawaran">
+                        <div class=" bg-secondary text-white text-sm text-center py-1 px-3 md:px-14 rounded-md font-bold hover:scale-95 duration-200">
+                            <p class="hidden md:inline">Continue</p> 
+                            <i class="ri-arrow-right-line block md:hidden"></i>
                         </div>
-
+                        </a>
+                    </div>
                 </div>
             </div>
         </form> 

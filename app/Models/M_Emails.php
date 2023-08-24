@@ -5,17 +5,18 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class ActivityModel extends Model
+class M_Emails extends Model
 {
     use HasFactory;
-    protected $table = 'activity';
-    
+
+    protected $table = 'emails';
+
+    protected $primaryKey = 'id';
+
     protected $fillable = [
-        'activity_type_id',
         'leads_id',
-        'xs1',
-        'xs2',
-        'xd',
-        'desc',
+        'email_name'
     ];
+
+    public $timestamps = false;
 }

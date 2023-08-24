@@ -42,33 +42,37 @@
 </style>
 
 @section('container')
-<div class=" overflow-auto pt-28 lg:pt-0 h-[90vh]">
-    <div class="w-full bg-darkSecondary py-10 px-8 rounded-md ">
+<div class="pt-20 pb-2 lg:pt-0">
+</div>
+<div class=" overflow-auto lg:pt-0 h-[90vh] rounded-md">
+    <div class="w-full bg-darkSecondary px-8 flex flex-col">
 
-        <div class="border-b border-white w-full pb-3 mb-3">
-            <h3 class="text-white font-semibold text-3xl">Data Leads</h3>
-        </div>
+        <div class="sticky top-0 pt-10 bg-darkSecondary">
+            <div class="border-b border-white w-full pb-3 mb-3">
+                <h3 class="text-white font-semibold text-3xl">Data Leads</h3>
+            </div>
 
-        <form class=" block md:flex items-start my-4 justify-between mb-3 w-full">
-            <div class=" md:block flex items-center justify-between">
-                <div class="flex gap-3 items-center justify-start">
-                    <p class="text-white text-xs md:text-sm">Show</p>
-                    <div class="flex items-center bg-grey rounded-md md:rounded-lg justify-center py-0 md:py-1 w-[40px] md:w-[60px] px-1">
-                        <input type="text" class=" text-white w-full text-center bg-transparent outline-none" placeholder="5">
+            <form method="{{ url('/leads') }}" method="get" class=" block md:flex items-start my-4 justify-between mb-3 w-full">
+                <div class=" md:block flex items-center justify-between">
+                    <div class="flex gap-3 items-center justify-start">
+                        <p class="text-white text-xs md:text-sm">Show</p>
+                        <div class="flex items-center bg-grey rounded-md md:rounded-lg justify-center py-0 md:py-1 w-[40px] md:w-[60px] px-1">
+                            <input type="number" id="search" value="{{ $leads->perPage() }}" name="per_page" min="1" class=" text-white w-full text-center bg-transparent outline-none" placeholder="5">
+                        </div>
+                        <p class="text-white text-xs md:text-sm">entries</p>
                     </div>
-                    <p class="text-white text-xs md:text-sm">entries</p>
+                    <div class="md:mt-5">
+                        <a class=" bg-secondary font-semibold text-sm md:text-[16px] py-1 px-3 md:px-5 rounded-lg mt-0 md:mt-7 hover:scale-95 duration-200" href="/leads/create">Create Leads</a>
+                    </div>
                 </div>
-                <div class="md:mt-5">
-                    <a class=" bg-secondary font-semibold text-sm md:text-[16px] py-1 px-3 md:px-5 rounded-lg mt-0 md:mt-7 hover:scale-95 duration-200" href="/leads/create">Create Leads</a>
+                <div class=" flex items-center gap-5 mt-5 md:mt-0">
+                    <p class=" hidden md:block">Search</p>
+                    <input name="search" type="text" class=" outline-none bg-white rounded-md w-full md:w-80 py-1 px-2 text-black font-semibold placeholder-gray-400 placeholder-opacity-100 md:placeholder-opacity-0" placeholder="search">
                 </div>
-            </div>
-            <div class=" flex items-center gap-5 mt-5 md:mt-0">
-                <p class=" hidden md:block">Search</p>
-                <input type="text" class=" outline-none bg-white rounded-md w-full md:w-80 py-1 px-2 text-black font-semibold placeholder-gray-400 placeholder-opacity-100 md:placeholder-opacity-0" placeholder="search">
-            </div>
-        </form>
-
-        <div class=" border-b border-white w-full rounded-lg mt-4"></div>
+                <button type="submit"></button>
+            </form>
+            <div class=" border-b border-white w-full rounded-lg mt-4"></div>
+        </div>
 
         <div class=" hide-scrollbar w-full mt-5 h-full overflow-auto pr-2">
             <table class=" w-full text-xs md:text-sm font-bold ">
@@ -84,22 +88,24 @@
                         <td class=" p-4" align="center">Aksi</td>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody id="search_data">
                     @foreach($leads as $row)
                     <tr class=" odd:bg-grey">
                         <td align="center" class=" p-4">{{ $row->id }}</td>
                         <td align="center" class=" p-4">{{ $row->business_name }}</td>
                         <td align="center" class=" p-4">{{ $row->business_sector }}</td>
-                        <td align="center" class=" p-4">{{ $row->pic_name  }}</td>
+                        <td align="center" class=" p-4">{{ $row->pic_name }}</td>
                         <td align="center" class=" p-4">{{ $row->pic_contact_number }}</td>
-                        <td align="center" class=" p-4">Appointment</td>
-                        <td align="center" class=" p-4">Selesai</td>
+                        <td align="center" class=" p-4">{{ $row->latestActivity }}</td>
+                        <td align="center" class=" p-4">{{ $row->statusParam->params_name }}</td>
                         <td align="center" class=" p-4">
                             <div class=" flex items-center gap-2">
-                                <a href="/leads/detail">
+                                <a href="{{ url('/leads/'. $row -> id .'/detail') }}">
                                     <i class=" text-lg cursor-pointer ri-information-line"></i>
                                 </a>
-                                <i class=" text-lg cursor-pointer ri-delete-bin-2-line text-delete"></i>
+                                <form action="{{ url('/leads/. $row -> id') }}">
+                                    <i class=" text-lg cursor-pointer ri-delete-bin-2-line text-delete"></i>
+                                </form>
                             </div>
                         </td>
                     </tr>
@@ -107,7 +113,7 @@
                 </tbody>
             </table>
         </div>
-        <div class="sticky bottom-0 flex justify-center items-center gap-3">
+        <div class="sticky bottom-0 pb-10 bg-darksecondary flex justify-center items-center gap-3">
             {{ $leads -> links('vendor.pagination.custom-pagination') }}
         </div>
     </div>

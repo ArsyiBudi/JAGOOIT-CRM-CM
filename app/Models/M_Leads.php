@@ -11,6 +11,7 @@ class M_Leads extends Model
 
     protected $table  = 'leads';
 
+    protected $primaryKey = 'id';
     protected $fillable = [
         'business_name',
         'business_sector',
@@ -21,4 +22,15 @@ class M_Leads extends Model
         'lead_status',
     ];
     
+    public function statusParam()
+    {
+        return $this->belongsTo(M_GlobalParams::class, 'lead_status', 'id_params');
+    }
+
+    public function latestActivity(){
+        return $this->hasOne(M_Activity::class, 'leads_id', 'id')
+        ->join('global_params', 'global_params.id_params', '=', 'activity.activity_type_id')
+        ->select('global_params.params_name')
+        ->withDefault('-');
+    }
 }

@@ -18,15 +18,16 @@
         </div>
     </form>
 </div> --}}
-<h6 class=" font-normal mb-4 text-2xl md:mt-20 mt-24 md:pl-0 pl-4 lg:text-left text-center">Create Activity</h6>
-<div class="bg-grey overflow-auto overflow-x-hidden md:p-9 p-4 rounded-lg border-2 border-white  w-full h-[500px]"> 
-<div class='dropdown'>
-    <select id="formSelector" class="mb-3 bg-transparent border m-1 btn p-2 outline-none border-spacing-1 rounded-md py-1 text-1xl text-white font-quicksand hover:bg-gray-300">
-        <option value="form1" class="bg-grey hover:bg-gray-300">Appointment</option>
-        <option value="form2" class="bg-grey hover:bg-gray-300">Note</option>
-        <option value="form3" class="bg-grey hover:bg-gray-300">Report</option>
-    </select>
-</div>
+<div class=" overflow-auto h-[90vh]">
+    <h6 class=" font-normal mb-4 text-2xl md:mt-0 mt-24 md:pl-0 pl-4 lg:text-left text-center">Create Activity</h6>
+    <div class="bg-grey overflow-x-hidden md:p-9 p-4 rounded-lg border-2 border-white  w-full"> 
+        <div class='dropdown'>
+            <select id="formSelector" class="mb-3 bg-transparent border m-1 btn p-2 outline-none border-spacing-1 rounded-md py-1 text-1xl text-white font-quicksand hover:bg-gray-300 hover:text-darkSecondary">
+                <option value="form1" class="bg-grey hover:bg-gray-300 hover:text-darkSecondary">Appointment</option>
+                <option value="form2" class="bg-grey hover:bg-gray-300 hover:text-darkSecondary">Note</option>
+                <option value="form3" class="bg-grey hover:bg-gray-300 hover:text-darkSecondary">Report</option>
+            </select>
+        </div>
 
             <div id="formContainer" class="w-full">
                 <form id="form1" class="hidden" method="POST" action="{{ route('activity.appointment')}}">
@@ -71,11 +72,10 @@
                     <div class="bg-white opacity-70 rounded-md w-full mb-4 p-2 h-[100px]">
                         <textarea name="deskripsireport" id="deskripsireport" class="bg-transparent outline-none p-2  rounded w-full h-full resize-none text-black" placeholder="Deskripsi"></textarea> 
                     </div>
-                    <div class="w-[97px] mx-auto">
-                        <input type="submit" class="bg-secondary text-white rounded-md mt-5 mr-3 px-4 py-2 h-[37px] hover:scale-95 duration-200">
-                    </div>
-                </form>
-            </div>
+                </div>
+            </form>
+        </div>
+    </div>
 </div>
     <script>
         document.addEventListener("DOMContentLoaded", function () {

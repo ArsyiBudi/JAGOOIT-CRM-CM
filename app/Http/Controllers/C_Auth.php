@@ -29,10 +29,6 @@ class C_Auth extends Controller
 
         $user_type = $user->user_type_id;
         if($user_type == 3){
-            Auth::attempt([
-                'username' => $field['username'],
-                'password' => $field['password'],
-            ], true);
             return response(['message' => 'bad creds']);
         }
         
@@ -40,8 +36,6 @@ class C_Auth extends Controller
         // return response()->json(['token' => $token]);
         // return response()->json(['message' => 'Unauthorized'], 401);
         // $token = $user -> createToken('myapptoken')->plainTextToken;
-
         return redirect('/leads');
-        
     }
 }

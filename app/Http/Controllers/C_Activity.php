@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\ActivityModel;
+use App\Models\M_Activity;
 
 class C_Activity extends Controller
 {
@@ -16,7 +17,7 @@ class C_Activity extends Controller
             'deskripsi'=>'required',
         ]);
         
-        $activity = ActivityModel::create([
+        $activity = M_Activity::create([
             'activity_type_id'=>'1',
             'leads_id'=>'1',
             'xs1'=>$field['judul'],
@@ -35,7 +36,7 @@ class C_Activity extends Controller
             'deskripsinote'=>'required'
         ]);
         
-        $activity = ActivityModel::create([
+        $activity = M_Activity::create([
             'activity_type_id'=>'2',
             'leads_id'=>'3',
             'xs1'=>null,
@@ -60,7 +61,7 @@ class C_Activity extends Controller
         $fileName = $file->getClientOriginalName();
         $filePath = $file->storeAs($fileName);
 
-        $activity = ActivityModel::create([
+        $activity = M_Activity::create([
             'activity_type_id' => '3',
             'leads_id' => '4',
             'xs1' => $field['judulreport'],

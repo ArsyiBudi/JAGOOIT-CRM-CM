@@ -5,6 +5,7 @@ use App\Http\Controllers\C_Auth;
 use App\Http\Controllers\C_Leads;
 use App\Http\Controllers\C_Orders;
 use App\Http\Controllers\C_Plan;
+use App\Http\Controllers\PenawaranWordController;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Route;
 
@@ -67,6 +68,7 @@ Route::prefix('login')->group(function(){
 
 Route::prefix('leads')->group(function(){
     Route::get('/', [C_Leads::class, 'fetch']);
+    Route::delete('/{id}', [C_Leads::class, 'detail']) -> name('delete_leads');
 
     Route::prefix('create') -> group(function(){
         Route::get('/', function(){
@@ -76,20 +78,16 @@ Route::prefix('leads')->group(function(){
         });
         Route::post('/', [C_Leads::class, 'create']) -> name('create_order');
     });
-    
-    Route::get('/detail', function () {
-        return view('admin.leads.detail', [
-            "title" => "Leads | Detail",
-        ]);
-    });
 
-    Route::get('/activity', function () {
+    Route::get('/{id}/detail', [C_Leads::class, 'detail']) -> name('detail_leads');
+
+    Route::get('/{id}/activity', function () {
         return view('admin.leads.activity', [
             "title" => "Leads | Create Activity",
         ]);
     });
     
-    Route::get('/offer', function () {
+    Route::get('/{id}/offer', function () {
         return view('admin.leads.offer', [
             "title" => "Leads | Create Offer",
         ]);
@@ -109,11 +107,7 @@ Route::prefix('client')->group(function(){
         ]);
     });
     
-    Route::get('/detail', function () {
-        return view('admin.client.detail', [
-            "title" => "Client | Detail",
-        ]);
-    });
+    Route::get('/detail/{id}', [C_Leads::class, 'detail']);
     
     Route::prefix('order')->group(function(){
         Route::get('/', function () {
@@ -173,6 +167,7 @@ Route::prefix('client')->group(function(){
                     "title" => "Plan | Penawaran",
                 ]);
             });
+            Route::post('/penawaran', [PenawaranWordController::class, 'generate'])->name('penawaran.download');
             
             Route::get('/negosiasi', function () {
                 return view('admin.client.plan.negosiasi', [
