@@ -1,10 +1,12 @@
 <?php
 
+use App\Http\Controllers\C_Activity;
 use App\Http\Controllers\C_Auth;
 use App\Http\Controllers\C_Leads;
 use App\Http\Controllers\C_Offer;
 use App\Http\Controllers\C_Orders;
 use App\Http\Controllers\C_Plan;
+use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Route;
 
 
@@ -44,7 +46,7 @@ function set_child_active($routes)
         }
     }
 
-    return 'text-white fill-white';
+    return 'text-white fill-white';
 }
 
 // Client
@@ -93,6 +95,12 @@ Route::prefix('leads')->group(function(){
             "title" => "Leads | Create Offer",
         ]);
     });
+    Route::post('/appointment',
+    [C_Activity::class, 'appointment'])->name('activity.appointment');
+    Route::post('/note',
+    [C_Activity::class, 'note'])->name('activity.note');
+    Route::post('/report',
+    [C_Activity::class, 'report'])->name('activity.report');
 });
 
 Route::prefix('client')->group(function(){
@@ -187,8 +195,8 @@ Route::prefix('client')->group(function(){
                     ]);
                 });
 
-                Route::post('/', [C_Plan::class, 'popks_save']) -> name('save_popks');
-
+                Route::post('/', [C_Plan::class, 'popks_create']) -> name('create_popks');
+                // Route::post('/', [C_Plan::class, 'popks_send']) -> name('send_popks');
             }); 
         });  
     });
