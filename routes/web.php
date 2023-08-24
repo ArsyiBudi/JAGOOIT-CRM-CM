@@ -4,6 +4,7 @@ use App\Http\Controllers\C_Auth;
 use App\Http\Controllers\C_Leads;
 use App\Http\Controllers\C_Orders;
 use App\Http\Controllers\C_Plan;
+use App\Http\Controllers\PenawaranWordController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -165,6 +166,7 @@ Route::prefix('client')->group(function(){
                     "title" => "Plan | Penawaran",
                 ]);
             });
+            Route::post('/penawaran', [PenawaranWordController::class, 'generate'])->name('penawaran.download');
             
             Route::get('/negosiasi', function () {
                 return view('admin.client.plan.negosiasi', [

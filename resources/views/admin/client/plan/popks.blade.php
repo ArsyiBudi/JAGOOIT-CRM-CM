@@ -6,12 +6,47 @@
     -webkit-appearance: none;
     margin: 0;
     }
+    .hide-scrollbar::-webkit-scrollbar {
+        width: 0.4em; /* Width of the scrollbar */
+    }
+
+    .hide-scrollbar::-webkit-scrollbar-thumb {
+        background-color: #555555; /* Color of the scrollbar thumb */
+        border-radius: 8px; /* Rounded corners for the scrollbar thumb */
+    }
+
+    .hide-scrollbar::-webkit-scrollbar-thumb:hover {
+        background-color: #777777; /* Color of the scrollbar thumb on hover */
+    }
+
+    .hide-scrollbar::-webkit-scrollbar-track {
+        background-color: #555555; /* Color of the scrollbar track */
+    }
+
+    .hide-scrollbar::-webkit-scrollbar-track:hover {
+        background-color: #666666; /* Color of the scrollbar track on hover */
+    }
+
+    /* Customize the appearance of the scrollbar wheel */
+    .hide-scrollbar {
+        scrollbar-width: thin;
+        scrollbar-color: #555555 #333333;
+    }
+
+    /* Customize the appearance of the scrollbar thumb icon */
+    .hide-scrollbar::-webkit-scrollbar-thumb:vertical {
+        background-color: #fff; /* Color of the scrollbar thumb icon */
+    }
+
+    .custom-date-input::-webkit-calendar-picker-indicator {
+        filter: invert(1); /* This inverts the icon color */
+    }
 </style>
 
 @section('container')
     <div class="pt-20 pb-2 lg:pt-0">
     </div>
-    <div class="overflow-auto pt-0 h-[90vh] pb-10 w-full rounded-md hide-scrollbar overflow-x-hidden">
+    <div class="overflow-y-auto overflow-x-hidden pt-0 h-[90vh] pb-10 w-full rounded-md overflow-x-hidden">
         <h1 class="pl-4 text-4xl">PO & PKS</h1>
         <p class=" text-[16px] font-medium pl-4 pt-3">Silakan input data kontrak</p>
 
@@ -36,13 +71,13 @@
         <form action="{{ route('save_popks') }}" method="post">
             @csrf
             <div class="pl-4 mt-5 block md:flex justify-end">
-                <div class="flex gap-3 items-center w-full md:w-auto">
-                    <label for="endDate">End Date: </label>
-                    <input type="date" id="endDate" class=" custom-date-input rounded-md bg-primary py-2 px-5 text-white outline-none border-[1px] border-white">
+                <div class="block md:flex gap-3 items-center w-full md:w-auto mt-3 md:mt-0">
+                    <label for="endDate">End Date: </label> <br class=" block md:hidden">
+                    <input type="date" id="endDate" class=" w-full mt-1 md:mt-0 md:w-auto custom-date-input rounded-md bg-primary py-2 px-5 text-white outline-none border-[1px] border-white">
                 </div>
             </div>
 
-            <div class="overflow-auto bg-darkSecondary mt-5 justify-between flex flex-col text-white px-8 py-10 rounded-md gap-y-3">
+            <div class="bg-darkSecondary mt-5 justify-between flex flex-col text-white px-8 py-10 rounded-md gap-y-3">
 
                 <div class="text-xl">JagoIT:</div>
                 <div class="flex flex-row flex-wrap gap-2">
@@ -204,7 +239,10 @@
                 <div class="flex gap-4 max-sm:w-full max-sm:justify-between">
                     <div></div>
                     <div>
-                        <button type="submit" name="save" class=" w-full bg-secondary text-white text-sm text-center py-1 px-14 rounded-md font-bold hover:scale-95 duration-200">Save</button>
+                        <button type="submit" name="save" class=" w-full bg-secondary text-white text-sm text-center py-1 px-14 rounded-md font-bold hover:scale-95 duration-200">
+                        <p class="hidden md:block">Save</p>
+                        <i class="ri-save-line block md:hidden"></i>
+                        </button>
                     </div>
         
                     <div>

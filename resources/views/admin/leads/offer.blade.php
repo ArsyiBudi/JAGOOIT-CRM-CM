@@ -133,9 +133,12 @@
                     <div class="bg-white opacity-70 rounded-md w-full p-2 h-[100px]">
                         <textarea name="deskripsi" id="deskripsi" class="bg-transparent outline-none p-2 text-black resize-none h-full w-full" placeholder="Deskripsi"></textarea> <!-- Menggunakan w-full untuk mengisi textarea secara penuh -->
                     </div>
-                    <div class="w-[97px] mx-auto">
-                        <input type="submit" class="bg-secondary  text-white rounded-md px-4 py-2 h-[37px] mt-11 cursor-pointer hover:scale-95 duration-200">
-                    </div>
+                    <div class="flex justify-center">
+                            <div class="space-x-5">
+                        <input type="submit" class="bg-secondary text-white rounded-md px-4 py-2 h-[37px] hover:scale-95 duration-200 mt-4" value="Edit">
+                        <input type="submit" class="bg-secondary text-white rounded-md px-4 py-2 h-[37px] hover:scale-95 duration-200 mt-4" value="Submit">
+                            </div>
+                </div>
                 </form>
                 {{-- <form id="form3" class="hidden"></form> --}}
                       
