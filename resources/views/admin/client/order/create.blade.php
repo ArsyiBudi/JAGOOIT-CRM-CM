@@ -40,23 +40,23 @@
         <div class=" flex flex-wrap md:flex-nowrap gap-4">
             <div class="w-full md:w-1/2 mb-4">
                 <label for="posisi" class="text-sm text-white">Posisi yang Dibutuhkan</label>
-                <input id="posisi" type="text" class="text-black rounded-lg px-2 py-1 w-full bg-white mt-1 md:mt-0">
+                <input required id="posisi" type="text" class="text-black rounded-lg px-2 py-1 w-full bg-white mt-1 md:mt-0" placeholder="Posisi">
             </div>
 
             <div class="w-1/5 md:w-1/2 mb-4">
                 <label for="jumlah" class="text-sm text-white">Jumlah</label>
-                <input id="jumlah" type="number" class="text-black rounded-lg px-2 py-1 w-full bg-white mt-1 md:mt-0">
+                <input required id="jumlah" type="number" class="text-black rounded-lg px-2 py-1 w-full bg-white mt-1 md:mt-0" placeholder="Jumlah">
             </div>
 
             <div class=" w-1/2 md:w-1/2 mb-4">
                 <label for="due-date" class="text-sm text-white">Due Date</label>
-                <input id="due-date" type="text" class="text-black rounded-lg px-2 py-1 w-full bg-white mt-1 md:mt-0">
+                <input required id="due-date" type="text" class="text-black rounded-lg px-2 py-1 w-full bg-white mt-1 md:mt-0" placeholder="Tanggal">
             </div>
         </div>
 
         <div class="mb-4">
             <label for="job-description" class="text-sm text-white">Job Description</label>
-            <input id="job-description" type="text" class="text-black rounded-lg px-2 py-1 w-full bg-white mt-2">
+            <input required id="job-description" type="text" class="text-black rounded-lg px-2 py-1 w-full bg-white mt-2" placeholder="Deskripsi">
         </div>
 
         <div class=" block md:flex gap-4">
@@ -64,14 +64,14 @@
                 <div class="w-full">
                     <label for="kriteria-keterampilan" class="text-sm text-white">Kriteria Keterampilan</label>
                     <div class="rounded-lg px-2 py-4 h-32 w-full bg-white mt-2">
-                        <textarea id="kriteria-keterampilan" type="text" class="text-black bg-transparent  h-full w-full hide-scrollbar resize-none"></textarea>
+                        <textarea required id="kriteria-keterampilan" type="text" class="text-black bg-transparent  h-full w-full hide-scrollbar resize-none" placeholder="Keterampilan"></textarea>
                     </div>
                 </div>
                 
                 <div class="w-full  mb-4 ">
                     <label for="file-tor" class="text-sm text-white">File TOR</label>
                     <label for="file-tor" class="flex justify-center items-center bg-white py-4 rounded-lg px-2 h-24 mt-2">
-                        <input id="file-tor" type="file" class="text-black rounded-lg px-2 py-4 h-24 hidden w-full bg-white" name="tor">
+                        <input required id="file-tor" type="file" class="text-black rounded-lg px-2 py-4 h-24 hidden w-full bg-white" name="tor">
                         <label for="file-tor" class="cursor-pointer">
                             <i class="ri-upload-2-fill text-3xl text-black"></i>
                         </label>
@@ -82,13 +82,13 @@
             <div class="flex flex-col gap-4 md:w-1/2">
                 <div class="w-full">
                     <label for="anggaran" class="text-sm text-white">Anggaran</label>
-                    <input id="anggaran" type="text" class="text-black rounded-lg px-2 py-4 w-full bg-white mt-2">
+                    <input required id="anggaran" type="text" class="text-black rounded-lg px-2 py-4 w-full bg-white mt-2" placeholder="Anggaran">
                 </div>
                 
                 <div class="w-full mb-4">
                     <label for="kriteria-karakteristik" class="text-sm text-white">Kriteria Karakteristik</label>
                     <div class="rounded-lg px-2 py-4 w-full h-[10.5rem] bg-white mt-2">
-                        <textarea id="kriteria-karakteristik" type="text" class="text-black bg-transparent  h-full w-full hide-scrollbar resize-none    "></textarea>
+                        <textarea required id="kriteria-karakteristik" type="text" class="text-black bg-transparent  h-full w-full hide-scrollbar resize-none" placeholder="Karakteristik"></textarea>
                     </div>
                 </div>
             </div>
