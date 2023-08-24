@@ -19,7 +19,7 @@
     <div class="flex flex-col gap-4 items-center w-full ">
         <div class="items-center flex gap-2 py-2 text-white px-8  {{ set_active(['/dashboard']) }} w-full">
             <i class="ri-dashboard-line text-3xl"></i>
-            <a href="/dashboard">Dashboard</a>
+            <a href="/leads">Dashboard</a>
         </div>
         <div class="items-center flex gap-2 py-2  text-white px-8 {{ set_active(['/leads']) }} w-full">
             <img src="/leads.png" class="w-[30px] h-[30px] " alt="leads">
@@ -109,7 +109,7 @@
             <div class="flex flex-col gap-4  w-full mt-5">
                 <div class="items-center flex gap-2 py-2 text-white px-8  {{ set_active(['/dashboard']) }} w-full">
                     <i class="ri-dashboard-line text-3xl"></i>
-                    <a href="/dashboard">Dashboard</a>
+                    <a href="/leads">Dashboard</a>
                 </div>
                 <div class="items-center flex gap-2 py-2  text-white px-8 {{ set_active(['/leads']) }} w-full">
                     <img src="/leads.png" class="w-[30px] h-[30px] " alt="leads">

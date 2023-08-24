@@ -2,7 +2,7 @@
 
 @section('container')
 <div class="  pt-20 lg:pt-0 h-screen">
-<div class="bg-primary flex flex-col text-lightGrey p-0 lg:p-8 rounded-md space-y-2 w-full h-scrreen">
+<div class="bg-primary flex flex-col text-lightGrey p-0 lg:p-8 rounded-md space-y-2 w-full h-screen">
         <div class=" py-10 px-8 bg-primary flex flex-col text-lightGrey p-8 rounded-md space-y-2 w-full h-full">
             <div class="text-2xl">Detail Leads</div>
             <div class="flex flex-row text-xs space-x-2">
