@@ -46,7 +46,7 @@
     </style>
 
 @section('container')
-<div class=" overflow-y-auto overflow-x-hidden pt-28 lg:pt-0 px-5 md:px-10 h-screen">
+<div class=" overflow-y-auto overflow-x-hidden pt-28 lg:pt-0 px-5 md:px-10 h-[90vh]">
     <h1 class=" text-4xl">Training</h1>
     <p class=" text-sm md:text-[16px] font-medium pt-3">Silakan nilai kandidat</p>
 
@@ -80,7 +80,7 @@
                 </div>
             </div>
 
-            <div class=" bg-grey w-full p-3 rounded-md mt-4 overflow-auto h-72 hide-scrollbar">
+            <div class=" bg-grey w-full p-3 rounded-md mt-4 overflow-auto h-3/4 hide-scrollbar">
                 <div class="overflow-auto ">
                     <table class="table overflow-auto">
                         <!-- head -->
