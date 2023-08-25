@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class M_Orders extends Model
 {
@@ -39,4 +40,9 @@ class M_Orders extends Model
         'cv_file',
         'po_file',
     ];
+
+    public function leadData() : BelongsTo
+    {
+        return $this->belongsTo(M_Leads::class, 'lead_id', 'id');
+    }
 }

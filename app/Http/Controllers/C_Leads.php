@@ -30,10 +30,10 @@ class C_Leads extends Controller
             'pic_contact_number' => $field['pic_contact_number']
         ]);
 
-        if(!$leads) return response([
+        if (!$leads) return response([
             'error' => 'Error occured'
         ]);
-   
+
         $emailAddresses = [];
         foreach ($request->all() as $fieldName => $fieldValue) {
             if (strpos($fieldName, 'input_') === 0) {
@@ -43,7 +43,7 @@ class C_Leads extends Controller
         // Save to leads_email table
         foreach ($emailAddresses as $email) {
             M_Emails::create([
-                'leads_id' => $leads -> id,
+                'leads_id' => $leads->id,
                 'email_name' => $email,
             ]);
         }
@@ -83,15 +83,29 @@ class C_Leads extends Controller
     public function delete($id)
     {
         $lead = M_Leads::find($id);
-
         if (!$lead) {
             return response()->json(['error' => 'Lead not found'], 404);
         }
 
-        
-
+        // Delete related emails
+        $lead->emails()->delete();
         $lead->delete();
+        return redirect('/leads');
+    }
 
-        return redirect('/leads')->with('success', 'Lead has been deleted successfully');
+    public function fetch_client(Request $request){
+        $entries = $request->input('per_page', 5);
+        $search = $request->input('search', '');
+
+        $data = M_Leads::where(function ($query) use ($search) {
+            $query->where('business_name', 'like', "%$search%")
+                ->orWhere('business_sector', 'like', "%$search%")
+                ->orWhere('pic_name', 'like', "%$search%");
+        })->where('client_indicator', '=', '1') ->paginate($entries);
+
+        return view('admin.client/menu', [
+            "title" => "Client | Menu",
+            "client" => $data
+        ]);
     }
 }
