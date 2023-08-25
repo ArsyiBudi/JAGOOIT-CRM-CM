@@ -28,6 +28,18 @@ class C_Orders extends Controller
         return $randomId;
     }
 
+    public function fetch(Request $request){
+        $entries = $request->input('per_page', 5);
+        $search = $request->input('search', '');
+
+        $data = M_Orders::paginate($entries);
+
+        return view('admin.client.order.list', [
+            "title" => "Client | Order List",
+            "order" => $data
+        ]);
+    }
+
     public function newOrder(){
         $leads = M_Leads::all();
         $randomId = $this -> generateUniqueRandomId();
@@ -64,7 +76,7 @@ class C_Orders extends Controller
             'tor_file' => 'required'
         ]);
         
-        $activity = M_Orders::create([
+        $order = M_Orders::create([
             'id' => $request -> id,
             'leads_id' => $field['business_id'],
             'desired_position' => $field['desired_position'],
@@ -76,9 +88,20 @@ class C_Orders extends Controller
             'budget_estimation' => $field['budget_estimation'],
             'tor_file' => $field['tor_file'],
         ]);
+
+        if(!$order){
+            return response([
+                'error' => 'error'
+            ]);
+        }
+
+        $update = M_Leads::find($field['business_id']);
+        $update -> client_indicator = 1;
+        $status = $update->update();
+
         
-        if($activity){
-            return redirect('/client/order');
+        if($status){
+            return redirect('/client');
         }
     }
 }

@@ -43,7 +43,7 @@
             <h3 class="text-white font-semibold text-3xl">Daftar Order</h3>
         </div>
 
-        <form class=" block md:flex items-start my-4 justify-between mb-8 w-full">
+        <form class=" block md:flex items-start my-4 justify-between mb-8 w-full" action="{{ route('fetch_order') }}" method="get">
             <div class=" md:block flex items-center justify-between">
                 <div class="flex gap-3 items-center justify-start">
                     <p class="text-white text-xs md:text-sm">Show</p>
@@ -60,6 +60,7 @@
                 <p class=" hidden md:block">Search</p>
                 <input type="text" class=" outline-none bg-white rounded-md w-full md:w-80 py-1 px-2 text-black font-semibold placeholder-gray-400 placeholder-opacity-100 md:placeholder-opacity-0" placeholder="search">
             </div>
+            <button type="submit"></button>
         </form>
 
         <div class=" hide-scrollbar w-full h-72 overflow-auto pr-2">

@@ -88,7 +88,7 @@
                         <td class=" p-2" align="center">Aksi</td>
                     </tr>
                 </thead>
-                <tbody id="search_data">
+                <tbody>
                     @foreach($leads as $row)
                     <tr class=" odd:bg-grey">
                         <td align="center" class=" p-4">{{ $row->id }}</td>
@@ -125,7 +125,7 @@
    function deleteLead(id) {
        if (confirm('Are you sure you want to delete this lead?')) {
            $.ajax({
-               url: `/leads/delete/${id}`,
+               url: `/leads/${id}`,
                type: 'DELETE',
                success: function(response) {
                    location.reload(); 

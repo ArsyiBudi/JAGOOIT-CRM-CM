@@ -34,4 +34,9 @@ class M_Leads extends Model
         ->select('global_params.params_name')
         ->withDefault('-');
     }
+
+    public function emails()
+    {
+        return $this->hasMany(M_Emails::class, 'leads_id');
+    }
 }

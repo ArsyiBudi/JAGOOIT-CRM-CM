@@ -7,6 +7,7 @@ use App\Http\Controllers\C_Offer;
 use App\Http\Controllers\C_Orders;
 use App\Http\Controllers\C_Plan;
 use App\Http\Controllers\PenawaranWordController;
+use App\Http\Controllers\TalentController;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Route;
 
@@ -67,7 +68,7 @@ Route::prefix('login')->group(function () {
 
 Route::prefix('leads')->group(function () {
     Route::get('/', [C_Leads::class, 'fetch']);
-    Route::delete('/leads/delete/{id}', [C_Leads::class, 'delete'])->name('admin.leads.delete');
+    Route::delete('/leads/{id}', [C_Leads::class, 'delete'])->name('admin.leads.delete');
 
     Route::prefix('create')->group(function () {
         Route::get('/', function () {
@@ -107,11 +108,7 @@ Route::prefix('leads')->group(function () {
 });
 
 Route::prefix('client')->group(function () {
-    Route::get('/', function () {
-        return view('admin.client.menu', [
-            "title" => "Client | Menu",
-        ]);
-    });
+    Route::get('/', [C_Leads::class, 'fetch_client'])-> name('fetch_client');
 
     Route::get('/detail/{id}', [C_Leads::class, 'detail']);
 
@@ -120,7 +117,7 @@ Route::prefix('client')->group(function () {
             return view('admin.client.order.list', [
                 "title" => "Client | Order List",
             ]);
-        });
+        })->name('fetch_order');
 
         Route::get('/create', [C_Orders::class, 'newOrder'])-> name('new_order');
         Route::post('/create', [C_Orders::class, 'create']) -> name('create_order');
@@ -149,11 +146,8 @@ Route::prefix('client')->group(function () {
 
 
         Route::prefix('plan')->group(function () {
-            Route::get('/recruitment', function () {
-                return view('admin.client.plan.recruitment', [
-                    "title" => "Plan | Recruitment",
-                ]);
-            });
+            Route::get('/', [TalentController::class, 'procedure1']);
+            Route::delete('/{id}', [TalentController::class, 'destroy']);
 
             Route::get('/training', function () {
                 return view('admin.client.plan.training', [
