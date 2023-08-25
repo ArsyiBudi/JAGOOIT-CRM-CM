@@ -71,9 +71,6 @@
                             <td align="center" class="pb-4 pl-2">Nama Perusahaan</td>
                             <td align="center" class="pb-4 pl-2">Due Date</td>
                             <td align="center" class="pb-4 pl-1">Status</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
                             <td align="center" class="pb-4 pl-5">Aksi</td>
                         </tr>
                     </thead>
@@ -84,9 +81,6 @@
                             <td align="center" class=" p-4">Los Santos 88</td>
                             <td align="center" class=" p-4">12 Agustus 2023</td>
                             <td align="center" class=" p-4"><p class='bg-green-700 rounded-md'>Training</p></td>
-                            <td align="center" class=" p-4"></td>
-                            <td align="center" class=" p-4"></td>
-                            <td align="center" class=" p-4"></td>
                             <td align="center" class=" p-4"> 
                                 <div class=" flex justify-center items-center gap-2">
                                     <i class="ri-checkbox-circle-line text-2xl cursor-pointer" title="Complete Manual"></i>
@@ -107,9 +101,6 @@
                             <td align="center" class=" p-4">Los Santos 88</td>
                             <td align="center" class=" p-4">12 Agustus 2023</td>
                             <td align="center" class=" p-4"><p class='bg-green-700 rounded-md'>Rekrutmen</p></td>
-                            <td align="center" class=" p-4"></td>
-                            <td align="center" class=" p-4"></td>
-                            <td align="center" class=" p-4"></td>
                             <td align="center" class=" p-4">
                                 <div class=" flex justify-center items-center gap-2">
                                     <i class="ri-checkbox-circle-line text-2xl cursor-pointer" title="Complete Manual"></i>
@@ -130,9 +121,6 @@
                             <td align="center" class=" p-4">Los Santos 88</td>
                             <td align="center" class=" p-4">12 Agustus 2023</td>
                             <td align="center" class=" p-4"><p class='bg-green-700 rounded-md'>Rekrutmen</p></td>
-                            <td align="center" class=" p-4"></td>
-                            <td align="center" class=" p-4"></td>
-                            <td align="center" class=" p-4"></td>
                             <td align="center" class=" p-4">
                                 <div class=" flex justify-center items-center gap-2">
                                     <i class="ri-checkbox-circle-line text-2xl cursor-pointer" title="Complete Manual"></i>
@@ -153,9 +141,6 @@
                             <td align="center" class=" p-4">Los Santos 88</td>
                             <td align="center" class=" p-4">12 Agustus 2023</td>
                             <td align="center" class=" p-4"><p class='bg-green-700 rounded-md'>Training</p></td>
-                            <td align="center" class=" p-4"></td>
-                            <td align="center" class=" p-4"></td>
-                            <td align="center" class=" p-4"></td>
                             <td align="center" class=" p-4">
                                 <div class=" flex justify-center items-center gap-2">
                                     <i class="ri-checkbox-circle-line text-2xl cursor-pointer" title="Complete Manual"></i>
@@ -176,9 +161,6 @@
                             <td align="center" class=" p-4">Los Santos 88</td>
                             <td align="center" class=" p-4">12 Agustus 2023</td>
                             <td align="center" class=" p-4"><p class='bg-green-700 rounded-md'>Rekrutmen</p></td>
-                            <td align="center" class=" p-4"></td>
-                            <td align="center" class=" p-4"></td>
-                            <td align="center" class=" p-4"></td>
                             <td align="center" class=" p-4">
                                 <div class=" flex justify-center items-center gap-2">
                                     <i class="ri-checkbox-circle-line text-2xl cursor-pointer" title="Complete Manual"></i>
@@ -199,9 +181,6 @@
                             <td align="center" class=" p-4">Los Santos 88</td>
                             <td align="center" class=" p-4">12 Agustus 2023</td>
                             <td align="center" class=" p-4"><p class='bg-green-700 rounded-md'>Training</p></td>
-                            <td align="center" class=" p-4"></td>
-                            <td align="center" class=" p-4"></td>
-                            <td align="center" class=" p-4"></td>
                             <td align="center" class=" p-4">
                                 <div class=" flex justify-center items-center gap-2">
                                     <i class="ri-checkbox-circle-line text-2xl cursor-pointer" title="Complete Manual"></i>
