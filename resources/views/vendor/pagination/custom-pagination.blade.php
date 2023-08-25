@@ -23,7 +23,7 @@
 
 @if (is_array($element))
     @foreach ($element as $page => $url)
-        @if ($page == $paginator->currentPage())
+        <!-- @if ($page == $paginator->currentPage())
             <li class="underline p-1 rounded-md w-8 text-center list-none active" aria-current="page">
                 <span>{{ $page }}</span>
             </li>
@@ -33,6 +33,22 @@
                         {{ $page }}
                     </div> 
                 </a>
+        @endif -->
+        <!--  Use three dots when current page is greater than 4.  -->
+        @if ($paginator->currentPage() > 4 && $page === 2)
+            <li class="list-none bg-grey p-1 rounded-md w-8 text-center page-item disabled"><span class="page-link cursor-pointer">...</span></li>
+        @endif
+
+        <!--  Show active page else show the first and last two pages from current page.  -->
+        @if ($page == $paginator->currentPage())
+            <li class="underline p-1 rounded-md w-8 text-center list-none active"><span class="page-link">{{ $page }}</span></li>
+        @elseif ($page === $paginator->currentPage() + 1 || $page === $paginator->currentPage() + 2 || $page === $paginator->currentPage() - 1 || $page === $paginator->currentPage() - 2 || $page === $paginator->lastPage() || $page === 1)
+            <li class="list-none bg-grey p-1 rounded-md w-8 text-center page-item"><a class="page-link" href="{{ $url }}">{{ $page }}</a></li>
+        @endif
+
+        <!--  Use three dots when current page is away from end.  -->
+        @if ($paginator->currentPage() < $paginator->lastPage() - 3 && $page === $paginator->lastPage() - 1)
+            <li class="list-none bg-grey p-1 rounded-md w-8 text-center page-item disabled"><span class="page-link cursor-pointer">...</span></li>
         @endif
     @endforeach
 @endif

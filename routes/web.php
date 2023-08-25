@@ -109,16 +109,10 @@ Route::prefix('leads')->group(function () {
 
 Route::prefix('client')->group(function () {
     Route::get('/', [C_Leads::class, 'fetch_client'])-> name('fetch_client');
-
     Route::get('/detail/{id}', [C_Leads::class, 'detail']);
-
+    
     Route::prefix('order')->group(function () {
-        Route::get('/', function () {
-            return view('admin.client.order.list', [
-                "title" => "Client | Order List",
-            ]);
-        })->name('fetch_order');
-
+        Route::get('/', [C_Orders::class, 'fetch'])->name('fetch_order');
         Route::get('/create', [C_Orders::class, 'newOrder'])-> name('new_order');
         Route::post('/create', [C_Orders::class, 'create']) -> name('create_order');
         

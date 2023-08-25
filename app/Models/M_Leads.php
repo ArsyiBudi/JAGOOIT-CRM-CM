@@ -30,9 +30,7 @@ class M_Leads extends Model
 
     public function latestActivity(){
         return $this->hasOne(M_Activity::class, 'leads_id', 'id')
-        ->join('global_params', 'global_params.id_params', '=', 'activity.activity_type_id')
-        ->select('global_params.params_name')
-        ->withDefault('-');
+        ->withDefault(' - ');
     }
 
     public function emails()

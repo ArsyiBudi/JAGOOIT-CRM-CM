@@ -33,7 +33,6 @@ class C_Orders extends Controller
         $search = $request->input('search', '');
 
         $data = M_Orders::paginate($entries);
-
         return view('admin.client.order.list', [
             "title" => "Client | Order List",
             "order" => $data
