@@ -10,6 +10,7 @@ class PenawaranWordController extends Controller
     public function generate(Request $request) 
     {
         $input = $request->all();
+        
         $phpWord = new \PhpOffice\PhpWord\TemplateProcessor('template.docx');
         
         $phpWord->setValue('perihal', $input['perihal']); 
