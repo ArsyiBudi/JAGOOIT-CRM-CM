@@ -6,11 +6,11 @@
         /* Width of the scrollbar */
     }
 
-    input::-webkit-outer-spin-button,
+    /* input::-webkit-outer-spin-button,
     input::-webkit-inner-spin-button {
         -webkit-appearance: none;
         margin: 0;
-    }
+    } */
 </style>
 
 @section('container')
@@ -52,7 +52,7 @@
 
                 <div class=" w-1/2 md:w-1/2 mb-4">
                     <label for="due-date" class="text-sm text-white">Due Date</label>
-                    <input required id="due-date" type="text" name="due_date" class="text-black rounded-lg px-2 py-1 w-full bg-white mt-1 md:mt-0" placeholder="Tanggal">
+                    <input required type="date" id="due-date" type="text" name="due_date" class="text-black rounded-lg px-2 py-1 w-full bg-white mt-1 md:mt-0" placeholder="Tanggal">
                 </div>
             </div>
 
@@ -84,7 +84,7 @@
                 <div class="flex flex-col gap-4 md:w-1/2">
                     <div class="w-full">
                         <label for="anggaran" class="text-sm text-white">Anggaran</label>
-                        <input required id="anggaran" type="text" name="budget_estimation" class="text-black rounded-lg px-2 py-4 w-full bg-white mt-2" placeholder="Anggaran">
+                        <input required id="anggaran" type="number" name="budget_estimation" class="text-black rounded-lg px-2 py-4 w-full bg-white mt-2" placeholder="Anggaran">
                     </div>
 
                     <div class="w-full mb-4">
