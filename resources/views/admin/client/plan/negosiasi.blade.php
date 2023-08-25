@@ -39,7 +39,9 @@
     </style>
 
     @section('container')
-        <div class="overflow-y-auto overflow-x-hidden pt-28 pb-5 lg:pt-0 px-5 lg:px-10 h-[90vh]">
+    <div class="pt-20 pb-2 lg:pt-0">
+    </div>
+        <div class="overflow-y-auto overflow-x-hidden pt-0 pb-10 lg:pt-0 px-5 lg:px-10 h-[90vh]">
             <h1 class=" text-4xl">Appointment Negosiasi</h1>
             <p class=" text-[16px] font-medium pt-3">Silakan set appointment</p>
 
@@ -110,11 +112,11 @@
             
                         <div>
                             <a href="/client/order/plan/percobaan">
-                            <div class=" bg-secondary text-white cursor-pointer text-sm text-center py-1 px-3 md:px-14 rounded-md font-bold hover:scale-95 duration-200">
-                                <p class="hidden md:inline">Continue</p> 
-                                <i class="ri-check-line block md:hidden"></i>
+                            <div class=" bg-secondary text-white text-sm text-center py-1 px-3 md:px-14 rounded-md font-bold hover:scale-95 duration-200">
+                                <p class="hidden md:inline">continue</p> 
+                                <i class="ri-arrow-right-line block md:hidden"></i>
                             </div>
-                        </a>
+                            </a>
                         </div>
                     </div>
                 </div>

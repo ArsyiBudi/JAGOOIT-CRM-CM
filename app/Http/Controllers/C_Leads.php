@@ -11,8 +11,9 @@ use function PHPUnit\Framework\returnSelf;
 
 class C_Leads extends Controller
 {
-    public function create(Request $request){
-        $field = $request -> validate([
+    public function create(Request $request)
+    {
+        $field = $request->validate([
             'business_name' => 'required|string',
             'business_sector' => 'required|string',
             'address' => 'required|string',
@@ -28,18 +29,42 @@ class C_Leads extends Controller
             'pic_contact_number' => $field['pic_contact_number']
         ]);
 
-        if(!$leads) return response([
-            'error' => 'Error occured'
-        ]);
+        if (!$leads)
+            return response([
+                'error' => 'Error occured'
+            ]);
 
         return redirect('/leads');
     }
 
-    public function fetch(Request $request){
+    public function fetch(Request $request)
+    {
         $data = DB::table('leads')->paginate(3);
         return view('admin.leads.menu', [
             "title" => "Leads | Menu",
             "leads" => $data
         ]);
     }
+
+    // public function delete($id)
+    // {
+    //     $delete = DB::delete("DELETE FROM leads WHERE leads.id = ${id}");
+    //     return view('admin.leads.menu', compact('delete'));
+    // }
+    public function delete($id)
+    {
+        $lead = M_Leads::find($id);
+
+        if (!$lead) {
+            return response()->json(['error' => 'Lead not found'], 404);
+        }
+
+        $lead->delete();
+
+        return redirect('/leads')->with('success', 'Lead has been deleted successfully');
+    }
+
+
+
+
 }

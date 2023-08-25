@@ -77,32 +77,36 @@
             <table class=" w-full text-xs md:text-sm font-bold ">
                 <thead>
                     <tr>
-                        <td class=" p-4" align="center">No</td>
-                        <td class=" p-4" align="center">Nama Perusahaan</td>
-                        <td class=" p-4" align="center">Alamat</td>
-                        <td class=" p-4" align="center">PIC</td>
-                        <td class=" p-4" align="center">Kontak</td>
-                        <td class=" p-4" align="center">Last Activity</td>
-                        <td class=" p-4" align="center">Status</td>
-                        <td class=" p-4" align="center">Aksi</td>
+                        <td class=" p-2" align="center">No</td>
+                        <td class=" p-2" align="center">Nama Perusahaan</td>
+                        <td class=" p-2" align="center">Alamat</td>
+                        <td class=" p-2" align="center">PIC</td>
+                        <td class=" p-2" align="center">Kontak</td>
+                        <td class=" p-2" align="center">Last Activity</td>
+                        <td class=" p-2" align="center">Status</td>
+                        <td class=" p-2" align="center">Aksi</td>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach($leads as $row)
                     <tr class=" odd:bg-grey">
-                        <td align="center" class=" p-4">{{ $row->id }}</td>
-                        <td align="center" class=" p-4">{{ $row->business_name }}</td>
-                        <td align="center" class=" p-4">{{ $row->business_sector }}</td>
-                        <td align="center" class=" p-4">{{ $row->pic_name  }}</td>
-                        <td align="center" class=" p-4">{{ $row->pic_contact_number }}</td>
-                        <td align="center" class=" p-4">Appointment</td>
-                        <td align="center" class=" p-4">Selesai</td>
-                        <td align="center" class=" p-4">
+                        <td align="center" class=" p-2">{{ $row->id }}</td>
+                        <td align="center" class=" p-2">{{ $row->business_name }}</td>
+                        <td align="center" class=" p-2">{{ $row->business_sector }}</td>
+                        <td align="center" class=" p-2">{{ $row->pic_name  }}</td>
+                        <td align="center" class=" p-2">{{ $row->pic_contact_number }}</td>
+                        <td align="center" class=" p-2">Appointment</td>
+                        <td align="center" class=" p-2">Selesai</td>
+                        <td align="center" class=" p-2">
                             <div class=" flex items-center gap-2">
                                 <a href="/leads/detail">
                                     <i class=" text-lg cursor-pointer ri-information-line"></i>
                                 </a>
-                                <i class=" text-lg cursor-pointer ri-delete-bin-2-line text-delete"></i>
+                                <form action="{{ route('admin.leads.delete', $row->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this lead?')" class=" block  mt-3">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class=" block text-lg cursor-pointer ri-delete-bin-2-line text-delete "></button>
+                                </form>
                             </div>
                         </td>
                     </tr>
@@ -115,4 +119,23 @@
         </div>
     </div>
 </div>
+
+<script>
+   function deleteLead(id) {
+       if (confirm('Are you sure you want to delete this lead?')) {
+           $.ajax({
+               url: `/leads/delete/${id}`,
+               type: 'DELETE',
+               success: function(response) {
+                   location.reload(); 
+               },
+               error: function(error) {
+                   console.log(error);
+               }
+           });
+       }
+   }
+</script>
+
+
 @endsection
