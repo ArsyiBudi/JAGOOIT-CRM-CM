@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class M_Leads extends Model
 {
@@ -22,7 +23,7 @@ class M_Leads extends Model
         'lead_status',
     ];
     
-    public function statusParam()
+    public function statusParam() : BelongsTo
     {
         return $this->belongsTo(M_GlobalParams::class, 'lead_status', 'id_params');
     }

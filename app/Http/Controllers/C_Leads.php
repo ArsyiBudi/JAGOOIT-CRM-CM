@@ -30,10 +30,10 @@ class C_Leads extends Controller
             'pic_contact_number' => $field['pic_contact_number']
         ]);
 
-        if (!$leads) return response([
+        if(!$leads) return response([
             'error' => 'Error occured'
         ]);
-        
+   
         $emailAddresses = [];
         foreach ($request->all() as $fieldName => $fieldValue) {
             if (strpos($fieldName, 'input_') === 0) {
@@ -66,8 +66,6 @@ class C_Leads extends Controller
             "leads" => $data
         ]);
     }
-
-
     public function detail(Request $request, $id)
     {
         $leads_data = M_Leads::where('id', '=', "$id")->get();
@@ -80,5 +78,18 @@ class C_Leads extends Controller
             "title" => "Leads | Detail",
             'leads' => $leads_data
         ]);
+    }
+
+    public function delete($id)
+    {
+        $lead = M_Leads::find($id);
+
+        if (!$lead) {
+            return response()->json(['error' => 'Lead not found'], 404);
+        }
+
+        $lead->delete();
+
+        return redirect('/leads')->with('success', 'Lead has been deleted successfully');
     }
 }

@@ -41,11 +41,6 @@
                         {{ $data -> statusParam -> params_name }}
                     </p>
                 </div>
-                <div class="pt-3">
-                    <p>
-                        Keterangan
-                    </p>
-                </div>
                 <hr>
             </div>
             @endforeach
