@@ -67,26 +67,26 @@
                     <thead>
                         <tr >  
                             <td align="center" class="pb-4">No</td>
-                            <td align="center" class="pb-4">Nama Perusahaan</td>
-                            <td align="center" class="pb-4">Alamat</td>
-                            <td align="center" class="pb-4">PIC</td>
-                            <td align="center" class="pb-4">Kontak</td>
-                            <td align="center" class="pb-4">Last Activity</td>
-                            <td align="center" class="pb-4">Status</td>
-                            <td align="center" class="pb-4">Keterangan</td>
-                            <td align="center" class="pb-4">Aksi</td>
+                            <td align="center" class="pb-4 pl-2">Order ID</td>
+                            <td align="center" class="pb-4 pl-2">Nama Perusahaan</td>
+                            <td align="center" class="pb-4 pl-2">Due Date</td>
+                            <td align="center" class="pb-4 pl-1">Status</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td align="center" class="pb-4 pl-5">Aksi</td>
                         </tr>
                     </thead>
                     <tbody>
                         <tr class=" odd:bg-grey">
                             <td align="center" class=" p-4">1</td>
-                            <td align="center" class=" p-4">PT Fuad Military</td>
+                            <td align="center" class=" p-4">282828282828</td>
                             <td align="center" class=" p-4">Los Santos 88</td>
-                            <td align="center" class=" p-4">Samsul</td>
-                            <td align="center" class=" p-4">089677854432</td>
-                            <td align="center" class=" p-4">Appointment</td>
-                            <td align="center" class=" p-4">Selesai</td>
-                            <td align="center" class=" p-4">-</td>
+                            <td align="center" class=" p-4">12 Agustus 2023</td>
+                            <td align="center" class=" p-4"><p class='bg-green-700 rounded-md'>Training</p></td>
+                            <td align="center" class=" p-4"></td>
+                            <td align="center" class=" p-4"></td>
+                            <td align="center" class=" p-4"></td>
                             <td align="center" class=" p-4"> 
                                 <div class=" flex justify-center items-center gap-2">
                                     <i class="ri-checkbox-circle-line text-2xl cursor-pointer" title="Complete Manual"></i>
@@ -103,13 +103,13 @@
 
                         <tr class=" odd:bg-grey">
                             <td align="center" class=" p-4">2</td>
-                            <td align="center" class=" p-4">PT Fuad Military</td>
+                            <td align="center" class=" p-4">282828282828</td>
                             <td align="center" class=" p-4">Los Santos 88</td>
-                            <td align="center" class=" p-4">Samsul</td>
-                            <td align="center" class=" p-4">089677854432</td>
-                            <td align="center" class=" p-4">Appointment</td>
-                            <td align="center" class=" p-4">Selesai</td>
-                            <td align="center" class=" p-4">-</td>
+                            <td align="center" class=" p-4">12 Agustus 2023</td>
+                            <td align="center" class=" p-4"><p class='bg-green-700 rounded-md'>Rekrutmen</p></td>
+                            <td align="center" class=" p-4"></td>
+                            <td align="center" class=" p-4"></td>
+                            <td align="center" class=" p-4"></td>
                             <td align="center" class=" p-4">
                                 <div class=" flex justify-center items-center gap-2">
                                     <i class="ri-checkbox-circle-line text-2xl cursor-pointer" title="Complete Manual"></i>
@@ -126,13 +126,13 @@
 
                         <tr class=" odd:bg-grey">
                             <td align="center" class=" p-4">3</td>
-                            <td align="center" class=" p-4">PT Fuad Military</td>
+                            <td align="center" class=" p-4">282828282828</td>
                             <td align="center" class=" p-4">Los Santos 88</td>
-                            <td align="center" class=" p-4">Samsul</td>
-                            <td align="center" class=" p-4">089677854432</td>
-                            <td align="center" class=" p-4">Appointment</td>
-                            <td align="center" class=" p-4">Selesai</td>
-                            <td align="center" class=" p-4">-</td>
+                            <td align="center" class=" p-4">12 Agustus 2023</td>
+                            <td align="center" class=" p-4"><p class='bg-green-700 rounded-md'>Rekrutmen</p></td>
+                            <td align="center" class=" p-4"></td>
+                            <td align="center" class=" p-4"></td>
+                            <td align="center" class=" p-4"></td>
                             <td align="center" class=" p-4">
                                 <div class=" flex justify-center items-center gap-2">
                                     <i class="ri-checkbox-circle-line text-2xl cursor-pointer" title="Complete Manual"></i>
@@ -149,13 +149,13 @@
 
                         <tr class=" odd:bg-grey">
                             <td align="center" class=" p-4">4</td>
-                            <td align="center" class=" p-4">PT Fuad Military</td>
+                            <td align="center" class=" p-4">282828282828</td>
                             <td align="center" class=" p-4">Los Santos 88</td>
-                            <td align="center" class=" p-4">Samsul</td>
-                            <td align="center" class=" p-4">089677854432</td>
-                            <td align="center" class=" p-4">Appointment</td>
-                            <td align="center" class=" p-4">Selesai</td>
-                            <td align="center" class=" p-4">-</td>
+                            <td align="center" class=" p-4">12 Agustus 2023</td>
+                            <td align="center" class=" p-4"><p class='bg-green-700 rounded-md'>Training</p></td>
+                            <td align="center" class=" p-4"></td>
+                            <td align="center" class=" p-4"></td>
+                            <td align="center" class=" p-4"></td>
                             <td align="center" class=" p-4">
                                 <div class=" flex justify-center items-center gap-2">
                                     <i class="ri-checkbox-circle-line text-2xl cursor-pointer" title="Complete Manual"></i>
@@ -172,13 +172,13 @@
 
                         <tr class=" odd:bg-grey">
                             <td align="center" class=" p-4">5</td>
-                            <td align="center" class=" p-4">PT Fuad Military</td>
+                            <td align="center" class=" p-4">282828282828</td>
                             <td align="center" class=" p-4">Los Santos 88</td>
-                            <td align="center" class=" p-4">Samsul</td>
-                            <td align="center" class=" p-4">089677854432</td>
-                            <td align="center" class=" p-4">Appointment</td>
-                            <td align="center" class=" p-4">Selesai</td>
-                            <td align="center" class=" p-4">-</td>
+                            <td align="center" class=" p-4">12 Agustus 2023</td>
+                            <td align="center" class=" p-4"><p class='bg-green-700 rounded-md'>Rekrutmen</p></td>
+                            <td align="center" class=" p-4"></td>
+                            <td align="center" class=" p-4"></td>
+                            <td align="center" class=" p-4"></td>
                             <td align="center" class=" p-4">
                                 <div class=" flex justify-center items-center gap-2">
                                     <i class="ri-checkbox-circle-line text-2xl cursor-pointer" title="Complete Manual"></i>
@@ -195,13 +195,13 @@
 
                         <tr class=" odd:bg-grey">
                             <td align="center" class=" p-4">6</td>
-                            <td align="center" class=" p-4">PT Fuad Military</td>
+                            <td align="center" class=" p-4">282828282828</td>
                             <td align="center" class=" p-4">Los Santos 88</td>
-                            <td align="center" class=" p-4">Samsul</td>
-                            <td align="center" class=" p-4">089677854432</td>
-                            <td align="center" class=" p-4">Appointment</td>
-                            <td align="center" class=" p-4">Selesai</td>
-                            <td align="center" class=" p-4">-</td>
+                            <td align="center" class=" p-4">12 Agustus 2023</td>
+                            <td align="center" class=" p-4"><p class='bg-green-700 rounded-md'>Training</p></td>
+                            <td align="center" class=" p-4"></td>
+                            <td align="center" class=" p-4"></td>
+                            <td align="center" class=" p-4"></td>
                             <td align="center" class=" p-4">
                                 <div class=" flex justify-center items-center gap-2">
                                     <i class="ri-checkbox-circle-line text-2xl cursor-pointer" title="Complete Manual"></i>
