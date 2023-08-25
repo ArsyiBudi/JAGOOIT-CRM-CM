@@ -88,6 +88,8 @@ class C_Leads extends Controller
             return response()->json(['error' => 'Lead not found'], 404);
         }
 
+        
+
         $lead->delete();
 
         return redirect('/leads')->with('success', 'Lead has been deleted successfully');
