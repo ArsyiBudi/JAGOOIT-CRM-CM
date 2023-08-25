@@ -9,20 +9,19 @@ use App\Http\Controllers\Controller;
 
 class C_Offer extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    public function create(Request $request)
     {
-        
-    }
-    public function store(Request $request)
-    {
+        $selectedTimestamp = time();
+        $selectedDate = new DateTime();
+        $selectedDate->setTimestamp($selectedTimestamp);
+        $selectedMonth = $selectedDate->format('m');
+        $selectedYear = $selectedDate->format('Y'); 
+
         $input = $request->validate([
-            'date' => 'required',
-            'location' => 'required',
             'offer_subject' => 'required',
             'recipient_name' => 'required',
+            'location' => 'required',
+            'date' => 'required',
             'context' => 'required',
             'talent_total' => 'required',
             'weekday_cost' => 'required',
@@ -32,13 +31,13 @@ class C_Offer extends Controller
         ]);
         if(!$input) return response([
             'error' => 'error'
-        ]);
-        $offer = M_Offer::create([
-            'letter_number' => 'JTI/07/2023',
-            'date' => $input['date'],
-            'location' => $input['recipient_name'],
+        ], 404);
+        M_Offer::create([
+            'letter_number' => "JTI/{$selectedMonth}/SP/{$selectedYear}",
             'offer_subject' => $input['offer_subject'],
-            'recipient_name' => $input['offer_subject'],
+            'recipient_name' => $input['recipient_name'],
+            'location' => $input['location'],
+            'date' => $input['date'],
             'context' => $input['context'],
             'talent_total' => $input['talent_total'],
             'weekday_cost' => $input['weekday_cost'],

@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Controllers\Controller;
+use App\Models\M_Users;
 use Illuminate\Http\Request;
 use Nette\Utils\DateTime;
 
@@ -18,7 +19,7 @@ class C_Auth extends Controller
         ]);
 
         //Checking email
-        $user = User::where('username', $field['username']) -> first();
+        $user = M_Users::where('username', $field['username']) -> first();
 
         //Checking Password
         if(!$user ||  !User::where('password', $field['password']) -> first()){
@@ -29,19 +30,15 @@ class C_Auth extends Controller
 
         $user_type = $user->user_type_id;
         if($user_type == 3){
-            Auth::attempt([
-                'username' => $field['username'],
-                'password' => $field['password'],
-            ], true);
             return response(['message' => 'bad creds']);
         }
         
-        $token = $user -> createToken('jagoit')->plainTextToken;
+        // $token = $user -> createToken('jagoit')->plainTextToken;
         // return response()->json(['token' => $token]);
         // return response()->json(['message' => 'Unauthorized'], 401);
         // $token = $user -> createToken('myapptoken')->plainTextToken;
 
-        return redirect('/leads');
-        
+        session(['user' => $user ]);
+        return redirect('/leads', );
     }
 }

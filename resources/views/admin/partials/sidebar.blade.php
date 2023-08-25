@@ -10,8 +10,10 @@
     <div class="flex gap-4 items-center mb-9 ">
         <img src="/bgRusdi.jpeg" alt="bgRusdi" class="rounded-full w-[54px] h-[54px]">
         <div class="flex flex-col ">
-            <h6 class="text-white font-bold text-[14px]">Herman Maritim</h6>
-            <p class="text-white text-[10px]">Admin</p>
+            @if(session() -> has('user'))
+            <h6 class="text-white font-bold text-[14px]">{{ session('user') -> xs1 }}</h6>
+            <p class="text-white text-[10px]">{{ session('user')->userTypes->description }}</p>
+            @endif
         </div>
     </div>
 
@@ -19,7 +21,7 @@
     <div class="flex flex-col gap-4 items-center w-full ">
         <div class="items-center flex gap-2 py-2 text-white px-8  {{ set_active(['/dashboard']) }} w-full">
             <i class="ri-dashboard-line text-3xl"></i>
-            <a href="/dashboard">Dashboard</a>
+            <a href="/leads">Dashboard</a>
         </div>
         <div class="items-center flex gap-2 py-2  text-white px-8 {{ set_active(['/leads']) }} w-full">
             <img src="/leads.png" class="w-[30px] h-[30px] " alt="leads">
@@ -109,7 +111,7 @@
             <div class="flex flex-col gap-4  w-full mt-5">
                 <div class="items-center flex gap-2 py-2 text-white px-8  {{ set_active(['/dashboard']) }} w-full">
                     <i class="ri-dashboard-line text-3xl"></i>
-                    <a href="/dashboard">Dashboard</a>
+                    <a href="/leads">Dashboard</a>
                 </div>
                 <div class="items-center flex gap-2 py-2  text-white px-8 {{ set_active(['/leads']) }} w-full">
                     <img src="/leads.png" class="w-[30px] h-[30px] " alt="leads">
