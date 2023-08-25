@@ -25,7 +25,7 @@
             @csrf
         <div class="mb-4 block md:flex items-center gap-4">
             <label for="order-id" class="text-sm text-white">Order/Request ID</label> <br class=" block md:hidden">
-            <input id="order-id" type="text" name="id" disabled class="text-black rounded-lg px-2 py-1 bg-gary w-full md:w-auto mt-2 outline-none">
+            <input id="order-id" type="text" name="id" disabled class="text-white rounded-lg px-2 py-1 bg-gary w-full md:w-auto mt-2 outline-none">
         </div>
 
         <div class="mb-4">
