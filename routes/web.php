@@ -96,6 +96,8 @@ Route::prefix('leads')->group(function () {
             "title" => "Leads | Create Offer",
         ]);
     });
+
+    //Activity Backend
     Route::post(
         '/appointment',
         [C_Activity::class, 'appointment']
@@ -135,6 +137,11 @@ Route::prefix('client')->group(function () {
         Route::post('/create', function () {
             return redirect('/client/order');
         });
+
+        Route::post(
+            '/create',
+            [C_Orders::class, 'create']
+        )->name('order.create');
 
         Route::prefix('history')->group(function () {
             Route::get('/', function () {
@@ -204,7 +211,5 @@ Route::prefix('client')->group(function () {
         });
     });
 });
-
-
 
 // Admin End
