@@ -52,27 +52,21 @@ class C_Orders extends Controller
         return view('clients.track', $order_data);
     }
     public function create(Request $request){
-        $field = $request->validate([
-            'company_name'=>'required',
-            'desired_position' => 'required',
-            'needed_qty' => 'required',
-            'due_date' => 'required',
-            'description' => 'required',
-            'skills_desc' => 'required',
+        $field = $request -> validate([
+            'business_id' => 'required', 
+            'desired_position' => 'required', 
+            'needed_qty' => 'required', 
+            'due_date' => 'required', 
+            'description' => 'required', 
+            'characteristic_desc' => 'required', 
+            'skills_desc' => 'required', 
             'budget_estimation' => 'required',
-            'characteristic_desc' =>'required',
             'tor_file' => 'required'
         ]);
         
-        $file = $request->file('file');
-        $fileName = $file->getLinkTarget();
-        $filePath = $file->storeAs($fileName);
         $activity = M_Orders::create([
-            'id' => $field['id'],
-            'leads_id' => null,
-            'offer_letter_id' => null,
-            'popks_letter_id' => null,
-            'order_status' => null,
+            'id' => $request -> id,
+            'leads_id' => $field['business_id'],
             'desired_position' => $field['desired_position'],
             'needed_qty' => $field['needed_qty'],
             'due_date' => $field['due_date'],
@@ -80,29 +74,11 @@ class C_Orders extends Controller
             'characteristic_desc' => $field['characteristic_desc'],
             'skills_desc' => $field['skills_desc'],
             'budget_estimation' => $field['budget_estimation'],
-            'start_recruitment' => null,
-            'end_recruitment'=> null,
-            'start_training' => null,
-            'end_training' => null,
-            'start_offer' => null,
-            'end_offer' => null,
-            'start_appointment' => null,
-            'end_appointment' => null,
-            'start_probation' => null,
-            'end_probition' => null,
-            'start_popks' => null,
-            'end_popks' => null,
-            'tor_file' => $filePath,
-            'cv_file' => null,
-            'po_file' => null,
+            'tor_file' => $field['tor_file'],
         ]);
-
-        if (!$activity) {
-            return response([
-                'error' => 'Error Occurred during activity creation',
-            ]);
+        
+        if($activity){
+            return redirect('/client/order');
         }
-
-        return redirect('/client/order');
     }
 }
