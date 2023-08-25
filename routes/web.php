@@ -1,10 +1,13 @@
 <?php
 
+use App\Http\Controllers\C_Activity;
 use App\Http\Controllers\C_Auth;
 use App\Http\Controllers\C_Leads;
+use App\Http\Controllers\C_Offer;
 use App\Http\Controllers\C_Orders;
 use App\Http\Controllers\C_Plan;
 use App\Http\Controllers\PenawaranWordController;
+use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Route;
 
 
@@ -44,7 +47,7 @@ function set_child_active($routes)
         }
     }
 
-    return 'text-white fill-white';
+    return 'text-white fill-white';
 }
 
 // Client
@@ -81,23 +84,27 @@ Route::prefix('leads')->group(function () {
         Route::post('/', [C_Leads::class, 'create'])->name('create_order');
     });
 
-    Route::get('/detail', function () {
-        return view('admin.leads.detail', [
-            "title" => "Leads | Detail",
-        ]);
-    });
+    Route::get('/{id}/detail', [C_Leads::class, 'detail']) -> name('detail_leads');
 
-    Route::get('/activity', function () {
+    Route::get('/{id}/activity', function () {
         return view('admin.leads.activity', [
             "title" => "Leads | Create Activity",
         ]);
     });
-
-    Route::get('/offer', function () {
+    
+    Route::get('/{id}/offer', function () {
         return view('admin.leads.offer', [
             "title" => "Leads | Create Offer",
         ]);
     });
+
+    //Activity Backend
+    Route::post('/appointment',
+    [C_Activity::class, 'appointment'])->name('activity.appointment');
+    Route::post('/note',
+    [C_Activity::class, 'note'])->name('activity.note');
+    Route::post('/report',
+    [C_Activity::class, 'report'])->name('activity.report');
 });
 
 Route::prefix('client')->group(function () {
@@ -106,14 +113,10 @@ Route::prefix('client')->group(function () {
             "title" => "Client | Menu",
         ]);
     });
-
-    Route::get('/detail', function () {
-        return view('admin.client.detail', [
-            "title" => "Client | Detail",
-        ]);
-    });
-
-    Route::prefix('order')->group(function () {
+    
+    Route::get('/detail/{id}', [C_Leads::class, 'detail']);
+    
+    Route::prefix('order')->group(function(){
         Route::get('/', function () {
             return view('admin.client.order.list', [
                 "title" => "Client | Order List",
@@ -130,7 +133,10 @@ Route::prefix('client')->group(function () {
             return redirect('/client/order');
         });
 
-        Route::prefix('history')->group(function () {
+        Route::post('/create',
+        [C_Orders::class, 'create'])->name('order.create');
+        
+        Route::prefix('history')->group(function(){
             Route::get('/', function () {
                 return view('admin.client.order.history', [
                     "title" => "Client | Order History",
@@ -192,13 +198,11 @@ Route::prefix('client')->group(function () {
                     ]);
                 });
 
-                Route::post('/', [C_Plan::class, 'popks_save'])->name('save_popks');
-
-            });
-        });
+                Route::post('/', [C_Plan::class, 'popks_create']) -> name('create_popks');
+                // Route::post('/', [C_Plan::class, 'popks_send']) -> name('send_popks');
+            }); 
+        });  
     });
 });
-
-
 
 // Admin End

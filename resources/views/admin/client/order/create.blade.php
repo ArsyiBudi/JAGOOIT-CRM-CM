@@ -21,42 +21,43 @@
             <h2 class="text-2xl font-semibold text-white">New Order</h2>
         </div>
 
-        <form action="{{ url ('client/order/create') }}" method="POST">
+        <form action="{{ route('order.create') }}" method="POST">
             @csrf
         <div class="mb-4 block md:flex items-center gap-4">
             <label for="order-id" class="text-sm text-white">Order/Request ID</label> <br class=" block md:hidden">
-            <input id="order-id" type="text" disabled class="text-black rounded-lg px-2 py-1 bg-gary w-full md:w-auto mt-2 outline-none">
+            <input id="order-id" type="text" name="id" disabled class="text-white rounded-lg px-2 py-1 bg-gary w-full md:w-auto mt-2 outline-none">
         </div>
 
         <div class="mb-4">
             <label for="nama-perusahaan" class="text-sm text-white">Nama Perusahaan</label>
-              <select name="order-id" id="" class=" w-full rounded-md mt-2 bg-white py-2 px-3 outline-none text-black">
+            <select name="business_name" id="" class=" w-full rounded-md mt-2 bg-white py-2 px-3 outline-none text-black">
                 <option value="">Pilih Perusahaan</option>
-                <option value="pt-fuad">PT Fuad</option>
-                <option value="Ambaaksesoris">Amba Aksesoris</option>
+                {{-- @foreach($leads as $lead)
+                <option value="{{ $lead->id }}">{{ $lead->business_name }}</option>
+                @endforeach --}}
             </select>
         </div>
 
         <div class=" flex flex-wrap md:flex-nowrap gap-4">
             <div class="w-full md:w-1/2 mb-4">
                 <label for="posisi" class="text-sm text-white">Posisi yang Dibutuhkan</label>
-                <input required id="posisi" type="text" class="text-black rounded-lg px-2 py-1 w-full bg-white mt-1 md:mt-0" placeholder="Posisi">
+                <input required id="posisi" type="text"  name="desired_position" class="text-black rounded-lg px-2 py-1 w-full bg-white mt-1 md:mt-0" placeholder="Posisi">
             </div>
 
             <div class="w-1/5 md:w-1/2 mb-4">
                 <label for="jumlah" class="text-sm text-white">Jumlah</label>
-                <input required id="jumlah" type="number" class="text-black rounded-lg px-2 py-1 w-full bg-white mt-1 md:mt-0" placeholder="Jumlah">
+                <input required id="jumlah" type="number"  name="needed_qty" class="text-black rounded-lg px-2 py-1 w-full bg-white mt-1 md:mt-0" placeholder="Jumlah">
             </div>
 
             <div class=" w-1/2 md:w-1/2 mb-4">
                 <label for="due-date" class="text-sm text-white">Due Date</label>
-                <input required id="due-date" type="text" class="text-black rounded-lg px-2 py-1 w-full bg-white mt-1 md:mt-0" placeholder="Tanggal">
+                <input required id="due-date" type="text" name="due_date" class="text-black rounded-lg px-2 py-1 w-full bg-white mt-1 md:mt-0" placeholder="Tanggal">
             </div>
         </div>
 
         <div class="mb-4">
             <label for="job-description" class="text-sm text-white">Job Description</label>
-            <input required id="job-description" type="text" class="text-black rounded-lg px-2 py-1 w-full bg-white mt-2" placeholder="Deskripsi">
+            <input required id="job-description" type="text" name="description" class="text-black rounded-lg px-2 py-1 w-full bg-white mt-2" placeholder="Deskripsi">
         </div>
 
         <div class=" block md:flex gap-4">
@@ -64,14 +65,14 @@
                 <div class="w-full">
                     <label for="kriteria-keterampilan" class="text-sm text-white">Kriteria Keterampilan</label>
                     <div class="rounded-lg px-2 py-4 h-32 w-full bg-white mt-2">
-                        <textarea required id="kriteria-keterampilan" type="text" class="text-black bg-transparent  h-full w-full hide-scrollbar resize-none" placeholder="Keterampilan"></textarea>
+                        <textarea required id="kriteria-keterampilan" type="text" name="skills_desc" class="text-black bg-transparent  h-full w-full hide-scrollbar resize-none" placeholder="Keterampilan"></textarea>
                     </div>
                 </div>
                 
                 <div class="w-full  mb-4 ">
                     <label for="file-tor" class="text-sm text-white">File TOR</label>
                     <label for="file-tor" class="flex justify-center items-center bg-white py-4 rounded-lg px-2 h-24 mt-2">
-                        <input required id="file-tor" type="file" class="text-black rounded-lg px-2 py-4 h-24 hidden w-full bg-white" name="tor">
+                        <input required id="file-tor" type="file" name="tor_file" class="text-black rounded-lg px-2 py-4 h-24 hidden w-full bg-white" name="tor">
                         <label for="file-tor" class="cursor-pointer">
                             <i class="ri-upload-2-fill text-3xl text-black"></i>
                         </label>
@@ -82,13 +83,13 @@
             <div class="flex flex-col gap-4 md:w-1/2">
                 <div class="w-full">
                     <label for="anggaran" class="text-sm text-white">Anggaran</label>
-                    <input required id="anggaran" type="text" class="text-black rounded-lg px-2 py-4 w-full bg-white mt-2" placeholder="Anggaran">
+                    <input required id="anggaran" type="text" name="budget_estimation" class="text-black rounded-lg px-2 py-4 w-full bg-white mt-2" placeholder="Anggaran">
                 </div>
                 
                 <div class="w-full mb-4">
                     <label for="kriteria-karakteristik" class="text-sm text-white">Kriteria Karakteristik</label>
                     <div class="rounded-lg px-2 py-4 w-full h-[10.5rem] bg-white mt-2">
-                        <textarea required id="kriteria-karakteristik" type="text" class="text-black bg-transparent  h-full w-full hide-scrollbar resize-none" placeholder="Karakteristik"></textarea>
+                        <textarea required id="kriteria-karakteristik" type="text" name="charasteristic_desc" class="text-black bg-transparent  h-full w-full hide-scrollbar resize-none" placeholder="Karakteristik"></textarea>
                     </div>
                 </div>
             </div>
