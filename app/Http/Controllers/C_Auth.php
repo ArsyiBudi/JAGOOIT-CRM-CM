@@ -39,6 +39,6 @@ class C_Auth extends Controller
         // $token = $user -> createToken('myapptoken')->plainTextToken;
 
         session(['user' => $user ]);
-        return redirect('/leads', );
+        return redirect('/leads' );
     }
 }

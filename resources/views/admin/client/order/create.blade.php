@@ -21,20 +21,20 @@
             <h2 class="text-2xl font-semibold text-white">New Order</h2>
         </div>
 
-        <form action="{{ route('order.create') }}" method="POST">
+        <form action="{{ route('create_order') }}" method="POST">
             @csrf
         <div class="mb-4 block md:flex items-center gap-4">
             <label for="order-id" class="text-sm text-white">Order/Request ID</label> <br class=" block md:hidden">
-            <input id="order-id" type="text" name="id" disabled class="text-white rounded-lg px-2 py-1 bg-gary w-full md:w-auto mt-2 outline-none">
+            <input id="order-id" type="text" name="id" disabled class="text-black rounded-lg px-2 py-1 bg-gary w-full md:w-auto mt-2 outline-none" value="{{ $randomId }}">
         </div>
 
         <div class="mb-4">
             <label for="nama-perusahaan" class="text-sm text-white">Nama Perusahaan</label>
             <select name="business_name" id="" class=" w-full rounded-md mt-2 bg-white py-2 px-3 outline-none text-black">
                 <option value="">Pilih Perusahaan</option>
-                {{-- @foreach($leads as $lead)
+                @foreach($leads as $lead)
                 <option value="{{ $lead->id }}">{{ $lead->business_name }}</option>
-                @endforeach --}}
+                @endforeach
             </select>
         </div>
 

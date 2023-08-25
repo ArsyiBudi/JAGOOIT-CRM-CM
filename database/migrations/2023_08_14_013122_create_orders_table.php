@@ -18,7 +18,7 @@ return new class extends Migration
             $table->integer('offer_letter_id')->nullable();
             $table->integer('popks_letter_id')->nullable();
             $table->integer('order_status')->default(1);
-            $table->integer('desired_position');
+            $table->string('desired_position');
             $table->integer('needed_qty');
             $table->date('due_date');
             $table->text('description');
