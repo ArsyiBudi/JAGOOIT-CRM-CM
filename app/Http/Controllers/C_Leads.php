@@ -12,6 +12,66 @@ use function PHPUnit\Framework\returnSelf;
 
 class C_Leads extends Controller
 {
+    public function fetch(Request $request)
+    {
+        $entries = $request->input('per_page', 5);
+        $search = $request->input('search', '');
+
+        $data = M_Leads::where(function ($query) use ($search) {
+            $query->where('business_name', 'like', "%$search%")
+                ->orWhere('business_sector', 'like', "%$search%")
+                ->orWhere('pic_name', 'like', "%$search%");
+        })->paginate($entries);
+
+        return view('admin.leads.menu', [
+            "title" => "Leads | Menu",
+            "leads" => $data
+        ]);
+    }
+
+    public function fetch_client(Request $request){
+        $entries = $request->input('per_page', 5);
+        $search = $request->input('search', '');
+
+        $data = M_Leads::where(function ($query) use ($search) {
+            $query->where('business_name', 'like', "%$search%")
+                ->orWhere('business_sector', 'like', "%$search%")
+                ->orWhere('pic_name', 'like', "%$search%");
+        })->where('client_indicator', '=', '1') ->paginate($entries);
+
+        return view('admin.client/menu', [
+            "title" => "Client | Menu",
+            "client" => $data
+        ]);
+    }
+    
+    public function detail(Request $request, $id)
+    {
+        $leads_data = M_Leads::where('id', '=', "$id")->get();
+        if (!$leads_data) {
+            return response([
+                'error' => "No leads has this id : {{ $id }}"
+            ]);
+        }
+        return view('admin.leads.detail', [
+            "title" => "Leads | Detail",
+            'leads' => $leads_data
+        ]);
+    }
+
+    public function delete($id)
+    {
+        $lead = M_Leads::find($id);
+        if (!$lead) {
+            return response()->json(['error' => 'Lead not found'], 404);
+        }
+
+        // Delete related emails
+        $lead->emails()->delete();
+        $lead->delete();
+        return redirect('/leads');
+    }
+
     public function create(Request $request)
     {
         $field = $request->validate([
@@ -49,63 +109,5 @@ class C_Leads extends Controller
         }
 
         return redirect('/leads');
-    }
-    public function fetch(Request $request)
-    {
-        $entries = $request->input('per_page', 5);
-        $search = $request->input('search', '');
-
-        $data = M_Leads::where(function ($query) use ($search) {
-            $query->where('business_name', 'like', "%$search%")
-                ->orWhere('business_sector', 'like', "%$search%")
-                ->orWhere('pic_name', 'like', "%$search%");
-        })->paginate($entries);
-
-        return view('admin.leads.menu', [
-            "title" => "Leads | Menu",
-            "leads" => $data
-        ]);
-    }
-    public function detail(Request $request, $id)
-    {
-        $leads_data = M_Leads::where('id', '=', "$id")->get();
-        if (!$leads_data) {
-            return response([
-                'error' => "No leads has this id : {{ $id }}"
-            ]);
-        }
-        return view('admin.leads.detail', [
-            "title" => "Leads | Detail",
-            'leads' => $leads_data
-        ]);
-    }
-
-    public function delete($id)
-    {
-        $lead = M_Leads::find($id);
-        if (!$lead) {
-            return response()->json(['error' => 'Lead not found'], 404);
-        }
-
-        // Delete related emails
-        $lead->emails()->delete();
-        $lead->delete();
-        return redirect('/leads');
-    }
-
-    public function fetch_client(Request $request){
-        $entries = $request->input('per_page', 5);
-        $search = $request->input('search', '');
-
-        $data = M_Leads::where(function ($query) use ($search) {
-            $query->where('business_name', 'like', "%$search%")
-                ->orWhere('business_sector', 'like', "%$search%")
-                ->orWhere('pic_name', 'like', "%$search%");
-        })->where('client_indicator', '=', '1') ->paginate($entries);
-
-        return view('admin.client/menu', [
-            "title" => "Client | Menu",
-            "client" => $data
-        ]);
     }
 }

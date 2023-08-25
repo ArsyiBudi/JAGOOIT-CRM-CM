@@ -76,141 +76,35 @@
                         </tr>
                     </thead>
                     <tbody>
+                        @foreach($order as $row)
                         <tr class=" odd:bg-grey">
-                            <td align="center" class=" p-4">1</td>
-                            <td align="center" class=" p-4">282828282828</td>
-                            <td align="center" class=" p-4">Los Santos 88</td>
-                            <td align="center" class=" p-4">12 Agustus 2023</td>
-                            <td align="center" class=" p-4"><p class='bg-green-700 rounded-md'>Training</p></td>
+                            <td align="center" class=" p-4">{{ isset($i) ? ++$i : $i = 1 }}</td>
+                            <td align="center" class=" p-4">{{ $row -> id  }}</td>
+                            <td align="center" class=" p-4">{{ $row -> leadData -> business_name }}</td>
+                            <td align="center" class=" p-4">{{ $row -> due_date }}</td>
+                            <td align="center" class=" p-4"><p class='bg-green-700 rounded-md'>{{ $row -> globalParams -> params_name }}</p></td>
                             <td align="center" class=" p-4"> 
                                 <div class=" flex justify-center items-center gap-2">
                                     <i class="ri-checkbox-circle-line text-2xl cursor-pointer" title="Complete Manual"></i>
                                     <a href="/client/order/plan/recruitment">
                                         <i class="ri-calendar-todo-fill text-2xl" title="Plan"></i>
                                     </a>
-                                    <a href="/client/detail">
+                                    <a href="{{ route('admin.leads.delete', $row->id) }}">
                                         <i class="ri-information-line text-2xl" title="Detail"></i>
                                     </a>
                                     <i class="ri-delete-bin-2-line text-2xl text-delete cursor-pointer" title="Delete"></i>
                                 </div> 
                             </td>
                         </tr>
-
-                        <tr class=" odd:bg-grey">
-                            <td align="center" class=" p-4">2</td>
-                            <td align="center" class=" p-4">282828282828</td>
-                            <td align="center" class=" p-4">Los Santos 88</td>
-                            <td align="center" class=" p-4">12 Agustus 2023</td>
-                            <td align="center" class=" p-4"><p class='bg-green-700 rounded-md'>Rekrutmen</p></td>
-                            <td align="center" class=" p-4">
-                                <div class=" flex justify-center items-center gap-2">
-                                    <i class="ri-checkbox-circle-line text-2xl cursor-pointer" title="Complete Manual"></i>
-                                    <a href="/client/order/plan/recruitment">
-                                        <i class="ri-calendar-todo-fill text-2xl" title="Plan"></i>
-                                    </a>
-                                    <a href="/client/detail">
-                                        <i class="ri-information-line text-2xl" title="Detail"></i>
-                                    </a>
-                                    <i class="ri-delete-bin-2-line text-2xl text-delete cursor-pointer" title="Delete"></i>
-                                </div> 
-                            </td>
-                        </tr>
-
-                        <tr class=" odd:bg-grey">
-                            <td align="center" class=" p-4">3</td>
-                            <td align="center" class=" p-4">282828282828</td>
-                            <td align="center" class=" p-4">Los Santos 88</td>
-                            <td align="center" class=" p-4">12 Agustus 2023</td>
-                            <td align="center" class=" p-4"><p class='bg-green-700 rounded-md'>Rekrutmen</p></td>
-                            <td align="center" class=" p-4">
-                                <div class=" flex justify-center items-center gap-2">
-                                    <i class="ri-checkbox-circle-line text-2xl cursor-pointer" title="Complete Manual"></i>
-                                    <a href="/client/order/plan/recruitment">
-                                        <i class="ri-calendar-todo-fill text-2xl" title="Plan"></i>
-                                    </a>
-                                    <a href="/client/detail">
-                                        <i class="ri-information-line text-2xl" title="Detail"></i>
-                                    </a>
-                                    <i class="ri-delete-bin-2-line text-2xl text-delete cursor-pointer" title="Delete"></i>
-                                </div> 
-                            </td>
-                        </tr>
-
-                        <tr class=" odd:bg-grey">
-                            <td align="center" class=" p-4">4</td>
-                            <td align="center" class=" p-4">282828282828</td>
-                            <td align="center" class=" p-4">Los Santos 88</td>
-                            <td align="center" class=" p-4">12 Agustus 2023</td>
-                            <td align="center" class=" p-4"><p class='bg-green-700 rounded-md'>Training</p></td>
-                            <td align="center" class=" p-4">
-                                <div class=" flex justify-center items-center gap-2">
-                                    <i class="ri-checkbox-circle-line text-2xl cursor-pointer" title="Complete Manual"></i>
-                                    <a href="/client/order/plan/recruitment">
-                                        <i class="ri-calendar-todo-fill text-2xl" title="Plan"></i>
-                                    </a>
-                                    <a href="/client/detail">
-                                        <i class="ri-information-line text-2xl" title="Detail"></i>
-                                    </a>
-                                    <i class="ri-delete-bin-2-line text-2xl text-delete cursor-pointer" title="Delete"></i>
-                                </div> 
-                            </td>
-                        </tr>
-
-                        <tr class=" odd:bg-grey">
-                            <td align="center" class=" p-4">5</td>
-                            <td align="center" class=" p-4">282828282828</td>
-                            <td align="center" class=" p-4">Los Santos 88</td>
-                            <td align="center" class=" p-4">12 Agustus 2023</td>
-                            <td align="center" class=" p-4"><p class='bg-green-700 rounded-md'>Rekrutmen</p></td>
-                            <td align="center" class=" p-4">
-                                <div class=" flex justify-center items-center gap-2">
-                                    <i class="ri-checkbox-circle-line text-2xl cursor-pointer" title="Complete Manual"></i>
-                                    <a href="/client/order/plan/recruitment">
-                                        <i class="ri-calendar-todo-fill text-2xl" title="Plan"></i>
-                                    </a>
-                                    <a href="/client/detail">
-                                        <i class="ri-information-line text-2xl" title="Detail"></i>
-                                    </a>
-                                    <i class="ri-delete-bin-2-line text-2xl text-delete cursor-pointer" title="Delete"></i>
-                                </div> 
-                            </td>
-                        </tr>
-
-                        <tr class=" odd:bg-grey">
-                            <td align="center" class=" p-4">6</td>
-                            <td align="center" class=" p-4">282828282828</td>
-                            <td align="center" class=" p-4">Los Santos 88</td>
-                            <td align="center" class=" p-4">12 Agustus 2023</td>
-                            <td align="center" class=" p-4"><p class='bg-green-700 rounded-md'>Training</p></td>
-                            <td align="center" class=" p-4">
-                                <div class=" flex justify-center items-center gap-2">
-                                    <i class="ri-checkbox-circle-line text-2xl cursor-pointer" title="Complete Manual"></i>
-                                    <a href="/client/order/plan/recruitment">
-                                        <i class="ri-calendar-todo-fill text-2xl" title="Plan"></i>
-                                    </a>
-                                    <a href="/client/detail">
-                                        <i class="ri-information-line text-2xl" title="Detail"></i>
-                                    </a>
-                                    <i class="ri-delete-bin-2-line text-2xl text-delete cursor-pointer" title="Delete"></i>
-                                </div> 
-                            </td>
-                        </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>
 
         <div class="flex items-center justify-center w-full">
 
-        <div class="flex gap-3 items-center mt-7">
-                <button class="bg-secondary hover:scale-95 duration-200 w-[69px] rounded-lg flex items-center justify-center py-2">Prev</button>
-                <div class="rounded-lg p-2 w-[32px] bg-grey flex items-center justify-center" onclick="{{ url('/client/detail') }}">
-                    <p>1</p>
-                </div>
-                <div class="rounded-lg p-2 w-[32px] bg-grey flex items-center justify-center">
-                    <p>10</p>
-                </div>
-                <button class="bg-secondary hover:scale-95 duration-200 rounded-lg w-[69px] flex items-center justify-center py-2">Next</button>
-            </div>
+        <div class="sticky bottom-0 pb-10 bg-darksecondary flex justify-center items-center gap-3">
+            {{ $order -> links('vendor.pagination.custom-pagination') }}
         </div>
         
     </div>
