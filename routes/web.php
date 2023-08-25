@@ -69,7 +69,6 @@ Route::prefix('login')->group(function () {
 
 Route::prefix('leads')->group(function () {
     Route::get('/', [C_Leads::class, 'fetch']);
-    // Route::delete('/', [C_Leads::class, 'delete'])->name('admin.leads.menu');
     Route::delete('/leads/delete/{id}', [C_Leads::class, 'delete'])->name('admin.leads.delete');
 
 
@@ -84,25 +83,31 @@ Route::prefix('leads')->group(function () {
         Route::post('/', [C_Leads::class, 'create'])->name('create_order');
     });
 
-    Route::get('/{id}/detail', [C_Leads::class, 'detail']) -> name('detail_leads');
+    Route::get('/{id}/detail', [C_Leads::class, 'detail'])->name('detail_leads');
 
     Route::get('/{id}/activity', function () {
         return view('admin.leads.activity', [
             "title" => "Leads | Create Activity",
         ]);
     });
-    
+
     Route::get('/{id}/offer', function () {
         return view('admin.leads.offer', [
             "title" => "Leads | Create Offer",
         ]);
     });
-    Route::post('/appointment',
-    [C_Activity::class, 'appointment'])->name('activity.appointment');
-    Route::post('/note',
-    [C_Activity::class, 'note'])->name('activity.note');
-    Route::post('/report',
-    [C_Activity::class, 'report'])->name('activity.report');
+    Route::post(
+        '/appointment',
+        [C_Activity::class, 'appointment']
+    )->name('activity.appointment');
+    Route::post(
+        '/note',
+        [C_Activity::class, 'note']
+    )->name('activity.note');
+    Route::post(
+        '/report',
+        [C_Activity::class, 'report']
+    )->name('activity.report');
 });
 
 Route::prefix('client')->group(function () {
@@ -111,10 +116,10 @@ Route::prefix('client')->group(function () {
             "title" => "Client | Menu",
         ]);
     });
-    
+
     Route::get('/detail/{id}', [C_Leads::class, 'detail']);
-    
-    Route::prefix('order')->group(function(){
+
+    Route::prefix('order')->group(function () {
         Route::get('/', function () {
             return view('admin.client.order.list', [
                 "title" => "Client | Order List",
@@ -193,10 +198,10 @@ Route::prefix('client')->group(function () {
                     ]);
                 });
 
-                Route::post('/', [C_Plan::class, 'popks_create']) -> name('create_popks');
+                Route::post('/', [C_Plan::class, 'popks_create'])->name('create_popks');
                 // Route::post('/', [C_Plan::class, 'popks_send']) -> name('send_popks');
-            }); 
-        });  
+            });
+        });
     });
 });
 
