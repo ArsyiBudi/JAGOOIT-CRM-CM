@@ -60,35 +60,35 @@
 
             <div class="mb-4">
                 <label for="perihal" class="text-sm text-white">Perihal</label>
-                <input name="offer_subject" id="perihal" type="text" class="mt-1 text-black rounded-md px-2 py-2 w-full bg-white" placeholder="Perihal">
+                <input value="{{ old('offer_subject', @$offer->offer_subject) }}" name="offer_subject" id="perihal" type="text" class="mt-1 text-black rounded-md px-2 py-2 w-full bg-white" placeholder="Perihal">
             </div>
 
             <div class=" block md:flex items-center gap-4">
                 <div class="w-full md:w-1/2 mb-4">
                     <label for="kepada" class="text-sm text-white">Kepada</label>
-                    <input name="recipient_name" id="kepada" type="text" class=" mt-1 text-black rounded-md px-2 py-2  w-full bg-white" placeholder="Kepada">
+                    <input value="{{ old('recipient_name', @$offer->recipient_name) }}" name="recipient_name" id="kepada" type="text" class=" mt-1 text-black rounded-md px-2 py-2  w-full bg-white" placeholder="Kepada">
                 </div>
 
                 <div class="w-full md:w-1/4 mb-4">
                     <label for="tempat" class="text-sm text-white">Tempat</label>
-                    <input name="location" id="tempat" type="text" class=" mt-1 text-black rounded-md px-2 py-2  w-full bg-white" placeholder="Bandung">
+                    <input value="{{ old('location', @$offer->location) }}" name="location" id="tempat" type="text" class=" mt-1 text-black rounded-md px-2 py-2  w-full bg-white" placeholder="Bandung">
                 </div>
 
                 <div class="w-full md:w-1/4 mb-4">
                     <label for="tanggal" class="text-sm text-white">Tanggal</label>
-                    <input name="date" id="tanggal" type="text" class=" mt-1 text-black rounded-md px-2 py-2  w-full bg-white" placeholder="03 Agustus 2023">
+                    <input value="{{ old('date', @$offer->date) }}" name="date" id="tanggal" type="text" class=" mt-1 text-black rounded-md px-2 py-2  w-full bg-white" placeholder="03 Agustus 2023">
                 </div>
             </div>
 
             <div class=" block md:flex items-center gap-4">
                 <div class=" w-full md:w-3/4">
                     <label for="ditawarkan" class="text-sm text-white">Hal yang Ditawarkan</label>
-                    <input name="context" id="ditawarkan" type="text" class=" mt-1 text-black rounded-md px-2 py-2  w-full bg-white" placeholder="Hal yang Ditawarkan">
+                    <input value="{{ old('context', @$offer->context) }}" name="context" id="ditawarkan" type="text" class=" mt-1 text-black rounded-md px-2 py-2  w-full bg-white" placeholder="Hal yang Ditawarkan">
                 </div>
 
                 <div class=" w-full md:w-1/4 mt-2 md:mt-0">
                     <label for="jumlah" class="text-sm text-white">Jumlah Talent</label>
-                    <input name="talent_total" id="jumlah" type="text" class=" mt-1 text-black rounded-md px-2 py-2  w-full bg-white" placeholder="Jumlah">
+                    <input value="{{ old('talent_total', @$offer->talent_total) }}" name="talent_total" id="jumlah" type="text" class=" mt-1 text-black rounded-md px-2 py-2  w-full bg-white" placeholder="Jumlah">
                 </div>
             </div>
 
@@ -96,13 +96,13 @@
                 <div>
                     <p class="gap-4">Outsourcing Detail</p>
                     <div class=" flex items-center gap-2 flex-wrap mt-2">
-                        <button type="button" class="bg-white text-darkSecondary text-opacity-50 text-sm text-center py-1 px-7  rounded-md font-bold flex items-center gap-3">
+                        {{-- <button type="button" class="bg-white text-darkSecondary text-opacity-50 text-sm text-center py-1 px-7  rounded-md font-bold flex items-center gap-3">
                             <p>Detail 1 </p>
                             <span>
                                 <i class=" text-lg cursor-pointer ri-delete-bin-2-line text-delete"></i>
                             </span>
-                            <button>
-                                <button type="button" class="btn bg-white text-darkSecondary text-opacity-50 text-sm text-center py-2 px-3  rounded-md font-bold hover:scale-95 duration-200" onclick="my_modal_5.showModal()">Add Detail +</button>
+                            <button> --}}
+                        <button type="button" class="btn bg-white text-darkSecondary text-opacity-50 text-sm text-center py-2 px-3  rounded-md font-bold hover:scale-95 duration-200" onclick="my_modal_5.showModal()">Add Detail +</button>
                     </div>
                 </div>
             </div>
@@ -114,14 +114,14 @@
                     <label for="weekday" class="text-sm text-white">Weekday</label>
                     <div class=" mt-2 flex items-center gap-0">
                         <label for="weekday" class=" bg-white p-2 rounded-tl-md rounded-bl-md text-black border-grey border-r-[1px] w-10">RP.</label>
-                        <input name="weekday_cost" type="number" id="weekday" placeholder="Weekday Overtime" class=" text-black w-full p-2 outline-none rounded-tr-md rounded-br-md">
+                        <input value="{{ old('weekday_cost', @$offer->weekday_cost) }}" name="weekday_cost" type="number" id="weekday" placeholder="Weekday Overtime" class=" text-black w-full p-2 outline-none rounded-tr-md rounded-br-md">
                     </div>
                 </div>
                 <div class=" w-full md:w-1/2 mt-2 md:mt-0">
                     <label for="Weekend" class="text-sm text-white">Weekend</label>
                     <div class=" mt-2 flex items-center gap-0">
                         <label for="Weekend" class=" bg-white p-2 rounded-tl-md rounded-bl-md text-black border-grey border-r-[1px] w-10">RP.</label>
-                        <input name="weekend_cost" type="number" id="Weekend" placeholder="Weekend Overtime" class=" text-black w-full p-2 outline-none rounded-tr-md rounded-br-md">
+                        <input value="{{ old('weekend_cost', @$offer->weekend_cost) }}" name="weekend_cost" type="number" id="Weekend" placeholder="Weekend Overtime" class=" text-black w-full p-2 outline-none rounded-tr-md rounded-br-md">
                     </div>
                 </div>
             </div>
@@ -133,14 +133,14 @@
                     <label for="konsumsi" class="text-sm text-white">Konsumsi (perhari)</label>
                     <div class=" mt-2 flex items-center gap-0">
                         <label for="konsumsi" class=" bg-white p-2 rounded-tl-md rounded-bl-md text-black border-grey border-r-[1px] w-10">RP.</label>
-                        <input name="consumtion_cost" type="number" id="konsumsi" placeholder="Konsumsi" class=" text-black w-full p-2 outline-none rounded-tr-md rounded-br-md">
+                        <input value="{{ old('offer_subject', @$offer->offer_subject) }}" name="consumtion_cost" type="number" id="konsumsi" placeholder="Konsumsi" class=" text-black w-full p-2 outline-none rounded-tr-md rounded-br-md">
                     </div>
                 </div>
                 <div class=" w-full md:w-1/2 mt-2 md:mt-0">
                     <label for="transport" class="text-sm text-white">Transport Pulang-Pergi Standar JKT-BDG</label>
                     <div class=" mt-2 flex items-center gap-0">
                         <label for="transport" class=" bg-white p-2 rounded-tl-md rounded-bl-md text-black border-grey border-r-[1px] w-10">RP.</label>
-                        <input name="transportation_cost" type="number" id="transport" placeholder="Transport" class=" text-black w-full p-2 outline-none rounded-tr-md rounded-br-md">
+                        <input value="{{ old('offer_subject', @$offer->offer_subject) }}" name="transportation_cost" type="number" id="transport" placeholder="Transport" class=" text-black w-full p-2 outline-none rounded-tr-md rounded-br-md">
                     </div>
                 </div>
             </div>
@@ -163,17 +163,17 @@
                 </label>
             </div>
 
-        <div class="w-full">
-            <label for="deskripsi" class="text-sm text-white">Deskirpsi</label>
-            <div class="rounded-lg px-2 py-4 h-24 w-full bg-white mt-2">
-                <textarea id="deskripsi" type="text" class="text-black bg-transparent outline-none h-full w-full hide-scrollbar resize-none"></textarea>
+            <div class="w-full">
+                <label for="deskripsi" class="text-sm text-white">Deskirpsi</label>
+                <div class="rounded-lg px-2 py-4 h-24 w-full bg-white mt-2">
+                    <textarea id="deskripsi" type="text" class="text-black bg-transparent outline-none h-full w-full hide-scrollbar resize-none"></textarea>
+                </div>
+            </div>
+
+            <div class="mt-4 flex justify-end">
+                <button type="submit" name="sendCV" class="bg-secondary text-white text-sm text-center w-full md:w-[188px] h-[37px] rounded-md hover:scale-95 duration-200">Send</button>
             </div>
         </div>
-
-        <div class="mt-4 flex justify-end">
-            <button type="submit" name="sendCV" class="bg-secondary text-white text-sm text-center w-full md:w-[188px] h-[37px] rounded-md hover:scale-95 duration-200">Send</button>
-        </div>
-    </div>
 
         <div class=" flex justify-between items-center pt-4 mb-5 md:mb-0">
             <div>
@@ -185,58 +185,58 @@
                 </div>
 
             </div>
-            
+
             <div class="flex gap-4 max-sm:w-full max-sm:justify-between">
                 <div></div>
-                    <button type="submit" name="save" class=" w-full bg-secondary text-white text-sm text-center py-1 px-14 rounded-md font-bold hover:scale-95 duration-200">
+                <button type="submit" name="save" class=" w-full bg-secondary text-white text-sm text-center py-1 px-14 rounded-md font-bold hover:scale-95 duration-200">
                     <p class="hidden md:block">Save</p>
                     <i class="ri-save-line block md:hidden"></i>
-                    </button>
+                </button>
                 <div>
-                <div>
-                <a href="/client/order/plan/negosiasi">
-                    <div class=" bg-secondary text-white text-sm text-center py-1 px-3 md:px-14 rounded-md font-bold hover:scale-95 duration-200">
-                        <p class="hidden md:inline">Continue</p> 
-                        <i class="ri-arrow-right-line block md:hidden"></i>
+                    <div>
+                        <a href="/client/order/plan/negosiasi">
+                            <div class=" bg-secondary text-white text-sm text-center py-1 px-3 md:px-14 rounded-md font-bold hover:scale-95 duration-200">
+                                <p class="hidden md:inline">Continue</p>
+                                <i class="ri-arrow-right-line block md:hidden"></i>
+                            </div>
+                        </a>
                     </div>
-                    </a>
                 </div>
             </div>
         </div>
-    </div>
-</form>
-
-<!--modal outsourcing-->
-<dialog id="my_modal_5" class="modal  text-white">
-    <form method="dialog" class="modal-box bg-grey border-2 border-white w-11/12 max-w-4xl">
-        <table class=" w-full">
-            <thead>
-                <tr class=" border-b-[1px] border-white">
-                    <td align="center" class="p-3">No</td>
-                    <td align="center" class="p-3">Deskirpsi</td>
-                    <td align="center" class="p-3">Qty</td>
-                    <td align="center" class="p-3">Durasi Kontrak (max 12 bulan)</td>
-                </tr>
-            </thead>
-            <tbody>
-                <tr class=" bg-[#202020]/50">
-                    <td class=" p-5 mt-2" align="center">1</td>
-                    <td class=" p-5" align="center"><input id="deskripsi" type="text" class=" outline-none rounded-md text-black p-2 placeholder:text-[#202020]/50" placeholder="Outsourcing IT Support"></td>
-                    <td class=" p-5" align="center"><input id="qty" type="text" class=" outline-none rounded-md text-black p-2 placeholder:text-[#202020]/50" placeholder="12"></td>
-                    <td class=" p-5" align="center"><input id="lamaKontrak" type="text" class=" outline-none rounded-md text-black p-2 placeholder:text-[#202020]/50" placeholder="11 Bulan"></td>
-                </tr>
-            </tbody>
-        </table>
-        <div class="modal-action">
-            <button type="submit" class="btn bg-secondary text-white border-none hover:bg-secondary/50 hover:text-white/80">Save</button>
-        </div>
     </form>
-</dialog>
 
-<script>
-    // alert('halo')
-    let outsourcing = {}
+    <!--modal outsourcing-->
+    <dialog id="my_modal_5" class="modal  text-white">
+        <form method="dialog" class="modal-box bg-grey border-2 border-white w-11/12 max-w-4xl">
+            <table class=" w-full">
+                <thead>
+                    <tr class=" border-b-[1px] border-white">
+                        <td align="center" class="p-3">No</td>
+                        <td align="center" class="p-3">Deskirpsi</td>
+                        <td align="center" class="p-3">Qty</td>
+                        <td align="center" class="p-3">Durasi Kontrak (max 12 bulan)</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class=" bg-[#202020]/50">
+                        <td class=" p-5 mt-2" align="center">1</td>
+                        <td class=" p-5" align="center"><input id="deskripsi" type="text" class=" outline-none rounded-md text-black p-2 placeholder:text-[#202020]/50" placeholder="Outsourcing IT Support"></td>
+                        <td class=" p-5" align="center"><input id="qty" type="text" class=" outline-none rounded-md text-black p-2 placeholder:text-[#202020]/50" placeholder="12"></td>
+                        <td class=" p-5" align="center"><input id="lamaKontrak" type="text" class=" outline-none rounded-md text-black p-2 placeholder:text-[#202020]/50" placeholder="11 Bulan"></td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="modal-action">
+                <button type="submit" class="btn bg-secondary text-white border-none hover:bg-secondary/50 hover:text-white/80">Save</button>
+            </div>
+        </form>
+    </dialog>
 
-</script>
+    <script>
+        // alert('halo')
+        let outsourcing = {}
 
-@endsection
+    </script>
+
+    @endsection
