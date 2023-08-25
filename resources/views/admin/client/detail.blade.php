@@ -1,7 +1,8 @@
 @extends('admin.layouts.main')
 
 @section('container')
-<div class="bg-primary flex flex-col text-lightGrey p-8 rounded-md space-y-2 w-full mt-20">
+<div class='overflow-auto h-[90vh]'>
+<div class="bg-primary flex flex-col text-lightGrey p-8 rounded-md space-y-2 w-full">
     <div class=" py-10 px-8 bg-primary flex flex-col text-lightGrey p-8 rounded-md space-y-2 w-full h-full">
         <div class="text-2xl">Detail Client</div>
         
@@ -44,5 +45,6 @@
             <hr>
         </div>
     </div>
+</div>
 </div>
 @endsection

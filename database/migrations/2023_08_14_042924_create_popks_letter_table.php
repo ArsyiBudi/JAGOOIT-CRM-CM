@@ -38,7 +38,6 @@ return new class extends Migration
             $table->string('account_manager_provider')->default("Sdr. Septian Nugraha Kudrat");
             $table->string('provider_finance_administrator')->default("Sdri. Retno Aliifah");
             $table->string('jagoit_director');
-            $table->string('client_director');
             $table->timestamps();
         });
     }
