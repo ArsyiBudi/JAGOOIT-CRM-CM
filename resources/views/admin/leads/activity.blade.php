@@ -29,54 +29,48 @@
             </select>
         </div>
 
-        <div id="formContainer" class="w-full">
-            <form id="form1" class="hidden">
-                <div class="bg-white opacity-70 mb-4 p-2 rounded-md w-full">
-                    <textarea required name="judul" id="judul" class="text-black opacity-100 w-full p-2 bg-transparent outline-none resize-none" placeholder="Judul"></textarea> <!-- Menggunakan w-full untuk mengisi textarea secara penuh -->
-                </div>
-                <div class="flex gap-2 mb-4 w-full">
-                    <div class="bg-white opacity-70 rounded-md mr-2 w-1/2 p-2">
-                        <textarea required name="lokasi" id="lokasi" class="bg-transparent text-black p-2 w-full outline-none resize-none" placeholder="Lokasi"></textarea>
+            <div id="formContainer" class="w-full">
+                <form id="form1" class="hidden" method="POST" action="{{ route('activity.appointment')}}">
+                    @csrf
+                    <div class="bg-white opacity-70 mb-4 p-2 rounded-md w-full">
+                        <textarea name="judul" id="judul" class="text-black opacity-100 w-full p-2 bg-transparent outline-none resize-none" placeholder="Judul"></textarea> <!-- Menggunakan w-full untuk mengisi textarea secara penuh -->
                     </div>
-                    <div class="bg-white opacity-70 rounded-md  w-1/2 p-2">
-                        <textarea required name="waktu" id="waktu" class="bg-transparent text-black p-2 w-full outline-none resize-none" placeholder="Waktu"></textarea>
+                    <div class="flex gap-2 mb-4 w-full">
+                        <div class="bg-white opacity-70 rounded-md mr-2 w-1/2 p-2">
+                            <textarea name="lokasi" id="lokasi" class="bg-transparent text-black p-2 w-full outline-none resize-none" placeholder="Lokasi"></textarea>
+                        </div>
+                        <div class="bg-white opacity-70 rounded-md  w-1/2 p-2">
+                            <textarea name="waktu" id="waktu" class="bg-transparent text-black p-2 w-full outline-none resize-none" placeholder="Waktu"></textarea>
+                        </div>
+                        
                     </div>
-                    
-                </div>
-                <div class="bg-white opacity-70 rounded-md w-full p-2 h-[100px]">
-                    <textarea required name="deskripsi" id="deskripsi" class="bg-transparent outline-none p-2 text-black resize-none h-full w-full" placeholder="Deskripsi"></textarea> <!-- Menggunakan w-full untuk mengisi textarea secara penuh -->
-                </div>
-                <div class="flex justify-center">
-                    <div class="space-x-5">
-                        <input required type="submit" class="bg-secondary text-white rounded-md px-4 py-2 h-[37px] hover:scale-95 duration-200 mt-4" value="Edit">
-                        <input required type="submit" class="bg-secondary text-white rounded-md px-4 py-2 h-[37px] hover:scale-95 duration-200 mt-4" value="Submit">
+                    <div class="bg-white opacity-70 rounded-md w-full p-2 h-[100px]">
+                        <textarea name="deskripsi" id="deskripsi" class="bg-transparent outline-none p-2 text-black resize-none h-full w-full" placeholder="Deskripsi"></textarea> <!-- Menggunakan w-full untuk mengisi textarea secara penuh -->
                     </div>
-                </div>
-
-            </form>
-            <form id="form2" class="hidden">
-                <div class="bg-white opacity-70 rounded-md w-full mb-2 p-2 h-[270px]">
-                    <textarea required name="deskripsinote" id="deskripsinote" class="bg-transparent p-2 outline-none text-black w-full h-full resize-none" placeholder="Deskripsi"></textarea> <!-- Menggunakan w-full untuk mengisi textarea secara penuh -->
-                </div>
-                <div class="w-[97px] mx-auto">
-                    <input required type="submit" class="bg-secondary text-white rounded-md px-4 mt-5 py-2 h-[37px] hover:scale-95 duration-200">
-                </div>
-            </form>
-            <form id="form3" class="hidden">
-                <div class="bg-white opacity-70 rounded-md w-full mb-4 p-2">
-                    <textarea required name="judulreport" id="judulreport" class="bg-transparent outline-none w-full p-2 resize-none text-black" placeholder="Judul"></textarea>
-                </div>
-                <div class="bg-white opacity-70 rounded-md w-full mb-4 p-4">
-                    <input required type="file" name="file" id="file" class="hidden w-full" placeholder="file"></input>
-                    <label for="file" class="text-grey w-full block">File</label>
-                </div>
-                <div class="bg-white opacity-70 rounded-md w-full mb-4 p-2 h-[100px]">
-                    <textarea required name="deskripsireport" id="deskripsireport" class="bg-transparent outline-none p-2  rounded w-full h-full resize-none text-black" placeholder="Deskripsi"></textarea> 
-                </div>
-                <div class="flex justify-center">
-                    <div class="space-x-5">
-                        <input required type="submit" class="bg-secondary text-white rounded-md px-4 py-2 h-[37px] hover:scale-95 duration-200 mt-4" value="Edit">
-                        <input required type="submit" class="bg-secondary text-white rounded-md px-4 py-2 h-[37px] hover:scale-95 duration-200 mt-4" value="Submit">
+                    <div class="w-[97px] mx-auto">
+                        <input type="submit" class="bg-secondary  text-white rounded-md px-4 py-2 h-[37px] mt-11 hover:scale-95 duration-200">
+                    </div>
+                </form>
+                <form id="form2" class="hidden" method="POST" action="{{ route('activity.note')}}">
+                    @csrf
+                    <div class="bg-white opacity-70 rounded-md w-full mb-2 p-2 h-[270px]">
+                        <textarea name="deskripsinote" id="deskripsinote" class="bg-transparent p-2 outline-none text-black w-full h-full resize-none" placeholder="Deskripsi"></textarea> <!-- Menggunakan w-full untuk mengisi textarea secara penuh -->
+                    </div>
+                    <div class="w-[97px] mx-auto">
+                        <input type="submit" class="bg-secondary text-white rounded-md px-4 mt-5 py-2 h-[37px] hover:scale-95 duration-200">
+                    </div>
+                </form>
+                <form id="form3" class="hidden" method="POST" action="{{ route('activity.report')}}" enctype="multipart/form-data">
+                    @csrf
+                    <div class="bg-white opacity-70 rounded-md w-full mb-4 p-2">
+                        <textarea name="judulreport" id="judulreport" class="bg-transparent outline-none w-full p-2 resize-none text-black" placeholder="Judul"></textarea>
+                    </div>
+                    <div class="bg-white opacity-70 rounded-md w-full mb-4 p-4">
+                        <input type="file" name="file" id="file" class="hidden w-full" placeholder="file"></input>
+                        <label for="file" class="text-grey w-full block">File</label>
+                    </div>
+                    <div class="bg-white opacity-70 rounded-md w-full mb-4 p-2 h-[100px]">
+                        <textarea name="deskripsireport" id="deskripsireport" class="bg-transparent outline-none p-2  rounded w-full h-full resize-none text-black" placeholder="Deskripsi"></textarea> 
                     </div>
                 </div>
             </form>

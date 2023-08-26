@@ -77,7 +77,6 @@
                             <td align="center" class="pb-4">Kontak</td>
                             <td align="center" class="pb-4">Last Activity</td>
                             <td align="center" class="pb-4">Status</td>
-                            <td align="center" class="pb-4">Keterangan</td>
                             <td align="center" class="pb-4">Aksi</td>
                         </tr>
                     </thead>
@@ -90,7 +89,6 @@
                             <td align="center" class=" p-4">089677854432</td>
                             <td align="center" class=" p-4">Appointment</td>
                             <td align="center" class=" p-4">Selesai</td>
-                            <td align="center" class=" p-4">-</td>
                             <td align="center" class=" p-4"> 
                                 <div class=" flex items-center gap-2">
                                     <a href="/client/detail">
@@ -109,7 +107,6 @@
                             <td align="center" class=" p-4">089677854432</td>
                             <td align="center" class=" p-4">Appointment</td>
                             <td align="center" class=" p-4">Selesai</td>
-                            <td align="center" class=" p-4">-</td>
                             <td align="center" class=" p-4">
                                 <div class=" flex items-center gap-2">
                                     <a href="/client/detail">
@@ -128,7 +125,6 @@
                             <td align="center" class=" p-4">089677854432</td>
                             <td align="center" class=" p-4">Appointment</td>
                             <td align="center" class=" p-4">Selesai</td>
-                            <td align="center" class=" p-4">-</td>
                             <td align="center" class=" p-4">
                                 <div class=" flex items-center gap-2">
                                     <a href="/client/detail">
@@ -147,7 +143,6 @@
                             <td align="center" class=" p-4">089677854432</td>
                             <td align="center" class=" p-4">Appointment</td>
                             <td align="center" class=" p-4">Selesai</td>
-                            <td align="center" class=" p-4">-</td>
                             <td align="center" class=" p-4">
                                 <div class=" flex items-center gap-2">
                                     <a href="/client/detail">
@@ -166,7 +161,6 @@
                             <td align="center" class=" p-4">089677854432</td>
                             <td align="center" class=" p-4">Appointment</td>
                             <td align="center" class=" p-4">Selesai</td>
-                            <td align="center" class=" p-4">-</td>
                             <td align="center" class=" p-4">
                                 <div class=" flex items-center gap-2">
                                     <a href="/client/detail">
@@ -185,7 +179,6 @@
                             <td align="center" class=" p-4">089677854432</td>
                             <td align="center" class=" p-4">Appointment</td>
                             <td align="center" class=" p-4">Selesai</td>
-                            <td align="center" class=" p-4">-</td>
                             <td align="center" class=" p-4">
                                 <div class=" flex items-center gap-2">
                                     <a href="/client/detail">

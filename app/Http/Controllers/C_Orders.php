@@ -3,11 +3,40 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\M_Leads;
+use App\Models\M_Orders;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Ramsey\Uuid\Uuid;
 
 class C_Orders extends Controller
 {
+    public function generateUniqueRandomId()
+    {
+        $unique = false;
+        $randomId = '';
+
+        while (!$unique) {
+            $randomId = strtoupper(substr(md5(microtime()), 0, 8)); // Generate a random ID
+            
+            // Check if the generated ID already exists in the orders table
+            if (!M_Orders::where('id', $randomId)->exists()) {
+                $unique = true;
+            }
+        }
+
+        return $randomId;
+    }
+
+    public function newOrder(){
+        $leads = M_Leads::all();
+        $randomId = $this -> generateUniqueRandomId();
+        return view('admin.client.order.create', [
+            "title" => "Client | Create Order",
+            "leads" => $leads,
+            "randomId" => $randomId
+        ]);
+    }
     public function track(Request $request){
         $field = $request -> validate([
             'order_id' => 'required'
@@ -21,5 +50,35 @@ class C_Orders extends Controller
         };
         $order_data['data'] = DB::table('orders')->where('id', $field['order_id']) -> first() -> get();
         return view('clients.track', $order_data);
+    }
+    public function create(Request $request){
+        $field = $request -> validate([
+            'business_id' => 'required', 
+            'desired_position' => 'required', 
+            'needed_qty' => 'required', 
+            'due_date' => 'required', 
+            'description' => 'required', 
+            'characteristic_desc' => 'required', 
+            'skills_desc' => 'required', 
+            'budget_estimation' => 'required',
+            'tor_file' => 'required'
+        ]);
+        
+        $activity = M_Orders::create([
+            'id' => $request -> id,
+            'leads_id' => $field['business_id'],
+            'desired_position' => $field['desired_position'],
+            'needed_qty' => $field['needed_qty'],
+            'due_date' => $field['due_date'],
+            'description' => $field['description'],
+            'characteristic_desc' => $field['characteristic_desc'],
+            'skills_desc' => $field['skills_desc'],
+            'budget_estimation' => $field['budget_estimation'],
+            'tor_file' => $field['tor_file'],
+        ]);
+        
+        if($activity){
+            return redirect('/client/order');
+        }
     }
 }

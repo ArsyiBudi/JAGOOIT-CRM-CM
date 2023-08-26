@@ -45,20 +45,6 @@
             text-overflow: ellipsis; /* Show ellipsis (...) if text overflows */
             max-width: 100%; /* Optional: Restrict the width of the element */
         }     
-
-        /* .button-container {
-            position: absolute;
-            bottom: 0;
-            left: 30px; 
-            margin: 10px;
-        }
-
-        @media (min-width: 1024px) {
-            .button-container {
-                left: 0; 
-                margin: 10px;
-            }
-        } */
     </style>
 </head>
 <body class="bg-primary font-quicksand text-white min-h-screen hide-scrollbar">

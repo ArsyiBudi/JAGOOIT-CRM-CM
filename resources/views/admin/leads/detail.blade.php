@@ -9,44 +9,41 @@
                 <a class="bg-secondary rounded-md px-3 md:px-4 py-1 md:py-2 hover:scale-95 duration-200"  href="{{ url('/leads/activity')}}">Create Activity</a>
                 <a class="bg-secondary rounded-md px-3 md:px-4 py-1 md:py-2 hover:scale-95 duration-200" href="{{ url('/leads/offer')}}">Create Offer</a>
             </div>
+            @foreach($leads as $data)
             <div class="divide-y divide-slate-50 gap-4 flex flex-col">
                 <div class="pt-3">
                     <p>
-                        Nama Perusahaan
+                       {{ $data -> business_name}}
                     </p>
                 </div>
                 <div class="pt-3">
                     <p>
-                        Alamat
+                        {{ $data -> address }}
                     </p>
                 </div>
                 <div class="pt-3">
                     <p>
-                        Nama PIC
+                        {{ $data ->  pic_name }}
                     </p>
                 </div>
                 <div class="pt-3">
                     <p>
-                        No Telp PIC
+                        {{ $data -> pic_contact_number }}
                     </p>
                 </div>
                 <div class="pt-3">
                     <p>
-                        Last Activity
+                        Appointment
                     </p>
                 </div>
                 <div class="pt-3">
                     <p>
-                        Status
-                    </p>
-                </div>
-                <div class="pt-3">
-                    <p>
-                        Keterangan
+                        {{ $data -> statusParam -> params_name }}
                     </p>
                 </div>
                 <hr>
             </div>
+            @endforeach
         </div>
     </div>
 </div>

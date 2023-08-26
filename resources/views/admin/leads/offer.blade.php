@@ -1,19 +1,21 @@
 @extends('admin.layouts.main')
 <style>
     .hide-scrollbar::-webkit-scrollbar {
-        width: 0; /* Width of the scrollbar */
+        width: 0;
+        /* Width of the scrollbar */
     }
+
 </style>
 @section('container')
 {{-- <div id="formContainer"> --}}
 
-    <form class=" hidden mt-24 md:mt-0 text-center lg:text-left" id="form3">
-        <h1 class="text-3xl font-semibold text-white">Create Order</h1>
-        <div class="bg-primary rounded shadow-lg mt-6 p-6 h-[calc(85vh-85px)] overflow-y-auto hide-scrollbar">
-            
-            <div class="border-b pb-3 mb-6">
-                <h2 class="text-2xl font-semibold text-white">New Order</h2>
-            </div>
+<form class=" hidden mt-24 md:mt-0 text-center lg:text-left" id="form3">
+    <h1 class="text-3xl font-semibold text-white">Create Order</h1>
+    <div class="bg-primary rounded shadow-lg mt-6 p-6 h-[calc(85vh-85px)] overflow-y-auto hide-scrollbar">
+
+        <div class="border-b pb-3 mb-6">
+            <h2 class="text-2xl font-semibold text-white">New Order</h2>
+        </div>
 
             <div class="mb-4 block md:flex items-center gap-4">
                 <label for="order-id" class="text-sm text-white">Order/Request ID</label> <br class=" block md:hidden">
@@ -50,7 +52,7 @@
             <label for="job-description" class="text-sm text-white">Job Description</label>
             <input required id="job-description" type="text" class="text-black rounded-lg px-2 py-1 w-full bg-white mt-2">
         </div>
-        
+
         <div class=" block md:flex gap-4">
                 <div class="flex flex-col gap-4 md:w-1/2">
                     <div class="w-full">
@@ -144,44 +146,42 @@
                       
             </div>
 </div>
-    <script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const formSelector = document.getElementById("formSelector");
+        const formContainer = document.getElementById("formContainer");
 
+        formSelector.addEventListener("change", function() {
+            const offerTitle = document.getElementById("offerTitle");
+            const selectedForm = formSelector.value;
+            const forms = formContainer.getElementsByTagName("form");
 
-    document.addEventListener("DOMContentLoaded", function () {
-            const formSelector = document.getElementById("formSelector");
-            const formContainer = document.getElementById("formContainer");
-            
-            formSelector.addEventListener("change", function () {
-                const offerTitle = document.getElementById("offerTitle");
-                const selectedForm = formSelector.value;
-                const forms = formContainer.getElementsByTagName("form");
-
-                // Sembunyikan semua formulir
-                for (const form of forms) {
-                    form.style.display = "none";
-                }
-
-                // Tampilkan formulir yang sesuai
-                const selectedFormElement = document.getElementById(selectedForm);
-                selectedFormElement.style.display = "block";
-
-                if (selectedForm === "form3") {
-                    createSection.style.display = "none";
-                    offerTitle.style.display = "none";
-                } else {
-                    createSection.style.display = "block";
-                    offerTitle.style.display = "block";
-                }
-            });
-            
-            function dropDownBack() {
-                document.getElementById("form3").style.display = "block";
-                document.getElementById("form1").style.display = "block";
+            // Sembunyikan semua formulir
+            for (const form of forms) {
+                form.style.display = "none";
             }
 
-            // Inisialisasi dengan menampilkan Formulir 1 secara default
-            document.getElementById("form1").style.display = "block";
+            // Tampilkan formulir yang sesuai
+            const selectedFormElement = document.getElementById(selectedForm);
+            selectedFormElement.style.display = "block";
+
+            if (selectedForm === "form3") {
+                createSection.style.display = "none";
+                offerTitle.style.display = "none";
+            } else {
+                createSection.style.display = "block";
+                offerTitle.style.display = "block";
+            }
         });
- 
-    </script>
+
+        function dropDownBack() {
+            document.getElementById("form3").style.display = "block";
+            document.getElementById("form1").style.display = "block";
+        }
+
+        // Inisialisasi dengan menampilkan Formulir 1 secara default
+        document.getElementById("form1").style.display = "block";
+    });
+
+</script>
 @endsection
