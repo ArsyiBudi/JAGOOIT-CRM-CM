@@ -13,32 +13,32 @@
             <div class="divide-y divide-slate-50 gap-4 flex flex-col">
                 <div class="pt-3">
                     <p>
-                       {{ $data -> business_name}}
+                       Nama Perusahaan : <span class=" font-bold"> {{ $data -> business_name}}</span>
                     </p>
                 </div>
                 <div class="pt-3">
                     <p>
-                        {{ $data -> address }}
+                       Alamat :  <span class=" font-bold"> {{ $data -> address }} </span>
                     </p>
                 </div>
                 <div class="pt-3">
                     <p>
-                        {{ $data ->  pic_name }}
+                       Nama PIC : <span class=" font-bold"> {{ $data ->  pic_name }} </span>
                     </p>
                 </div>
                 <div class="pt-3">
                     <p>
-                        {{ $data -> pic_contact_number }}
+                        No Telepon PIC : <span class=" font-bold"> {{ $data -> pic_contact_number }} </span>
                     </p>
                 </div>
                 <div class="pt-3">
                     <p>
-                        Appointment
+                       Aktivitas terakhir: <span class=" font-bold"> Appointment </span>
                     </p>
                 </div>
                 <div class="pt-3">
                     <p>
-                        {{ $data -> statusParam -> params_name }}
+                      Status : <span class=" font-bold"> {{ $data -> statusParam -> params_name }} </span>
                     </p>
                 </div>
                 <hr>
