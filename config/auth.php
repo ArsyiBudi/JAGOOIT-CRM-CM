@@ -15,7 +15,7 @@ return [
 
     'defaults' => [
         // 'guard' => 'web',
-        'guard' => 'sanctum',
+        'guard' => 'web',
         'passwords' => 'users',
     ],
 

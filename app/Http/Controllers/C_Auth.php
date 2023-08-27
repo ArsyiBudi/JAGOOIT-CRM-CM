@@ -11,34 +11,32 @@ use Illuminate\Http\Request;
 use Nette\Utils\DateTime;
 
 class C_Auth extends Controller
-{
-    public function login (Request $request){
-        $field = $request -> validate([
-            'username' => 'required|string',
-            'password' => 'required|string'
+{    public function login(Request $request)
+    {
+        $credentials = $request->validate([
+            'username' => 'required',
+            'password' => 'required'
         ]);
 
-        //Checking email
-        $user = M_Users::where('username', $field['username']) -> first();
+        $user = M_Users::where('username', $credentials['username'])->first();
 
-        //Checking Password
-        if(!$user ||  !User::where('password', $field['password']) -> first()){
-            return response([
-                'message' => 'Bad Creds'
-            ], 401);
-        };
-
-        $user_type = $user->user_type_id;
-        if($user_type == 3){
-            return response(['message' => 'bad creds']);
+        if (!$user || !User::where('password', $credentials['password'])->first()) {
+            return back()->with('loginError', 'Username Atau Password Salah!');
+        } else if ($user->user_type_id == 3) {
+            return back()->with('loginError', 'Akses Ditolak!');
+        } else {
+            Auth::attempt($credentials);
+            $request->session()->regenerate();
+            session(['user' => $user]);
+            return redirect()->intended('/leads');
         }
-        
-        // $token = $user -> createToken('jagoit')->plainTextToken;
-        // return response()->json(['token' => $token]);
-        // return response()->json(['message' => 'Unauthorized'], 401);
-        // $token = $user -> createToken('myapptoken')->plainTextToken;
+    }
 
-        session(['user' => $user ]);
-        return redirect('/leads' );
+    public function logout(Request $request)
+    {
+        Auth::logout();
+        request()->session()->invalidate();
+        request()->session()->regenerateToken();
+        return redirect('/login');
     }
 }

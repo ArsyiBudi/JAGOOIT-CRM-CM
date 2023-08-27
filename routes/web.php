@@ -59,14 +59,18 @@ Route::get('/track', function () {
 Route::post('/track', [C_Orders::class, 'track']);
 // Client End
 
+
+Route::post('/logout', [C_Auth::class, 'logout']);
+
+
 // Admin 
 Route::prefix('login')->group(function () {
-    Route::view('/', 'admin.login');
+    Route::view('/', 'admin.login')->name('login');
     Route::post('/', [C_Auth::class, 'login']);
 });
 
 Route::prefix('leads')->group(function () {
-    Route::get('/', [C_Leads::class, 'fetch']);
+    Route::get('/', [C_Leads::class, 'fetch'])->middleware('auth');
     Route::delete('/leads/delete/{id}', [C_Leads::class, 'delete'])->name('admin.leads.delete');
 
     Route::prefix('create')->group(function () {
@@ -77,7 +81,7 @@ Route::prefix('leads')->group(function () {
         });
         Route::post('/', [C_Leads::class, 'create'])->name('create_leads');
     });
-    Route::get('/{id}/detail', [C_Leads::class, 'detail']) -> name('detail_leads');
+    Route::get('/{id}/detail', [C_Leads::class, 'detail'])->name('detail_leads');
 
     Route::get('/{id}/activity', function () {
         return view('admin.leads.activity', [
@@ -122,10 +126,10 @@ Route::prefix('client')->group(function () {
             ]);
         });
 
-        Route::get('/create', [C_Orders::class, 'newOrder'])-> name('new_order');
-        Route::post('/create', [C_Orders::class, 'create']) -> name('create_order');
-        
-        Route::prefix('history')->group(function(){
+        Route::get('/create', [C_Orders::class, 'newOrder'])->name('new_order');
+        Route::post('/create', [C_Orders::class, 'create'])->name('create_order');
+
+        Route::prefix('history')->group(function () {
             Route::get('/', function () {
                 return view('admin.client.order.history', [
                     "title" => "Client | Order History",

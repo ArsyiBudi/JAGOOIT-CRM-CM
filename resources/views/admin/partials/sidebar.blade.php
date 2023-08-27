@@ -58,10 +58,15 @@
     </div>
 
     <div class="border-t border-white flex items-center w-full absolute bottom-0 py-4">
-        <div class="items-center flex gap-2 py-2 text-white px-8  w-full">
-            <i class="ri-logout-box-r-line text-3xl"></i>
-            <a href="#">Logout</a>
-        </div>
+        <form action="/logout" method="POST" >
+                @csrf
+                <button type="submit">
+                    <div class="items-center flex gap-2 py-2 text-white px-8  w-full">
+                        <i class="ri-logout-box-r-line text-3xl"></i>
+                        <p>Logout</p>
+                    </div>
+                </button>
+        </form>
     </div>
 </div>
 
@@ -148,10 +153,12 @@
             </div>
 
             <div class="border-t border-white flex items-center w-full absolute bottom-0 py-4">
-                <div class="items-center flex gap-2 py-2 text-white px-8  w-full">
-                    <i class="ri-logout-box-r-line text-3xl"></i>
-                    <a href="#">Logout</a>
-                </div>
+                <form action="/logout" method="POST">
+                    <button type="submit"  class="items-center flex gap-2 py-2 text-white px-8  w-full">
+                        <i class="ri-logout-box-r-line text-3xl"></i>
+                        <a href="#">Logout</a>
+                    </button>
+                </form>
             </div>
         </div>
     </div>
