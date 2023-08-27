@@ -1,6 +1,3 @@
-
-
-
 <div class=" hidden bg-darkSecondary w-screen lg:w-[18%] pt-11  h-screen lg:flex flex-col items-center fixed top-0 left-0 ">
 
     <div class="rounded-lg py-1 px-8 mx-8 flex items-center mb-9 bg-lightGrey">
@@ -60,7 +57,7 @@
     <div class="border-t border-white flex items-center w-full absolute bottom-0 py-4">
         <div class="items-center flex gap-2 py-2 text-white px-8  w-full">
             <i class="ri-logout-box-r-line text-3xl"></i>
-            <a href="#">Logout</a>
+            <a href="/logout">Logout</a>
         </div>
     </div>
 </div>
@@ -70,8 +67,8 @@
 
 {{-- Mobile --}}
 <div class="drawer fixed lg:hidden top-0 z-50">
-    
-  <input id="my-drawer" type="checkbox" class="drawer-toggle" />
+
+    <input id="my-drawer" type="checkbox" class="drawer-toggle" />
 
     <div class=" flex justify-between items-center px-5 pt-8 pb-5 absolute top-0 right-0 w-full bg-layoutBg">
 
@@ -85,8 +82,8 @@
     </div>
 
     <div class="drawer-side">
-    <label for="my-drawer" class="drawer-overlay"></label>
-    <div class=" bg-darkSecondary w-screen lg:w-[18%] pt-11  h-screen flex flex-col items-center fixed top-0 left-0 ">
+        <label for="my-drawer" class="drawer-overlay"></label>
+        <div class=" bg-darkSecondary w-screen lg:w-[18%] pt-11  h-screen flex flex-col items-center fixed top-0 left-0 ">
 
             <div class=" flex items-center justify-between w-full px-5">
                 <div class="rounded-lg py-1 px-8 ml-5 flex items-center bg-lightGrey">
@@ -148,10 +145,12 @@
             </div>
 
             <div class="border-t border-white flex items-center w-full absolute bottom-0 py-4">
-                <div class="items-center flex gap-2 py-2 text-white px-8  w-full">
-                    <i class="ri-logout-box-r-line text-3xl"></i>
-                    <a href="#">Logout</a>
-                </div>
+                <form action="{{ route('logout') }}" method="get">
+                    <button type="submit" class="items-center flex gap-2 py-2 text-white px-8  w-full">
+                        <i class="ri-logout-box-r-line text-3xl"></i>
+                        <p>Logout</p>
+                    </button>
+                </form>
             </div>
         </div>
     </div>
