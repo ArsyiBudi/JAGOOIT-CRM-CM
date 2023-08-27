@@ -96,7 +96,15 @@
                         <td align="center" class=" p-4">{{ $row->business_sector }}</td>
                         <td align="center" class=" p-4">{{ $row->pic_name }}</td>
                         <td align="center" class=" p-4">{{ $row->pic_contact_number }}</td>
-                        <td align="center" class=" p-4">{{ $row->latestActivity }}</td>
+                        <td align="center" class=" p-4">
+                            @if ($row->latestActivity)
+                                @if ($row->latestActivityType)
+                                    {{ $row->latestActivityType->params_name }}
+                                @endif
+                            @else
+                                -
+                            @endif
+                        </td>
                         <td align="center" class=" p-4">{{ $row->statusParam->params_name }}</td>
                         <td align="center" class=" p-4">
                             <div class=" flex items-center gap-2">
@@ -122,20 +130,20 @@
 </div>
 
 <script>
-   function deleteLead(id) {
-       if (confirm('Are you sure you want to delete this lead?')) {
-           $.ajax({
-               url: `/leads/${id}`,
-               type: 'DELETE',
-               success: function(response) {
-                   location.reload(); 
-               },
-               error: function(error) {
-                   console.log(error);
-               }
-           });
-       }
-   }
+    function deleteLead(id) {
+        if (confirm('Are you sure you want to delete this lead?')) {
+            $.ajax({
+                url: `/leads/${id}`,
+                type: 'DELETE',
+                success: function(response) {
+                    location.reload();
+                },
+                error: function(error) {
+                    console.log(error);
+                }
+            });
+        }
+    }
 </script>
 
 

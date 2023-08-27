@@ -189,5 +189,4 @@ Route::middleware('auth')->group(function(){
     });
 });
 
-
 // Admin End

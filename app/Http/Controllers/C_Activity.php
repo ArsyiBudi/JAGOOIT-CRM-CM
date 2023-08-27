@@ -29,7 +29,7 @@ class C_Activity extends Controller
         if(!$activity) return response([
             'error' => 'Error Occured',
         ]);
-        return redirect('/leads/detail')->with('success', 'Data berhasil ditambahkan.');
+        return redirect('/leads')->with('success', 'Data berhasil ditambahkan.');
     }
     public function note(Request $request){
         $field = $request->validate([

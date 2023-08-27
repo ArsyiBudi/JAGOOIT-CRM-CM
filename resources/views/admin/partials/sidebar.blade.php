@@ -98,8 +98,10 @@
             <div class="flex gap-4 pl-8 items-start mt-9 w-full">
                 <img src="/bgRusdi.jpeg" alt="bgRusdi" class="rounded-full w-[54px] h-[54px]">
                 <div class="flex flex-col ">
-                    <h6 class="text-white font-bold text-[14px]">Herman Maritim</h6>
-                    <p class="text-white text-[10px]">Admin</p>
+                @if(session() -> has('user'))
+                    <h6 class="text-white font-bold text-[14px]">{{ session('user') -> xs1 }}</h6>
+                    <p class="text-white text-[10px]">{{ session('user')->userTypes->description }}</p>
+                @endif
                 </div>
             </div>
 
@@ -145,12 +147,10 @@
             </div>
 
             <div class="border-t border-white flex items-center w-full absolute bottom-0 py-4">
-                <form action="{{ route('logout') }}" method="get">
-                    <button type="submit" class="items-center flex gap-2 py-2 text-white px-8  w-full">
+                    <div type="submit" class="items-center flex gap-2 py-2 text-white px-8  w-full">
                         <i class="ri-logout-box-r-line text-3xl"></i>
-                        <p>Logout</p>
-                    </button>
-                </form>
+                        <a href="/logout">Logout</a>
+                    </div>
             </div>
         </div>
     </div>

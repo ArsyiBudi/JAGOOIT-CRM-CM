@@ -22,7 +22,7 @@ class C_Leads extends Controller
                 ->orWhere('business_sector', 'like', "%$search%")
                 ->orWhere('pic_name', 'like', "%$search%");
         })->paginate($entries);
-
+        
         return view('admin.leads.menu', [
             "title" => "Leads | Menu",
             "leads" => $data
