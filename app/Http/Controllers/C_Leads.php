@@ -14,22 +14,30 @@ class C_Leads extends Controller
 {
     public function fetch(Request $request)
     {
-        $entries = $request->input('per_page', 5);
+        $perPage = $request->input('per_page', 5);
         $search = $request->input('search', '');
+    
+        // Store the values in the session
+        session(['leads_per_page' => $perPage]);
+        session(['leads_search' => $search]);
+
+        $entries = session('leads_per_page', 5);
+        $search = session('leads_search', '');
 
         $data = M_Leads::where(function ($query) use ($search) {
             $query->where('business_name', 'like', "%$search%")
                 ->orWhere('business_sector', 'like', "%$search%")
                 ->orWhere('pic_name', 'like', "%$search%");
         })->paginate($entries);
-        
+
         return view('admin.leads.menu', [
             "title" => "Leads | Menu",
             "leads" => $data
         ]);
     }
 
-    public function fetch_client(Request $request){
+    public function fetch_client(Request $request)
+    {
         $entries = $request->input('per_page', 5);
         $search = $request->input('search', '');
 
@@ -37,14 +45,14 @@ class C_Leads extends Controller
             $query->where('business_name', 'like', "%$search%")
                 ->orWhere('business_sector', 'like', "%$search%")
                 ->orWhere('pic_name', 'like', "%$search%");
-        })->where('client_indicator', '=', '1') ->paginate($entries);
+        })->where('client_indicator', '=', '1')->paginate($entries);
 
         return view('admin.client/menu', [
             "title" => "Client | Menu",
             "client" => $data
         ]);
     }
-    
+
     public function detail(Request $request, $id)
     {
         $leads_data = M_Leads::where('id', '=', "$id")->get();

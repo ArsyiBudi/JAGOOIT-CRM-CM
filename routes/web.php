@@ -73,7 +73,7 @@ Route::get('/logout', [C_Auth::class, 'logout'])->name('logout');
 
 Route::middleware('auth')->group(function(){
     Route::prefix('leads')->group(function () {
-        Route::get('/', [C_Leads::class, 'fetch']);
+        Route::get('/', [C_Leads::class, 'fetch'])->name('fetch_leads');
         Route::delete('/leads/{id}', [C_Leads::class, 'delete'])->name('admin.leads.delete');
     
         Route::prefix('create')->group(function () {
@@ -98,7 +98,6 @@ Route::middleware('auth')->group(function(){
             ]);
         });
     
-        //Activity Backend
         Route::post(
             '/appointment',
             [C_Activity::class, 'appointment']
