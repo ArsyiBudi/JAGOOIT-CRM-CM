@@ -1,6 +1,3 @@
-
-
-
 <div class=" hidden bg-darkSecondary w-screen lg:w-[18%] pt-11  h-screen lg:flex flex-col items-center fixed top-0 left-0 ">
 
     <div class="rounded-lg py-1 px-8 mx-8 flex items-center mb-9 bg-lightGrey">
@@ -75,8 +72,8 @@
 
 {{-- Mobile --}}
 <div class="drawer fixed lg:hidden top-0 z-50">
-    
-  <input id="my-drawer" type="checkbox" class="drawer-toggle" />
+
+    <input id="my-drawer" type="checkbox" class="drawer-toggle" />
 
     <div class=" flex justify-between items-center px-5 pt-8 pb-5 absolute top-0 right-0 w-full bg-layoutBg">
 
@@ -90,8 +87,8 @@
     </div>
 
     <div class="drawer-side">
-    <label for="my-drawer" class="drawer-overlay"></label>
-    <div class=" bg-darkSecondary w-screen lg:w-[18%] pt-11  h-screen flex flex-col items-center fixed top-0 left-0 ">
+        <label for="my-drawer" class="drawer-overlay"></label>
+        <div class=" bg-darkSecondary w-screen lg:w-[18%] pt-11  h-screen flex flex-col items-center fixed top-0 left-0 ">
 
             <div class=" flex items-center justify-between w-full px-5">
                 <div class="rounded-lg py-1 px-8 ml-5 flex items-center bg-lightGrey">
@@ -106,8 +103,10 @@
             <div class="flex gap-4 pl-8 items-start mt-9 w-full">
                 <img src="/bgRusdi.jpeg" alt="bgRusdi" class="rounded-full w-[54px] h-[54px]">
                 <div class="flex flex-col ">
-                    <h6 class="text-white font-bold text-[14px]">Herman Maritim</h6>
-                    <p class="text-white text-[10px]">Admin</p>
+                @if(session() -> has('user'))
+                    <h6 class="text-white font-bold text-[14px]">{{ session('user') -> xs1 }}</h6>
+                    <p class="text-white text-[10px]">{{ session('user')->userTypes->description }}</p>
+                @endif
                 </div>
             </div>
 

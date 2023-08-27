@@ -11,32 +11,33 @@ use Illuminate\Http\Request;
 use Nette\Utils\DateTime;
 
 class C_Auth extends Controller
-{    public function login(Request $request)
+{
+    public function login(Request $request)
     {
         $credentials = $request->validate([
             'username' => 'required',
-            'password' => 'required'
+            'password' => 'required',
         ]);
 
-        $user = M_Users::where('username', $credentials['username'])->first();
+        if (Auth::guard('web')->attempt($credentials)) {
+            $user = Auth::guard('web')->user(); // Get the authenticated user
 
-        if (!$user || !User::where('password', $credentials['password'])->first()) {
-            return back()->with('loginError', 'Username Atau Password Salah!');
-        } else if ($user->user_type_id == 3) {
-            return back()->with('loginError', 'Akses Ditolak!');
-        } else {
-            Auth::attempt($credentials);
-            $request->session()->regenerate();
+            // Implement your user type check logic here
+            if ($user->user_type_id == 3) {
+                Auth::guard('web')->logout(); // Log out the user
+                return response(['message' => 'Invalid user type']);
+            }
+
             session(['user' => $user]);
-            return redirect()->intended('/leads');
+            return redirect('/leads');
+        } else {
+            return back()->withErrors(['message' => 'Invalid credentials']);
         }
     }
 
-    public function logout(Request $request)
+    public function logout()
     {
-        Auth::logout();
-        request()->session()->invalidate();
-        request()->session()->regenerateToken();
-        return redirect('/login');
+        Auth::guard('web')->logout();
+        return redirect('/');
     }
 }

@@ -19,8 +19,13 @@ class M_Activity extends Model
         'desc',
     ];
 
-    public function leads()
+    public function lead()
     {
-        return $this -> belongsTo(M_Leads::class, 'id');
+        return $this->belongsTo(M_Leads::class, 'leads_id');
+    }
+
+    public function activityType()
+    {
+        return $this->belongsTo(M_GlobalParams::class, 'activity_type_id', 'id_params');
     }
 }

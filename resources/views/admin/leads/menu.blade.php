@@ -52,25 +52,26 @@
                 <h3 class="text-white font-semibold text-3xl">Data Leads</h3>
             </div>
 
-            <form method="{{ url('/leads') }}" method="get" class=" block md:flex items-start my-4 justify-between mb-3 w-full">
-                <div class=" md:block flex items-center justify-between">
+            <form method="{{ route('fetch_leads') }}" method="get" class="block md:flex items-start my-4 justify-between mb-3 w-full">
+                <div class="md:block flex items-center justify-between">
                     <div class="flex gap-3 items-center justify-start">
                         <p class="text-white text-xs md:text-sm">Show</p>
                         <div class="flex items-center bg-grey rounded-md md:rounded-lg justify-center py-0 md:py-1 w-[40px] md:w-[60px] px-1">
-                            <input type="number" id="search" value="{{ $leads->perPage() }}" name="per_page" min="1" class=" text-white w-full text-center bg-transparent outline-none" placeholder="5">
+                            <input type="number" id="search" value="{{ old('per_page', $leads->perPage()) }}" name="per_page" min="1" class="text-white w-full text-center bg-transparent outline-none" placeholder="5">
                         </div>
                         <p class="text-white text-xs md:text-sm">entries</p>
                     </div>
                     <div class="md:mt-5">
-                        <a class=" bg-secondary font-semibold text-sm md:text-[16px] py-1 px-3 md:px-5 rounded-lg mt-0 md:mt-7 hover:scale-95 duration-200" href="/leads/create">Create Leads</a>
+                        <a class="bg-secondary font-semibold text-sm md:text-[16px] py-1 px-3 md:px-5 rounded-lg mt-0 md:mt-7 hover:scale-95 duration-200" href="/leads/create">Create Leads</a>
                     </div>
+                    <button type="submit"></button>
                 </div>
-                <div class=" flex items-center gap-5 mt-5 md:mt-0">
-                    <p class=" hidden md:block">Search</p>
-                    <input name="search" type="text" class=" outline-none bg-white rounded-md w-full md:w-80 py-1 px-2 text-black font-semibold placeholder-gray-400 placeholder-opacity-100 md:placeholder-opacity-0" placeholder="search">
+                <div class="flex items-center gap-5 mt-5 md:mt-0">
+                    <p class="hidden md:block">Search</p>
+                    <input name="search" type="text" class="outline-none bg-white rounded-md w-full md:w-80 py-1 px-2 text-black font-semibold placeholder-gray-400 placeholder-opacity-100 md:placeholder-opacity-0" placeholder="search" value="{{ old('search') }}">
                 </div>
-                <button type="submit"></button>
             </form>
+
             <div class=" border-b border-white w-full rounded-lg mt-4"></div>
         </div>
 
@@ -88,7 +89,7 @@
                         <td class=" p-2" align="center">Aksi</td>
                     </tr>
                 </thead>
-                <tbody id="search_data">
+                <tbody>
                     @foreach($leads as $row)
                     <tr class=" odd:bg-grey">
                         <td align="center" class=" p-4">{{ $row->id }}</td>
@@ -96,7 +97,15 @@
                         <td align="center" class=" p-4">{{ $row->business_sector }}</td>
                         <td align="center" class=" p-4">{{ $row->pic_name }}</td>
                         <td align="center" class=" p-4">{{ $row->pic_contact_number }}</td>
-                        <td align="center" class=" p-4">{{ $row->latestActivity }}</td>
+                        <td align="center" class=" p-4">
+                            @if ($row->latestActivity)
+                            @if ($row->latestActivityType)
+                            {{ $row->latestActivityType->params_name }}
+                            @endif
+                            @else
+                            -
+                            @endif
+                        </td>
                         <td align="center" class=" p-4">{{ $row->statusParam->params_name }}</td>
                         <td align="center" class=" p-4">
                             <div class=" flex items-center gap-2">
@@ -122,20 +131,20 @@
 </div>
 
 <script>
-   function deleteLead(id) {
-       if (confirm('Are you sure you want to delete this lead?')) {
-           $.ajax({
-               url: `/leads/delete/${id}`,
-               type: 'DELETE',
-               success: function(response) {
-                   location.reload(); 
-               },
-               error: function(error) {
-                   console.log(error);
-               }
-           });
-       }
-   }
+    function deleteLead(id) {
+        if (confirm('Are you sure you want to delete this lead?')) {
+            $.ajax({
+                url: `/leads/${id}`,
+                type: 'DELETE',
+                success: function(response) {
+                    location.reload();
+                },
+                error: function(error) {
+                    console.log(error);
+                }
+            });
+        }
+    }
 </script>
 
 
