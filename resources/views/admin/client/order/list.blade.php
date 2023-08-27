@@ -89,7 +89,7 @@
                                     <a href="/client/order/plan/recruitment">
                                         <i class="ri-calendar-todo-fill text-2xl" title="Plan"></i>
                                     </a>
-                                    <a href="{{ route('admin.leads.delete', $row->id) }}">
+                                    <a href="/client/order/history/detail">
                                         <i class="ri-information-line text-2xl" title="Detail"></i>
                                     </a>
                                     <i class="ri-delete-bin-2-line text-2xl text-delete cursor-pointer" title="Delete"></i>
