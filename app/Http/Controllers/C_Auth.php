@@ -25,13 +25,13 @@ class C_Auth extends Controller
             // Implement your user type check logic here
             if ($user->user_type_id == 3) {
                 Auth::guard('web')->logout(); // Log out the user
-                return response(['message' => 'Invalid user type']);
+                return back()->with('message', 'Akses Ditolak');
             }
 
             session(['user' => $user]);
             return redirect('/leads');
         } else {
-            return back()->withErrors(['message' => 'Invalid credentials']);
+            return back()->with('message', 'Invalid credentials');
         }
     }
 

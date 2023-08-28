@@ -38,7 +38,7 @@
                 </div>
                 <div class="pt-3">
                     <p>
-                      Status : <span class=" font-bold"> {{ $data -> statusParam -> params_name }} </span>
+                      Status : <span class=" font-bold"> {{ $data -> statusParam -> params_name }} </span>,
                     </p>
                 </div>
                 <hr>
