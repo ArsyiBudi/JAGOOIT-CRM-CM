@@ -122,23 +122,23 @@ Route::middleware('auth')->group(function () {
 
         Route::prefix('order')->group(function () {
             Route::get('/', [C_Orders::class, 'fetch'])->name('fetch_order');
-            Route::get('/create', [C_Orders::class, 'newOrder'])->name('new_order');
-            Route::post('/create', [C_Orders::class, 'create'])->name('create_order');
-
-            Route::prefix('history')->group(function () {
+            Route::get('/create', [C_Orders::class, 'newOrder'])-> name('new_order');
+            Route::post('/create', [C_Orders::class, 'create']) -> name('create_order');
+            Route::prefix('detail')->group(function () {
+                Route::get('/', function () {
+                    return view('admin.client.order.detail', [
+                        "title" => "Client | Detail Order",
+                    ]);
+                });
+            
+            Route::prefix('history')->group(function(){
                 Route::get('/', function () {
                     return view('admin.client.order.history', [
                         "title" => "Client | Order History",
                     ]);
                 });
-
-                Route::prefix('detail')->group(function () {
-                    Route::get('/', function () {
-                        return view('admin.client.order.detail', [
-                            "title" => "Client | Detail Order",
-                        ]);
-                    });
-
+    
+    
                     Route::get('/timeline', function () {
                         return view('admin.client.order.timeline', [
                             "title" => "Client | Order Timeline",

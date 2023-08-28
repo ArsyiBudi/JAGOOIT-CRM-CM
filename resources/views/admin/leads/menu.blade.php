@@ -99,11 +99,11 @@
                         <td align="center" class=" p-4">{{ $row->pic_contact_number }}</td>
                         <td align="center" class=" p-4">
                             @if ($row->latestActivity)
-                            @if ($row->latestActivityType)
-                            {{ $row->latestActivityType->params_name }}
-                            @endif
+                                @if ($row->latestActivityParams)
+                                    {{ $row->latestActivityParams->params_name }}
+                                @endif
                             @else
-                            -
+                                -
                             @endif
                         </td>
                         <td align="center" class=" p-4">{{ $row->statusParam->params_name }}</td>

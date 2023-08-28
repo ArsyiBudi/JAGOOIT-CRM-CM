@@ -38,7 +38,7 @@ class M_Leads extends Model
         return $this->hasOne(M_Activity::class, 'leads_id')->latest();
     }
 
-    public function latestActivityType()
+    public function latestActivityParams()
     {
         return $this->hasOneThrough(
             M_GlobalParams::class,

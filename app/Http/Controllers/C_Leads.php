@@ -17,7 +17,6 @@ class C_Leads extends Controller
         $perPage = $request->input('per_page', 5);
         $search = $request->input('search', '');
     
-        // Store the values in the session
         session(['leads_per_page' => $perPage]);
         session(['leads_search' => $search]);
 
@@ -38,8 +37,14 @@ class C_Leads extends Controller
 
     public function fetch_client(Request $request)
     {
-        $entries = $request->input('per_page', 5);
+        $perPage = $request->input('per_page', 5);
         $search = $request->input('search', '');
+    
+        session(['leads_per_page' => $perPage]);
+        session(['leads_search' => $search]);
+
+        $entries = session('leads_per_page', 5);
+        $search = session('leads_search', '');
 
         $data = M_Leads::where(function ($query) use ($search) {
             $query->where('business_name', 'like', "%$search%")
