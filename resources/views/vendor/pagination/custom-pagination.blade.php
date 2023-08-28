@@ -43,9 +43,11 @@
         @if ($page == $paginator->currentPage())
             <li class="underline p-1 rounded-md w-8 text-center list-none active"><span class="page-link">{{ $page }}</span></li>
         @elseif ($page === $paginator->currentPage() + 1 || $page === $paginator->currentPage() + 2 || $page === $paginator->currentPage() - 1 || $page === $paginator->currentPage() - 2 || $page === $paginator->lastPage() || $page === 1)
-            <li class="list-none bg-grey p-1 rounded-md w-8 text-center page-item">
-                <a class="page-link" href="{{ $url . '&' . http_build_query(['per_page' => session('leads_per_page', 5), 'search' => session('leads_search', '')]) }}">{{ $page }}</a>
-            </li>
+                <a href="{{ $url . '&' . http_build_query(['per_page' => session('leads_per_page', 5), 'search' => session('leads_search', '')]) }}">
+                    <li class="list-none bg-grey p-1 rounded-md w-8 text-center page-item">
+                        <p class="page-link" >{{ $page }}</p>
+                    </li>
+                </a>
         @endif
 
         <!--  Use three dots when current page is away from end.  -->
