@@ -62,10 +62,8 @@ Route::get('/track', function () {
     return view('clients.track');
 });
 Route::post('/track', [C_Orders::class, 'track']);
-// Client End
-
-
 Route::post('/logout', [C_Auth::class, 'logout']);
+// Client End
 
 
 // Admin 
