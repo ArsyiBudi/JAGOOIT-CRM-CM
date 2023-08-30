@@ -47,7 +47,7 @@
 <div class=" overflow-auto lg:pt-0 h-[90vh] rounded-md">
     <div class="w-full bg-darkSecondary px-8 flex flex-col">
 
-        <div class="sticky top-0 pt-10 bg-darkSecondary">
+        <div class="pt-10 bg-darkSecondary">
             <div class="border-b border-white w-full pb-3 mb-3">
                 <h3 class="text-white font-semibold text-3xl">Data Leads</h3>
             </div>
@@ -75,9 +75,9 @@
             <div class=" border-b border-white w-full rounded-lg mt-4"></div>
         </div>
 
-        <div class=" hide-scrollbar w-full mt-5 h-full overflow-auto pr-2">
+        <div class=" hide-scrollbar w-full mt-5 max-h-96 overflow-auto pr-2">
             <table class=" w-full text-xs md:text-sm font-bold ">
-                <thead>
+                <thead class="bg-darkSecondary sticky top-0">
                     <tr>
                         <td class=" p-2" align="center">No</td>
                         <td class=" p-2" align="center">Nama Perusahaan</td>
