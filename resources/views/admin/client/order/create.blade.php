@@ -3,7 +3,6 @@
 <style>
     .hide-scrollbar::-webkit-scrollbar {
         width: 0;
-        /* Width of the scrollbar */
     }
 
     /* input::-webkit-outer-spin-button,
@@ -140,11 +139,11 @@ async function previewFile() {
         fileNamePreview.style.display = 'block';
 
         if (file.type === 'application/pdf') {
-            // Jika file adalah PDF
+            
             const loadingTask = pdfjsLib.getDocument(fileURL);
             const pdf = await loadingTask.promise;
 
-            const pageNum = 1; // Ganti dengan nomor halaman yang ingin ditampilkan
+            const pageNum = 1; 
             const page = await pdf.getPage(pageNum);
 
             const viewport = page.getViewport({ scale: 1 });
@@ -159,7 +158,7 @@ async function previewFile() {
             await page.render(renderContext).promise;
             canvas.style.display = 'block';
         } else {
-            // Jika file bukan PDF
+            
             canvas.style.display = 'none';
         }
     } else {
