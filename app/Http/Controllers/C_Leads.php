@@ -58,7 +58,7 @@ class C_Leads extends Controller
         ]);
     }
 
-    public function detail(Request $request, $id)
+    public function detail($id)
     {
         $leads_data = M_Leads::where('id', '=', "$id")->get();
         if (!$leads_data) {
