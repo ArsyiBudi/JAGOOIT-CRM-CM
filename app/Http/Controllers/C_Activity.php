@@ -9,7 +9,7 @@ use App\Models\M_Activity;
 
 class C_Activity extends Controller
 {
-    public function appointment(Request $request){
+    public function appointment(Request $request, $id){
         $field = $request->validate([
             'judul'=>'required',
             'lokasi'=>'required',

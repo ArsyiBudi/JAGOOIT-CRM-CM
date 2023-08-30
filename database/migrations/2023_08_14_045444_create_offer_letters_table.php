@@ -13,17 +13,17 @@ return new class extends Migration
     {
         Schema::create('offer_letters', function (Blueprint $table) {
             $table->integer('id', true);
-            $table->string('letter_number');
-            $table->string('offer_subject');
-            $table->string('recipient_name');
-            $table->string('location');
-            $table->date('date');
-            $table->string('context');
-            $table->integer('talent_total');
-            $table->integer('weekday_cost');
-            $table->integer('weekend_cost');
-            $table->integer('consumption_cost');
-            $table->integer('transportation_cost');
+            $table->string('letter_number')->nullable(); 
+            $table->string('offer_subject')->nullable();
+            $table->string('recipient_name')->nullable();
+            $table->string('location')->nullable();
+            $table->date('date')->nullable();
+            $table->string('context')->nullable();
+            $table->integer('talent_total')->nullable();
+            $table->integer('weekday_cost')->nullable();
+            $table->integer('weekend_cost')->nullable();
+            $table->integer('consumption_cost')->nullable();
+            $table->integer('transportation_cost')->nullable();
             $table->timestamps();
         });
     }

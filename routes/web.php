@@ -49,30 +49,28 @@ function set_child_active($routes)
     return 'text-white fill-white';
 }
 
-// Client
+//? Client
 Route::any('/', function () {
     return view('clients.landing');
 });
 
-Route::fallback(function () { //To Handle an unknown routes
+Route::fallback(function () { //!To Handle an unknown routes
     return redirect('/');
 });
 
-Route::get('/track', function () {
-    return view('clients.track');
-});
+Route::view('/track', 'clients.track');
 Route::post('/track', [C_Orders::class, 'track']);
 Route::post('/logout', [C_Auth::class, 'logout']);
-// Client End
+//? Client End
 
-
-// Admin 
+//? Admin 
 Route::prefix('login')->group(function () {
     Route::view('/', 'admin.login')->name('login');
     Route::post('/', [C_Auth::class, 'login']);
 });
 Route::get('/logout', [C_Auth::class, 'logout'])->name('logout');
 
+//!PROTECTED ROUTES
 Route::middleware('auth')->group(function () {
     Route::prefix('leads')->group(function () {
         Route::get('/', [C_Leads::class, 'fetch'])->name('fetch_leads');
@@ -88,10 +86,15 @@ Route::middleware('auth')->group(function () {
         });
         Route::get('/{id}/detail', [C_Leads::class, 'detail'])->name('detail_leads');
 
-        Route::get('/{id}/activity', function () {
-            return view('admin.leads.activity', [
-                "title" => "Leads | Create Activity",
-            ]);
+        Route::prefix('/activity') -> group(function () {
+            Route::get('/{id}', function(){
+                return view('admin.leads.activity', [
+                    'title' => "Leads | Create Activity"
+                ]);
+            });
+            Route::post('/{id}/appointment', [C_Activity::class, 'appointment'])->name('activity.appointment');
+            Route::post('/{id}/note',[C_Activity::class, 'note'])->name('activity.note');
+            Route::post('/{id}/report', [C_Activity::class, 'report'])->name('activity.report');
         });
 
         Route::get('/{id}/offer', function () {
@@ -100,18 +103,7 @@ Route::middleware('auth')->group(function () {
             ]);
         });
 
-        Route::post(
-            '/appointment',
-            [C_Activity::class, 'appointment']
-        )->name('activity.appointment');
-        Route::post(
-            '/note',
-            [C_Activity::class, 'note']
-        )->name('activity.note');
-        Route::post(
-            '/report',
-            [C_Activity::class, 'report']
-        )->name('activity.report');
+      
     });
 
     Route::prefix('client')->group(function () {
@@ -190,4 +182,4 @@ Route::middleware('auth')->group(function () {
     });
 });
 
-// Admin End
+//? Admin End
