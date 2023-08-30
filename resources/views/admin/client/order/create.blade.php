@@ -70,7 +70,7 @@
                     </div>
 
                     <div class="w-full  mb-4 ">
-                        <label for="file-tor" class="text-sm text-white">File TOR</label>
+                        <label for="file-tor" class="text-sm text-white">File TOR ( PDF )</label>
                         <p id="file-name-preview" style="display: none;"  class=" pt-3"></p>
                         <canvas id="pdf-preview" style="display: none;" class=" w-full rounded-md"></canvas>
                         <label for="file-tor" id="container-tor" class="flex justify-center items-center bg-white py-4 rounded-lg px-2 h-24 mt-2">
@@ -109,10 +109,10 @@
     </div>
 </div>
 
+{{-- library --}}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.11.338/pdf.min.js"></script>
 
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.11.338/pdf.min.js"></script>
 <script>
 async function previewFile() {
     const fileInput = document.getElementById('file-tor');
@@ -135,6 +135,7 @@ async function previewFile() {
         const file = fileInput.files[0];
         const fileURL = URL.createObjectURL(file);
 
+        fileNamePreview.style.color = 'white'
         fileNamePreview.textContent = file.name;
         fileNamePreview.style.display = 'block';
 
@@ -158,8 +159,9 @@ async function previewFile() {
             await page.render(renderContext).promise;
             canvas.style.display = 'block';
         } else {
-            
             canvas.style.display = 'none';
+            fileNamePreview.textContent = 'File harus berupa PDF!';
+            fileNamePreview.style.color = 'red'
         }
     } else {
         fileNamePreview.style.display = 'none';
