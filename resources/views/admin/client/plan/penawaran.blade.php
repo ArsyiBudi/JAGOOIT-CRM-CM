@@ -96,13 +96,13 @@
                 <div>
                     <p class="gap-4">Outsourcing Detail</p>
                     <div class=" flex items-center gap-2 flex-wrap mt-2">
-                        {{-- <button type="button" class="bg-white text-darkSecondary text-opacity-50 text-sm text-center py-1 px-7  rounded-md font-bold flex items-center gap-3">
-                            <p>Detail 1 </p>
-                            <span>
-                                <i class=" text-lg cursor-pointer ri-delete-bin-2-line text-delete"></i>
-                            </span>
-                            <button> --}}
-                        <button type="button" class="btn bg-white text-darkSecondary text-opacity-50 text-sm text-center py-2 px-3  rounded-md font-bold hover:scale-95 duration-200" onclick="my_modal_5.showModal()">Add Detail +</button>
+                        <form action="">
+                            @csrf
+                            <div class=" detail-container flex gap-2">
+                                <!-- Existing detail buttons will be dynamically added here -->
+                            </div>
+                        </form>
+                        <button type="button" class="btn bg-white text-darkSecondary text-opacity-50 text-sm text-center py-2 px-3  rounded-md font-bold hover:scale-95 duration-200 hover:bg-white" onclick="my_modal_5.showModal()">Add Detail +</button>
                     </div>
                 </div>
             </div>
@@ -114,14 +114,14 @@
                     <label for="weekday" class="text-sm text-white">Weekday</label>
                     <div class=" mt-2 flex items-center gap-0">
                         <label for="weekday" class=" bg-white p-2 rounded-tl-md rounded-bl-md text-black border-grey border-r-[1px] w-10">RP.</label>
-                        <input value="{{ old('weekday_cost', @$offer->weekday_cost) }}" name="weekday_cost" type="number" id="weekday" placeholder="Weekday Overtime" class=" text-black w-full p-2 outline-none rounded-tr-md rounded-br-md">
+                        <input name="weekday_cost" type="number" id="weekday" placeholder="Weekday Overtime" class=" text-black bg-white w-full p-2 outline-none rounded-tr-md rounded-br-md ">
                     </div>
                 </div>
                 <div class=" w-full md:w-1/2 mt-2 md:mt-0">
                     <label for="Weekend" class="text-sm text-white">Weekend</label>
                     <div class=" mt-2 flex items-center gap-0">
                         <label for="Weekend" class=" bg-white p-2 rounded-tl-md rounded-bl-md text-black border-grey border-r-[1px] w-10">RP.</label>
-                        <input value="{{ old('weekend_cost', @$offer->weekend_cost) }}" name="weekend_cost" type="number" id="Weekend" placeholder="Weekend Overtime" class=" text-black w-full p-2 outline-none rounded-tr-md rounded-br-md">
+                        <input name="weekend_cost" type="number" id="Weekend" placeholder="Weekend Overtime" class=" text-black bg-white w-full p-2 outline-none rounded-tr-md rounded-br-md">
                     </div>
                 </div>
             </div>
@@ -133,14 +133,14 @@
                     <label for="konsumsi" class="text-sm text-white">Konsumsi (perhari)</label>
                     <div class=" mt-2 flex items-center gap-0">
                         <label for="konsumsi" class=" bg-white p-2 rounded-tl-md rounded-bl-md text-black border-grey border-r-[1px] w-10">RP.</label>
-                        <input value="{{ old('offer_subject', @$offer->offer_subject) }}" name="consumption_cost" type="number" id="konsumsi" placeholder="Konsumsi" class=" text-black w-full p-2 outline-none rounded-tr-md rounded-br-md">
+                        <input name="consumtion_cost" type="number" id="konsumsi" placeholder="Konsumsi" class=" text-black bg-white w-full p-2 outline-none rounded-tr-md rounded-br-md">
                     </div>
                 </div>
                 <div class=" w-full md:w-1/2 mt-2 md:mt-0">
                     <label for="transport" class="text-sm text-white">Transport Pulang-Pergi Standar JKT-BDG</label>
                     <div class=" mt-2 flex items-center gap-0">
                         <label for="transport" class=" bg-white p-2 rounded-tl-md rounded-bl-md text-black border-grey border-r-[1px] w-10">RP.</label>
-                        <input value="{{ old('offer_subject', @$offer->offer_subject) }}" name="transportation_cost" type="number" id="transport" placeholder="Transport" class=" text-black w-full p-2 outline-none rounded-tr-md rounded-br-md">
+                        <input name="transportation_cost" type="number" id="transport" placeholder="Transport" class=" text-black bg-white w-full p-2 outline-none rounded-tr-md rounded-br-md">
                     </div>
                 </div>
             </div>
@@ -206,36 +206,89 @@
         </div>
     </form>
 
-    <!--modal outsourcing-->
-    <dialog id="my_modal_5" class="modal  text-white">
-        <form method="dialog" class="modal-box bg-grey border-2 border-white w-11/12 max-w-4xl">
-            <table class=" w-full">
-                <thead>
-                    <tr class=" border-b-[1px] border-white">
-                        <td align="center" class="p-3">No</td>
-                        <td align="center" class="p-3">Deskirpsi</td>
-                        <td align="center" class="p-3">Qty</td>
-                        <td align="center" class="p-3">Durasi Kontrak (max 12 bulan)</td>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr class=" bg-[#202020]/50">
-                        <td class=" p-5 mt-2" align="center">1</td>
-                        <td class=" p-5" align="center"><input id="deskripsi" type="text" class=" outline-none rounded-md text-black p-2 placeholder:text-[#202020]/50" placeholder="Outsourcing IT Support"></td>
-                        <td class=" p-5" align="center"><input id="qty" type="text" class=" outline-none rounded-md text-black p-2 placeholder:text-[#202020]/50" placeholder="12"></td>
-                        <td class=" p-5" align="center"><input id="lamaKontrak" type="text" class=" outline-none rounded-md text-black p-2 placeholder:text-[#202020]/50" placeholder="11 Bulan"></td>
-                    </tr>
-                </tbody>
-            </table>
-            <div class="modal-action">
-                <button type="submit" class="btn bg-secondary text-white border-none hover:bg-secondary/50 hover:text-white/80">Save</button>
-            </div>
-        </form>
-    </dialog>
+<!--modal outsourcing-->
+<dialog id="my_modal_5" class="modal  text-white">
+    <form method="dialog" class="modal-box bg-grey border-2 border-white w-11/12 max-w-4xl" onsubmit="handleFormSubmit(); hideModal(); return false;">
+        @csrf
+        <table class=" w-full">
+            <thead>
+                <tr class=" border-b-[1px] border-white">
+                    <td align="center" class="p-3">No</td>
+                    <td align="center" class="p-3">Deskirpsi</td>
+                    <td align="center" class="p-3">Qty</td>
+                    <td align="center" class="p-3">Durasi Kontrak (max 12 bulan)</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class=" bg-[#202020]/50">
+                    <td class=" p-5 mt-2" align="center">1</td>
+                    <td class=" p-5" align="center"><input id="dsc" type="text" class="bg-white outline-none rounded-md text-black p-2 placeholder:text-[#202020]/50" placeholder="Outsourcing IT Support"></td>
+                    <td class=" p-5" align="center"><input id="qty" type="number" class="bg-white outline-none rounded-md text-black p-2 placeholder:text-[#202020]/50" placeholder="12"></td>
+                    <td class=" p-5" align="center"><input id="lamaKontrak" type="number" class="bg-white outline-none rounded-md text-black p-2 placeholder:text-[#202020]/50" placeholder="11 Bulan"></td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="modal-action">
+            <button type="submit" class="btn bg-secondary text-white border-none hover:bg-secondary/50 hover:text-white/80">Save</button>
+        </div>
+    </form>
+</dialog>
 
-    <script>
-        // alert('halo')
-        let outsourcing = {}
+<script>
+    const my_modal_5 = document.getElementById('my_modal_5');
+
+    function showModal() {
+        my_modal_5.showModal();
+    }
+
+    function hideModal() {
+        my_modal_5.close();
+    }
+
+    function handleFormSubmit() {
+        const dsc = document.getElementById('dsc');
+        const deskripsi = dsc.value;
+        const qty = document.getElementById('qty').value;
+        const lamaKontrak = document.getElementById('lamaKontrak').value;
+
+        if(deskripsi.trim() !== "") {
+
+        
+            const detailContainer = document.querySelector('.detail-container'); // Add this class to your container
+
+            const detailElement = document.createElement('div');
+            detailElement.className = 'bg-white text-black text-opacity-50 text-sm text-center py-1 px-7 rounded-md font-bold flex items-center gap-3';
+
+            console.log(deskripsi);
+            detailElement.innerHTML = `
+                <p>${deskripsi}</p>
+                <span>
+                    <i class="text-lg cursor-pointer ri-delete-bin-2-line text-delete"></i>
+                </span>
+            `;
+
+            const deleteIcon = detailElement.querySelector('.ri-delete-bin-2-line');
+            deleteIcon.addEventListener('click', function() {
+                detailContainer.removeChild(detailElement);
+            });
+            detailContainer.appendChild(detailElement);
+
+        }
+
+
+
+        var detailData = {
+            qty: qty,
+            needed_job: deskripsi,
+            city_location: lamaKontrak
+        };
+
+        console.log(detailData);
+    
+
+        deskripsi.value = "";
+    }
+    
 
     </script>
 
