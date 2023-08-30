@@ -15,7 +15,7 @@ return [
 
     'defaults' => [
         // 'guard' => 'web',
-        'guard' => 'sanctum',
+        'guard' => 'web',
         'passwords' => 'users',
     ],
 
@@ -63,7 +63,7 @@ return [
     'providers' => [
         'users' => [
             'driver' => 'eloquent',
-            'model' => App\Models\User::class,
+            'model' => App\Models\M_Users::class,
         ],
 
         // 'users' => [

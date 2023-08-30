@@ -1,6 +1,3 @@
-
-
-
 <div class=" hidden bg-darkSecondary w-screen lg:w-[18%] pt-11  h-screen lg:flex flex-col items-center fixed top-0 left-0 ">
 
     <div class="rounded-lg py-1 px-8 mx-8 flex items-center mb-9 bg-lightGrey">
@@ -45,7 +42,7 @@
 
 
             </div>
-            <div class="items-center flex gap-2 py-2  {{ set_child_active(['/client/order/'])  }}  w-full">
+            <div class="items-center flex gap-2 py-2  {{ request()->is('client/order/history') ? 'text-secondary fill-secondary' : 'text-white fill-white' }}  w-full">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="32" height="32">
                     <path d="M12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12H4C4 16.4183 7.58172 20 12 20C16.4183 20 20 16.4183 20 12C20 7.58172 16.4183 4 12 4C9.25022 4 6.82447 5.38734 5.38451 7.50024L8 7.5V9.5H2V3.5H4L3.99989 5.99918C5.82434 3.57075 8.72873 2 12 2ZM13 7L12.9998 11.585L16.2426 14.8284L14.8284 16.2426L10.9998 12.413L11 7H13Z"></path>
                 </svg>
@@ -58,10 +55,15 @@
     </div>
 
     <div class="border-t border-white flex items-center w-full absolute bottom-0 py-4">
-        <div class="items-center flex gap-2 py-2 text-white px-8  w-full">
-            <i class="ri-logout-box-r-line text-3xl"></i>
-            <a href="#">Logout</a>
-        </div>
+        <form action="/logout" method="POST" >
+                @csrf
+                <button type="submit">
+                    <div class="items-center flex gap-2 py-2 text-white px-8  w-full">
+                        <i class="ri-logout-box-r-line text-3xl"></i>
+                        <p>Logout</p>
+                    </div>
+                </button>
+        </form>
     </div>
 </div>
 
@@ -70,8 +72,8 @@
 
 {{-- Mobile --}}
 <div class="drawer fixed lg:hidden top-0 z-50">
-    
-  <input id="my-drawer" type="checkbox" class="drawer-toggle" />
+
+    <input id="my-drawer" type="checkbox" class="drawer-toggle" />
 
     <div class=" flex justify-between items-center px-5 pt-8 pb-5 absolute top-0 right-0 w-full bg-layoutBg">
 
@@ -85,8 +87,8 @@
     </div>
 
     <div class="drawer-side">
-    <label for="my-drawer" class="drawer-overlay"></label>
-    <div class=" bg-darkSecondary w-screen lg:w-[18%] pt-11  h-screen flex flex-col items-center fixed top-0 left-0 ">
+        <label for="my-drawer" class="drawer-overlay"></label>
+        <div class=" bg-darkSecondary w-screen lg:w-[18%] pt-11  h-screen flex flex-col items-center fixed top-0 left-0 ">
 
             <div class=" flex items-center justify-between w-full px-5">
                 <div class="rounded-lg py-1 px-8 ml-5 flex items-center bg-lightGrey">
@@ -101,8 +103,10 @@
             <div class="flex gap-4 pl-8 items-start mt-9 w-full">
                 <img src="/bgRusdi.jpeg" alt="bgRusdi" class="rounded-full w-[54px] h-[54px]">
                 <div class="flex flex-col ">
-                    <h6 class="text-white font-bold text-[14px]">Herman Maritim</h6>
-                    <p class="text-white text-[10px]">Admin</p>
+                @if(session() -> has('user'))
+                    <h6 class="text-white font-bold text-[14px]">{{ session('user') -> xs1 }}</h6>
+                    <p class="text-white text-[10px]">{{ session('user')->userTypes->description }}</p>
+                @endif
                 </div>
             </div>
 
@@ -148,10 +152,12 @@
             </div>
 
             <div class="border-t border-white flex items-center w-full absolute bottom-0 py-4">
-                <div class="items-center flex gap-2 py-2 text-white px-8  w-full">
-                    <i class="ri-logout-box-r-line text-3xl"></i>
-                    <a href="#">Logout</a>
-                </div>
+                <form action="/logout" method="POST">
+                    <button type="submit"  class="items-center flex gap-2 py-2 text-white px-8  w-full">
+                        <i class="ri-logout-box-r-line text-3xl"></i>
+                        <a href="#">Logout</a>
+                    </button>
+                </form>
             </div>
         </div>
     </div>

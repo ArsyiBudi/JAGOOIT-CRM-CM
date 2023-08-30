@@ -28,10 +28,25 @@ class M_Leads extends Model
         return $this->belongsTo(M_GlobalParams::class, 'lead_status', 'id_params');
     }
 
-    public function latestActivity(){
-        return $this->hasOne(M_Activity::class, 'leads_id', 'id')
-        ->join('global_params', 'global_params.id_params', '=', 'activity.activity_type_id')
-        ->select('global_params.params_name')
-        ->withDefault('-');
+    public function emails()
+    {
+        return $this->hasMany(M_Emails::class, 'leads_id');
+    }
+
+    public function latestActivity()
+    {
+        return $this->hasOne(M_Activity::class, 'leads_id')->latest();
+    }
+
+    public function latestActivityParams()
+    {
+        return $this->hasOneThrough(
+            M_GlobalParams::class,
+            M_Activity::class,
+            'leads_id',
+            'id_params',
+            'id',
+            'activity_type_id'
+        );
     }
 }

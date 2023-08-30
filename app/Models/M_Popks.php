@@ -39,6 +39,5 @@ class M_Popks extends Model
         'provider_finance_administrator',
         'jagoit_director',
         'client_director',
-
     ];    
 }

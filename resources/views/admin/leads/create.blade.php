@@ -38,7 +38,7 @@
 
 @section('container')
     <div class="hide-scrollbar overflow-auto pt-28 lg:pt-0 h-screen w-full">
-        <form class="  w-full bg-darkSecondary py-10 px-8 rounded-md" action="{{ route('create_order') }}" method="post">
+        <form class="w-full bg-darkSecondary py-10 px-8 rounded-md" action="{{ route('create_leads') }}" method="post">
             @csrf
             <div class="px-0 md:px-5 py-0 md:py-4 overflow-auto">
                 <div class="mb-2 text-3xl pb-5 border-white border-b "> 

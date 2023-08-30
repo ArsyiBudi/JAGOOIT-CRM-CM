@@ -42,7 +42,7 @@
         </ul>
     </div>
 
-    <form class="" action="{{ route('penawaran.download') }}" method="POST">
+    <form class="" action="{{ url(request()->path()) }}" method="POST">
         @csrf
         <div class=" mt-5">
             <div class=" block md:flex justify-end">
@@ -133,7 +133,7 @@
                     <label for="konsumsi" class="text-sm text-white">Konsumsi (perhari)</label>
                     <div class=" mt-2 flex items-center gap-0">
                         <label for="konsumsi" class=" bg-white p-2 rounded-tl-md rounded-bl-md text-black border-grey border-r-[1px] w-10">RP.</label>
-                        <input value="{{ old('offer_subject', @$offer->offer_subject) }}" name="consumtion_cost" type="number" id="konsumsi" placeholder="Konsumsi" class=" text-black w-full p-2 outline-none rounded-tr-md rounded-br-md">
+                        <input value="{{ old('offer_subject', @$offer->offer_subject) }}" name="consumption_cost" type="number" id="konsumsi" placeholder="Konsumsi" class=" text-black w-full p-2 outline-none rounded-tr-md rounded-br-md">
                     </div>
                 </div>
                 <div class=" w-full md:w-1/2 mt-2 md:mt-0">

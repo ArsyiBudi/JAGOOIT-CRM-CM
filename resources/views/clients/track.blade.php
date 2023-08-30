@@ -88,7 +88,7 @@
                         <p class="absolute top-12 text-xs py-4 text-left date-text">End Date : 8 desember 2022 </p>
                     </div> 
                 </li>
-                <li  class="step step-primary">
+                <li class="step step-primary">
                     <div class=" relative w-full">
                         <h1 class=" text-left text-lg pb-2">Training</h1> 
                         <p class=" absolute text-xs  text-left date-text">Start Date : 8 desember 2022 </p>
@@ -119,9 +119,6 @@
                 <li class="step">Onboarding</li>
             </ul>
         </div>
-
-        
      </div>
-  
 </body>
 </html>
