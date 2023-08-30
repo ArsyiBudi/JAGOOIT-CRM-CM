@@ -54,7 +54,7 @@ Route::any('/', function () {
     return view('clients.landing');
 });
 
-Route::fallback(function () { //To Handle an unknown routes
+Route::fallback(function () {
     return redirect('/');
 });
 
