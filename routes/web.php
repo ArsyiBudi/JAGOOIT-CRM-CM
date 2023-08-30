@@ -54,9 +54,9 @@ Route::any('/', function () {
     return view('clients.landing');
 });
 
-Route::fallback(function () { //!To Handle an unknown routes
-    return redirect('/');
-});
+// Route::fallback(function () { //!To Handle an unknown routes
+//     return redirect('/');
+// });
 
 Route::view('/track', 'clients.track');
 Route::post('/track', [C_Orders::class, 'track']);
@@ -75,7 +75,6 @@ Route::middleware('auth')->group(function () {
     Route::prefix('leads')->group(function () {
         Route::get('/', [C_Leads::class, 'fetch'])->name('fetch_leads');
         Route::delete('/leads/{id}', [C_Leads::class, 'delete'])->name('admin.leads.delete');
-
         Route::prefix('create')->group(function () {
             Route::get('/', function () {
                 return view('admin.leads.create', [
@@ -85,16 +84,15 @@ Route::middleware('auth')->group(function () {
             Route::post('/', [C_Leads::class, 'create'])->name('create_leads');
         });
         Route::get('/{id}/detail', [C_Leads::class, 'detail'])->name('detail_leads');
-
         Route::prefix('/activity') -> group(function () {
-            Route::get('/{id}', function(){
+            Route::get('/{leads_id}', function(){
                 return view('admin.leads.activity', [
                     'title' => "Leads | Create Activity"
                 ]);
             });
-            Route::post('/{id}/appointment', [C_Activity::class, 'appointment'])->name('activity.appointment');
-            Route::post('/{id}/note',[C_Activity::class, 'note'])->name('activity.note');
-            Route::post('/{id}/report', [C_Activity::class, 'report'])->name('activity.report');
+            Route::post('/{leads_id}/appointment', [C_Activity::class, 'appointment'])->name('activity.appointment');
+            Route::post('/{leads_id}/note',[C_Activity::class, 'note'])->name('activity.note');
+            Route::post('/{leads_id}/report', [C_Activity::class, 'report'])->name('activity.report');
         });
 
         Route::get('/{id}/offer', function () {
@@ -102,41 +100,35 @@ Route::middleware('auth')->group(function () {
                 "title" => "Leads | Create Offer",
             ]);
         });
-
-      
     });
 
     Route::prefix('client')->group(function () {
         Route::get('/', [C_Leads::class, 'fetch_client'])->name('fetch_client');
         Route::get('/detail/{id}', [C_Leads::class, 'detail']);
-
         Route::prefix('order')->group(function () {
             Route::get('/', [C_Orders::class, 'fetch'])->name('fetch_order');
             Route::get('/create', [C_Orders::class, 'newOrder'])-> name('new_order');
             Route::post('/create', [C_Orders::class, 'create']) -> name('create_order');
             Route::prefix('detail')->group(function () {
-                Route::get('/', function () {
+                Route::get('/{client_id}', function () {
                     return view('admin.client.order.detail', [
                         "title" => "Client | Detail Order",
                     ]);
                 });
-            
+                
+            });
             Route::prefix('history')->group(function(){
                 Route::get('/', function () {
                     return view('admin.client.order.history', [
                         "title" => "Client | Order History",
                     ]);
                 });
-    
-    
-                    Route::get('/timeline', function () {
-                        return view('admin.client.order.timeline', [
-                            "title" => "Client | Order Timeline",
-                        ]);
-                    });
+                Route::get('/{order_id}/timeline', function () {
+                    return view('admin.client.order.timeline', [
+                        "title" => "Client | Order Timeline",
+                    ]);
                 });
             });
-
 
             Route::prefix('plan')->group(function () {
                 Route::get('/', [TalentController::class, 'procedure1']);

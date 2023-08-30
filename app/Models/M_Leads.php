@@ -47,6 +47,6 @@ class M_Leads extends Model
             'id_params',
             'id',
             'activity_type_id'
-        );
+        )->latest();
     }
 }

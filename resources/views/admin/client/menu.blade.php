@@ -107,7 +107,7 @@
                         <td align="center" class=" p-4">{{ $row->statusParam->params_name }}</td>
                         <td align="center" class=" p-4">
                             <div class=" flex items-center gap-2">
-                                <a href="{{ url('/leads/'.$row -> id.'/detail') }}">
+                                <a href="{{ url('/client/detail/'. $row -> id) }}">
                                     <i class="text-lg cursor-pointer ri-information-line"></i>
                                 </a>
                                 <i class=" text-lg cursor-pointer ri-delete-bin-2-line text-delete"></i>
