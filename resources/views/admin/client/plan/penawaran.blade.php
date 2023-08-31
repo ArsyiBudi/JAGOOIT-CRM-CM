@@ -76,7 +76,7 @@
 
                 <div class="w-full md:w-1/4 mb-4">
                     <label for="tanggal" class="text-sm text-white">Tanggal</label>
-                    <input value="{{ old('date', @$offer->date) }}" name="date" id="tanggal" type="text" class=" mt-1 text-black rounded-md px-2 py-2  w-full bg-white" placeholder="03 Agustus 2023">
+                    <input value="{{ old('date', @$offer->date) }}" name="date" id="tanggal" type="date" class=" mt-1 text-black rounded-md px-2 py-2  w-full bg-white">
                 </div>
             </div>
 
