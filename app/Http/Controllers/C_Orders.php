@@ -29,10 +29,21 @@ class C_Orders extends Controller
     }
 
     public function fetch(Request $request){
-        $entries = $request->input('per_page', 5);
+        $perPage = $request->input('per_page', 5);
         $search = $request->input('search', '');
+    
+        session(['leads_per_page' => $perPage]);
+        session(['leads_search' => $search]);
 
-        $data = M_Orders::paginate($entries);
+        $entries = session('leads_per_page', 5);
+        $search = session('leads_search', '');
+
+        $data = M_Orders::whereHas('leadData', function($query) use ($search){
+            $query -> where('business_name', 'like', "%$search%");
+        })->orWhereHas('globalParams', function($query) use ($search){
+            $query -> where('params_name', 'like', "%$search%");
+        })->paginate($entries);
+
         return view('admin.client.order.list', [
             "title" => "Client | Order List",
             "order" => $data
