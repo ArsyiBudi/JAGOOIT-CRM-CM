@@ -47,7 +47,7 @@ class C_Plan extends Controller
         if(!$status){
             return redirect() -> back() -> with('error', 'Nigga');
         }
-        return redirect('/client/order/'. $order_id .'/penawaran/');
+        return redirect('/client/order/plan/'. $order_id .'/penawaran');
     }
 
     public function openOffer($order_id)
