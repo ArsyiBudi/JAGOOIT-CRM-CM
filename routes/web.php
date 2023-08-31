@@ -104,19 +104,18 @@ Route::middleware('auth')->group(function () {
 
     Route::prefix('client')->group(function () {
         Route::get('/', [C_Leads::class, 'fetch_client'])->name('fetch_client');
-        Route::get('/detail/{id}', [C_Leads::class, 'detail']);
+        Route::get('/detail/{client_id}', [C_Leads::class, 'detail']);
         Route::prefix('order')->group(function () {
             Route::get('/', [C_Orders::class, 'fetch'])->name('fetch_order');
-            Route::get('/create', [C_Orders::class, 'newOrder'])-> name('new_order');
-            Route::post('/create', [C_Orders::class, 'create']) -> name('create_order');
-            Route::prefix('detail')->group(function () {
-                Route::get('/{client_id}', function () {
-                    return view('admin.client.order.detail', [
-                        "title" => "Client | Detail Order",
-                    ]);
-                });
-                
+            Route::get('/detail/{order_id}', [C_Orders::class, 'detail'])->name('detail_order');
+
+            //?CREATE ORDER
+            Route::prefix('create')->group(function(){
+                Route::get('/', [C_Orders::class, 'newOrder'])-> name('new_order');
+                Route::post('/', [C_Orders::class, 'create']) -> name('create_order');
             });
+
+            //?HISTORY ORDER
             Route::prefix('history')->group(function(){
                 Route::get('/', function () {
                     return view('admin.client.order.history', [
@@ -130,9 +129,10 @@ Route::middleware('auth')->group(function () {
                 });
             });
 
+            //?PLAN ORDER
             Route::prefix('plan')->group(function () {
-                Route::get('/', [TalentController::class, 'procedure1']);
-                Route::delete('/{id}', [TalentController::class, 'destroy']);
+                Route::get('/recruitment/{order_id}', [TalentController::class, 'procedure1']) -> name('recruitment');
+                Route::delete('/recruitment/{order_id}', [TalentController::class, 'destroy']);
 
                 Route::get('/training', function () {
                     return view('admin.client.plan.training', [

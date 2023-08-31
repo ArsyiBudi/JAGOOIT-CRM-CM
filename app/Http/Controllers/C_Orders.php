@@ -56,7 +56,7 @@ class C_Orders extends Controller
         $order_data['data'] = M_Orders::find($field['order_id'])->get();
         if(!$order_data){
             return response([
-                'message' => "No order has an id of {$request['order_id']}"
+                'message' => "No order has an id of {$field['order_id']}"
             ], 401);
         };
         return view('clients.track', $order_data);
@@ -101,4 +101,13 @@ class C_Orders extends Controller
             return redirect('/client');
         }
     }
+
+    public function detail($order_id){
+        $data = M_Orders::where('id', '=', "$order_id")->first();
+        return view('admin.client.order.detail', [
+            "title" => "Client | Detail Order",
+            "data" => $data
+        ]);
+    }
+    
 }

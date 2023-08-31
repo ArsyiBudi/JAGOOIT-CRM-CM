@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class M_Orders extends Model
 {
@@ -55,5 +56,15 @@ class M_Orders extends Model
     public function globalParams() : BelongsTo
     {
         return $this->belongsTo(M_GlobalParams::class, 'order_status', 'id_params');
+    }
+    
+     public function talentData()
+    {
+        return $this->hasOne(M_OrderDetails::class, 'order_id');
+    }
+
+    public function  talentDataFetch(): HasMany
+    {
+        return $this->hasMany(M_OrderDetails::class, 'order_id');
     }
 }

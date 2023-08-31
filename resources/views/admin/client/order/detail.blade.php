@@ -46,13 +46,20 @@
                     <a class="bg-secondary rounded-md py-2 px-4 text-sm" href="/client/order/history/detail/timeline">Lihat Timeline</a>
                 </div>
                 <div class="divide-y divide-slate-50">
-                    <div class="pt-3">Nama Perusahaan</div>
-                    <div class="pt-3">Alamat</div>
-                    <div class="pt-3">Nama PIC</div>
-                    <div class="pt-3">No Telp PIC</div>
-                    <div class="pt-3">Last Activity</div>
-                    <div class="pt-3">Status</div>
-                    <div class="pt-3">Keterangan</div>
+                    <div class="pt-3">{{ $data -> leadData -> business_name }}</div>
+                    <div class="pt-3">{{ $data -> leadData -> address }}</div>
+                    <div class="pt-3">{{ $data -> leadData -> pic_name }}</div>
+                    <div class="pt-3">{{ $data -> leadData -> pic_contact_number }}</div>
+                    <div class="pt-3">
+                        @if ($data-> leadData ->latestActivity)
+                            @if ($data -> leadData ->latestActivityParams)
+                                {{ $data -> leadData ->latestActivityParams->params_name }}
+                            @endif
+                        @else
+                            -
+                        @endif
+                    </div>
+                    <div class="pt-3">{{ $data -> leadData -> statusParam -> params_name }}</div>
                     <hr>
                 </div>
             </div>
@@ -69,41 +76,19 @@
                         </tr>
                     </thead>
                     <tbody class="">
-                        <tr class="text-center bg-grey font-medium">
-                            <td class="p-4">1</td>
-                            <td class="p-4">Bambang Nurjaman</td>
-                            <td class="p-4">Los Santos 88</td>
-                            <td class="p-4">Samsul</td>
-                            <td class="p-4">Front End</td>
-                        </tr>
-                        <tr class="text-center bg-primary">
-                            <td class="p-4">2</td>
-                            <td class="p-4">Bambang Nurjaman</td>
-                            <td class="p-4">Los Santos 88</td>
-                            <td class="p-4">Samsul</td>
-                            <td class="p-4">Front End</td>
-                        </tr>
-                        <tr class="text-center bg-grey">
-                            <td class="p-4">3</td>
-                            <td class="p-4">Bambang Nurjaman</td>
-                            <td class="p-4">Los Santos 88</td>
-                            <td class="p-4">Samsul</td>
-                            <td class="p-4">Front End</td>
-                        </tr>
-                        <tr class="text-center bg-primary">
-                            <td class="p-4">4</td>
-                            <td class="p-4">Bambang Nurjaman</td>
-                            <td class="p-4">Los Santos 88</td>
-                            <td class="p-4">Samsul</td>
-                            <td class="p-4">Front End</td>
-                        </tr>
-                        <tr class="text-center bg-grey">
-                            <td class="p-4">5</td>
-                            <td class="">Bambang Nurjaman</td>
-                            <td class="">Los Santos 88</td>
-                            <td class="">Samsul</td>
-                            <td class="">Front End</td>
-                        </tr>
+                        @if($data -> talentData)
+                            @foreach($data -> talentDataFetch as $row)
+                            <tr class="text-center bg-grey font-medium">
+                                <td class="p-4">{{ $row -> id }}</td>
+                                <td class="p-4">{{ $row -> talentData -> name }}</td>
+                                <td class="p-4">{{ $row -> talentData -> pendidikanTalent -> description }}</td>
+                                <td class="p-4">{{ $row -> talentData -> keterampilanTalent -> description }}</td>
+                                <td class="p-4">{{ $row -> talentData -> posisiTalent -> description }}</td>
+                            </tr>
+                            @endforeach
+                        @else
+                            No Talent Data
+                        @endif
                     </tbody>
                 </table>
             </div>

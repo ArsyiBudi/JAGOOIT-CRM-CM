@@ -58,12 +58,12 @@ class C_Leads extends Controller
         ]);
     }
 
-    public function detail($id)
+    public function detail($leads_id)
     {
-        $leads_data = M_Leads::where('id', '=', "$id")->get();
+        $leads_data = M_Leads::where('id', '=', "$leads_id")->get();
         if (!$leads_data) {
             return response([
-                'error' => "No leads has this id : {{ $id }}"
+                'error' => "No leads has this id : {{ $leads_id }}"
             ]);
         }
         return view('admin.leads.detail', [
