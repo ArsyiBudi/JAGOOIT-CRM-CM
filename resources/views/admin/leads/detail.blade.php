@@ -8,7 +8,7 @@
             @foreach($leads as $data)
             <div class="flex flex-row text-xs space-x-2">
                 <a class="bg-secondary rounded-md px-3 md:px-4 py-1 md:py-2 hover:scale-95 duration-200"  href="{{ url('/leads/activity/'. $data -> id) }}">Create Activity</a>
-                <a class="bg-secondary rounded-md px-3 md:px-4 py-1 md:py-2 hover:scale-95 duration-200" href="{{ url('/leads/offer')}}">Create Offer</a>
+            <a class="bg-secondary rounded-md px-3 md:px-4 py-1 md:py-2 hover:scale-95 duration-200" href="{{ url('/leads/offer/'. $data -> id)}}">Create Offer</a>
             </div>
             <div class="divide-y divide-slate-50 gap-4 flex flex-col">
                 <div class="pt-3">

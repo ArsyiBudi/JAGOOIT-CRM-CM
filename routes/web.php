@@ -98,7 +98,7 @@ Route::middleware('auth')->group(function () {
         });
 
         //?LEADS OFFER
-        Route::get('/{id}/offer', function () {
+        Route::get('/offer/{order_id}', function () {
             return view('admin.leads.offer', [
                 "title" => "Leads | Create Offer",
             ]);
