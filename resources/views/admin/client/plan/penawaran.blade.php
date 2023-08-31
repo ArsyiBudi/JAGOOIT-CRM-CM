@@ -99,7 +99,6 @@
                         <form action="">
                             @csrf
                             <div class=" detail-container flex gap-2">
-                                <!-- Existing detail buttons will be dynamically added here -->
                             </div>
                         </form>
                         <button type="button" class="btn bg-white text-darkSecondary text-opacity-50 text-sm text-center py-2 px-3  rounded-md font-bold hover:scale-95 duration-200 hover:bg-white" onclick="my_modal_5.showModal()">Add Detail +</button>
@@ -166,8 +165,8 @@
                 <label for="file-cv" id="container-cv" class="flex justify-center items-center bg-white py-4 rounded-lg px-2 h-24 cursor-pointer mt-2">
                      <input required id="file-cv" type="file" name="cv_file" class="text-black rounded-lg px-2 py-4 h-[56px] w-[337px] hidden bg-white" name="cv" onchange="previewFile()">
                     <span id="file-upload-label" class=" text-white font-semibold cursor-pointer font-quicksand">
-                                <i class="ri-upload-2-fill text-3xl text-black"></i>
-                            </span>
+                        <i class="ri-upload-2-fill text-3xl text-black"></i>
+                    </span>
                 </label>
             </div>
 
