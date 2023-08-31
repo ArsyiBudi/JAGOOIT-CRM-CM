@@ -206,14 +206,21 @@
             @csrf
             <div class="overflow-auto bg-darkSecondary mt-5 justify-between flex flex-col text-lightGrey px-8 py-10 rounded-md space-y-3">
                 <div>File PKS (1 file, pdf)</div>
+
                 <div class="flex flex-row space-x-2">
                     <div class="flex-auto flex flex-col">
-                        <div class="flex justify-center items-center bg-white py-2 rounded-lg h-[56px] w-[335px]">
-                            <input id="file-cv" type="file" class="text-black rounded-lg hidden bg-white" name="">
-                            <label for="file-cv" class="cursor-pointer">
-                                <i class="ri-upload-2-fill text-3xl text-black"></i>
-                            </label>
+                        <p id="file-name-preview" style="display: none;"  class=" pt-3"></p>
+                        <div id="canvas-loading"  class=" my-3 w-full hidden">
+                            <span class="loading loading-dots loading-md "></span>
                         </div>
+                                
+                        <canvas id="pdf-preview" style="display: none;" class=" w-[355px] rounded-md my-3"></canvas>
+                        <label for="file-pks" class="flex justify-center items-center cursor-pointer bg-white py-2 rounded-lg h-[56px] w-[335px]" id="container-pks">
+                            <input id="file-pks" type="file" class="text-black rounded-lg hidden bg-white" name="file-pks" onchange="previewFile()">
+                        <span id="file-upload-label" class=" text-white font-semibold cursor-pointer font-quicksand">
+                        <i class="ri-upload-2-fill text-3xl text-black"></i>
+                    </span>
+                        </label>
                     </div>
                     <div class="">
                         <input type="checkbox" class="rounded-md"> File PO Diterima
@@ -254,5 +261,73 @@
             </div>
         </div>
 </form>
-    </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.11.338/pdf.min.js"></script>
+
+<script>
+    async function previewFile() {
+        const fileInput = document.getElementById('file-pks');
+        const containerInput = document.getElementById('container-pks');
+        const fileNamePreview = document.getElementById('file-name-preview');
+        const canvas = document.getElementById('pdf-preview');
+        const fileUploadLabel = document.getElementById('file-upload-label');
+        const canvasLoading = document.getElementById('canvas-loading');
+
+
+        
+        if (fileInput.files && fileInput.files[0]) {
+            fileUploadLabel.textContent = 'Ganti File';
+            containerInput.style.width = '355px'; 
+            containerInput.style.height = 'auto'; 
+            containerInput.style.backgroundColor = '#EC512E'
+        } else {
+            fileUploadLabel.innerHTML = '<i class="ri-upload-2-fill text-3xl text-black"></i>';
+        }
+        
+        if (fileInput.files && fileInput.files[0]) {
+            canvasLoading.style.display = 'block';
+            const file = fileInput.files[0];
+            const fileURL = URL.createObjectURL(file);
+
+            fileNamePreview.style.color = 'white'
+            fileNamePreview.textContent = file.name;
+            fileNamePreview.style.display = 'block';
+
+            if (file.type === 'application/pdf') {
+                
+                const loadingTask = pdfjsLib.getDocument(fileURL);
+                const pdf = await loadingTask.promise;
+
+                const pageNum = 1; 
+                const page = await pdf.getPage(pageNum);
+
+                const viewport = page.getViewport({ scale: 1 });
+                canvas.width = viewport.width;
+                canvas.height = 200;
+
+                const renderContext = {
+                    canvasContext: canvas.getContext('2d'),
+                    viewport
+                };
+
+                await page.render(renderContext).promise;
+                canvas.style.display = 'block';
+                canvasLoading.style.display = 'none';
+
+            } else {
+                canvas.style.display = 'none';
+                fileNamePreview.textContent = 'File harus berupa PDF!';
+                fileNamePreview.style.color = 'red'
+                canvasLoading.style.display = 'none';
+            }
+        } else {
+            fileNamePreview.style.display = 'none';
+            canvas.style.display = 'none';
+        }
+}
+</script>
+
+
+
 @endsection
