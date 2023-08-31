@@ -17,7 +17,7 @@ class M_Orders extends Model
         'id',
         'leads_id',
         'offer_letter_id',
-    'popks_letter_id',
+        'popks_letter_id',
         'order_status',
         'desired_position',
         'needed_qty',

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\M_Orders;
 use App\Models\M_Popks;
 use Illuminate\Http\Request;
 use Nette\Utils\DateTime;
@@ -78,18 +79,23 @@ class C_Plan extends Controller
         // return redirect('/client/order');
     }
 
-    // public function popks_send(Request $request){
-    //     $field = $request->validate([
-    //         'po_file' => 'required',
-    //         'po_descr' => 'required',
-    //     ]);
+    public function popks_send(Request $request, $order_id){
+        $field = $request->validate([
+            'po_file' => 'required',
+            'po_descr' => 'required',
+        ]);
 
-    //     if(!$field) return response([
-    //         'error' => 'error'
-    //     ]);
+        if(!$field) return response([
+            'error' => 'error'
+        ]);
 
-    //     $popks = M_Popks::create([
+        $popks = M_Orders::find($order_id);
+        $popks-> po_file = $field['po_file'];
+        $popks-> po_description = $field['po_descr'];
+        $status = $popks->update();
 
-    //     ]);
-    // }
+        if($status){
+            return redirect('/client/order');
+        }
+    }
 }

@@ -139,14 +139,14 @@ Route::middleware('auth')->group(function () {
                         "title" => "Plan | Training",
                     ]);
                 });
-            Route::post('/training', [C_Offer::class, 'newOffer'])->name('create_offer_null');
 
-            Route::get('/penawaran/{id}', function () {
-                return view('admin.client.plan.penawaran', [
-                    "title" => "Plan | Penawaran",
-                ]);
-            });
-            Route::post('/penawaran/{id}', [C_Offer::class, 'create'])->name('create_offer');
+                Route::post('/training', [C_Offer::class, 'newOffer'])->name('create_offer_null');
+                Route::get('/penawaran/{id}', function () {
+                    return view('admin.client.plan.penawaran', [
+                        "title" => "Plan | Penawaran",
+                    ]);
+                });
+                Route::post('/penawaran/{id}', [C_Offer::class, 'create'])->name('create_offer');
             
                 Route::get('/negosiasi', function () {
                     return view('admin.client.plan.negosiasi', [
@@ -159,20 +159,19 @@ Route::middleware('auth')->group(function () {
                         "title" => "Plan | Percobaan",
                     ]);
                 });
-
-                Route::prefix('popks')->group(function () {
-                    Route::get('/', function () {
-                        return view('admin.client.plan.popks', [
-                            "title" => "Plan | PO & PKS",
-                        ]);
-                    });
-
-                    Route::post('/', [C_Plan::class, 'popks_create'])->name('create_popks');
-                    // Route::post('/', [C_Plan::class, 'popks_send']) -> name('send_popks');
+                Route::get('/{order_id}/popks/{popks_id}', function () {
+                    return view('admin.client.plan.popks', [
+                        "title" => "Plan | PO & PKS",
+                    ]);
                 });
+    
+                Route::post('/{order_id}/popks/{popks_id}', [C_Plan::class, 'popks_create']) -> name('create_popks');
+                Route::patch('/{order_id}/popks/{popks_id}', [C_Plan::class, 'popks_send']) -> name('send_popks');
+            
             });
         });
     });
 });
+
 
 //? Admin End

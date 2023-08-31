@@ -66,7 +66,7 @@
                 <li></li>
             </ul>
         </div>
-    <form action="{{ route('create_popks') }}" method="post">         
+    <form action="{{ url(request()->path()) }}" method="post">         
     @csrf
     @if (!empty($field))
         @method('PATCH')
@@ -201,15 +201,17 @@
             </div>
 
         </div>
+    </form>
     
-        <form method="post">
+        <form action="{{ url(request()->path()) }}" method="POST">
             @csrf
+            @method('PATCH')
             <div class="overflow-auto bg-darkSecondary mt-5 justify-between flex flex-col text-lightGrey px-8 py-10 rounded-md space-y-3">
                 <div>File PKS (1 file, pdf)</div>
                 <div class="flex flex-row space-x-2">
                     <div class="flex-auto flex flex-col">
                         <div class="flex justify-center items-center bg-white py-2 rounded-lg h-[56px] w-[335px]">
-                            <input id="file-cv" type="file" class="text-black rounded-lg hidden bg-white" name="">
+                            <input id="file-cv" type="file" class="text-black rounded-lg hidden bg-white" name="po_file">
                             <label for="file-cv" class="cursor-pointer">
                                 <i class="ri-upload-2-fill text-3xl text-black"></i>
                             </label>
@@ -222,7 +224,7 @@
 
                     <div class="flex-auto flex flex-col">
                         <label for="desk-popks">Deskripsi</label>
-                        <textarea id="desk-popks" type="text" class="rounded-md h-[70px] text-black hide-scrollbar resize-none"></textarea>
+                        <textarea id="desk-popks" type="text" class="rounded-md h-[70px] text-black hide-scrollbar resize-none" name="po_descr"></textarea>
                     </div>
 
                 <div class="mt-4 flex justify-end">
@@ -253,6 +255,5 @@
                 </div>
             </div>
         </div>
-</form>
     </div>
 @endsection
