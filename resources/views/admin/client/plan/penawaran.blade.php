@@ -155,11 +155,19 @@
         <div class="bg-grey rounded shadow-lg mt-6 p-6">
             <div class="w-full  mb-4 ">
                 <label for="file-tor" class="text-sm text-white">File Surat Penawaran + CV (1 file, pdf)</label>
-                <label for="file-cv" class="flex justify-center items-center bg-white py-4 rounded-lg px-2 h-24 cursor-pointer mt-2">
-                    <input id="file-cv" type="file" class="text-black rounded-lg px-2 py-4 h-[56px] w-[337px] hidden bg-white" name="tor">
-                    <label for="file-cv" class="cursor-pointer">
-                        <i class="ri-upload-2-fill text-3xl text-black"></i>
-                    </label>
+
+                <p id="file-name-preview" style="display: none;"  class=" pt-3"></p>
+                <div id="canvas-loading"  class=" my-3 w-full hidden">
+                    <span class="loading loading-dots loading-md "></span>
+                </div>
+                        
+                <canvas id="pdf-preview" style="display: none;" class="w-full rounded-md"></canvas>
+
+                <label for="file-cv" id="container-cv" class="flex justify-center items-center bg-white py-4 rounded-lg px-2 h-24 cursor-pointer mt-2">
+                     <input required id="file-cv" type="file" name="cv_file" class="text-black rounded-lg px-2 py-4 h-[56px] w-[337px] hidden bg-white" name="cv" onchange="previewFile()">
+                    <span id="file-upload-label" class=" text-white font-semibold cursor-pointer font-quicksand">
+                                <i class="ri-upload-2-fill text-3xl text-black"></i>
+                            </span>
                 </label>
             </div>
 
@@ -234,6 +242,8 @@
     </form>
 </dialog>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.11.338/pdf.min.js"></script>
+
 <script>
     const my_modal_5 = document.getElementById('my_modal_5');
 
@@ -288,8 +298,67 @@
 
         deskripsi.value = "";
     }
-    
 
+    async function previewFile() {
+        const fileInput = document.getElementById('file-cv');
+        const containerInput = document.getElementById('container-cv');
+        const fileNamePreview = document.getElementById('file-name-preview');
+        const canvas = document.getElementById('pdf-preview');
+        const fileUploadLabel = document.getElementById('file-upload-label');
+        const canvasLoading = document.getElementById('canvas-loading');
+
+
+        
+        if (fileInput.files && fileInput.files[0]) {
+            fileUploadLabel.textContent = 'Ganti File';
+            containerInput.style.width = 'auto'; 
+            containerInput.style.height = 'auto'; 
+            containerInput.style.backgroundColor = '#EC512E'
+        } else {
+            fileUploadLabel.innerHTML = '<i class="ri-upload-2-fill text-3xl text-black"></i>';
+        }
+        
+        if (fileInput.files && fileInput.files[0]) {
+            canvasLoading.style.display = 'block';
+            const file = fileInput.files[0];
+            const fileURL = URL.createObjectURL(file);
+
+            fileNamePreview.style.color = 'white'
+            fileNamePreview.textContent = file.name;
+            fileNamePreview.style.display = 'block';
+
+            if (file.type === 'application/pdf') {
+                
+                const loadingTask = pdfjsLib.getDocument(fileURL);
+                const pdf = await loadingTask.promise;
+
+                const pageNum = 1; 
+                const page = await pdf.getPage(pageNum);
+
+                const viewport = page.getViewport({ scale: 1 });
+                canvas.width = viewport.width;
+                canvas.height = 200;
+
+                const renderContext = {
+                    canvasContext: canvas.getContext('2d'),
+                    viewport
+                };
+
+                await page.render(renderContext).promise;
+                canvas.style.display = 'block';
+                canvasLoading.style.display = 'none';
+
+            } else {
+                canvas.style.display = 'none';
+                fileNamePreview.textContent = 'File harus berupa PDF!';
+                fileNamePreview.style.color = 'red'
+                canvasLoading.style.display = 'none';
+            }
+        } else {
+            fileNamePreview.style.display = 'none';
+            canvas.style.display = 'none';
+        }
+}
 </script>
 
 @endsection
