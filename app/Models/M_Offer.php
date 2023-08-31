@@ -13,17 +13,19 @@ class M_Offer extends Model
     protected $guarded = [
         'id', 
     ];
-    // protected $fillable = [
-    //     'letter_number',
-    //     'date',
-    //     'location',
-    //     'offer_subject',
-    //     'recipient_name',
-    //     'context',
-    //     'talent_total',
-    //     'weekday_cost',
-    //     'weekend_cost',
-    //     'consumtion_cost',
-    //     'transportation_cost',
-    // ];
+
+    protected $primaryKey = 'id';
+    protected $fillable = [
+        'letter_number',
+        'date',
+        'location',
+        'offer_subject',
+        'recipient_name',
+        'context',
+        'talent_total',
+        'weekday_cost',
+        'weekend_cost',
+        'consumtion_cost',
+        'transportation_cost',
+    ];
 }

@@ -24,13 +24,13 @@ class M_OrderDetails extends Model
         'recruitment_status'
     ];
 
-    public function orders()
+    public function order() : BelongsTo
     {
         return $this -> belongsTo(M_Orders::class, 'order_id');
     }
 
     public function talentData() : BelongsTo
     {
-        return $this -> belongsTo(M_Talents::class, 'talent_id', 'id');
+        return $this -> belongsTo(M_Talents::class, 'talent_id');
     }
 }

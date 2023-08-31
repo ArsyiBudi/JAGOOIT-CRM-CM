@@ -94,7 +94,7 @@
                     <tr class=" odd:bg-grey">
                         <td align="center" class=" p-4">{{ $row->id }}</td>
                         <td align="center" class=" p-4">{{ $row->business_name }}</td>
-                        <td align="center" class=" p-4">{{ $row->business_sector }}</td>
+                        <td align="center" class=" p-4">{{ $row->address }}</td>
                         <td align="center" class=" p-4">{{ $row->pic_name }}</td>
                         <td align="center" class=" p-4">{{ $row->pic_contact_number }}</td>
                         <td align="center" class=" p-4">

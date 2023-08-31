@@ -61,6 +61,7 @@ class C_Orders extends Controller
         };
         return view('clients.track', $order_data);
     }
+    
     public function create(Request $request){
         $field = $request -> validate([
             'business_id' => 'required', 

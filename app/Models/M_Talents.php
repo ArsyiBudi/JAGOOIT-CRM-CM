@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class M_Talents extends Model
@@ -31,12 +32,12 @@ class M_Talents extends Model
         'is_active',
     ];
 
-    public function lead()
+    public function lead() : BelongsTo
     {
         return $this->belongsTo(M_Orders::class);
     }
 
-    public function orderDetails()
+    public function order_detail() : BelongsTo
     {
         return $this->belongsTo(M_OrderDetails::class);
     }

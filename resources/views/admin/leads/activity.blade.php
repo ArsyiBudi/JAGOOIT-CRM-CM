@@ -32,6 +32,7 @@
             <div id="formContainer" class="w-full">
                 <form id="form1" class="hidden" method="POST" action="{{ url(request()->path() . '/appointment') }}">
                     @csrf
+                    @method('PATCH')
                     <div class="bg-white opacity-70 mb-4 p-2 rounded-md w-full">
                         <textarea name="judul" id="judul" class="text-black opacity-100 w-full p-2 bg-transparent outline-none resize-none" placeholder="Judul"></textarea> <!-- Menggunakan w-full untuk mengisi textarea secara penuh -->
                     </div>

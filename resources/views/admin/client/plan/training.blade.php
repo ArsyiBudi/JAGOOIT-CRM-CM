@@ -51,7 +51,6 @@
         -webkit-appearance: none;
         margin: 0;
     }
-
 </style>
 
 @section('container')
@@ -109,84 +108,50 @@
                         </thead>
                         <tbody>
                             <div>
-                                <!-- row 1 -->
-                                <tr>
-                                    <th align="center">1</th>
-                                    <td align="center">Bambang S.</td>
-                                    <td align="center">
-                                        <div class="w-[86px] h-[27px] rounded-md bg-white flex items-center justify-center">
-                                            <input id='pre-test' name='pre-test' type="number" class='text-black w-full text-center outline-none bg-transparent' placeholder='nilai'>
-                                        </div>
-                                    </td>
-                                    <td align="center">
-                                        <div class="w-[86px] h-[27px] rounded-md bg-white flex items-center justify-center">
-                                            <input id='post-test' name='post-test' type="number" class='text-black w-full text-center outline-none bg-transparent' placeholder='nilai'>
-                                        </div>
-                                    </td>
-                                    <td align="center">
-                                        <div class="w-[86px] h-[27px] rounded-md bg-white flex items-center justify-center">
-                                            <input id='nilai-kelompok' name='nilai-kelompok' type="number" class='text-black w-full text-center outline-none bg-transparent' placeholder='nilai'>
-                                        </div>
-                                    </td align="center">
-                                    <td align="center">
-                                        <div class="w-[86px] h-[27px] rounded-md bg-white flex items-center justify-center">
-                                            <input id='nilai-akhir' name='nilai-akhir' type="number" class='text-black w-full text-center outline-none bg-transparent' placeholder='nilai'>
-                                        </div>
-                                    </td>
-                                    <td align="center">
-                                        <div class="w-[86px] h-[27px] rounded-md bg-white flex items-center justify-center">
-                                            <input id='rata-rata' name='rata-rata' type="number" class='text-black w-full text-center outline-none bg-transparent' placeholder='nilai'>
-                                        </div>
-                                    </td>
-                                    <td align="center"><input type="submit" class="bg-secondary text-white rounded-md w-[82px] h-[25px]"></td>
-                                </tr>
-
-                                <!-- row 2 -->
-                                <tr>
-                                    <th align="center">2</th>
-                                    <td align="center">Budi P</td>
-                                    <td align="center">
-                                        <div class="w-[86px] h-[27px] rounded-md bg-white flex items-center justify-center">
-                                            <input id='pre-test' name='pre-test' type="number" class='text-black w-full text-center outline-none bg-transparent' placeholder='nilai'>
-                                        </div>
-                                    </td>
-                                    <td align="center">
-                                        <div class="w-[86px] h-[27px] rounded-md bg-white flex items-center justify-center">
-                                            <input id='post-test' name='post-test' type="number" class='text-black w-full text-center outline-none bg-transparent' placeholder='nilai'>
-                                        </div>
-                                    </td>
-                                    <td align="center">
-                                        <div class="w-[86px] h-[27px] rounded-md bg-white flex items-center justify-center">
-                                            <input id='nilai-kelompok' name='nilai-kelompok' type="number" class='text-black w-full text-center outline-none bg-transparent' placeholder='nilai'>
-                                        </div>
-                                    </td align="center">
-                                    <td align="center">
-                                        <div class="w-[86px] h-[27px] rounded-md bg-white flex items-center justify-center">
-                                            <input id='nilai-akhir' name='nilai-akhir' type="number" class='text-black w-full text-center outline-none bg-transparent' placeholder='nilai'>
-                                        </div>
-                                    </td>
-                                    <td align="center">
-                                        <div class="w-[86px] h-[27px] rounded-md bg-white flex items-center justify-center">
-                                            <input id='rata-rata' name='rata-rata' type="number" class='text-black w-full text-center outline-none bg-transparent' placeholder='nilai'>
-                                        </div>
-                                    </td>
-                                    <td align="center"><input type="submit" class="bg-secondary text-white rounded-md w-[82px] h-[25px]"></td>
-                                </tr>
+                                @foreach($datas as $data)
+                                    @if($data -> talentData)
+                                    @foreach($data -> talentDataFetch as $row)
+                                        <tr>
+                                            <th align="center">1</th>
+                                            <td align="center">{{ $row -> talentData -> name}}</td>
+                                            <td align="center">
+                                                <div class="w-[86px] h-[27px] rounded-md bg-white flex items-center justify-center">
+                                                    <input id='pre-test' name='pre-test' type="number" class='text-black w-full text-center outline-none bg-transparent' placeholder='nilai'>
+                                                </div>
+                                            </td>
+                                            <td align="center">
+                                                <div class="w-[86px] h-[27px] rounded-md bg-white flex items-center justify-center">
+                                                    <input id='post-test' name='post-test' type="number" class='text-black w-full text-center outline-none bg-transparent' placeholder='nilai'>
+                                                </div>
+                                            </td>
+                                            <td align="center">
+                                                <div class="w-[86px] h-[27px] rounded-md bg-white flex items-center justify-center">
+                                                    <input id='nilai-kelompok' name='nilai-kelompok' type="number" class='text-black w-full text-center outline-none bg-transparent' placeholder='nilai'>
+                                                </div>
+                                            </td align="center">
+                                            <td align="center">
+                                                <div class="w-[86px] h-[27px] rounded-md bg-white flex items-center justify-center">
+                                                    <input id='nilai-akhir' name='nilai-akhir' type="number" class='text-black w-full text-center outline-none bg-transparent' placeholder='nilai'>
+                                                </div>
+                                            </td>
+                                            <td align="center">
+                                                <div class="w-[86px] h-[27px] rounded-md bg-white flex items-center justify-center">
+                                                    <input id='rata-rata' name='rata-rata' type="number" class='text-black w-full text-center outline-none bg-transparent' placeholder='nilai'>
+                                                </div>
+                                            </td>
+                                            <td align="center"><input type="submit" class="bg-secondary text-white rounded-md w-[82px] h-[25px]"></td>
+                                        </tr>
+                                    @endforeach
+                                    @else
+                                        No Talent Data
+                                    @endif
+                                @endforeach
+                            </div>
                         </tbody>
                     </table>
                 </div>
                 <div class="sticky bottom-0 pb-1 text-sm bg-darkSecondary flex items-center justify-center w-full">
-
-                    <div class="flex gap-3 items-center">
-                        <button class="bg-secondary hover:scale-95 duration-200 py-1 px-3 md:px-5 rounded-lg flex items-center justify-center my-5">Prev</button>
-                        <div class="rounded-lg p-1 w-8 bg-grey flex items-center justify-center" onclick="{{ url('/client/detail') }}">
-                            <p>1</p>
-                        </div>
-                        <div class="rounded-lg p-1 w-8 bg-grey flex items-center justify-center">
-                            <p>10</p>
-                        </div>
-                        <button class="bg-secondary hover:scale-95 duration-200 py-1 px-3 md:px-5 rounded-lg flex items-center justify-center my-5">Next</button>
-                    </div>
+                    {{ $datas -> links('vendor.pagination.custom-pagination') }}
                 </div>
             </div>
         </form>
@@ -204,7 +169,7 @@
             <div class="flex gap-4 max-sm:w-full max-sm:justify-between">
                 <div></div>
                 <div>
-                    <form action="{{ route('create_offer_null') }}" method="POST">
+                    <form action="{{ url(request() -> path()) }}" method="POST">
                         @csrf
                         <button type="submit" name="save" class=" w-full bg-secondary text-white text-sm text-center py-1 px-14 rounded-md font-bold hover:scale-95 duration-200">
                             <p class="hidden md:block">Save</p>
@@ -214,12 +179,18 @@
                 </div>
 
                 <div>
-                    <a href="/client/order/plan/penawaran">
-                        <div class=" bg-secondary text-white text-sm text-center py-1 px-3 md:px-14 rounded-md font-bold hover:scale-95 duration-200">
-                            <p class="hidden md:inline">Continue</p>
-                            <i class="ri-arrow-right-line block md:hidden"></i>
-                        </div>
-                    </a>
+                    @foreach($datas as $data)
+                    @if($data -> offer_letter_id)
+                        <form method="get" action="{{ route('open_offer', ['order_id' => $data -> id, 'offer_id' => $data -> offer_letter_id]) }}">
+                            <button>
+                                <div class=" bg-secondary text-white text-sm text-center py-1 px-3 md:px-14 rounded-md font-bold hover:scale-95 duration-200">
+                                    <p class="hidden md:inline">Continue</p>
+                                    <i class="ri-arrow-right-line block md:hidden"></i>
+                                </div>
+                            </button>
+                        </form>
+                    @endif
+                    @endforeach
                 </div>
             </div>
         </div>
