@@ -57,9 +57,7 @@
                 <i class="ri-eye-off-fill text-black text-opacity-70"></i>
             </div>
             </div>
-            <a href="/login" class=" text-xs font-bold text-white text-opacity-50 ">
-                <p class=" text-right my-5 md:my-3">Forgot your password?</p></a>
-            <button type="submit" class="bg-secondary py-1 px-9 font-bold mx-auto block rounded-lg hover:scale-95 duration-200">Login</button>
+            <button type="submit" class="mt-5 bg-secondary py-1 px-9 font-bold mx-auto block rounded-lg hover:scale-95 duration-200">Login</button>
         </form>
 
     </div>

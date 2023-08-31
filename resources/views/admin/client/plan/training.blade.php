@@ -179,7 +179,7 @@
                 </div>
 
                 <div>
-                    @foreach($datas as $data)
+                @foreach($datas as $data)
                     @if($data -> offer_letter_id)
                         <form method="get" action="{{ route('open_offer', ['order_id' => $data -> id, 'offer_id' => $data -> offer_letter_id]) }}">
                             <button>
@@ -190,7 +190,7 @@
                             </button>
                         </form>
                     @endif
-                    @endforeach
+                    @endforeach                
                 </div>
             </div>
         </div>
