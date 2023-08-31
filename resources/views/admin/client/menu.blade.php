@@ -56,7 +56,7 @@
                     <div class="flex gap-3 items-center justify-start">
                         <p class="text-white text-xs md:text-sm">Show</p>
                         <div class="flex items-center bg-grey rounded-md md:rounded-lg justify-center py-0 md:py-1 w-[40px] md:w-[60px] px-1">
-                            <input type="text" value="{{ $client->perPage() }}" name="per_page" min="1" class=" text-white w-full text-center bg-transparent outline-none" placeholder="5">
+                            <input type="text" value="{{ old('per_page', $client->perPage()) }}" name="per_page" min="1" class=" text-white w-full text-center bg-transparent outline-none" placeholder="5">
                         </div>
                         <p class="text-white text-xs md:text-sm">entries</p>
                     </div>
@@ -67,7 +67,7 @@
                 </div>
                 <div class=" flex items-center gap-5 mt-5 md:mt-0">
                     <p class=" hidden md:block">Search</p>
-                    <input type="text" name="search" class=" outline-none bg-white rounded-md w-full md:w-80 py-1 px-2 text-black font-semibold placeholder-gray-400 placeholder-opacity-100 md:placeholder-opacity-0" placeholder="search">
+                    <input type="text" name="search" class=" outline-none bg-white rounded-md w-full md:w-80 py-1 px-2 text-black font-semibold placeholder-gray-400 placeholder-opacity-100 md:placeholder-opacity-0" placeholder="search" value="{{ old('search') }}">
                 </div>
             </form>
             <div class=" border-b border-white w-full rounded-lg mt-4"></div>
@@ -97,8 +97,8 @@
                         <td align="center" class=" p-4">{{ $row->pic_contact_number }}</td>
                         <td align="center" class=" p-4">
                             @if ($row->latestActivity)
-                                @if ($row->latestActivityType)
-                                    {{ $row->latestActivityType->params_name }}
+                                @if ($row->latestActivityParams)
+                                    {{ $row->latestActivityParams->params_name }}
                                 @endif
                             @else
                                 -
@@ -107,7 +107,7 @@
                         <td align="center" class=" p-4">{{ $row->statusParam->params_name }}</td>
                         <td align="center" class=" p-4">
                             <div class=" flex items-center gap-2">
-                                <a href="{{ url('/leads/'.$row -> id.'/detail') }}">
+                                <a href="{{ url('/client/detail/'. $row -> id) }}">
                                     <i class="text-lg cursor-pointer ri-information-line"></i>
                                 </a>
                                 <i class=" text-lg cursor-pointer ri-delete-bin-2-line text-delete"></i>

@@ -9,7 +9,7 @@ use App\Models\M_Activity;
 
 class C_Activity extends Controller
 {
-    public function appointment(Request $request){
+    public function appointment(Request $request, $leads_id){
         $field = $request->validate([
             'judul'=>'required',
             'lokasi'=>'required',
@@ -18,8 +18,8 @@ class C_Activity extends Controller
         ]);
         
         $activity = M_Activity::create([
-            'activity_type_id'=>'1',
-            'leads_id'=>'1',
+            'activity_type_id'=>'7',
+            'leads_id'=>$leads_id,
             'xs1'=>$field['judul'],
             'xs2'=>$field['lokasi'],
             'xd'=>$field['waktu'],
@@ -31,42 +31,33 @@ class C_Activity extends Controller
         ]);
         return redirect('/leads')->with('success', 'Data berhasil ditambahkan.');
     }
-    public function note(Request $request){
+    public function note(Request $request, $leads_id){
         $field = $request->validate([
             'deskripsinote'=>'required'
         ]);
         
         $activity = M_Activity::create([
-            'activity_type_id'=>'2',
-            'leads_id'=>'3',
-            'xs1'=>null,
-            'xs2'=>null,
-            'xd'=>null,
+            'activity_type_id'=>'8',
+            'leads_id'=> $leads_id,
             'desc'=>$field['deskripsinote'],
         ]);
         
         if(!$activity) return response([
             'error' => 'Error Occured'
         ]);
-        return redirect('/leads/detail')->with('success', 'Data berhasil ditambahkan.');
+        return redirect('/leads')->with('success', 'Data berhasil ditambahkan.');
     }
-    public function report(Request $request){
+    public function report(Request $request, $leads_id){
         $field = $request->validate([
             'judulreport' => 'required',
             'file' => 'required|file',
             'deskripsireport' => 'required',
         ]);
-
-        $file = $request->file('file');
-        $fileName = $file->getClientOriginalName();
-        $filePath = $file->storeAs($fileName);
-
         $activity = M_Activity::create([
-            'activity_type_id' => '3',
-            'leads_id' => '4',
+            'activity_type_id' => '9',
+            'leads_id' => $leads_id,
             'xs1' => $field['judulreport'],
-            'xs2' => $filePath,
-            'xd' => null,
+            'xs2' => $field['file'],
             'desc' => $field['deskripsireport'],
         ]);
 
@@ -76,6 +67,6 @@ class C_Activity extends Controller
             ]);
         }
 
-        return redirect('/leads/detail')->with('success', 'Data berhasil ditambahkan.');
+        return redirect('/leads')->with('success', 'Data berhasil ditambahkan.');
     }
 }

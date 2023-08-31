@@ -2,48 +2,57 @@
 
 <style>
     .hide-scrollbar::-webkit-scrollbar {
-        width: 0em; /* Width of the scrollbar */
+        width: 0em;
+        /* Width of the scrollbar */
     }
-    
+
     .hide-scrollbar::-webkit-scrollbar-thumb {
-        background-color: #555555; /* Color of the scrollbar thumb */
-        border-radius: 8px; /* Rounded corners for the scrollbar thumb */
+        background-color: #555555;
+        /* Color of the scrollbar thumb */
+        border-radius: 8px;
+        /* Rounded corners for the scrollbar thumb */
     }
-    
+
     .hide-scrollbar::-webkit-scrollbar-thumb:hover {
-        background-color: #777777; /* Color of the scrollbar thumb on hover */
+        background-color: #777777;
+        /* Color of the scrollbar thumb on hover */
     }
-    
+
     .hide-scrollbar::-webkit-scrollbar-track {
-        background-color: #555555; /* Color of the scrollbar track */
+        background-color: #555555;
+        /* Color of the scrollbar track */
     }
-    
+
     .hide-scrollbar::-webkit-scrollbar-track:hover {
-        background-color: #666666; /* Color of the scrollbar track on hover */
+        background-color: #666666;
+        /* Color of the scrollbar track on hover */
     }
-    
+
     /* Customize the appearance of the scrollbar wheel */
     .hide-scrollbar {
         scrollbar-width: thin;
         scrollbar-color: #555555 #333333;
     }
-    
+
     /* Customize the appearance of the scrollbar thumb icon */
     .hide-scrollbar::-webkit-scrollbar-thumb:vertical {
-        background-color: #fff; /* Color of the scrollbar thumb icon */
+        background-color: #fff;
+        /* Color of the scrollbar thumb icon */
     }
-    
+
     .custom-date-input::-webkit-calendar-picker-indicator {
-        filter: invert(1); /* This inverts the icon color */
+        filter: invert(1);
+        /* This inverts the icon color */
     }
 
     /* Chrome, Safari, Edge, Opera */
     input::-webkit-outer-spin-button,
     input::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
+        -webkit-appearance: none;
+        margin: 0;
     }
-    </style>
+
+</style>
 
 @section('container')
 <div class="pt-20 pb-2 lg:pt-0">
@@ -54,9 +63,9 @@
 
     <div class=" mt-5  w-full ">
         <ul class=" mx-auto steps steps-horizontal w-full ml-0 md:ml-14">
-            <li  class="step step-primary">
+            <li class="step step-primary">
             </li>
-            <li  class="step ">
+            <li class="step ">
             </li>
             <li class="step">
             </li>
@@ -73,7 +82,7 @@
         <form action="">
             <div class=" block md:flex justify-between">
                 <div class=" relative w-full md:w-auto">
-                    <input type="text"  class=" bg-[#D9D9D9] outline-none rounded-md text-black py-1  px-8 w-full md:w-auto" placeholder="Search">
+                    <input type="text" class=" bg-[#D9D9D9] outline-none rounded-md text-black py-1  px-8 w-full md:w-auto" placeholder="Search">
                     <i class="ri-search-line absolute top-1 left-2 text-black"></i>
                 </div>
                 <div class=" block md:flex gap-3 items-center w-full md:w-auto mt-3 md:mt-0">
@@ -98,72 +107,72 @@
                                 <th align="center">Aksi</th>
                             </tr>
                         </thead>
-                            <tbody>
-                                <div>
+                        <tbody>
+                            <div>
                                 <!-- row 1 -->
-                                    <tr>
-                                        <th align="center">1</th>
-                                        <td align="center">Bambang S.</td>
-                                        <td align="center">
-                                            <div class="w-[86px] h-[27px] rounded-md bg-white flex items-center justify-center"> 
-                                                <input id='pre-test' name='pre-test' type="number" class='text-black w-full text-center outline-none bg-transparent' placeholder='nilai' >
-                                            </div>
-                                        </td>
-                                        <td align="center">
-                                            <div class="w-[86px] h-[27px] rounded-md bg-white flex items-center justify-center">
-                                                <input id='post-test' name='post-test' type="number" class='text-black w-full text-center outline-none bg-transparent' placeholder='nilai'>
-                                            </div>
-                                        </td>
-                                        <td align="center">
-                                            <div class="w-[86px] h-[27px] rounded-md bg-white flex items-center justify-center">
-                                                <input id='nilai-kelompok' name='nilai-kelompok' type="number" class='text-black w-full text-center outline-none bg-transparent' placeholder='nilai'>
-                                            </div>
-                                        </td align="center">
-                                        <td align="center">
-                                            <div class="w-[86px] h-[27px] rounded-md bg-white flex items-center justify-center">
-                                                <input id='nilai-akhir' name='nilai-akhir' type="number" class='text-black w-full text-center outline-none bg-transparent' placeholder='nilai'>
-                                            </div>
-                                        </td>
-                                        <td align="center">
-                                            <div class="w-[86px] h-[27px] rounded-md bg-white flex items-center justify-center">
-                                                <input id='rata-rata' name='rata-rata' type="number" class='text-black w-full text-center outline-none bg-transparent' placeholder='nilai'>
-                                            </div>
-                                        </td>
-                                        <td align="center"><input type="submit" class="bg-secondary text-white rounded-md w-[82px] h-[25px]"></td>
-                                    </tr>
+                                <tr>
+                                    <th align="center">1</th>
+                                    <td align="center">Bambang S.</td>
+                                    <td align="center">
+                                        <div class="w-[86px] h-[27px] rounded-md bg-white flex items-center justify-center">
+                                            <input id='pre-test' name='pre-test' type="number" class='text-black w-full text-center outline-none bg-transparent' placeholder='nilai'>
+                                        </div>
+                                    </td>
+                                    <td align="center">
+                                        <div class="w-[86px] h-[27px] rounded-md bg-white flex items-center justify-center">
+                                            <input id='post-test' name='post-test' type="number" class='text-black w-full text-center outline-none bg-transparent' placeholder='nilai'>
+                                        </div>
+                                    </td>
+                                    <td align="center">
+                                        <div class="w-[86px] h-[27px] rounded-md bg-white flex items-center justify-center">
+                                            <input id='nilai-kelompok' name='nilai-kelompok' type="number" class='text-black w-full text-center outline-none bg-transparent' placeholder='nilai'>
+                                        </div>
+                                    </td align="center">
+                                    <td align="center">
+                                        <div class="w-[86px] h-[27px] rounded-md bg-white flex items-center justify-center">
+                                            <input id='nilai-akhir' name='nilai-akhir' type="number" class='text-black w-full text-center outline-none bg-transparent' placeholder='nilai'>
+                                        </div>
+                                    </td>
+                                    <td align="center">
+                                        <div class="w-[86px] h-[27px] rounded-md bg-white flex items-center justify-center">
+                                            <input id='rata-rata' name='rata-rata' type="number" class='text-black w-full text-center outline-none bg-transparent' placeholder='nilai'>
+                                        </div>
+                                    </td>
+                                    <td align="center"><input type="submit" class="bg-secondary text-white rounded-md w-[82px] h-[25px]"></td>
+                                </tr>
 
-                                    <!-- row 2 -->
-                                    <tr>
-                                        <th align="center">2</th>
-                                        <td align="center">Budi P</td>
-                                        <td align="center">
-                                            <div class="w-[86px] h-[27px] rounded-md bg-white flex items-center justify-center"> 
-                                                <input id='pre-test' name='pre-test' type="number" class='text-black w-full text-center outline-none bg-transparent' placeholder='nilai' >
-                                            </div>
-                                        </td>
-                                        <td align="center">
-                                            <div class="w-[86px] h-[27px] rounded-md bg-white flex items-center justify-center">
-                                                <input id='post-test' name='post-test' type="number" class='text-black w-full text-center outline-none bg-transparent' placeholder='nilai'>
-                                            </div>
-                                        </td>
-                                        <td align="center">
-                                            <div class="w-[86px] h-[27px] rounded-md bg-white flex items-center justify-center">
-                                                <input id='nilai-kelompok' name='nilai-kelompok' type="number" class='text-black w-full text-center outline-none bg-transparent' placeholder='nilai'>
-                                            </div>
-                                        </td align="center">
-                                        <td align="center">
-                                            <div class="w-[86px] h-[27px] rounded-md bg-white flex items-center justify-center">
-                                                <input id='nilai-akhir' name='nilai-akhir' type="number" class='text-black w-full text-center outline-none bg-transparent' placeholder='nilai'>
-                                            </div>
-                                        </td>
-                                        <td align="center">
-                                            <div class="w-[86px] h-[27px] rounded-md bg-white flex items-center justify-center">
-                                                <input id='rata-rata' name='rata-rata' type="number" class='text-black w-full text-center outline-none bg-transparent' placeholder='nilai'>
-                                            </div>
-                                        </td>
-                                        <td align="center"><input type="submit" class="bg-secondary text-white rounded-md w-[82px] h-[25px]"></td>
-                                    </tr>
-                            </tbody>
+                                <!-- row 2 -->
+                                <tr>
+                                    <th align="center">2</th>
+                                    <td align="center">Budi P</td>
+                                    <td align="center">
+                                        <div class="w-[86px] h-[27px] rounded-md bg-white flex items-center justify-center">
+                                            <input id='pre-test' name='pre-test' type="number" class='text-black w-full text-center outline-none bg-transparent' placeholder='nilai'>
+                                        </div>
+                                    </td>
+                                    <td align="center">
+                                        <div class="w-[86px] h-[27px] rounded-md bg-white flex items-center justify-center">
+                                            <input id='post-test' name='post-test' type="number" class='text-black w-full text-center outline-none bg-transparent' placeholder='nilai'>
+                                        </div>
+                                    </td>
+                                    <td align="center">
+                                        <div class="w-[86px] h-[27px] rounded-md bg-white flex items-center justify-center">
+                                            <input id='nilai-kelompok' name='nilai-kelompok' type="number" class='text-black w-full text-center outline-none bg-transparent' placeholder='nilai'>
+                                        </div>
+                                    </td align="center">
+                                    <td align="center">
+                                        <div class="w-[86px] h-[27px] rounded-md bg-white flex items-center justify-center">
+                                            <input id='nilai-akhir' name='nilai-akhir' type="number" class='text-black w-full text-center outline-none bg-transparent' placeholder='nilai'>
+                                        </div>
+                                    </td>
+                                    <td align="center">
+                                        <div class="w-[86px] h-[27px] rounded-md bg-white flex items-center justify-center">
+                                            <input id='rata-rata' name='rata-rata' type="number" class='text-black w-full text-center outline-none bg-transparent' placeholder='nilai'>
+                                        </div>
+                                    </td>
+                                    <td align="center"><input type="submit" class="bg-secondary text-white rounded-md w-[82px] h-[25px]"></td>
+                                </tr>
+                        </tbody>
                     </table>
                 </div>
                 <div class="sticky bottom-0 pb-1 text-sm bg-darkSecondary flex items-center justify-center w-full">
@@ -180,37 +189,41 @@
                     </div>
                 </div>
             </div>
+        </form>
 
-            <div class="mt-2 flex justify-between items-center gap-1 md:gap-0">
+        <div class="mt-2 flex justify-between items-center gap-1 md:gap-0">
+            <div>
                 <div>
-                    <div>
-                        <a href="/client/order/plan/recruitment" class="bg-secondary text-white text-sm text-center py-1 px-2 md:px-14 rounded-md font-bold flex items-center hover:scale-95 duration-200">
-                            <p class="hidden md:block">Back</p>
-                            <i class="ri-arrow-left-line block md:hidden ml-1"></i>
-                        </a>
-                    </div>
-    
+                    <a href="/client/order/plan/recruitment" class="bg-secondary text-white text-sm text-center py-1 px-2 md:px-14 rounded-md font-bold flex items-center hover:scale-95 duration-200">
+                        <p class="hidden md:block">Back</p>
+                        <i class="ri-arrow-left-line block md:hidden ml-1"></i>
+                    </a>
                 </div>
-                <div class="flex gap-4 max-sm:w-full max-sm:justify-between">
-                    <div></div>
-                    <div>
+
+            </div>
+            <div class="flex gap-4 max-sm:w-full max-sm:justify-between">
+                <div></div>
+                <div>
+                    <form action="{{ route('create_offer_null') }}" method="POST">
+                        @csrf
                         <button type="submit" name="save" class=" w-full bg-secondary text-white text-sm text-center py-1 px-14 rounded-md font-bold hover:scale-95 duration-200">
-                        <p class="hidden md:block">Save</p>
-                        <i class="ri-save-line block md:hidden"></i>
+                            <p class="hidden md:block">Save</p>
+                            <i class="ri-save-line block md:hidden"></i>
                         </button>
-                    </div>
-        
-                    <div>
-                        <a href="/client/order/plan/penawaran">
+                    </form>
+                </div>
+
+                <div>
+                    <a href="/client/order/plan/penawaran">
                         <div class=" bg-secondary text-white text-sm text-center py-1 px-3 md:px-14 rounded-md font-bold hover:scale-95 duration-200">
-                            <p class="hidden md:inline">Continue</p> 
+                            <p class="hidden md:inline">Continue</p>
                             <i class="ri-arrow-right-line block md:hidden"></i>
                         </div>
-                        </a>
-                    </div>
+                    </a>
                 </div>
             </div>
-        </form> 
-     </div>
-</div>     
+        </div>
+
+    </div>
+</div>
 @endsection

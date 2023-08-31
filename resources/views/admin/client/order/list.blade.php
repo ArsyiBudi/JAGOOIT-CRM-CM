@@ -55,12 +55,12 @@
                 <div class="md:mt-5">
                         <a class=" bg-secondary text-sm md:text-[16px] py-1 px-3 md:px-5 rounded-lg mt-0 md:mt-7 hover:scale-95 duration-200" href="{{ url('/client/order/create') }}">New Orders</a>  
                 </div>
+                <button type="submit"></button>
             </div>
             <div class=" flex items-center gap-5 mt-5 md:mt-0">
                 <p class=" hidden md:block">Search</p>
                 <input type="text" class=" outline-none bg-white rounded-md w-full md:w-80 py-1 px-2 text-black font-semibold placeholder-gray-400 placeholder-opacity-100 md:placeholder-opacity-0" placeholder="search">
             </div>
-            <button type="submit"></button>
         </form>
 
         <div class=" hide-scrollbar w-full h-72 overflow-auto pr-2">

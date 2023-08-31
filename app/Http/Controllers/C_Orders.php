@@ -53,13 +53,12 @@ class C_Orders extends Controller
             'order_id' => 'required'
         ]);
 
-        $order_data['data'] = DB::table('orders')->where('id', $field['order_id']) -> first();
-        if(!$order_data['data']){
+        $order_data['data'] = M_Orders::find($field['order_id'])->get();
+        if(!$order_data){
             return response([
                 'message' => "No order has an id of {$request['order_id']}"
             ], 401);
         };
-        $order_data['data'] = DB::table('orders')->where('id', $field['order_id']) -> first() -> get();
         return view('clients.track', $order_data);
     }
     public function create(Request $request){
@@ -74,7 +73,6 @@ class C_Orders extends Controller
             'budget_estimation' => 'required',
             'tor_file' => 'required'
         ]);
-        
         $order = M_Orders::create([
             'id' => $request -> id,
             'leads_id' => $field['business_id'],

@@ -42,7 +42,7 @@
         </ul>
     </div>
 
-    <form class="" action="{{ route('penawaran.download') }}" method="POST">
+    <form class="" action="{{ url(request()->path()) }}" method="POST">
         @csrf
         <div class=" mt-5">
             <div class=" block md:flex justify-end">
@@ -60,35 +60,35 @@
 
             <div class="mb-4">
                 <label for="perihal" class="text-sm text-white">Perihal</label>
-                <input name="offer_subject" id="perihal" type="text" class="mt-1 text-black rounded-md px-2 py-2 w-full bg-white" placeholder="Perihal">
+                <input value="{{ old('offer_subject', @$offer->offer_subject) }}" name="offer_subject" id="perihal" type="text" class="mt-1 text-black rounded-md px-2 py-2 w-full bg-white" placeholder="Perihal">
             </div>
 
             <div class=" block md:flex items-center gap-4">
                 <div class="w-full md:w-1/2 mb-4">
                     <label for="kepada" class="text-sm text-white">Kepada</label>
-                    <input name="recipient_name" id="kepada" type="text" class=" mt-1 text-black rounded-md px-2 py-2  w-full bg-white" placeholder="Kepada">
+                    <input value="{{ old('recipient_name', @$offer->recipient_name) }}" name="recipient_name" id="kepada" type="text" class=" mt-1 text-black rounded-md px-2 py-2  w-full bg-white" placeholder="Kepada">
                 </div>
 
                 <div class="w-full md:w-1/4 mb-4">
                     <label for="tempat" class="text-sm text-white">Tempat</label>
-                    <input name="location" id="tempat" type="text" class=" mt-1 text-black rounded-md px-2 py-2  w-full bg-white" placeholder="Bandung">
+                    <input value="{{ old('location', @$offer->location) }}" name="location" id="tempat" type="text" class=" mt-1 text-black rounded-md px-2 py-2  w-full bg-white" placeholder="Bandung">
                 </div>
 
                 <div class="w-full md:w-1/4 mb-4">
                     <label for="tanggal" class="text-sm text-white">Tanggal</label>
-                    <input name="date" id="tanggal" type="text" class=" mt-1 text-black rounded-md px-2 py-2  w-full bg-white" placeholder="03 Agustus 2023">
+                    <input value="{{ old('date', @$offer->date) }}" name="date" id="tanggal" type="text" class=" mt-1 text-black rounded-md px-2 py-2  w-full bg-white" placeholder="03 Agustus 2023">
                 </div>
             </div>
 
             <div class=" block md:flex items-center gap-4">
                 <div class=" w-full md:w-3/4">
                     <label for="ditawarkan" class="text-sm text-white">Hal yang Ditawarkan</label>
-                    <input name="context" id="ditawarkan" type="text" class=" mt-1 text-black rounded-md px-2 py-2  w-full bg-white" placeholder="Hal yang Ditawarkan">
+                    <input value="{{ old('context', @$offer->context) }}" name="context" id="ditawarkan" type="text" class=" mt-1 text-black rounded-md px-2 py-2  w-full bg-white" placeholder="Hal yang Ditawarkan">
                 </div>
 
                 <div class=" w-full md:w-1/4 mt-2 md:mt-0">
                     <label for="jumlah" class="text-sm text-white">Jumlah Talent</label>
-                    <input name="talent_total" id="jumlah" type="text" class=" mt-1 text-black rounded-md px-2 py-2  w-full bg-white" placeholder="Jumlah">
+                    <input value="{{ old('talent_total', @$offer->talent_total) }}" name="talent_total" id="jumlah" type="text" class=" mt-1 text-black rounded-md px-2 py-2  w-full bg-white" placeholder="Jumlah">
                 </div>
             </div>
 
@@ -171,17 +171,17 @@
                 </label>
             </div>
 
-        <div class="w-full">
-            <label for="deskripsi" class="text-sm text-white">Deskirpsi</label>
-            <div class="rounded-lg px-2 py-4 h-24 w-full bg-white mt-2">
-                <textarea id="deskripsi" type="text" class="text-black bg-transparent outline-none h-full w-full hide-scrollbar resize-none"></textarea>
+            <div class="w-full">
+                <label for="deskripsi" class="text-sm text-white">Deskirpsi</label>
+                <div class="rounded-lg px-2 py-4 h-24 w-full bg-white mt-2">
+                    <textarea id="deskripsi" type="text" class="text-black bg-transparent outline-none h-full w-full hide-scrollbar resize-none"></textarea>
+                </div>
+            </div>
+
+            <div class="mt-4 flex justify-end">
+                <button type="submit" name="sendCV" class="bg-secondary text-white text-sm text-center w-full md:w-[188px] h-[37px] rounded-md hover:scale-95 duration-200">Send</button>
             </div>
         </div>
-
-        <div class="mt-4 flex justify-end">
-            <button type="submit" name="sendCV" class="bg-secondary text-white text-sm text-center w-full md:w-[188px] h-[37px] rounded-md hover:scale-95 duration-200">Send</button>
-        </div>
-    </div>
 
         <div class=" flex justify-between items-center pt-4 mb-5 md:mb-0">
             <div>
@@ -193,26 +193,26 @@
                 </div>
 
             </div>
-            
+
             <div class="flex gap-4 max-sm:w-full max-sm:justify-between">
                 <div></div>
-                    <button type="submit" name="save" class=" w-full bg-secondary text-white text-sm text-center py-1 px-14 rounded-md font-bold hover:scale-95 duration-200">
+                <button type="submit" name="save" class=" w-full bg-secondary text-white text-sm text-center py-1 px-14 rounded-md font-bold hover:scale-95 duration-200">
                     <p class="hidden md:block">Save</p>
                     <i class="ri-save-line block md:hidden"></i>
-                    </button>
+                </button>
                 <div>
-                <div>
-                <a href="/client/order/plan/negosiasi">
-                    <div class=" bg-secondary text-white text-sm text-center py-1 px-3 md:px-14 rounded-md font-bold hover:scale-95 duration-200">
-                        <p class="hidden md:inline">Continue</p> 
-                        <i class="ri-arrow-right-line block md:hidden"></i>
+                    <div>
+                        <a href="/client/order/plan/negosiasi">
+                            <div class=" bg-secondary text-white text-sm text-center py-1 px-3 md:px-14 rounded-md font-bold hover:scale-95 duration-200">
+                                <p class="hidden md:inline">Continue</p>
+                                <i class="ri-arrow-right-line block md:hidden"></i>
+                            </div>
+                        </a>
                     </div>
-                    </a>
                 </div>
             </div>
         </div>
-    </div>
-</form>
+    </form>
 
 <!--modal outsourcing-->
 <dialog id="my_modal_5" class="modal  text-white">
@@ -361,4 +361,4 @@
 }
 </script>
 
-@endsection
+    @endsection
