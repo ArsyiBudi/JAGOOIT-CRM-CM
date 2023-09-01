@@ -81,7 +81,7 @@
         <form action="">
             <div class=" block md:flex justify-between">
                 <div class=" relative w-full md:w-auto">
-                    <input type="text" class=" bg-[#D9D9D9] outline-none rounded-md text-black py-1  px-8 w-full md:w-auto" placeholder="Search">
+                    <input type="text" name="search" value="{{ $searchQuery }}" class=" bg-[#D9D9D9] outline-none rounded-md text-black py-1  px-8 w-full md:w-auto" placeholder="Search">
                     <i class="ri-search-line absolute top-1 left-2 text-black"></i>
                 </div>
                 <div class=" block md:flex gap-3 items-center w-full md:w-auto mt-3 md:mt-0">
@@ -112,7 +112,7 @@
                                     @if($data -> talentData)
                                     @foreach($data -> talentDataFetch as $row)
                                         <tr>
-                                            <th align="center">1</th>
+                                            <th align="center">{{ isset($i) ? ++$i : $i = 1  }}</th>
                                             <td align="center">{{ $row -> talentData -> name}}</td>
                                             <td align="center">
                                                 <div class="w-[86px] h-[27px] rounded-md bg-white flex items-center justify-center">
@@ -159,9 +159,9 @@
         <div class="mt-2 flex justify-between items-center gap-1 md:gap-0">
             <div>
                 <div>
-                    <a href="{{ redirect() -> back() }}" class="bg-secondary text-white text-sm text-center py-1 px-2 md:px-14 rounded-md font-bold flex items-center hover:scale-95 duration-200">
-                        <p class="hidden md:block">Back</p>
-                        <i class="ri-arrow-left-line block md:hidden ml-1"></i>
+                    <a href="{{ url('/client/order/plan/'.$order_id.'/recruitment') }}" class="bg-secondary text-white text-sm text-center py-1 px-2 md:px-14 rounded-md font-bold flex items-center hover:scale-95 duration-200">
+                            <p class="hidden md:block">Back</p>
+                            <i class="ri-arrow-left-line block md:hidden ml-1"></i>
                     </a>
                 </div>
 

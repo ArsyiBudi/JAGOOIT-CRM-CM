@@ -140,7 +140,8 @@ Route::middleware('auth')->group(function () {
             //?PLAN ORDER
             Route::prefix('plan')->group(function () {
                 //?RECRUITMENT
-                Route::get('/{order_id}/recruitment', [C_Plan::class, 'fetchRecruitment'])->name('fetch_recruitment');
+                Route::get('/{order_id}/recruitment', [C_Plan::class, 'fetch_recruitment'])->name('recruitment');
+                Route::post('/{order_id}/recruitment', [C_Plan::class, 'save_recruitment'])->name('save_recruitment');
                 Route::delete('/{order_id}/recruitment', [TalentController::class, 'destroy']);
 
                 //?TRAINING
