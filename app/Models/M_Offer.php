@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class M_Offer extends Model
 {
@@ -28,4 +30,13 @@ class M_Offer extends Model
         'consumtion_cost',
         'transportation_cost',
     ];
+
+    public function offerJob() : HasOne
+    {
+        return $this->hasOne(M_OfferLetterJobsDetails::class, 'offer_letters_id');
+    }
+    public function offerJobDetails() : HasOne
+    {
+        return $this->hasOne(M_OfferLetterJobsDetails::class, 'offer_letters_id');
+    }
 }

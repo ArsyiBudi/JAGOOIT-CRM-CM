@@ -57,6 +57,19 @@ class C_Plan extends Controller
 
 
 
+    public function saveRecruitment(Request $request, $order_id)
+    {
+       foreach($request -> talents_id as $talent_id)
+       {
+           M_OrderDetails::create([
+               'talent_id' => $talent_id,
+               'order_id' => $order_id
+           ]);
+       }
+       return redirect('/client/order/plan/'. $order_id .'/training/');
+    }
+
+
 
 
     //?BELOW ARE USED IN OFFER PLAN
@@ -99,7 +112,7 @@ class C_Plan extends Controller
         ]);
 
         if(!$offer_details) return response(['error' => "Data didn't created"]);
-        return redirect('open_offer');
+        return redirect('/client/order/plan/'.$order_id.'/penawaran');
     }
 
     public function createOffer(Request $request, $order_id)
@@ -191,6 +204,7 @@ class C_Plan extends Controller
 
 
 
+    //?POPKS CONTROLLER CODE
     public function popks_create(Request $request)
     {
         $field = $request->validate([
