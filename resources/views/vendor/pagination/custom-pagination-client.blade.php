@@ -8,8 +8,8 @@
     </div>
     @else
         <a href="{{ $paginator->previousPageUrl() . '&' . http_build_query([
-            'per_page' => session('order_per_page', 5), 
-            'search' => session('order_search', '')
+            'per_page' => session('client_per_page', 5), 
+            'search' => session('client_search', '')
             ]) }}" rel="prev" aria-label="@lang('pagination.previous')">
             <div class="bg-secondary py-1 px-5 rounded-md cursor-pointer hover:scale-95 my-5">
             Prev
@@ -34,8 +34,8 @@
             <li class="underline p-1 rounded-md w-8 text-center list-none active"><span class="page-link">{{ $page }}</span></li>
         @elseif ($page === $paginator->currentPage() + 1 || $page === $paginator->currentPage() + 2 || $page === $paginator->currentPage() - 1 || $page === $paginator->currentPage() - 2 || $page === $paginator->lastPage() || $page === 1)
                 <a href="{{ $url . '&' . http_build_query([
-                    'per_page' => session('order_per_page', 5), 
-                    'search' => session('order_search', '')
+                    'per_page' => session('client_per_page', 5), 
+                    'search' => session('client_search', '')
                     ]) }}">
                     <li class="list-none bg-grey p-1 rounded-md w-8 text-center page-item">
                         <p class="page-link" >{{ $page }}</p>
@@ -53,8 +53,8 @@
 <!-- Paginator for Next -->
 @if ($paginator->hasMorePages())
     <a href="{{ $paginator->nextPageUrl() . '&' . http_build_query([
-        'per_page' => session('order_per_page', 5),
-        'search' => session('order_search', ''),
+        'per_page' => session('client_per_page', 5),
+        'search' => session('client_search', ''),
         ]) }}" rel="next" aria-label="@lang('pagination.next')">
         <div class="bg-secondary py-1 px-5 rounded-md cursor-pointer hover:scale-95 my-5 disabled">
             Next

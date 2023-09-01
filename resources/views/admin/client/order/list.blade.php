@@ -112,7 +112,7 @@
         <div class="flex items-center justify-center w-full">
 
             <div class="sticky bottom-0 pb-10 bg-darksecondary flex justify-center items-center gap-3">
-                {{ $order -> links('vendor.pagination.custom-pagination') }}
+                {{ $order -> links('vendor.pagination.custom-pagination-order') }}
             </div>
 
         </div>

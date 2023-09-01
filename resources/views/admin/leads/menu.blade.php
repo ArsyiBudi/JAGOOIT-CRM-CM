@@ -125,7 +125,7 @@
             </table>
         </div>
         <div class="sticky bottom-5 pb-10 bg-darksecondary flex justify-center items-center gap-3">
-            {{ $leads -> links('vendor.pagination.custom-pagination') }}
+            {{ $leads -> links('vendor.pagination.custom-pagination-leads') }}
         </div>
     </div>
 </div>

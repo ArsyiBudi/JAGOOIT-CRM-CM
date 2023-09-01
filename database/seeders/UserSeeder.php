@@ -17,11 +17,11 @@ class UserSeeder extends Seeder
     {
         $faker = Faker::create();
         DB::table('users')->insert([
-            'user_type_id' => random_int(2, 3),
+            'user_type_id' => random_int(1, 2),
             'username' => "bintangSobo",
             'password' => Hash::make('saya0568'),
             'email' => $faker->email(),
-            'xs1' => $faker-> name()
+            'xs1' => "Power Phanter Jos"
         ]);
         foreach(range(1, 10) as $value){
             DB::table('users')->insert([

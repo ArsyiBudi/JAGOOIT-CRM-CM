@@ -51,7 +51,7 @@
                 <h3 class="text-white font-semibold text-3xl">Data Clients</h3>
             </div>
 
-            <form class=" block md:flex items-start my-4 justify-between mb-8 w-full" action="{{ route('fetch_client') }}" method="get">
+            <form action="{{ route('fetch_client') }}" method="get" class=" block md:flex items-start my-4 justify-between mb-8 w-full">
                 <div class=" md:block flex items-center justify-between">
                     <div class="flex gap-3 items-center justify-start">
                         <p class="text-white text-xs md:text-sm">Show</p>
@@ -119,7 +119,7 @@
             </table>
         </div>
         <div class="sticky bottom-0 pb-10 bg-darksecondary flex justify-center items-center gap-3">
-            {{ $client -> links('vendor.pagination.custom-pagination') }}
+            {{ $client -> links('vendor.pagination.custom-pagination-client') }}
         </div>
     </div>
 </div>

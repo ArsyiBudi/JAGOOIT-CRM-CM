@@ -15,12 +15,34 @@ use PhpOffice\PhpWord\TemplateProcessor;
 class C_Plan extends Controller
 {
     //?BELOW ARE TO FETCH A DATA
-    public function fetchRecruitment($order_id)
+    public function fetchRecruitment(Request $request, $order_id)
     {
-        $talent = M_Talents::paginate(5);
+        $perPage = $request->input('per_page', 5);
+        $search = $request->input('search', '');
+    
+        session(['talent_per_page' => $perPage]);
+        session(['talent_search' => $search]);
+
+        $entries = session('talent_per_page', 5);
+        $search = session('talent_search', '');
+
+        $talent = M_Talents::where(function($query) use ($search){
+            $query -> where('name', 'like', "%$search%");
+        })
+        ->orWhereHas('posisiTalent',function($query) use ($search){
+            $query -> where('description', 'like', "%$search%");
+        }) 
+        ->orWhereHas('keterampilanTalent',function($query) use ($search){
+            $query -> where('description', 'like', "%$search%");
+        }) 
+        ->orWhereHas('pendidikanTalent',function($query) use ($search){
+            $query -> where('description', 'like', "%$search%");
+        })->paginate($entries);
+
         return view('admin.client.plan.recruitment', [
             "title" => "Plan | Recruitment",
-            'talents' => $talent
+            'talents' => $talent,
+            "order_id" => $order_id
         ]);
     }
 

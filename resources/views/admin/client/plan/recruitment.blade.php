@@ -45,10 +45,6 @@
         /* This inverts the icon color */
     }
 </style>
-@php
-    $routeParams = request()->route()->parameters();
-    $order_id = isset($routeParams['order_id']) ? $routeParams['order_id'] : '';
-@endphp
 
 @section('container')
 <div class="pt-20 pb-2 lg:pt-0">
@@ -74,7 +70,7 @@
         </ul>
     </div>
     <div class=" mt-5">
-        <form action="">
+        <form action="{{ route('fetch_recruitment', ['order_id' => $order_id]) }}">
             <div class=" block md:flex justify-between">
                 <div class=" relative w-full md:w-auto">
                     <input type="text" name="search" class=" bg-[#D9D9D9] outline-none rounded-md text-black py-1  px-8 w-full md:w-auto" placeholder="Search">
@@ -85,6 +81,7 @@
                     <input type="date" id="endDate" class=" w-full mt-1 md:mt-0 md:w-auto custom-date-input rounded-md bg-primary py-2 px-5 text-white outline-none border-[1px] border-white">
                 </div>
             </div>
+        </form>
             <div class=" bg-darkSecondary w-full px-3 rounded-md mt-4 overflow-auto hide-scrollbar">
                 <div class="overflow-auto ">
                     <table class="table overflow-auto">
