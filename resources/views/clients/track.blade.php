@@ -57,7 +57,7 @@
         <h1 class=" text-center text-3xl font-bold">Tracking Your Order</h1>
         <p class=" text-center pt-3">{{ $order -> id }}</p>
      </div>
-     <div class=" block md:flex items-start gap-5 md:gap-40 px-10 mt-10 w-full">
+     <div class=" block md:flex items-start gap-5 md:gap-[22rem] px-10 mt-10 w-full">
         <div class=" bg-darkSecondary border-white border-2 rounded-lg py-5 pr-20 pl-5 mt-5 w-full md:w-auto">
             <h1 class=" text-xl font-bold">Keterangan</h1>
             <div class=" flex items-center gap-4 my-4">

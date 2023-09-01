@@ -44,8 +44,8 @@
 @section('container')
 <div class="pt-20 pb-2 lg:pt-0">
 </div>
-<div class=" overflow-hidden lg:pt-0 h-screen rounded-md">
-    <div class="w-full bg-darkSecondary px-8 flex flex-col">
+<div class=" overflow-auto hide-scrollbar lg:pt-0 h-screen rounded-md">
+    <div class="w-full bg-darkSecondary px-8 mb-20 flex flex-col">
 
         <div class="pt-10 bg-darkSecondary">
             <div class="border-b border-white w-full pb-3 mb-3">
