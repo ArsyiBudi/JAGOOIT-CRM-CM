@@ -18,7 +18,7 @@ class C_Activity extends Controller
         ]);
         
         $activity = M_Activity::create([
-            'activity_type_id'=>'7',
+            'activity_type_id'=>'8',
             'leads_id'=>$leads_id,
             'xs1'=>$field['judul'],
             'xs2'=>$field['lokasi'],
@@ -37,7 +37,7 @@ class C_Activity extends Controller
         ]);
         
         $activity = M_Activity::create([
-            'activity_type_id'=>'8',
+            'activity_type_id'=>'9',
             'leads_id'=> $leads_id,
             'desc'=>$field['deskripsinote'],
         ]);
@@ -54,7 +54,7 @@ class C_Activity extends Controller
             'deskripsireport' => 'required',
         ]);
         $activity = M_Activity::create([
-            'activity_type_id' => '9',
+            'activity_type_id' => '10',
             'leads_id' => $leads_id,
             'xs1' => $field['judulreport'],
             'xs2' => $field['file'],

@@ -116,7 +116,7 @@
                                 <td align="center">{{ $talent -> name }}</td>
                                 <td align="center">{{ $talent -> pendidikanTalent -> description }}</td>
                                 <td align="center">{{ $talent -> keterampilanTalent -> description }}</td>
-                                <td align="center"> {{ $talent -> posisiTalent -> des }}</td>
+                                <td align="center"> {{ $talent -> posisiTalent -> description }}</td>
                                 <td align="center">
                                     <div class=" flex items-center gap-2">
                                         <a href="/client/plan/create/recruitment">

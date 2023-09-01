@@ -15,7 +15,7 @@ use PhpOffice\PhpWord\TemplateProcessor;
 class C_Plan extends Controller
 {
     //?BELOW ARE TO FETCH A DATA
-    public function fetch_recruitment($order_id)
+    public function fetchRecruitment($order_id)
     {
         $talent = M_Talents::paginate(5);
         return view('admin.client.plan.recruitment', [
@@ -24,7 +24,7 @@ class C_Plan extends Controller
         ]);
     }
 
-    public function fetch_training($order_id)
+    public function fetchTraining($order_id)
     {
         $talent = M_Orders::where('id', $order_id)->paginate(5);
         return view('admin.client.plan.training', [
@@ -38,16 +38,14 @@ class C_Plan extends Controller
 
 
     //?BELOW ARE USED IN OFFER PLAN
-    public function newOffer(Request $request, $order_id)
+    public function saveTraining($order_id)
     {
         $offer = M_Offer::create();
         $update = M_Orders::find($order_id);
         $update -> offer_letter_id = $offer -> id;
+        $update -> order_status = 2;
         $status = $update -> update();
-        if(!$status){
-            return redirect() -> back() -> with('error', 'Nigga');
-        }
-        return redirect('/client/order/'. $order_id .'/penawaran/');
+        if($status) return redirect('/client/order/plan/'. $order_id .'/penawaran/');
     }
 
     public function openOffer($order_id)
@@ -56,7 +54,8 @@ class C_Plan extends Controller
         $offer = M_Offer::find($order -> offer_letter_id);
         return view('admin.client.plan.penawaran', [
             "title" => "Plan | Penawaran",
-            "offer" => $offer
+            "offer" => $offer,
+            "order_id" => $order_id
         ]);
     }
 
@@ -81,7 +80,7 @@ class C_Plan extends Controller
         return redirect('open_offer');
     }
 
-    public function create(Request $request, $order_id)
+    public function createOffer(Request $request, $order_id)
     {
         $order = M_Orders::find($order_id);
         $input = $request->validate([

@@ -40,11 +40,11 @@ class C_Leads extends Controller
         $perPage = $request->input('per_page', 5);
         $search = $request->input('search', '');
     
-        session(['leads_per_page' => $perPage]);
-        session(['leads_search' => $search]);
+        session(['client_per_page' => $perPage]);
+        session(['client_search' => $search]);
 
-        $entries = session('leads_per_page', 5);
-        $search = session('leads_search', '');
+        $entries = session('client_per_page', 5);
+        $search = session('client_search', '');
 
         $data = M_Leads::where(function ($query) use ($search) {
             $query->where('business_name', 'like', "%$search%")

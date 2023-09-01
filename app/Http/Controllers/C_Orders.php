@@ -32,11 +32,11 @@ class C_Orders extends Controller
         $perPage = $request->input('per_page', 5);
         $search = $request->input('search', '');
     
-        session(['leads_per_page' => $perPage]);
-        session(['leads_search' => $search]);
+        session(['order_per_page' => $perPage]);
+        session(['order_search' => $search]);
 
-        $entries = session('leads_per_page', 5);
-        $search = session('leads_search', '');
+        $entries = session('order_per_page', 5);
+        $search = session('order_search', '');
 
         $data = M_Orders::whereHas('leadData', function($query) use ($search){
             $query -> where('business_name', 'like', "%$search%");

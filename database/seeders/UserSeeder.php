@@ -16,6 +16,13 @@ class UserSeeder extends Seeder
     public function run(): void
     {
         $faker = Faker::create();
+        DB::table('users')->insert([
+            'user_type_id' => random_int(2, 3),
+            'username' => "bintangSobo",
+            'password' => Hash::make('saya0568'),
+            'email' => $faker->email(),
+            'xs1' => $faker-> name()
+        ]);
         foreach(range(1, 10) as $value){
             DB::table('users')->insert([
                 'user_type_id' => random_int(1, 3),

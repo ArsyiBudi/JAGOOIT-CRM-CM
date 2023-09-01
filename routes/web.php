@@ -140,17 +140,17 @@ Route::middleware('auth')->group(function () {
             //?PLAN ORDER
             Route::prefix('plan')->group(function () {
                 //?RECRUITMENT
-                Route::get('/{order_id}/recruitment', [C_Plan::class, 'fetch_recruitment'])->name('recruitment');
+                Route::get('/{order_id}/recruitment', [C_Plan::class, 'fetchRecruitment'])->name('fetch_recruitment');
                 Route::delete('/{order_id}/recruitment', [TalentController::class, 'destroy']);
 
                 //?TRAINING
-                Route::get('/{order_id}/training', [C_Plan::class, 'fetch_training']) -> name('fetch_training');
-                Route::post('/{order_id}/training', [C_Plan::class, 'newOffer'])->name('new_offer');
+                Route::get('/{order_id}/training', [C_Plan::class, 'fetchTraining']) -> name('fetch_training');
+                Route::post('/{order_id}/training', [C_Plan::class, 'saveTraining'])->name('new_offer');
 
                 //?PENAWARAN
                 Route::get('/{order_id}/penawaran', [C_Plan::class, 'openOffer']) -> name('open_offer');
                 Route::put('/{order_id}/penawaran', [C_Plan::class, 'addOfferDetails']) -> name('add_offer_details');
-                Route::post('/{order_id}/penawaran', [C_Plan::class, 'create'])->name('create_offer');
+                Route::post('/{order_id}/penawaran', [C_Plan::class, 'createOffer'])->name('create_offer');
             
                 //?NEGOSIASI
                 Route::get('/{order_id}/negosiasi', function () {

@@ -185,7 +185,7 @@
         <div class=" flex justify-between items-center pt-4 mb-5 md:mb-0">
             <div>
                 <div>
-                    <a href="/client/order/plan/training" class="bg-secondary text-white text-sm text-center py-1 px-2 md:px-14 rounded-md font-bold flex items-center hover:scale-95 duration-200">
+                    <a href="{{ url('/client/order/plan/'. $order_id .'/training') }}" class="bg-secondary text-white text-sm text-center py-1 px-2 md:px-14 rounded-md font-bold flex items-center hover:scale-95 duration-200">
                         <p class="hidden md:block">Back</p>
                         <i class="ri-arrow-left-line block md:hidden ml-1"></i>
                     </a>

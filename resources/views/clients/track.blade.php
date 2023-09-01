@@ -81,7 +81,11 @@
 
         <div class=" w-96 flex items-center justify-center">
             <ul class="steps steps-vertical w-full">
-                <li data-content="✓" class="step step-primary">
+                <li 
+                @if($row->order_id)
+                    data-content="✓"
+                @endif
+                class="step step-primary">
                     <div class=" relative w-full">
                         <h1 class=" text-left pb-2 text-lg">Recruitment</h1> 
                         <p class=" absolute text-xs  text-left date-text">Start Date : 8 desember 2022 </p>
