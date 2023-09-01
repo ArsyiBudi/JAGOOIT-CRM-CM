@@ -157,7 +157,7 @@ Route::middleware('auth')->group(function () {
                     return view('admin.client.plan.negosiasi', [
                         "title" => "Plan | Negosiasi",
                     ]);
-                });
+                })->name("fetch_negosiasi");
 
                 //?PERCOBAAN
                 Route::get('/{order_id}/percobaan', function () {
@@ -167,13 +167,10 @@ Route::middleware('auth')->group(function () {
                 });
 
                 //?PO & PKS
-                Route::get('/{order_id}/popks/{popks_id}', function () {
-                    return view('admin.client.plan.popks', [
-                        "title" => "Plan | PO & PKS",
-                    ]);
-                });
-                Route::post('/{order_id}/popks/{popks_id}', [C_Plan::class, 'popks_create']) -> name('create_popks');
-                Route::patch('/{order_id}/popks/{popks_id}', [C_Plan::class, 'popks_send']) -> name('send_popks');
+                Route::get('/{order_id}/popks',[C_Plan::class, 'fetchPopks']);
+                Route::post('/{order_id}/popks', [C_Plan::class, 'popks_create']) -> name('create_popks');
+                Route::patch('/{order_id}/popks', [C_Plan::class, 'popks_send']) -> name('send_popks');
+                Route::put('/{order_id}/popks', [C_Plan::class, 'popks_save']);
             });
         });
     });

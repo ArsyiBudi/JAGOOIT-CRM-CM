@@ -55,6 +55,14 @@ class C_Plan extends Controller
         ]);
     }
 
+    public function fetchPopks($order_id)
+    {
+        return view('admin.client.plan.popks', [
+            "title" => "Plan | POPKS",
+            "order_id" => $order_id,
+        ]);
+    }
+
 
 
 
@@ -280,5 +288,15 @@ class C_Plan extends Controller
         if ($status) {
             return redirect('/client/order');
         }
+    }
+
+    public function popks_save($order_id)
+    {
+        $offer = M_Offer::create();
+        $update = M_Orders::find($order_id);
+        $update -> offer_letter_id = $offer -> id;
+        $update -> order_status = 7;
+        $status = $update -> update();
+        if($status) return redirect('/client/order');
     }
 }

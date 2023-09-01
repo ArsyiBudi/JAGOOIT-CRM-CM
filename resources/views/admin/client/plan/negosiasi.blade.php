@@ -111,7 +111,7 @@
                         </div>
             
                         <div>
-                            <a href="/client/order/plan/percobaan">
+                            <a href={{ url("/client/order/plan/percobaan")}}>
                             <div class=" bg-secondary text-white text-sm text-center py-1 px-3 md:px-14 rounded-md font-bold hover:scale-95 duration-200">
                                 <p class="hidden md:inline">continue</p> 
                                 <i class="ri-arrow-right-line block md:hidden"></i>
