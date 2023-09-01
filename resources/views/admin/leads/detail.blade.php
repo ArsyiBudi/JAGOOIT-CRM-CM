@@ -33,7 +33,7 @@
                 </div>
                 <div class="pt-3">
                     <p>
-                       Aktivitas terakhir: <span class=" font-bold">
+                       Aktivitas terakhir : <span class=" font-bold">
                             @if ($data->latestActivity)
                                 @if ($data->latestActivityParams)
                                     {{ $data->latestActivityParams->params_name }}

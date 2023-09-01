@@ -45,21 +45,45 @@
                     <div class="text-2xl">Detail Order</div>
                     <a class="bg-secondary rounded-md py-2 px-4 text-sm" href="/client/order/history/detail/timeline">Lihat Timeline</a>
                 </div>
-                <div class="divide-y divide-slate-50">
-                    <div class="pt-3">{{ $data -> leadData -> business_name }}</div>
-                    <div class="pt-3">{{ $data -> leadData -> address }}</div>
-                    <div class="pt-3">{{ $data -> leadData -> pic_name }}</div>
-                    <div class="pt-3">{{ $data -> leadData -> pic_contact_number }}</div>
+                <div class="divide-y divide-slate-50 gap-4 flex flex-col">
                     <div class="pt-3">
-                        @if ($data-> leadData ->latestActivity)
-                            @if ($data -> leadData ->latestActivityParams)
-                                {{ $data -> leadData ->latestActivityParams->params_name }}
-                            @endif
-                        @else
-                            -
-                        @endif
+                        <p>
+                            Nama Perusahaan : <span class="font-bold"> {{ $data -> leadData -> business_name }}</span>
+                        </p>
                     </div>
-                    <div class="pt-3">{{ $data -> leadData -> statusParam -> params_name }}</div>
+                    <div class="pt-3">
+                        <p>
+                            Alamat : <span class="font-bold"> {{ $data -> leadData -> address }}</span>
+                        </p>
+                    </div>
+                    <div class="pt-3">
+                        <p>
+                            Nama PIC : <span class="font-bold"> {{ $data -> leadData -> pic_name }}</span>
+                        </p>
+                    </div>
+                    <div class="pt-3">
+                        <p>
+                            No Telepon PIC : <span class="font-bold"> {{ $data -> leadData -> pic_contact_number }}</span>
+                        </p>
+                    </div>
+                    <div class="pt-3">
+                        <p>
+                            Aktivitas terakhir : <span class="font-bold">
+                                @if ($data-> leadData ->latestActivity)
+                                @if ($data -> leadData ->latestActivityParams)
+                                {{ $data -> leadData ->latestActivityParams->params_name }}
+                                @endif
+                                @else
+                                -
+                                @endif
+                            </span>
+                        </p>
+                    </div>
+                    <div class="pt-3">
+                        <p>
+                           Status : <span class="font-bold"> {{ $data -> leadData -> statusParam -> params_name }}</span> 
+                        </p>
+                    </div>
                     <hr>
                 </div>
             </div>
