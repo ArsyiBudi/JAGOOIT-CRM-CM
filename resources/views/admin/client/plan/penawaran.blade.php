@@ -215,12 +215,12 @@
 
 <!--modal outsourcing-->
 <dialog id="my_modal_5" class="modal  text-white">
-    <form method="dialog" class="modal-box bg-grey border-2 border-white w-11/12 max-w-4xl" onsubmit="handleFormSubmit(); hideModal(); return false;">
+    <form method="dialog" class="modal-box bg-grey border-2 border-white w-11/12 max-w-5xl" onsubmit="handleFormSubmit(); hideModal(); return false;">
         @csrf
         <table class=" w-full">
             <thead>
                 <tr class=" border-b-[1px] border-white">
-                    <td align="center" class="p-3">No</td>
+                    <td align="center" class="p-3">Domisili</td>
                     <td align="center" class="p-3">Deskirpsi</td>
                     <td align="center" class="p-3">Qty</td>
                     <td align="center" class="p-3">Durasi Kontrak (max 12 bulan)</td>
@@ -228,7 +228,7 @@
             </thead>
             <tbody>
                 <tr class=" bg-[#202020]/50">
-                    <td class=" p-5 mt-2" align="center">1</td>
+                    <td class=" p-5 mt-2" align="center"><input type="text" id="domisili" placeholder="Domisili" class="bg-white outline-none rounded-md text-black p-2 placeholder:text-[#202020]/50"></td>
                     <td class=" p-5" align="center"><input id="dsc" type="text" class="bg-white outline-none rounded-md text-black p-2 placeholder:text-[#202020]/50" placeholder="Outsourcing IT Support"></td>
                     <td class=" p-5" align="center"><input id="qty" type="number" class="bg-white outline-none rounded-md text-black p-2 placeholder:text-[#202020]/50" placeholder="12"></td>
                     <td class=" p-5" align="center"><input id="lamaKontrak" type="number" class="bg-white outline-none rounded-md text-black p-2 placeholder:text-[#202020]/50" placeholder="11 Bulan"></td>
