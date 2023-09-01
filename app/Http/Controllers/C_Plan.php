@@ -306,11 +306,17 @@ class C_Plan extends Controller
 
     public function popks_save($order_id)
     {
+        $currentTimestamp = time();
+        $selectedDate = new DateTime();
+        $selectedDate->setTimestamp($currentTimestamp);
+        
         $offer = M_Offer::create();
         $update = M_Orders::find($order_id);
         $update -> offer_letter_id = $offer -> id;
         $update -> order_status = 7;
+        $update -> end_popks = $selectedDate;
         $status = $update -> update();
         if($status) return redirect('/client/order');
+
     }
 }
