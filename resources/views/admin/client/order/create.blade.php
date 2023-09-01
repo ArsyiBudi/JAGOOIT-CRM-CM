@@ -25,7 +25,7 @@
             @csrf
             <div class="mb-4 block md:flex items-center gap-4">
                 <label for="order-id" class="text-sm text-white">Order/Request ID</label> <br class=" block md:hidden">
-                <input id="order-id" type="text" name="id" class="text-black rounded-lg px-2 py-1 bg-gary w-full md:w-auto mt-2 outline-none read-only" value="{{ $randomId }}">
+                <input disabled id="order-id" type="text" name="id" class="text-black rounded-lg px-2 py-1 bg-gary w-full md:w-auto mt-2 outline-none read-only" value="{{ $randomId }}">
             </div>
 
             <div class="mb-4">
@@ -41,23 +41,23 @@
             <div class=" flex flex-wrap md:flex-nowrap gap-4">
                 <div class="w-full md:w-1/2 mb-4">
                     <label for="posisi" class="text-sm text-white">Posisi yang Dibutuhkan</label>
-                    <input required id="posisi" type="text" name="desired_position" class="text-black rounded-lg px-2 py-1 w-full bg-white mt-1 md:mt-0" placeholder="Posisi">
+                    <input required id="posisi" type="text" name="desired_position" class=" outline-none text-black rounded-lg px-2 py-1 w-full bg-white mt-1 md:mt-0" placeholder="Posisi">
                 </div>
 
                 <div class="w-1/5 md:w-1/2 mb-4">
                     <label for="jumlah" class="text-sm text-white">Jumlah</label>
-                    <input required id="jumlah" type="number" name="needed_qty" class="text-black rounded-lg px-2 py-1 w-full bg-white mt-1 md:mt-0" placeholder="Jumlah">
+                    <input required id="jumlah" type="number" name="needed_qty" class="outline-none text-black rounded-lg px-2 py-1 w-full bg-white mt-1 md:mt-0" placeholder="Jumlah">
                 </div>
 
                 <div class=" w-1/2 md:w-1/2 mb-4">
                     <label for="due-date" class="text-sm text-white">Due Date</label>
-                    <input required type="date" id="due-date" type="text" name="due_date" class="text-black rounded-lg px-2 py-1 w-full bg-white mt-1 md:mt-0" placeholder="Tanggal">
+                    <input required type="date" id="due-date" type="text" name="due_date" class="outline-none text-black rounded-lg px-2 py-1 w-full bg-white mt-1 md:mt-0" placeholder="Tanggal">
                 </div>
             </div>
 
             <div class="mb-4">
                 <label for="job-description" class="text-sm text-white">Job Description</label>
-                <input required id="job-description" type="text" name="description" class="text-black rounded-lg px-2 py-1 w-full bg-white mt-2" placeholder="Deskripsi">
+                <input required id="job-description" type="text" name="description" class="outline-none text-black rounded-lg px-2 py-1 w-full bg-white mt-2" placeholder="Deskripsi">
             </div>
 
             <div class=" block md:flex gap-4">
@@ -65,7 +65,7 @@
                     <div class="w-full">
                         <label for="kriteria-keterampilan" class="text-sm text-white">Kriteria Keterampilan</label>
                         <div class="rounded-lg px-2 py-4 h-32 w-full bg-white mt-2">
-                            <textarea required id="kriteria-keterampilan" type="text" name="skills_desc" class="text-black bg-transparent  h-full w-full hide-scrollbar resize-none" placeholder="Keterampilan"></textarea>
+                            <textarea required id="kriteria-keterampilan" type="text" name="skills_desc" class="outline-none text-black bg-transparent  h-full w-full hide-scrollbar resize-none" placeholder="Keterampilan"></textarea>
                         </div>
                     </div>
 
@@ -77,7 +77,7 @@
                         </div>
                         <canvas id="pdf-preview" style="display: none;" class=" w-full rounded-md"></canvas>
                         <label for="file-tor" id="container-tor" class="flex justify-center items-center bg-white py-4 rounded-lg px-2 h-24 mt-2">
-                            <input required id="file-tor" type="file" name="tor_file" class="text-black rounded-lg px-2 py-4 h-24 hidden w-full bg-white" name="tor" onchange="previewFile()">
+                            <input required id="file-tor" type="file" name="tor_file" class="outline-none text-black rounded-lg px-2 py-4 h-24 hidden w-full bg-white" name="tor" onchange="previewFile()">
                             <span id="file-upload-label" class=" text-white font-semibold cursor-pointer font-quicksand">
                                 <i class="ri-upload-2-fill text-3xl text-black"></i>
                             </span>
@@ -88,13 +88,13 @@
                 <div class="flex flex-col gap-4 md:w-1/2">
                     <div class="w-full">
                         <label for="anggaran" class="text-sm text-white">Anggaran</label>
-                        <input required id="anggaran" type="number" name="budget_estimation" class="text-black rounded-lg px-2 py-4 w-full bg-white mt-2" placeholder="Anggaran">
+                        <input required id="anggaran" type="number" name="budget_estimation" class="outline-none text-black rounded-lg px-2 py-4 w-full bg-white mt-2" placeholder="Anggaran">
                     </div>
 
                     <div class="w-full mb-4">
                         <label for="kriteria-karakteristik" class="text-sm text-white">Kriteria Karakteristik</label>
                         <div class="rounded-lg px-2 py-4 w-full h-[10.5rem] bg-white mt-2">
-                            <textarea required id="kriteria-karakteristik" type="text" name="characteristic_desc" class="text-black bg-transparent  h-full w-full hide-scrollbar resize-none" placeholder="Karakteristik"></textarea>
+                            <textarea required id="kriteria-karakteristik" type="text" name="characteristic_desc" class="outline-none text-black bg-transparent  h-full w-full hide-scrollbar resize-none" placeholder="Karakteristik"></textarea>
                         </div>
                     </div>
                 </div>
