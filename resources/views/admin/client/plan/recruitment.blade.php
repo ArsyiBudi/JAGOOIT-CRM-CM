@@ -82,9 +82,11 @@
                 </div>
             </div>
         </form>
-            <div class=" bg-darkSecondary w-full px-3 rounded-md mt-4 overflow-auto hide-scrollbar">
-                <div class="overflow-auto ">
-                    <table class="table overflow-auto">
+        <div class=" bg-darkSecondary w-full px-3 rounded-md mt-4 overflow-auto hide-scrollbar">
+            <form action="{{ url(request() -> path()) }}" method="post">
+                @csrf
+            <div class="overflow-auto ">
+                <table class="table overflow-auto">
                         <!-- head -->
                         <thead>
                             <tr class="text-white">
@@ -106,7 +108,7 @@
                             <tr>
                                 <td>
                                     <label>
-                                        <input type="checkbox" class="checkbox border-white border-2" />
+                                        <input name="talents_id[]" value="{{ $talent -> id }}" type="checkbox" class="checgitkbox border-white border-2" />
                                     </label>
                                 </td>
                                 <td align="center">{{ isset($i) ? ++$i : $i = 1  }}</td>
@@ -133,7 +135,7 @@
             </div>
             <div class="mt-2 flex justify-between items-center gap-1 md:gap-0">
                 <div>
-                    <button class=" bg-secondary text-white text-sm text-center py-1 px-3 md:px-14 rounded-md font-bold">
+                    <button type="submit" class=" bg-secondary text-white text-sm text-center py-1 px-3 md:px-14 rounded-md font-bold">
                         <p class=" hidden md:block">Save</p>
                         <i class="ri-save-3-line block md:hidden"></i>
                     </button>
@@ -143,8 +145,7 @@
                         <p class="hidden md:block">Continue</p>
                         <i class="ri-arrow-right-line block md:hidden ml-1"></i>
                     </a>
-                </div>
-
+                </div>   
             </div>
         </form>
     </div>

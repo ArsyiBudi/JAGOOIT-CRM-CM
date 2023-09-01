@@ -142,6 +142,7 @@ Route::middleware('auth')->group(function () {
                 //?RECRUITMENT
                 Route::get('/{order_id}/recruitment', [C_Plan::class, 'fetchRecruitment'])->name('fetch_recruitment');
                 Route::delete('/{order_id}/recruitment', [TalentController::class, 'destroy']);
+                Route::post('/{order_id}/recruitment', [C_Plan::class, 'saveRecruitment']) -> name('fetch_training');
 
                 //?TRAINING
                 Route::get('/{order_id}/training', [C_Plan::class, 'fetchTraining']) -> name('fetch_training');
@@ -157,7 +158,7 @@ Route::middleware('auth')->group(function () {
                     return view('admin.client.plan.negosiasi', [
                         "title" => "Plan | Negosiasi",
                     ]);
-                })->name("fetch_negosiasi");
+                })->name('fetch_negosisasi');
 
                 //?PERCOBAAN
                 Route::get('/{order_id}/percobaan', function () {
