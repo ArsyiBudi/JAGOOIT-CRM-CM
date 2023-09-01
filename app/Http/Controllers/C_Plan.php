@@ -27,7 +27,8 @@ class C_Plan extends Controller
         $search = session('talent_search', '');
 
         $talent = M_Talents::where(function($query) use ($search){
-            $query -> where('name', 'like', "%$search%");
+            $query -> where('name', 'like', "%$search%")
+            ->orWhere('is_active', '=', '0');
         })
         ->orWhereHas('posisiTalent',function($query) use ($search){
             $query -> where('description', 'like', "%$search%");
@@ -73,6 +74,9 @@ class C_Plan extends Controller
                'talent_id' => $talent_id,
                'order_id' => $order_id
            ]);
+           $update = M_Talents::find($talent_id);
+           $update -> is_active = 1;
+           $update -> update();
        }
        return redirect('/client/order/plan/'. $order_id .'/training/');
     }
@@ -95,6 +99,7 @@ class C_Plan extends Controller
     {
         $order = M_Orders::find($order_id);
         $offer = M_Offer::find($order -> offer_letter_id);
+        // dd($offer -> offerJobDetails);
         return view('admin.client.plan.penawaran', [
             "title" => "Plan | Penawaran",
             "offer" => $offer,
@@ -178,11 +183,22 @@ class C_Plan extends Controller
         $phpWord->setValue('weekend', $input['weekend_cost']);
         $phpWord->setValue('konsumsi', $input['consumption_cost']);
         $phpWord->setValue('transPP', $input['transportation_cost']);
-        $replc = array(
-            array('qty' => '12', 'needed_job' => 'BE', 'city_location' => 'Liverpool'),
-            array('qty' => '11', 'needed_job' => 'FE', 'city_location' => 'Manchester'),
-            array('qty' => '1', 'needed_job' => 'BE', 'city_location' => 'Londo'),
-        );
+        // $replc = array(
+        //     array('qty' => '12', 'needed_job' => 'BE', 'city_location' => 'Liverpool'),
+        //     array('qty' => '11', 'needed_job' => 'FE', 'city_location' => 'Manchester'),
+        //     array('qty' => '1', 'needed_job' => 'BE', 'city_location' => 'Londo'),
+        // );
+
+        $replc = [];
+
+        foreach($findid->offerJobDetails as $detail) {
+            $replc[] = [
+                'qty' => $detail->quantity,
+                'needed_job' => $detail->needed_job,
+                'city_location' => $detail->city_location,
+                'contract_duration' => $detail->contract_duration,
+            ];
+        }
         $phpWord->cloneBlock('table_block_placeholder', 0, true, false, $replc);
         $tempFilePath = tempnam(sys_get_temp_dir(), 'Surat_Penawaran');
         $phpWord->saveAs($tempFilePath);

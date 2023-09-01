@@ -35,8 +35,8 @@ class M_Offer extends Model
     {
         return $this->hasOne(M_OfferLetterJobsDetails::class, 'offer_letters_id');
     }
-    public function offerJobDetails() : HasOne
+    public function offerJobDetails() : HasMany
     {
-        return $this->hasOne(M_OfferLetterJobsDetails::class, 'offer_letters_id');
+        return $this->hasMany(M_OfferLetterJobsDetails::class, 'offer_letters_id');
     }
 }
