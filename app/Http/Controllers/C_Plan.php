@@ -197,7 +197,7 @@ class C_Plan extends Controller
         $replc = [];
         foreach($findid->offerJobDetails as $detail) {
             $replc[] = [
-                'qty' => $detail->quantity,
+                'quantity' => $detail->quantity,
                 'needed_job' => $detail->needed_job,
                 'city_location' => $detail->city_location,
                 'contract_duration' => $detail->contract_duration,

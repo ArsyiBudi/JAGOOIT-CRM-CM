@@ -57,6 +57,30 @@
             </div>
 
             <div class="mb-4">
+                <div>
+                    <p class="gap-4">Outsourcing Detail</p>
+                    <div class=" flex items-center gap-2 flex-wrap mt-2">
+                        <form action="">
+                            @csrf
+                            <div class=" detail-container flex gap-2">
+                                @if($offer -> offerJob)
+                                    @foreach($offer -> offerJobDetails as $data)
+                                        <div class="bg-white text-black text-opacity-50 text-sm text-center py-1 px-7 rounded-md font-bold flex items-center gap-3">
+                                            <p>{{ $data->needed_job }} ({{ $data->quantity }})</p>
+                                            <span>
+                                                <i class="text-lg cursor-pointer ri-delete-bin-2-line text-delete"></i>
+                                            </span>
+                                        </div>
+                                    @endforeach
+                                @endif
+                            </div>
+                        </form>
+                        <button type="button" class="btn bg-white text-darkSecondary text-opacity-50 text-sm text-center py-2 px-3  rounded-md font-bold hover:scale-95 duration-200 hover:bg-white" onclick="my_modal_5.showModal()">Add Detail +</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mb-4">
                 <label for="perihal" class="text-sm text-white">Perihal</label>
                 <input value="{{ old('offer_subject', @$offer->offer_subject) }}" name="offer_subject" id="perihal" type="text" class="mt-1 text-black rounded-md px-2 py-2 w-full bg-white" placeholder="Perihal">
             </div>
@@ -90,29 +114,7 @@
                 </div>
             </div>
 
-            <div class="mt-4">
-                <div>
-                    <p class="gap-4">Outsourcing Detail</p>
-                    <div class=" flex items-center gap-2 flex-wrap mt-2">
-                        <form action="">
-                            @csrf
-                            <div class=" detail-container flex gap-2">
-                                @if($offer -> offerJob)
-                                    @foreach($offer -> offerJobDetails as $data)
-                                        <div class="bg-white text-black text-opacity-50 text-sm text-center py-1 px-7 rounded-md font-bold flex items-center gap-3">
-                                            <p>{{ $data->needed_job }} ({{ $data->quantity }})</p>
-                                            <span>
-                                                <i class="text-lg cursor-pointer ri-delete-bin-2-line text-delete"></i>
-                                            </span>
-                                        </div>
-                                    @endforeach
-                                @endif
-                            </div>
-                        </form>
-                        <button type="button" class="btn bg-white text-darkSecondary text-opacity-50 text-sm text-center py-2 px-3  rounded-md font-bold hover:scale-95 duration-200 hover:bg-white" onclick="my_modal_5.showModal()">Add Detail +</button>
-                    </div>
-                </div>
-            </div>
+            
 
             <p class="mt-4">Biaya Overtime (perjam)</p>
 
