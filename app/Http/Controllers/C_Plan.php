@@ -61,6 +61,7 @@ class C_Plan extends Controller
         return view('admin.client.plan.training', [
             "title" => "Plan | Training",
             "datas" => $talent,
+            "order_id" => $order_id
         ]);
     }
 

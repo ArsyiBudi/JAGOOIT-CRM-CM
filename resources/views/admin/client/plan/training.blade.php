@@ -159,7 +159,7 @@
         <div class="mt-2 flex justify-between items-center gap-1 md:gap-0">
             <div>
                 <div>
-                    <a href="{{ redirect() -> back() }}" class="bg-secondary text-white text-sm text-center py-1 px-2 md:px-14 rounded-md font-bold flex items-center hover:scale-95 duration-200">
+                    <a href="{{ url('/') }}" class="bg-secondary text-white text-sm text-center py-1 px-2 md:px-14 rounded-md font-bold flex items-center hover:scale-95 duration-200">
                         <p class="hidden md:block">Back</p>
                         <i class="ri-arrow-left-line block md:hidden ml-1"></i>
                     </a>
