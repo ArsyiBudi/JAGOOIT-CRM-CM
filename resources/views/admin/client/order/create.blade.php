@@ -25,7 +25,7 @@
             @csrf
             <div class="mb-4 block md:flex items-center gap-4">
                 <label for="order-id" class="text-sm text-white">Order/Request ID</label> <br class=" block md:hidden">
-                <input disabled id="order-id" type="text" name="id" class="text-black rounded-lg px-2 py-1 bg-gary w-full md:w-auto mt-2 outline-none read-only" value="{{ $randomId }}">
+                <input readonly id="order-id" type="text" name="id" class="text-black rounded-lg px-2 py-1 bg-gary w-full md:w-auto mt-2 outline-none read-only" value="{{ $randomId }}">
             </div>
 
             <div class="mb-4">
