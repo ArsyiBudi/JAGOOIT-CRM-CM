@@ -126,6 +126,7 @@ class C_Plan extends Controller
         }
 
         $phpWord = new TemplateProcessor('template.docx');
+        $phpWord->setValue('no_surat', "JTI/{$selectedMonth}/SP/{$selectedYear}");
         $phpWord->setValue('perihal', $input['offer_subject']);
         $phpWord->setValue('kepada', $input['recipient_name']);
         $phpWord->setValue('tempat', $input['location']);
