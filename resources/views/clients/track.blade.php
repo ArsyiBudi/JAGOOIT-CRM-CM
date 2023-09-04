@@ -173,15 +173,15 @@
                             <div class=" relative w-full">
                                 <h1 class=" text-left text-lg pb-2">Appoinment Negosiasi</h1>
                                 <p class=" absolute text-xs  text-left date-text">Start Date :
-                                @if($order -> start_offer)
-                                    {{ $order -> start_offer }}
+                                @if($order -> start_appointment)
+                                    {{ $order -> start_appointment }}
                                     @else
                                     -
                                     @endif
                                 </p>
                                 <p class="absolute top-12 text-xs py-4 text-left date-text">End Date :
-                                @if($order -> end_offer)
-                                    {{ $order -> end_offer }}
+                                @if($order -> end_appointment)
+                                    {{ $order -> end_appointment }}
                                     @else
                                     -
                                     @endif
