@@ -150,8 +150,9 @@ Route::middleware('auth')->group(function () {
                 Route::get('/{order_id}/penawaran', [C_Plan::class, 'openOffer']) -> name('open_offer');
                 Route::put('/{order_id}/penawaran', [C_Plan::class, 'addOfferDetails']) -> name('add_offer_details');
                 Route::post('/{order_id}/penawaran', [C_Plan::class, 'createOffer'])->name('create_offer');
-                Route::patch('/{order_id}/penawaran', [C_Plan::class, 'offer_send']) -> name('send_popks');
-            
+                Route::patch('/{order_id}/penawaran', [C_Plan::class, 'offer_send']) -> name('send_offer');
+                Route::post('/{order_id}/penawaran/save', [C_Plan::class, 'offer_save']) -> name('save_offer');
+
                 //?NEGOSIASI
                 Route::get('/{order_id}/negosiasi', function () {
                     return view('admin.client.plan.negosiasi', [

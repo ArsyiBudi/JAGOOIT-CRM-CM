@@ -202,178 +202,180 @@
                         <i class="ri-arrow-left-line block md:hidden ml-1"></i>
                     </a>
                 </div>
-
             </div>
 
-            <div class="flex gap-4 max-sm:w-full max-sm:justify-between">
-                <div></div>
-                <button type="submit" name="save" class=" w-full bg-secondary text-white text-sm text-center py-1 px-14 rounded-md font-bold hover:scale-95 duration-200">
-                    <p class="hidden md:block">Save</p>
-                    <i class="ri-save-line block md:hidden"></i>
-                </button>
-                <div>
-                    <div>
-                        <a href="{{ url('/client/order/plan/'.$order_id.'/negosiasi') }}">
-                            <div class=" bg-secondary text-white text-sm text-center py-1 px-3 md:px-14 rounded-md font-bold hover:scale-95 duration-200">
-                                <p class="hidden md:inline">Continue</p>
-                                <i class="ri-arrow-right-line block md:hidden"></i>
-                            </div>
-                        </a>
+    </form>
+    <div class="flex gap-4 max-sm:w-full max-sm:justify-between">
+        <div></div>
+        <form action="{{ url(request() -> path() . '/save') }}" method="POST">
+            @csrf
+            <button type="submit" name="save" class=" w-full bg-secondary text-white text-sm text-center py-1 px-14 rounded-md font-bold hover:scale-95 duration-200">
+                <p class="hidden md:block">Save</p>
+                <i class="ri-save-line block md:hidden"></i>
+            </button>
+        </form>
+        <div>
+            <div>
+                <a href="{{ url('/client/order/plan/'.$order_id.'/negosiasi') }}">
+                    <div class=" bg-secondary text-white text-sm text-center py-1 px-3 md:px-14 rounded-md font-bold hover:scale-95 duration-200">
+                        <p class="hidden md:inline">Continue</p>
+                        <i class="ri-arrow-right-line block md:hidden"></i>
                     </div>
-                </div>
+                </a>
             </div>
         </div>
+    </div>
+</div>
+
+<!--modal outsourcing-->
+<dialog id="my_modal_5" class="modal  text-white">
+    <form action="{{ url(request() -> path()) }}" method="post" class="modal-box bg-grey border-2 border-white w-11/12 max-w-5xl">
+        @csrf
+        @method('PUT')
+        <table class=" w-full">
+            <thead>
+                <tr class=" border-b-[1px] border-white">
+                    <td align="center" class="p-3">Kota</td>
+                    <td align="center" class="p-3">Pekerjaan</td>
+                    <td align="center" class="p-3">Qty</td>
+                    <td align="center" class="p-3">Durasi Kontrak (max 12 bulan)</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class=" bg-[#202020]/50">
+                    <td class=" p-5 mt-2" align="center"><input type="text" name="city_location" id="domisili" placeholder="Domisili" class="bg-white outline-none rounded-md text-black p-2 placeholder:text-[#202020]/50"></td>
+                    <td class=" p-5" align="center"><input id="dsc" name="needed_job" type="text" class="bg-white outline-none rounded-md text-black p-2 placeholder:text-[#202020]/50" placeholder="Outsourcing IT Support"></td>
+                    <td class=" p-5" align="center"><input id="qty" name="quantity" type="number" class="bg-white outline-none rounded-md text-black p-2 placeholder:text-[#202020]/50" placeholder="12"></td>
+                    <td class=" p-5" align="center"><input id="lamaKontrak" name="contract_duration" type="number" class="bg-white outline-none rounded-md text-black p-2 placeholder:text-[#202020]/50" placeholder="11 Bulan"></td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="modal-action">
+            <button type="submit" class="btn bg-secondary text-white border-none hover:bg-secondary/50 hover:text-white/80">Save</button>
+        </div>
     </form>
+</dialog>
 
-    <!--modal outsourcing-->
-    <dialog id="my_modal_5" class="modal  text-white">
-        <form action="{{ url(request() -> path()) }}" method="post" class="modal-box bg-grey border-2 border-white w-11/12 max-w-5xl">
-            @csrf
-            @method('PUT')
-            <table class=" w-full">
-                <thead>
-                    <tr class=" border-b-[1px] border-white">
-                        <td align="center" class="p-3">Kota</td>
-                        <td align="center" class="p-3">Pekerjaan</td>
-                        <td align="center" class="p-3">Qty</td>
-                        <td align="center" class="p-3">Durasi Kontrak (max 12 bulan)</td>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr class=" bg-[#202020]/50">
-                        <td class=" p-5 mt-2" align="center"><input type="text" name="city_location" id="domisili" placeholder="Domisili" class="bg-white outline-none rounded-md text-black p-2 placeholder:text-[#202020]/50"></td>
-                        <td class=" p-5" align="center"><input id="dsc" name="needed_job" type="text" class="bg-white outline-none rounded-md text-black p-2 placeholder:text-[#202020]/50" placeholder="Outsourcing IT Support"></td>
-                        <td class=" p-5" align="center"><input id="qty" name="quantity" type="number" class="bg-white outline-none rounded-md text-black p-2 placeholder:text-[#202020]/50" placeholder="12"></td>
-                        <td class=" p-5" align="center"><input id="lamaKontrak" name="contract_duration" type="number" class="bg-white outline-none rounded-md text-black p-2 placeholder:text-[#202020]/50" placeholder="11 Bulan"></td>
-                    </tr>
-                </tbody>
-            </table>
-            <div class="modal-action">
-                <button type="submit" class="btn bg-secondary text-white border-none hover:bg-secondary/50 hover:text-white/80">Save</button>
-            </div>
-        </form>
-    </dialog>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.11.338/pdf.min.js"></script>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.11.338/pdf.min.js"></script>
+<script>
+    const my_modal_5 = document.getElementById('my_modal_5');
 
-    <script>
-        const my_modal_5 = document.getElementById('my_modal_5');
+    function showModal() {
+        my_modal_5.showModal();
+    }
 
-        function showModal() {
-            my_modal_5.showModal();
-        }
+    function hideModal() {
+        my_modal_5.close();
+    }
 
-        function hideModal() {
-            my_modal_5.close();
-        }
+    function handleFormSubmit() {
+        const dsc = document.getElementById('dsc');
+        const deskripsi = dsc.value;
+        const qty = document.getElementById('qty').value;
+        const lamaKontrak = document.getElementById('lamaKontrak').value;
 
-        function handleFormSubmit() {
-            const dsc = document.getElementById('dsc');
-            const deskripsi = dsc.value;
-            const qty = document.getElementById('qty').value;
-            const lamaKontrak = document.getElementById('lamaKontrak').value;
-
-            if (deskripsi.trim() !== "") {
+        if (deskripsi.trim() !== "") {
 
 
-                const detailContainer = document.querySelector('.detail-container'); // Add this class to your container
+            const detailContainer = document.querySelector('.detail-container'); // Add this class to your container
 
-                const detailElement = document.createElement('div');
-                detailElement.className = 'bg-white text-black text-opacity-50 text-sm text-center py-1 px-7 rounded-md font-bold flex items-center gap-3';
+            const detailElement = document.createElement('div');
+            detailElement.className = 'bg-white text-black text-opacity-50 text-sm text-center py-1 px-7 rounded-md font-bold flex items-center gap-3';
 
-                console.log(deskripsi);
-                detailElement.innerHTML = `
+            console.log(deskripsi);
+            detailElement.innerHTML = `
                 <p>${deskripsi}</p>
                 <span>
                     <i class="text-lg cursor-pointer ri-delete-bin-2-line text-delete"></i>
                 </span>
             `;
 
-                const deleteIcon = detailElement.querySelector('.ri-delete-bin-2-line');
-                deleteIcon.addEventListener('click', function() {
-                    detailContainer.removeChild(detailElement);
+            const deleteIcon = detailElement.querySelector('.ri-delete-bin-2-line');
+            deleteIcon.addEventListener('click', function() {
+                detailContainer.removeChild(detailElement);
+            });
+            detailContainer.appendChild(detailElement);
+
+        }
+
+
+
+        var detailData = {
+            qty: qty
+            , needed_job: deskripsi
+            , city_location: lamaKontrak
+        };
+
+        console.log(detailData);
+
+
+        deskripsi.value = "";
+    }
+
+    async function previewFile() {
+        const fileInput = document.getElementById('file-cv');
+        const containerInput = document.getElementById('container-cv');
+        const fileNamePreview = document.getElementById('file-name-preview');
+        const canvas = document.getElementById('pdf-preview');
+        const fileUploadLabel = document.getElementById('file-upload-label');
+        const canvasLoading = document.getElementById('canvas-loading');
+
+
+
+        if (fileInput.files && fileInput.files[0]) {
+            fileUploadLabel.textContent = 'Ganti File';
+            containerInput.style.width = 'auto';
+            containerInput.style.height = 'auto';
+            containerInput.style.backgroundColor = '#EC512E'
+        } else {
+            fileUploadLabel.innerHTML = '<i class="ri-upload-2-fill text-3xl text-black"></i>';
+        }
+
+        if (fileInput.files && fileInput.files[0]) {
+            canvasLoading.style.display = 'block';
+            const file = fileInput.files[0];
+            const fileURL = URL.createObjectURL(file);
+
+            fileNamePreview.style.color = 'white'
+            fileNamePreview.textContent = file.name;
+            fileNamePreview.style.display = 'block';
+
+            if (file.type === 'application/pdf') {
+
+                const loadingTask = pdfjsLib.getDocument(fileURL);
+                const pdf = await loadingTask.promise;
+
+                const pageNum = 1;
+                const page = await pdf.getPage(pageNum);
+
+                const viewport = page.getViewport({
+                    scale: 1
                 });
-                detailContainer.appendChild(detailElement);
+                canvas.width = viewport.width;
+                canvas.height = 200;
 
-            }
+                const renderContext = {
+                    canvasContext: canvas.getContext('2d')
+                    , viewport
+                };
 
+                await page.render(renderContext).promise;
+                canvas.style.display = 'block';
+                canvasLoading.style.display = 'none';
 
-
-            var detailData = {
-                qty: qty
-                , needed_job: deskripsi
-                , city_location: lamaKontrak
-            };
-
-            console.log(detailData);
-
-
-            deskripsi.value = "";
-        }
-
-        async function previewFile() {
-            const fileInput = document.getElementById('file-cv');
-            const containerInput = document.getElementById('container-cv');
-            const fileNamePreview = document.getElementById('file-name-preview');
-            const canvas = document.getElementById('pdf-preview');
-            const fileUploadLabel = document.getElementById('file-upload-label');
-            const canvasLoading = document.getElementById('canvas-loading');
-
-
-
-            if (fileInput.files && fileInput.files[0]) {
-                fileUploadLabel.textContent = 'Ganti File';
-                containerInput.style.width = 'auto';
-                containerInput.style.height = 'auto';
-                containerInput.style.backgroundColor = '#EC512E'
             } else {
-                fileUploadLabel.innerHTML = '<i class="ri-upload-2-fill text-3xl text-black"></i>';
-            }
-
-            if (fileInput.files && fileInput.files[0]) {
-                canvasLoading.style.display = 'block';
-                const file = fileInput.files[0];
-                const fileURL = URL.createObjectURL(file);
-
-                fileNamePreview.style.color = 'white'
-                fileNamePreview.textContent = file.name;
-                fileNamePreview.style.display = 'block';
-
-                if (file.type === 'application/pdf') {
-
-                    const loadingTask = pdfjsLib.getDocument(fileURL);
-                    const pdf = await loadingTask.promise;
-
-                    const pageNum = 1;
-                    const page = await pdf.getPage(pageNum);
-
-                    const viewport = page.getViewport({
-                        scale: 1
-                    });
-                    canvas.width = viewport.width;
-                    canvas.height = 200;
-
-                    const renderContext = {
-                        canvasContext: canvas.getContext('2d')
-                        , viewport
-                    };
-
-                    await page.render(renderContext).promise;
-                    canvas.style.display = 'block';
-                    canvasLoading.style.display = 'none';
-
-                } else {
-                    canvas.style.display = 'none';
-                    fileNamePreview.textContent = 'File harus berupa PDF!';
-                    fileNamePreview.style.color = 'red'
-                    canvasLoading.style.display = 'none';
-                }
-            } else {
-                fileNamePreview.style.display = 'none';
                 canvas.style.display = 'none';
+                fileNamePreview.textContent = 'File harus berupa PDF!';
+                fileNamePreview.style.color = 'red'
+                canvasLoading.style.display = 'none';
             }
+        } else {
+            fileNamePreview.style.display = 'none';
+            canvas.style.display = 'none';
         }
+    }
 
-    </script>
+</script>
 
-    @endsection
+@endsection

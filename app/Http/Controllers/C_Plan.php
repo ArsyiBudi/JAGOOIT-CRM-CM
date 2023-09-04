@@ -242,29 +242,13 @@ class C_Plan extends Controller
         $offer = M_Offer::create();
         $update = M_Orders::find($order_id);
         $update -> offer_letter_id = $offer -> id;
-        $update -> order_status = 7;
-        $update -> end_popks = $selectedDate;
+        $update -> order_status = 3;
+        $update -> end_offer = $selectedDate;
+        $update -> start_appointment = $selectedDate;
         $status = $update -> update();
-        if($status) return redirect('/client/order/plan/'.$order_id.'/training');
+        if($status) return redirect('/client/order/plan/'.$order_id.'/negosiasi');
 
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     //?POPKS CONTROLLER CODE
     public function popks_create(Request $request)
