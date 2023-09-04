@@ -25,7 +25,7 @@ class C_Leads extends Controller
 
         $data = M_Leads::where(function ($query) use ($search) {
             $query->where('business_name', 'like', "%$search%")
-                ->orWhere('business_sector', 'like', "%$search%")
+                ->orWhere('address', 'like', "%$search%")
                 ->orWhere('pic_name', 'like', "%$search%");
         })->paginate($entries);
 
@@ -48,9 +48,13 @@ class C_Leads extends Controller
 
         $data = M_Leads::where(function ($query) use ($search) {
             $query->where('business_name', 'like', "%$search%")
-                ->orWhere('business_sector', 'like', "%$search%")
+                ->orWhere('address', 'like', "%$search%")
                 ->orWhere('pic_name', 'like', "%$search%");
-        })->where('client_indicator', '=', '1')->paginate($entries);
+            })->where('client_indicator', '=', '1')
+        // ->orWhereHas('latestActivityParams', function ($query) use ($search){
+        //     $query -> where('params_name', 'like', "%$search%");
+        // })
+        ->paginate($entries);
 
         return view('admin.client/menu', [
             "title" => "Client | Menu",

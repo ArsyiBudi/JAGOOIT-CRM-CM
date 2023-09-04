@@ -68,8 +68,18 @@
                     <textarea name="judulreport" id="judulreport" class="bg-transparent outline-none w-full p-2 resize-none text-black" placeholder="Judul"></textarea>
                 </div>
                 <div class="bg-white opacity-70 rounded-md w-full mb-4 p-4">
-                    <input type="file" name="file" id="file" class="hidden w-full" placeholder="file"></input>
                     <label for="file" class="text-grey w-full block">File</label>
+                     <p id="file-name-preview" style="display: none;"  class=" pt-3"></p>
+                        <div id="canvas-loading"  class=" my-3 w-full hidden">
+                            <span class="loading loading-dots loading-md "></span>
+                        </div>
+                        <canvas id="pdf-preview" style="display: none;" class=" w-full rounded-md"></canvas>
+                        <label for="file-tor" id="container-tor" class="flex justify-center items-center bg-white py-4 rounded-lg px-2 h-24 mt-2">
+                            <input required id="file-tor" type="file" name="file" class="outline-none text-black rounded-lg px-2 py-4 h-24 hidden w-full bg-white" name="tor" onchange="previewFile()">
+                            <span id="file-upload-label" class=" text-white font-semibold cursor-pointer font-quicksand">
+                                <i class="ri-upload-2-fill text-3xl text-black"></i>
+                            </span>
+                        </label>
                 </div>
                 <div class="bg-white opacity-70 rounded-md w-full mb-4 p-2 h-[100px]">
                     <textarea name="deskripsireport" id="deskripsireport" class="bg-transparent outline-none p-2  rounded w-full h-full resize-none text-black" placeholder="Deskripsi"></textarea>
@@ -82,6 +92,9 @@
     </div>
 </div>
 </div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.11.338/pdf.min.js"></script>
+
 <script>
     document.addEventListener("DOMContentLoaded", function() {
         const formSelector = document.getElementById("formSelector");
@@ -104,5 +117,66 @@
         // Inisialisasi dengan menampilkan Formulir 1 secara default
         document.getElementById("form1").style.display = "block";
     });
+
+async function previewFile() {
+    const fileInput = document.getElementById('file-tor');
+    const containerInput = document.getElementById('container-tor');
+    const fileNamePreview = document.getElementById('file-name-preview');
+    const canvas = document.getElementById('pdf-preview');
+    const fileUploadLabel = document.getElementById('file-upload-label');
+    const canvasLoading = document.getElementById('canvas-loading');
+
+
+    
+    if (fileInput.files && fileInput.files[0]) {
+        fileUploadLabel.textContent = 'Ganti File';
+        containerInput.style.width = 'auto'; 
+        containerInput.style.height = 'auto'; 
+        containerInput.style.backgroundColor = '#EC512E'
+    } else {
+        fileUploadLabel.innerHTML = '<i class="ri-upload-2-fill text-3xl text-black"></i>';
+    }
+    
+    if (fileInput.files && fileInput.files[0]) {
+        canvasLoading.style.display = 'block';
+        const file = fileInput.files[0];
+        const fileURL = URL.createObjectURL(file);
+
+        fileNamePreview.style.color = 'white'
+        fileNamePreview.textContent = file.name;
+        fileNamePreview.style.display = 'block';
+
+        if (file.type === 'application/pdf') {
+            
+            const loadingTask = pdfjsLib.getDocument(fileURL);
+            const pdf = await loadingTask.promise;
+
+            const pageNum = 1; 
+            const page = await pdf.getPage(pageNum);
+
+            const viewport = page.getViewport({ scale: 1 });
+            canvas.width = viewport.width;
+            canvas.height = 200;
+
+            const renderContext = {
+                canvasContext: canvas.getContext('2d'),
+                viewport
+            };
+
+            await page.render(renderContext).promise;
+            canvas.style.display = 'block';
+            canvasLoading.style.display = 'none';
+
+        } else {
+            canvas.style.display = 'none';
+            fileNamePreview.textContent = 'File harus berupa PDF!';
+            fileNamePreview.style.color = 'red'
+            canvasLoading.style.display = 'none';
+        }
+    } else {
+        fileNamePreview.style.display = 'none';
+        canvas.style.display = 'none';
+    }
+}
 </script>
 @endsection

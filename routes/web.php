@@ -114,11 +114,7 @@ Route::middleware('auth')->group(function () {
             //?DETAIL ORDER
             Route::prefix('detail') -> group(function(){
                 Route::get('/{order_id}', [C_Orders::class, 'detail'])->name('detail_order');
-                Route::get('/{order_id}/timeline', function () {
-                    return view('admin.client.order.timeline', [
-                        "title" => "Client | Order Timeline",
-                    ]);
-                });
+                Route::get('/{order_id}/timeline', [C_Orders::class, 'timeline']);
             });
 
             //?CREATE ORDER
@@ -154,6 +150,7 @@ Route::middleware('auth')->group(function () {
                 Route::get('/{order_id}/penawaran', [C_Plan::class, 'openOffer']) -> name('open_offer');
                 Route::put('/{order_id}/penawaran', [C_Plan::class, 'addOfferDetails']) -> name('add_offer_details');
                 Route::post('/{order_id}/penawaran', [C_Plan::class, 'createOffer'])->name('create_offer');
+                Route::patch('/{order_id}/penawaran', [C_Plan::class, 'offer_send']) -> name('send_popks');
             
                 //?NEGOSIASI
                 Route::get('/{order_id}/negosiasi', function () {

@@ -75,6 +75,22 @@ class C_Orders extends Controller
             "order" => $order_data
         ]);
     }
+
+    public function timeline($order_id)
+    {
+        $order_data = M_Orders::find($order_id);
+        $lead_data = M_Leads::find($order_data -> leads_id);
+        if(!$order_data){
+            return response([
+                'message' => "No order has an id of $order_id"
+            ], 401);
+        };
+        return view('admin.client.order.timeline', [
+            "title" => "Client | Order Timeline",
+            "order" => $order_data,
+            "lead" => $lead_data
+        ]);
+    }
     
     public function create(Request $request){
         $field = $request -> validate([
