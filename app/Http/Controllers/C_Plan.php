@@ -14,6 +14,14 @@ use PhpOffice\PhpWord\TemplateProcessor;
 
 class C_Plan extends Controller
 {
+    //?BELOW ARE USED FOR HANDLING PLAN ROUTES
+    public function handlePlanRoute($order_id)
+    {
+        $order = M_Orders::find($order_id) -> order_status - 1;
+        $routes = ['recruitment', 'training', 'penawaran', 'negosiasi', 'percobaan', 'popks', 'popks'];
+        return redirect("/client/order/plan/$order_id/$routes[$order]");
+    }
+
     //?BELOW ARE TO FETCH A DATA
     public function fetchRecruitment(Request $request, $order_id)
     {
@@ -183,14 +191,8 @@ class C_Plan extends Controller
         $phpWord->setValue('weekend', $input['weekend_cost']);
         $phpWord->setValue('konsumsi', $input['consumption_cost']);
         $phpWord->setValue('transPP', $input['transportation_cost']);
-        // $replc = array(
-        //     array('qty' => '12', 'needed_job' => 'BE', 'city_location' => 'Liverpool'),
-        //     array('qty' => '11', 'needed_job' => 'FE', 'city_location' => 'Manchester'),
-        //     array('qty' => '1', 'needed_job' => 'BE', 'city_location' => 'Londo'),
-        // );
 
         $replc = [];
-
         foreach($findid->offerJobDetails as $detail) {
             $replc[] = [
                 'qty' => $detail->quantity,

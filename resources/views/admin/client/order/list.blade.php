@@ -94,7 +94,7 @@
                         <td align="center" class=" p-4">
                             <div class=" flex justify-center items-center gap-2">
                                 <i class="ri-checkbox-circle-line text-2xl cursor-pointer" title="Complete Manual"></i>
-                                <a href="{{ route('fetch_recruitment', ['order_id' => $row -> id]) }}">
+                                <a href="{{ route('handle_plan', ['order_id' => $row -> id]) }}">
                                     <i class="ri-calendar-todo-fill text-2xl" title="Plan"></i>
                                 </a>
                                 <a href="{{ route('detail_order', ['order_id' => $row -> id]) }}">

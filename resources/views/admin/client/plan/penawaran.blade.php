@@ -40,7 +40,6 @@
             <li></li>
         </ul>
     </div>
-
     <form class="" action="{{ url(request()->path()) }}" method="POST">
         @csrf
         <div class=" mt-5">
@@ -101,7 +100,7 @@
                                 @if($offer -> offerJob)
                                     @foreach($offer -> offerJobDetails as $data)
                                         <div class="bg-white text-black text-opacity-50 text-sm text-center py-1 px-7 rounded-md font-bold flex items-center gap-3">
-                                            <p>{{ $data -> needed_job }}</p>
+                                            <p>{{ $data->needed_job }} ({{ $data->quantity }})</p>
                                             <span>
                                                 <i class="text-lg cursor-pointer ri-delete-bin-2-line text-delete"></i>
                                             </span>

@@ -139,6 +139,8 @@ Route::middleware('auth')->group(function () {
 
             //?PLAN ORDER
             Route::prefix('plan')->group(function () {
+                //?Plan Handler
+                Route::get('/{order_id}', [C_Plan::class, 'handlePlanRoute']) -> name('handle_plan');
                 //?RECRUITMENT
                 Route::get('/{order_id}/recruitment', [C_Plan::class, 'fetchRecruitment'])->name('fetch_recruitment');
                 Route::delete('/{order_id}/recruitment', [TalentController::class, 'destroy']);
