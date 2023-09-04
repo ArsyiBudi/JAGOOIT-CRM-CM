@@ -160,21 +160,21 @@ class C_Plan extends Controller
         $selectedMonth = $selectedDate->format('m');
         $selectedYear = $selectedDate->format('Y');
 
-        $findid = M_Offer::find($order -> offer_letter_id);
-        if(!$findid) return response(['error' => "No offer has this id: $order -> offer_letter_id"]);
+        $offer = M_Offer::find($order -> offer_letter_id);
+        if(!$offer) return response(['error' => "No offer has this id: $order -> offer_letter_id"]);
 
-        $findid->letter_number = "JTI/{$selectedMonth}/SP/{$selectedYear}";
-        $findid->offer_subject = $input['offer_subject'];
-        $findid->recipient_name = $input['recipient_name'];
-        $findid->location = $input['location'];
-        $findid->date = $input['date'];
-        $findid->context = $input['context'];
-        $findid->talent_total = $input['talent_total'];
-        $findid->weekday_cost = $input['weekday_cost'];
-        $findid->weekend_cost = $input['weekend_cost'];
-        $findid->consumption_cost = $input['consumption_cost'];
-        $findid->transportation_cost = $input['transportation_cost'];
-        $status = $findid -> save();
+        $offer->letter_number = "JTI/{$selectedMonth}/SP/{$selectedYear}";
+        $offer->offer_subject = $input['offer_subject'];
+        $offer->recipient_name = $input['recipient_name'];
+        $offer->location = $input['location'];
+        $offer->date = $input['date'];
+        $offer->context = $input['context'];
+        $offer->talent_total = $input['talent_total'];
+        $offer->weekday_cost = $input['weekday_cost'];
+        $offer->weekend_cost = $input['weekend_cost'];
+        $offer->consumption_cost = $input['consumption_cost'];
+        $offer->transportation_cost = $input['transportation_cost'];
+        $status = $offer -> save();
         if (!$status) {
             return response([
                 'error' => "Data didn't updated"
@@ -194,7 +194,8 @@ class C_Plan extends Controller
         $phpWord->setValue('transPP', $input['transportation_cost']);
 
         $replc = [];
-        foreach($findid->offerJobDetails as $detail) {
+
+        foreach($offer->offerJobDetails as $detail) {
             $replc[] = [
                 'qty' => $detail->quantity,
                 'needed_job' => $detail->needed_job,
@@ -212,7 +213,41 @@ class C_Plan extends Controller
         return response()->file($tempFilePath, $headers);
     }
 
+    public function offer_send(Request $request, $order_id)
+    {
+        $field = $request->validate([
+            'cv_file' => 'required',
+            'cv_desc' => 'required',
+        ]);
 
+        if (!$field) return response([
+            'error' => 'error'
+        ]);
+
+        $offer = M_Orders::find($order_id);
+        $offer->cv_file = $field['cv_file'];
+        $offer->cv_description = $field['cv_desc'];
+        $status = $offer->update();
+
+        if ($status) {
+            return redirect('/client/order/plan/'.$order_id.'/penawaran');
+        }
+    }
+    public function offer_save($order_id)
+    {
+        $currentTimestamp = time();
+        $selectedDate = new DateTime();
+        $selectedDate->setTimestamp($currentTimestamp);
+        
+        $offer = M_Offer::create();
+        $update = M_Orders::find($order_id);
+        $update -> offer_letter_id = $offer -> id;
+        $update -> order_status = 7;
+        $update -> end_popks = $selectedDate;
+        $status = $update -> update();
+        if($status) return redirect('/client/order/plan/'.$order_id.'/training');
+
+    }
 
 
 

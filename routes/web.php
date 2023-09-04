@@ -154,6 +154,7 @@ Route::middleware('auth')->group(function () {
                 Route::get('/{order_id}/penawaran', [C_Plan::class, 'openOffer']) -> name('open_offer');
                 Route::put('/{order_id}/penawaran', [C_Plan::class, 'addOfferDetails']) -> name('add_offer_details');
                 Route::post('/{order_id}/penawaran', [C_Plan::class, 'createOffer'])->name('create_offer');
+                Route::patch('/{order_id}/penawaran', [C_Plan::class, 'offer_send']) -> name('send_popks');
             
                 //?NEGOSIASI
                 Route::get('/{order_id}/negosiasi', function () {

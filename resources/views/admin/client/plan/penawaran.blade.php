@@ -15,6 +15,7 @@
         -webkit-appearance: none;
         margin: 0;
     }
+
 </style>
 
 @section('container')
@@ -98,14 +99,14 @@
                             @csrf
                             <div class=" detail-container flex gap-2">
                                 @if($offer -> offerJob)
-                                    @foreach($offer -> offerJobDetails as $data)
-                                        <div class="bg-white text-black text-opacity-50 text-sm text-center py-1 px-7 rounded-md font-bold flex items-center gap-3">
-                                            <p>{{ $data->needed_job }} ({{ $data->quantity }})</p>
-                                            <span>
-                                                <i class="text-lg cursor-pointer ri-delete-bin-2-line text-delete"></i>
-                                            </span>
-                                        </div>
-                                    @endforeach
+                                @foreach($offer -> offerJobDetails as $data)
+                                <div class="bg-white text-black text-opacity-50 text-sm text-center py-1 px-7 rounded-md font-bold flex items-center gap-3">
+                                    <p>{{ $data->needed_job }} ({{ $data->quantity }})</p>
+                                    <span>
+                                        <i class="text-lg cursor-pointer ri-delete-bin-2-line text-delete"></i>
+                                    </span>
+                                </div>
+                                @endforeach
                                 @endif
                             </div>
                         </form>
@@ -157,7 +158,9 @@
         </div>
     </form>
 
-    <form action="">
+    <form action="{{ url(request() -> path()) }}" method="POST">
+        @csrf
+        @method('patch')
         <div class="bg-grey rounded shadow-lg mt-6 p-6">
             <div class="w-full  mb-4 ">
                 <label for="file-tor" class="text-sm text-white">File Surat Penawaran + CV (1 file, pdf)</label>
@@ -180,7 +183,7 @@
             <div class="w-full">
                 <label for="deskripsi" class="text-sm text-white">Deskirpsi</label>
                 <div class="rounded-lg px-2 py-4 h-24 w-full bg-white mt-2">
-                    <textarea id="deskripsi" type="text" class="text-black bg-transparent outline-none h-full w-full hide-scrollbar resize-none"></textarea>
+                    <textarea name="cv_desc" id="deskripsi" type="text" class="text-black bg-transparent outline-none h-full w-full hide-scrollbar resize-none"></textarea>
                 </div>
             </div>
 
@@ -295,9 +298,9 @@
 
 
             var detailData = {
-                qty: qty,
-                needed_job: deskripsi,
-                city_location: lamaKontrak
+                qty: qty
+                , needed_job: deskripsi
+                , city_location: lamaKontrak
             };
 
             console.log(detailData);
@@ -349,8 +352,8 @@
                     canvas.height = 200;
 
                     const renderContext = {
-                        canvasContext: canvas.getContext('2d'),
-                        viewport
+                        canvasContext: canvas.getContext('2d')
+                        , viewport
                     };
 
                     await page.render(renderContext).promise;
@@ -368,6 +371,7 @@
                 canvas.style.display = 'none';
             }
         }
+
     </script>
 
     @endsection
