@@ -42,6 +42,10 @@ class M_Talents extends Model
         return $this->belongsTo(M_OrderDetails::class);
     }
 
+    public function talentDetailsData() : BelongsTo
+    {
+        return $this -> belongsTo(M_TalentDetails::class, 'id');
+    }
     public function posisiTalent() : HasOne
     {
         return $this -> hasOne(M_TalentDetails::class, 'id_talent')

@@ -15,7 +15,7 @@ class LeadSeeder extends Seeder
     public function run(): void
     {
         $faker = Faker::create();
-        foreach(range(1, 10) as $value){
+        foreach (range(1, 10) as $value) {
             DB::table('leads')->insert([
                 'business_name' => $faker->domainName(),
                 'business_sector' => 'IT Support',

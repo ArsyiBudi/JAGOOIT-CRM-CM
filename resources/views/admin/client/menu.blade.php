@@ -51,7 +51,7 @@
                 <h3 class="text-white font-semibold text-3xl">Data Clients</h3>
             </div>
 
-            <form class=" block md:flex items-start my-4 justify-between mb-8 w-full" action="{{ route('fetch_client') }}" method="get">
+            <form action="{{ route('fetch_client') }}" method="get" class=" block md:flex items-start my-4 justify-between mb-8 w-full">
                 <div class=" md:block flex items-center justify-between">
                     <div class="flex gap-3 items-center justify-start">
                         <p class="text-white text-xs md:text-sm">Show</p>
@@ -67,7 +67,7 @@
                 </div>
                 <div class=" flex items-center gap-5 mt-5 md:mt-0">
                     <p class=" hidden md:block">Search</p>
-                    <input type="text" name="search" class=" outline-none bg-white rounded-md w-full md:w-80 py-1 px-2 text-black font-semibold placeholder-gray-400 placeholder-opacity-100 md:placeholder-opacity-0" placeholder="search" value="{{ old('search') }}">
+                    <input type="text" name="search" value="{{ old('per_page', session('client_search')) }}" class=" outline-none bg-white rounded-md w-full md:w-80 py-1 px-2 text-black font-semibold placeholder-gray-400 placeholder-opacity-100 md:placeholder-opacity-0" placeholder="search" value="{{ old('search') }}">
                 </div>
             </form>
             <div class=" border-b border-white w-full rounded-lg mt-4"></div>
@@ -119,7 +119,7 @@
             </table>
         </div>
         <div class="sticky bottom-0 pb-10 bg-darksecondary flex justify-center items-center gap-3">
-            {{ $client -> links('vendor.pagination.custom-pagination') }}
+            {{ $client -> links('vendor.pagination.custom-pagination-client') }}
         </div>
     </div>
 </div>

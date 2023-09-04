@@ -54,7 +54,7 @@
                 <div class="flex gap-3 items-center justify-start">
                     <p class="text-white text-xs md:text-sm">Show</p>
                     <div class="flex items-center bg-grey rounded-md md:rounded-lg justify-center py-0 md:py-1 w-[40px] md:w-[60px] px-1">
-                        <input type="text" class=" text-white w-full text-center bg-transparent outline-none" placeholder="5">
+                        <input type="number" id="search" value="{{ old('per_page', $order->perPage()) }}" name="per_page" min="1" class=" text-white w-full text-center bg-transparent outline-none" placeholder="5">
                     </div>
                     <p class="text-white text-xs md:text-sm">entries</p>
                 </div>
@@ -65,7 +65,7 @@
             </div>
             <div class=" flex items-center gap-5 mt-5 md:mt-0">
                 <p class=" hidden md:block">Search</p>
-                <input type="text" class=" outline-none bg-white rounded-md w-full md:w-80 py-1 px-2 text-black font-semibold placeholder-gray-400 placeholder-opacity-100 md:placeholder-opacity-0" placeholder="search">
+                <input type="text" name="search" value="{{ old('per_page', session('order_search')) }}" class=" outline-none bg-white rounded-md w-full md:w-80 py-1 px-2 text-black font-semibold placeholder-gray-400 placeholder-opacity-100 md:placeholder-opacity-0" placeholder="search">
             </div>
         </form>
 
@@ -94,7 +94,7 @@
                         <td align="center" class=" p-4">
                             <div class=" flex justify-center items-center gap-2">
                                 <i class="ri-checkbox-circle-line text-2xl cursor-pointer" title="Complete Manual"></i>
-                                <a href="{{ route('recruitment', ['order_id' => $row -> id]) }}">
+                                <a href="{{ route('fetch_recruitment', ['order_id' => $row -> id]) }}">
                                     <i class="ri-calendar-todo-fill text-2xl" title="Plan"></i>
                                 </a>
                                 <a href="{{ route('detail_order', ['order_id' => $row -> id]) }}">
@@ -112,7 +112,7 @@
         <div class="flex items-center justify-center w-full">
 
             <div class="sticky bottom-0 pb-10 bg-darksecondary flex justify-center items-center gap-3">
-                {{ $order -> links('vendor.pagination.custom-pagination') }}
+                {{ $order -> links('vendor.pagination.custom-pagination-order') }}
             </div>
 
         </div>

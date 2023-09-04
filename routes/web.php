@@ -98,7 +98,7 @@ Route::middleware('auth')->group(function () {
         });
 
         //?LEADS OFFER
-        Route::get('/{id}/offer', function () {
+        Route::get('/offer/{order_id}', function () {
             return view('admin.leads.offer', [
                 "title" => "Leads | Create Offer",
             ]);
@@ -140,24 +140,25 @@ Route::middleware('auth')->group(function () {
             //?PLAN ORDER
             Route::prefix('plan')->group(function () {
                 //?RECRUITMENT
-                Route::get('/{order_id}/recruitment', [C_Plan::class, 'fetch_recruitment'])->name('recruitment');
+                Route::get('/{order_id}/recruitment', [C_Plan::class, 'fetchRecruitment'])->name('fetch_recruitment');
                 Route::delete('/{order_id}/recruitment', [TalentController::class, 'destroy']);
+                Route::post('/{order_id}/recruitment', [C_Plan::class, 'saveRecruitment']) -> name('fetch_training');
 
                 //?TRAINING
-                Route::get('/{order_id}/training', [C_Plan::class, 'fetch_training']) -> name('fetch_training');
-                Route::post('/{order_id}/training', [C_Plan::class, 'newOffer'])->name('new_offer');
+                Route::get('/{order_id}/training', [C_Plan::class, 'fetchTraining']) -> name('fetch_training');
+                Route::post('/{order_id}/training', [C_Plan::class, 'saveTraining'])->name('new_offer');
 
                 //?PENAWARAN
                 Route::get('/{order_id}/penawaran', [C_Plan::class, 'openOffer']) -> name('open_offer');
                 Route::put('/{order_id}/penawaran', [C_Plan::class, 'addOfferDetails']) -> name('add_offer_details');
-                Route::post('/{order_id}/penawaran', [C_Plan::class, 'create'])->name('create_offer');
+                Route::post('/{order_id}/penawaran', [C_Plan::class, 'createOffer'])->name('create_offer');
             
                 //?NEGOSIASI
                 Route::get('/{order_id}/negosiasi', function () {
                     return view('admin.client.plan.negosiasi', [
                         "title" => "Plan | Negosiasi",
                     ]);
-                });
+                })->name('fetch_negosisasi');
 
                 //?PERCOBAAN
                 Route::get('/{order_id}/percobaan', function () {
@@ -167,13 +168,10 @@ Route::middleware('auth')->group(function () {
                 });
 
                 //?PO & PKS
-                Route::get('/{order_id}/popks/{popks_id}', function () {
-                    return view('admin.client.plan.popks', [
-                        "title" => "Plan | PO & PKS",
-                    ]);
-                });
-                Route::post('/{order_id}/popks/{popks_id}', [C_Plan::class, 'popks_create']) -> name('create_popks');
-                Route::patch('/{order_id}/popks/{popks_id}', [C_Plan::class, 'popks_send']) -> name('send_popks');
+                Route::get('/{order_id}/popks',[C_Plan::class, 'fetchPopks']);
+                Route::post('/{order_id}/popks', [C_Plan::class, 'popks_create']) -> name('create_popks');
+                Route::patch('/{order_id}/popks', [C_Plan::class, 'popks_send']) -> name('send_popks');
+                Route::put('/{order_id}/popks', [C_Plan::class, 'popks_save']);
             });
         });
     });

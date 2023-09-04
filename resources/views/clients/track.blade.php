@@ -55,9 +55,7 @@
      @include('admin.partials.navbar')
      <div class=" pt-28">
         <h1 class=" text-center text-3xl font-bold">Tracking Your Order</h1>
-        @foreach($data as $row)
-        <p class=" text-center pt-3">{{ $row -> id }}</p>
-        @endforeach
+        <p class=" text-center pt-3">{{ $order -> id }}</p>
      </div>
      <div class=" block md:flex items-start gap-5 md:gap-[22rem] px-10 mt-10 w-full">
         <div class=" bg-darkSecondary border-white border-2 rounded-lg py-5 pr-20 pl-5 mt-5 w-full md:w-auto">
@@ -81,35 +79,75 @@
 
         <div class=" w-96 flex items-center justify-center">
             <ul class="steps steps-vertical w-full">
-                <li data-content="✓" class="step step-primary">
+                <li 
+                @if($order -> order_status > 1)
+                    data-content="✓" 
+                    class="step step-primary"
+                @elseif($order -> order_status == 1)
+                    class="step step-primary"
+                @else
+                    class="step"
+                @endif >
                     <div class=" relative w-full">
                         <h1 class=" text-left pb-2 text-lg">Recruitment</h1> 
                         <p class=" absolute text-xs  text-left date-text">Start Date : 8 desember 2022 </p>
                         <p class="absolute top-12 text-xs py-4 text-left date-text">End Date : 8 desember 2022 </p>
                     </div> 
                 </li>
-                <li class="step step-primary">
+                <li
+                @if($order -> order_status > 2)
+                    data-content="✓" 
+                    class="step step-primary"
+                @elseif($order -> order_status == 2)
+                    class="step step-primary"
+                @else
+                    class="step"
+                @endif >
                     <div class=" relative w-full">
                         <h1 class=" text-left text-lg pb-2">Training</h1> 
                         <p class=" absolute text-xs  text-left date-text">Start Date : 8 desember 2022 </p>
                         <p class="absolute top-12 text-xs py-4 text-left date-text">End Date : 8 desember 2022 </p>
                     </div> 
                 </li>
-                <li class="step">
+                <li 
+                @if($order -> order_status > 3)
+                    data-content="✓" 
+                    class="step step-primary"
+                @elseif($order -> order_status == 3)
+                    class="step step-primary"
+                @else
+                    class="step"
+                @endif >
                     <div class=" relative w-full">
                         <h1 class=" text-left text-lg pb-2">Penawaran</h1> 
                         <p class=" absolute text-xs  text-left date-text">Start Date : 8 desember 2022 </p>
                         <p class="absolute top-12 text-xs py-4 text-left date-text">End Date : 8 desember 2022 </p>
                     </div>
                 </li>
-                <li class="step">
+                <li 
+                @if($order -> order_status > 4)
+                    data-content="✓" 
+                    class="step step-primary"
+                @elseif($order -> order_status == 4)
+                    class="step step-primary"
+                @else
+                    class="step"
+                @endif >
                     <div class=" relative w-full">
                         <h1 class=" text-left text-lg pb-2">User Interview</h1> 
                         <p class=" absolute text-xs  text-left date-text">Start Date : 8 desember 2022 </p>
                         <p class="absolute top-12 text-xs py-4 text-left date-text">End Date : 8 desember 2022 </p>
                     </div>
                 </li>
-                <li class="step">
+                <li 
+                @if($order -> order_status > 5)
+                    data-content="✓" 
+                    class="step step-primary"
+                @elseif($order -> order_status == 5)
+                    class="step step-primary"
+                @else
+                    class="step"
+                @endif >
                     <div class=" relative w-full">
                         <h1 class=" text-left text-lg pb-2">PO & PKS</h1> 
                         <p class=" absolute text-xs  text-left date-text">Start Date : 8 desember 2022 </p>
