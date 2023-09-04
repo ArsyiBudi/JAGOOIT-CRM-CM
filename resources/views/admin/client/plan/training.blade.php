@@ -112,7 +112,7 @@
                                     @if($data -> talentData)
                                     @foreach($data -> talentDataFetch as $row)
                                         <tr>
-                                            <th align="center">1</th>
+                                            <th align="center">{{ isset($i) ? ++$i : $i = 1  }}</th>
                                             <td align="center">{{ $row -> talentData -> name}}</td>
                                             <td align="center">
                                                 <div class="w-[86px] h-[27px] rounded-md bg-white flex items-center justify-center">
@@ -190,7 +190,7 @@
                             </button>
                         </form>
                     @endif
-                    @endforeach                
+                @endforeach                
                 </div>
             </div>
         </div>

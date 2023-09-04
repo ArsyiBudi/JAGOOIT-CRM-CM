@@ -242,7 +242,7 @@
 
         <div class=" flex justify-between items-center pt-4 md:mb-0">
             <div>
-                <a href="/client/order/plan/percobaan" class=" bg-secondary text-white text-sm text-center py-1 px-3 md:px-14 rounded-md font-bold hover:scale-95 duration-200">
+                <a href="{{ url('/client/order/plan/'. $order_id .'/percobaan') }}" class=" bg-secondary text-white text-sm text-center py-1 px-3 md:px-14 rounded-md font-bold hover:scale-95 duration-200">
                     <p class=" hidden md:inline">Back</p>        
                     <i class="ri-arrow-left-line inline md:hidden"></i>  
                 </a>
@@ -251,14 +251,20 @@
             <div class="flex gap-4 max-sm:w-full max-sm:justify-between">
                 <div></div>
                 <div>
-                    <button name="save" class=" w-full bg-secondary text-white text-sm text-center py-1 px-14 rounded-md font-bold hover:scale-95 duration-200">Save</button>
+                    <form action="{{ url(request()->path()) }}" method="POST">
+                        @csrf
+                        @method('put')
+                        <button type="submit" name="save" class=" w-full bg-secondary text-white text-sm text-center py-1 px-14 rounded-md font-bold hover:scale-95 duration-200">Save</button>
+                    </form>
                 </div>
     
                 <div>
-                    <button class=" bg-secondary text-white text-sm text-center py-1 px-3 md:px-14 rounded-md font-bold hover:scale-95 duration-200">
-                      <p class=" hidden md:block">Continue</p> 
-                      <i class="ri-arrow-right-line block md:hidden"></i>
-                    </button>
+                    <a href="{{ url('/client/order') }}">
+                        <button class=" bg-secondary text-white text-sm text-center py-1 px-3 md:px-14 rounded-md font-bold hover:scale-95 duration-200">
+                        <p class=" hidden md:block">Exit</p> 
+                        <i class="ri-arrow-right-line block md:hidden"></i>
+                        </button>
+                    </a>
                 </div>
             </div>
         </div>

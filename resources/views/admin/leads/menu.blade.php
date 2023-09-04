@@ -68,7 +68,7 @@
                 </div>
                 <div class="flex items-center gap-5 mt-5 md:mt-0">
                     <p class="hidden md:block">Search</p>
-                    <input name="search" type="text" class="outline-none bg-white rounded-md w-full md:w-80 py-1 px-2 text-black font-semibold placeholder-gray-400 placeholder-opacity-100 md:placeholder-opacity-0" placeholder="search" value="{{ old('search') }}">
+                    <input name="search" type="text" value="{{ old('search', session('leads_search')) }}" class="outline-none bg-white rounded-md w-full md:w-80 py-1 px-2 text-black font-semibold placeholder-gray-400 placeholder-opacity-100 md:placeholder-opacity-0" placeholder="search" value="{{ old('search') }}">
                 </div>
             </form>
 
@@ -124,8 +124,8 @@
                 </tbody>
             </table>
         </div>
-        <div class="bg-darksecondary flex justify-center items-center gap-3">
-            {{ $leads -> links('vendor.pagination.custom-pagination') }}
+        <div class="sticky bottom-5 pb-10 bg-darksecondary flex justify-center items-center gap-3">
+            {{ $leads -> links('vendor.pagination.custom-pagination-leads') }}
         </div>
     </div>
 </div>

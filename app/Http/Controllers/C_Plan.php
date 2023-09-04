@@ -15,16 +15,39 @@ use PhpOffice\PhpWord\TemplateProcessor;
 class C_Plan extends Controller
 {
     //?BELOW ARE TO FETCH A DATA
-    public function fetch_recruitment($order_id)
+    public function fetchRecruitment(Request $request, $order_id)
     {
-        $talent = M_Talents::paginate(5);
+        $perPage = $request->input('per_page', 5);
+        $search = $request->input('search', '');
+    
+        session(['talent_per_page' => $perPage]);
+        session(['talent_search' => $search]);
+
+        $entries = session('talent_per_page', 5);
+        $search = session('talent_search', '');
+
+        $talent = M_Talents::where(function($query) use ($search){
+            $query -> where('name', 'like', "%$search%")
+            ->orWhere('is_active', '=', '0');
+        })
+        ->orWhereHas('posisiTalent',function($query) use ($search){
+            $query -> where('description', 'like', "%$search%");
+        }) 
+        ->orWhereHas('keterampilanTalent',function($query) use ($search){
+            $query -> where('description', 'like', "%$search%");
+        }) 
+        ->orWhereHas('pendidikanTalent',function($query) use ($search){
+            $query -> where('description', 'like', "%$search%");
+        })->paginate($entries);
+
         return view('admin.client.plan.recruitment', [
             "title" => "Plan | Recruitment",
-            'talents' => $talent
+            'talents' => $talent,
+            "order_id" => $order_id
         ]);
     }
 
-    public function fetch_training($order_id)
+    public function fetchTraining($order_id)
     {
         $talent = M_Orders::where('id', $order_id)->paginate(5);
         return view('admin.client.plan.training', [
@@ -33,30 +56,54 @@ class C_Plan extends Controller
         ]);
     }
 
+    public function fetchPopks($order_id)
+    {
+        return view('admin.client.plan.popks', [
+            "title" => "Plan | POPKS",
+            "order_id" => $order_id,
+        ]);
+    }
+
+
+
+    public function saveRecruitment(Request $request, $order_id)
+    {
+       foreach($request -> talents_id as $talent_id)
+       {
+           M_OrderDetails::create([
+               'talent_id' => $talent_id,
+               'order_id' => $order_id
+           ]);
+           $update = M_Talents::find($talent_id);
+           $update -> is_active = 1;
+           $update -> update();
+       }
+       return redirect('/client/order/plan/'. $order_id .'/training/');
+    }
 
 
 
 
     //?BELOW ARE USED IN OFFER PLAN
-    public function newOffer(Request $request, $order_id)
+    public function saveTraining($order_id)
     {
         $offer = M_Offer::create();
         $update = M_Orders::find($order_id);
         $update -> offer_letter_id = $offer -> id;
+        $update -> order_status = 2;
         $status = $update -> update();
-        if(!$status){
-            return redirect() -> back() -> with('error', 'Nigga');
-        }
-        return redirect('/client/order/plan/'. $order_id .'/penawaran');
+        if($status) return redirect('/client/order/plan/'. $order_id .'/penawaran/');
     }
 
     public function openOffer($order_id)
     {
         $order = M_Orders::find($order_id);
         $offer = M_Offer::find($order -> offer_letter_id);
+        // dd($offer -> offerJobDetails);
         return view('admin.client.plan.penawaran', [
             "title" => "Plan | Penawaran",
-            "offer" => $offer
+            "offer" => $offer,
+            "order_id" => $order_id
         ]);
     }
 
@@ -78,10 +125,10 @@ class C_Plan extends Controller
         ]);
 
         if(!$offer_details) return response(['error' => "Data didn't created"]);
-        return redirect('open_offer');
+        return redirect('/client/order/plan/'.$order_id.'/penawaran');
     }
 
-    public function create(Request $request, $order_id)
+    public function createOffer(Request $request, $order_id)
     {
         $order = M_Orders::find($order_id);
         $input = $request->validate([
@@ -137,11 +184,22 @@ class C_Plan extends Controller
         $phpWord->setValue('weekend', $input['weekend_cost']);
         $phpWord->setValue('konsumsi', $input['consumption_cost']);
         $phpWord->setValue('transPP', $input['transportation_cost']);
-        $replc = array(
-            array('qty' => '12', 'needed_job' => 'BE', 'city_location' => 'Liverpool'),
-            array('qty' => '11', 'needed_job' => 'FE', 'city_location' => 'Manchester'),
-            array('qty' => '1', 'needed_job' => 'BE', 'city_location' => 'Londo'),
-        );
+        // $replc = array(
+        //     array('qty' => '12', 'needed_job' => 'BE', 'city_location' => 'Liverpool'),
+        //     array('qty' => '11', 'needed_job' => 'FE', 'city_location' => 'Manchester'),
+        //     array('qty' => '1', 'needed_job' => 'BE', 'city_location' => 'Londo'),
+        // );
+
+        $replc = [];
+
+        foreach($findid->offerJobDetails as $detail) {
+            $replc[] = [
+                'qty' => $detail->quantity,
+                'needed_job' => $detail->needed_job,
+                'city_location' => $detail->city_location,
+                'contract_duration' => $detail->contract_duration,
+            ];
+        }
         $phpWord->cloneBlock('table_block_placeholder', 0, true, false, $replc);
         $tempFilePath = tempnam(sys_get_temp_dir(), 'Surat_Penawaran');
         $phpWord->saveAs($tempFilePath);
@@ -171,6 +229,7 @@ class C_Plan extends Controller
 
 
 
+    //?POPKS CONTROLLER CODE
     public function popks_create(Request $request)
     {
         $field = $request->validate([
@@ -260,5 +319,21 @@ class C_Plan extends Controller
         if ($status) {
             return redirect('/client/order');
         }
+    }
+
+    public function popks_save($order_id)
+    {
+        $currentTimestamp = time();
+        $selectedDate = new DateTime();
+        $selectedDate->setTimestamp($currentTimestamp);
+        
+        $offer = M_Offer::create();
+        $update = M_Orders::find($order_id);
+        $update -> offer_letter_id = $offer -> id;
+        $update -> order_status = 7;
+        $update -> end_popks = $selectedDate;
+        $status = $update -> update();
+        if($status) return redirect('/client/order');
+
     }
 }
