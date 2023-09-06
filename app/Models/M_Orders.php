@@ -58,7 +58,6 @@ class M_Orders extends Model
     {
         return $this->belongsTo(M_GlobalParams::class, 'order_status', 'id_params');
     }
-
     public function orderDetails() : HasMany
     {
         return $this->hasMany(M_OrderDetails::class, 'order_id');

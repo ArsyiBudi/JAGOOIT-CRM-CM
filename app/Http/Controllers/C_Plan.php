@@ -14,12 +14,55 @@ use PhpOffice\PhpWord\TemplateProcessor;
 
 class C_Plan extends Controller
 {
+
+    public function generateWordOffer($offer_letter_id)
+    {
+        $offer = M_Offer::find($offer_letter_id);
+        $phpWord = new TemplateProcessor('template.docx');
+        $phpWord->setValue('no_surat', $offer -> letter_number);
+        $phpWord->setValue('perihal', $offer -> offer_subject);
+        $phpWord->setValue('kepada', $offer -> recipient_name);
+        $phpWord->setValue('tempat', $offer -> location);
+        $phpWord->setValue('tanggal', $offer -> date);
+        $phpWord->setValue('ditawarkan', $offer -> context);
+        $phpWord->setValue('jumlahTalent', $offer -> talent_total);
+        $phpWord->setValue('weekday', $offer -> weekday_cost);
+        $phpWord->setValue('weekend', $offer -> weekend_cost);
+        $phpWord->setValue('konsumsi', $offer -> consumption_cost);
+        $phpWord->setValue('transPP', $offer -> transportation_cost);
+        $replc = [];
+        foreach($offer->offerJobDetails as $detail) {
+            $replc[] = [
+                'quantity' => $detail->quantity,
+                'needed_job' => $detail->needed_job,
+                'city_location' => $detail->city_location,
+                'contract_duration' => $detail->contract_duration,
+            ];
+        }
+        $phpWord->cloneBlock('table_block_placeholder', 0, true, false, $replc);
+        $tempFilePath = tempnam(sys_get_temp_dir(), 'Surat_Penawaran');
+        $phpWord->saveAs($tempFilePath);
+        $headers = [
+            'Content-Type' => 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+            'Content-Disposition' => 'attachment; filename="Surat_Penawaran.docx"',
+        ];
+        return response()->file($tempFilePath, $headers);
+    }
+
     //?BELOW ARE USED FOR HANDLING PLAN ROUTES
     public function handlePlanRoute($order_id)
     {
-        $order = M_Orders::find($order_id) -> order_status - 1;
-        $routes = ['recruitment', 'training', 'penawaran', 'negosiasi', 'percobaan', 'popks', 'popks'];
-        return redirect("/client/order/plan/$order_id/$routes[$order]");
+        $selectedTimestamp = time();
+        $selectedDate = new DateTime();
+        $selectedDate->setTimestamp($selectedTimestamp);
+
+        $order = M_Orders::find($order_id);
+        if (is_null($order->start_recruitment)) {
+            $order->start_recruitment = $selectedDate;
+            $order->save();
+        }
+        $routes = ['','recruitment', 'training', 'penawaran', 'negosiasi', 'percobaan', 'popks', 'popks', ''];
+        return redirect("/client/order/plan/$order_id/{$routes[$order -> order_status]}");    
     }
 
     //?BELOW ARE TO FETCH A DATA
@@ -87,9 +130,14 @@ class C_Plan extends Controller
     }
 
 
-
+    //?BELOW ARE USED IN RECRUITMENT PLAN
     public function saveRecruitment(Request $request, $order_id)
     {
+        $selectedTimestamp = time();
+        $selectedDate = new DateTime();
+        $selectedDate->setTimestamp($selectedTimestamp);
+        $update = M_Orders::find($order_id);
+        $update -> order_status = 2;
         foreach($request -> talents_id as $talent_id)
         {
             M_OrderDetails::create([
@@ -98,30 +146,42 @@ class C_Plan extends Controller
             ]);
             $update = M_Talents::find($talent_id);
             $update -> is_active = 1;
-            $update -> update();
+            $update -> save();
         }
+
+        if (is_null($update->end_recruitment) && is_null($update->start_training)) {
+            $update->end_recruitment = $selectedDate;
+            $update->start_training = $selectedDate;
+        }
+        $update->save();
         return redirect('/client/order/plan/'. $order_id .'/training/');
     }
 
 
-
-
-    //?BELOW ARE USED IN OFFER PLAN
+    //?BELOW ARE USED IN TRAINING PLAN
     public function saveTraining($order_id)
     {
+        $selectedTimestamp = time();
+        $selectedDate = new DateTime();
+        $selectedDate->setTimestamp($selectedTimestamp);
+
         $offer = M_Offer::create();
         $update = M_Orders::find($order_id);
         $update -> offer_letter_id = $offer -> id;
-        $update -> order_status = 2;
+        $update -> order_status = 3;
+        if(is_null($update -> end_training) && is_null($update -> start_offer)){
+            $update->end_training = $selectedDate;
+            $update->start_offer = $selectedDate;
+        }
         $status = $update -> update();
         if($status) return redirect('/client/order/plan/'. $order_id .'/penawaran/');
     }
 
+    //?BELOW ARE USED IN OFFER PLAN
     public function openOffer($order_id)
     {
         $order = M_Orders::find($order_id);
         $offer = M_Offer::find($order -> offer_letter_id);
-        // dd($offer -> offerJobDetails);
         return view('admin.client.plan.penawaran', [
             "title" => "Plan | Penawaran",
             "offer" => $offer,
@@ -147,12 +207,17 @@ class C_Plan extends Controller
         ]);
 
         if(!$offer_details) return response(['error' => "Data didn't created"]);
-        return redirect('/client/order/plan/'.$order_id.'/penawaran');
+        return redirect()->back();
     }
 
     public function createOffer(Request $request, $order_id)
     {
-        $order = M_Orders::find($order_id);
+        $selectedTimestamp = time();
+        $selectedDate = new DateTime();
+        $selectedDate->setTimestamp($selectedTimestamp);
+        $selectedMonth = $selectedDate->format('m');
+        $selectedYear = $selectedDate->format('Y');
+
         $input = $request->validate([
             'offer_subject' => 'required',
             'recipient_name' => 'required',
@@ -166,15 +231,12 @@ class C_Plan extends Controller
             'transportation_cost' => 'required',
         ]);
         if (!$input) return response(['error' => 'error'], 404);
-
-        $selectedTimestamp = time();
-        $selectedDate = new DateTime();
-        $selectedDate->setTimestamp($selectedTimestamp);
-        $selectedMonth = $selectedDate->format('m');
-        $selectedYear = $selectedDate->format('Y');
-
+        
+        $order = M_Orders::find($order_id);
         $offer = M_Offer::find($order -> offer_letter_id);
-        if(!$offer) return response(['error' => "No offer has this id: $order -> offer_letter_id"]);
+        if(!$offer) return response([
+            'error' => "No offer has this id: $order -> offer_letter_id"
+        ]);
 
         $offer->letter_number = "JTI/{$selectedMonth}/SP/{$selectedYear}";
         $offer->offer_subject = $input['offer_subject'];
@@ -192,39 +254,11 @@ class C_Plan extends Controller
             return response([
                 'error' => "Data didn't updated"
             ]);
+        } else {
+            $status = $this -> generateWordOffer($order -> offer_letter_id);
+            if($status) return $status;
         }
-
-        $phpWord = new TemplateProcessor('template.docx');
-        $phpWord->setValue('no_surat', "JTI/{$selectedMonth}/SP/{$selectedYear}");
-        $phpWord->setValue('perihal', $input['offer_subject']);
-        $phpWord->setValue('kepada', $input['recipient_name']);
-        $phpWord->setValue('tempat', $input['location']);
-        $phpWord->setValue('tanggal', $input['date']);
-        $phpWord->setValue('ditawarkan', $input['context']);
-        $phpWord->setValue('jumlahTalent', $input['talent_total']);
-        $phpWord->setValue('weekday', $input['weekday_cost']);
-        $phpWord->setValue('weekend', $input['weekend_cost']);
-        $phpWord->setValue('konsumsi', $input['consumption_cost']);
-        $phpWord->setValue('transPP', $input['transportation_cost']);
-
-        $replc = [];
-
-        foreach($offer->offerJobDetails as $detail) {
-            $replc[] = [
-                'quantity' => $detail->quantity,
-                'needed_job' => $detail->needed_job,
-                'city_location' => $detail->city_location,
-                'contract_duration' => $detail->contract_duration,
-            ];
-        }
-        $phpWord->cloneBlock('table_block_placeholder', 0, true, false, $replc);
-        $tempFilePath = tempnam(sys_get_temp_dir(), 'Surat_Penawaran');
-        $phpWord->saveAs($tempFilePath);
-        $headers = [
-            'Content-Type' => 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
-            'Content-Disposition' => 'attachment; filename="Surat_Penawaran.docx"',
-        ];
-        return response()->file($tempFilePath, $headers);
+        return redirect()->back();
     }
 
     public function offer_send(Request $request, $order_id)
@@ -233,19 +267,19 @@ class C_Plan extends Controller
             'cv_file' => 'required',
             'cv_desc' => 'required',
         ]);
-
         if (!$field) return response([
             'error' => 'error'
         ]);
-
         $offer = M_Orders::find($order_id);
         $offer->cv_file = $field['cv_file'];
         $offer->cv_description = $field['cv_desc'];
         $status = $offer->update();
-
-        if ($status) {
-            return redirect('/client/order/plan/'.$order_id.'/penawaran');
+        if (!$status) {
+            return response([
+                'error' => "data didn't updated"
+            ]);
         }
+        return redirect()->back();
     }
     public function offer_save($order_id)
     {

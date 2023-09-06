@@ -54,7 +54,7 @@
                     <div class="flex gap-3 items-center justify-start">
                         <p class="text-white text-xs md:text-sm">Show</p>
                         <div class="flex items-center bg-grey rounded-md md:rounded-lg justify-center py-0 md:py-1 w-[40px] md:w-[60px] px-1">
-                            <input type="text" class=" text-white w-full text-center bg-transparent outline-none" placeholder="5">
+                            <input type="number" class=" text-white w-full text-center bg-transparent outline-none" placeholder="5">
                         </div>
                         <p class="text-white text-xs md:text-sm">entries</p>
                     </div>
@@ -80,9 +80,15 @@
                         </tr>
                     </thead>
                     <tbody>
+                        @php
+                        $count = ($orders->currentPage() - 1) * $orders->perPage() + 1;
+                        @endphp
                         @foreach($orders as $order)
                         <tr class=" odd:bg-grey">
-                            <td align="center" class=" p-4">{{ isset($i) ? ++$I : $i = 1 }}</td>
+                            <td align="center" class=" p-4">{{ $count }}</td>
+                            @php
+                            $count++;
+                            @endphp
                             <td align="center" class=" p-4">{{ $order -> id }}</td>
                             <td align="center" class=" p-4">{{ $order -> leadData -> business_name }}</td>
                             <td align="center" class=" p-4">{{ $order -> due_date }}</td>
@@ -94,11 +100,14 @@
                             <td align="center" class=" p-4">
                                 <div class=" flex items-center gap-2 justify-center">
                                     <i class="ri-checkbox-circle-line text-lg cursor-pointer" title="Complete Manual"></i>
-
                                     <a href="{{  url('/client/order/detail/'. $order -> id) }}">
                                         <i class=" text-lg cursor-pointer ri-information-line" title="Detail"></i>
                                     </a>
-                                    <i class=" text-lg cursor-pointer ri-delete-bin-2-line text-delete" title="Delete"></i>
+                                    <form action="{{ route('delete_order', ['order_id' => $order -> id]) }}" method="post" class=" block  mt-3">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class=" text-lg cursor-pointer ri-delete-bin-2-line text-delete" title="Delete"></button>
+                                    </form>
                                 </div>
                             </td>
                         </tr>

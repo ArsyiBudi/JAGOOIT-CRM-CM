@@ -54,7 +54,7 @@ class M_Leads extends Model
 
     public function ActivityData() : HasMany
     {
-        return $this -> hasMany(M_Activity::class, 'leads_id');
+        return $this -> hasMany(M_Activity::class, 'leads_id')->latest();
     }
 
     public function hasNote() : HasOne

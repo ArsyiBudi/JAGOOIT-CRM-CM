@@ -13,8 +13,8 @@ use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Route;
 
 //? TESTING
-Route::get('/send-email', [C_Mail::class, 'index']);
-
+Route::get('/send-email/{email}', [C_Mail::class, 'index']);
+Route::get('/generate-offer/{offer_letter_id}', [C_Plan::class, 'generateWordOffer']);
 
 
 //set active
@@ -108,9 +108,12 @@ Route::middleware('auth')->group(function () {
 
     Route::prefix('client')->group(function () {
         Route::get('/', [C_Leads::class, 'fetch_client'])->name('fetch_client');
+        Route::delete('/{client_id}', [C_Leads::class, 'delete_client'])->name('delete_client');
         Route::get('/detail/{client_id}', [C_Leads::class, 'detail']);
         Route::prefix('order')->group(function () {
             Route::get('/', [C_Orders::class, 'fetch'])->name('fetch_order');
+            Route::delete('/{order_id}', [C_Orders::class, 'delete_order'])->name('delete_order');
+            Route::patch('/{order_id}', [C_Orders::class, 'finish_order'])->name('finish_order');
 
             //?DETAIL ORDER
             Route::prefix('detail') -> group(function(){

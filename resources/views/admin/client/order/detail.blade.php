@@ -69,12 +69,12 @@
                     <div class="pt-3">
                         <p>
                             Aktivitas terakhir : <span class="font-bold">
-                                @if ($data-> leadData ->latestActivity)
+                                @if ($data-> leadData -> hasOneActivity)
                                 @if ($data -> leadData ->latestActivityParams)
-                                {{ $data -> leadData ->latestActivityParams->params_name }}
+                                    {{ $data -> leadData ->latestActivityParams->params_name }}
                                 @endif
                                 @else
-                                -
+                                    -
                                 @endif
                             </span>
                         </p>

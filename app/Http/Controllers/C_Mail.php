@@ -7,14 +7,14 @@ use Illuminate\Support\Facades\Mail;
 use App\Mail\TestMail;
 class C_Mail extends Controller
 {
-    public function index()
+    public function index($email)
     {
         $mailData = [
-            'title' => 'Mail from jagoit',
-            'body' => 'This is body email'
+            'title' => 'Mail from JAGO IT',
+            'body' => 'SELAMAT TUGAS KAMU SUDAH SELESAI 🥶🥶🥶🥶🔥🔥🔥'
         ];
 
-        Mail::to('hafizh.project45@gmail.com')->send(new TestMail($mailData));
+        Mail::to($email)->send(new TestMail($mailData));
         dd('Email send successfully');
     }
 }
