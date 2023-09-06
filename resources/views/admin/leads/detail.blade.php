@@ -1,14 +1,16 @@
 @extends('admin.layouts.main')
 
 @section('container')
-<div class="  pt-20 lg:pt-0 h-screen">
-<div class="bg-primary flex flex-col text-lightGrey p-0 lg:p-8 rounded-md space-y-2 w-full h-screen">
-        <div class=" py-10 px-8 bg-primary flex flex-col text-lightGrey p-8 rounded-md space-y-2 w-full h-full">
+<div class="pt-20 lg:pt-0">
+</div>
+<div class="overflow-auto pt-0 h-[90vh] w-full rounded-md hide-scrollbar">
+    <div class="bg-darkSecondary flex flex-col px-8 py-10">
+         <div class="flex flex-col text-lightGrey space-y-2">
             <div class="text-2xl">Detail Leads</div>
             @foreach($leads as $data)
             <div class="flex flex-row text-xs space-x-2">
                 <a class="bg-secondary rounded-md px-3 md:px-4 py-1 md:py-2 hover:scale-95 duration-200"  href="{{ url('/leads/activity/'. $data -> id) }}">Create Activity</a>
-            <a class="bg-secondary rounded-md px-3 md:px-4 py-1 md:py-2 hover:scale-95 duration-200" href="{{ url('/leads/offer/'. $data -> id)}}">Create Offer</a>
+                <a class="bg-secondary rounded-md px-3 md:px-4 py-1 md:py-2 hover:scale-95 duration-200" href="{{ url('/leads/offer/'. $data -> id)}}">Create Offer</a>
             </div>
             <div class="divide-y divide-slate-50 gap-4 flex flex-col">
                 <div class="pt-3">
@@ -52,6 +54,35 @@
                 <hr>
             </div>
             @endforeach
+        </div>
+
+        <div class="w-full mt-10 h-full overflow-auto hide-scrollbar">
+            <table class="text-lightGrey  w-full h-full ">
+                <thead class="border-white">
+                    <tr class="">
+                        <th class="p-4 font-bold">No</th>
+                        <th class="p-4 font-bold">Activity</th>
+                        <th class="p-4 font-bold">Judul</th>
+                        <th class="p-4 font-bold">Tanggal/File</th>
+                        <th class="p-4 font-bold">Deskripsi</th>
+                    </tr>
+                </thead>
+                <tbody class="">
+                    {{-- @if($data -> talentData)
+                        @foreach($data -> talentDataFetch as $row) --}}
+                        <tr class="text-center bg-grey font-medium">
+                            <td class="p-4">id</td>
+                            <td class="p-4">Appointment</td>
+                            <td class="p-4">Tawuran RT</td>
+                            <td class="p-4">40 Agustus</td>
+                            <td class="p-4">Hajar lawan</td>
+                        </tr>
+                        {{-- @endforeach
+                    @else
+                        No Talent Data
+                    @endif --}}
+                </tbody>
+            </table>
         </div>
     </div>
 </div>
