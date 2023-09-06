@@ -56,7 +56,7 @@
             @endforeach
         </div>
 
-        <div class="w-full mt-10 h-full overflow-auto hide-scrollbar">
+        <div class="w-full mt-10 max-h-72 overflow-auto hide-scrollbar">
             <table class="text-lightGrey  w-full h-full ">
                 <thead class="border-white">
                     <tr class="">
@@ -81,6 +81,34 @@
                     @else
                         No Talent Data
                     @endif --}}
+                    <tr class="text-center bg-grey font-medium">
+                        <td class="p-4">id</td>
+                        <td class="p-4">Appointment</td>
+                        <td class="p-4">Tawuran RT</td>
+                        <td class="p-4">40 Agustus</td>
+                        <td class="p-4">Hajar lawan</td>
+                    </tr>
+                    <tr class="text-center bg-grey font-medium">
+                        <td class="p-4">id</td>
+                        <td class="p-4">Appointment</td>
+                        <td class="p-4">Tawuran RT</td>
+                        <td class="p-4">40 Agustus</td>
+                        <td class="p-4">Hajar lawan</td>
+                    </tr>
+                    <tr class="text-center bg-grey font-medium">
+                        <td class="p-4">id</td>
+                        <td class="p-4">Appointment</td>
+                        <td class="p-4">Tawuran RT</td>
+                        <td class="p-4">40 Agustus</td>
+                        <td class="p-4">Hajar lawan</td>
+                    </tr>
+                    <tr class="text-center bg-grey font-medium">
+                        <td class="p-4">id</td>
+                        <td class="p-4">Appointment</td>
+                        <td class="p-4">Tawuran RT</td>
+                        <td class="p-4">40 Agustus</td>
+                        <td class="p-4">Hajar lawan</td>
+                    </tr>
                 </tbody>
             </table>
         </div>
