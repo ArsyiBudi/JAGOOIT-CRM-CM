@@ -16,19 +16,28 @@ class C_Leads extends Controller
     {
         $perPage = $request->input('per_page', 5);
         $search = $request->input('search', '');
+        $sort = $request->input('sort', 'oldest');
     
         session(['leads_per_page' => $perPage]);
         session(['leads_search' => $search]);
-
+    
         $entries = session('leads_per_page', 5);
         $search = session('leads_search', '');
-
-        $data = M_Leads::where(function ($query) use ($search) {
+    
+        $query = M_Leads::where(function ($query) use ($search) {
             $query->where('business_name', 'like', "%$search%")
                 ->orWhere('address', 'like', "%$search%")
                 ->orWhere('pic_name', 'like', "%$search%");
-        })->paginate($entries);
-
+        });
+    
+        if ($sort === 'latest') {
+            $query->latest();
+        } elseif ($sort === 'old') {
+            $query->oldest();
+        }
+    
+        $data = $query->paginate($entries);
+    
         return view('admin.leads.menu', [
             "title" => "Leads | Menu",
             "leads" => $data
@@ -49,11 +58,11 @@ class C_Leads extends Controller
         $data = M_Leads::where(function ($query) use ($search) {
             $query->where('business_name', 'like', "%$search%")
                 ->orWhere('address', 'like', "%$search%")
-                ->orWhere('pic_name', 'like', "%$search%");
+                ->orWhere('pic_name', 'like', "%$search%")
+                ->orWhereHas('latestActivityParams', function ($query) use ($search){
+                    $query -> where('params_name', 'like', "%$search%");
+                });
             })->where('client_indicator', '=', '1')
-        // ->orWhereHas('latestActivityParams', function ($query) use ($search){
-        //     $query -> where('params_name', 'like', "%$search%");
-        // })
         ->paginate($entries);
 
         return view('admin.client/menu', [
@@ -64,12 +73,13 @@ class C_Leads extends Controller
 
     public function detail($leads_id)
     {
-        $leads_data = M_Leads::where('id', '=', "$leads_id")->get();
+        $leads_data = M_Leads::find($leads_id);
         if (!$leads_data) {
             return response([
                 'error' => "No leads has this id : {{ $leads_id }}"
             ]);
         }
+        
         return view('admin.leads.detail', [
             "title" => "Leads | Detail",
             'leads' => $leads_data

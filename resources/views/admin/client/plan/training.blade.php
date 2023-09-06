@@ -112,9 +112,10 @@
                                     @if($data -> talentData)
                                     @foreach($data -> talentDataFetch as $row)
                                         <tr>
-                                            <th align="center">{{ isset($i) ? ++$i : $i = 1  }}</th>
-                                            <td align="center">{{ $row -> talentData -> name}}</td>
-                                            <td align="center">
+                                            <form action="{{ url('/client/order/plan/'. $order_id. '/training/' . $row -> talentData -> id) }}" method="post">
+                                                <th align="center">{{ isset($i) ? ++$i : $i = 1  }}</th>
+                                                <td align="center">{{ $row -> talentData -> name}}</td>
+                                                <td align="center">
                                                 <div class="w-[86px] h-[27px] rounded-md bg-white flex items-center justify-center">
                                                     <input id='pre-test' name='pre-test' type="number" class='text-black w-full text-center outline-none bg-transparent' placeholder='nilai'>
                                                 </div>
@@ -136,10 +137,11 @@
                                             </td>
                                             <td align="center">
                                                 <div class="w-[86px] h-[27px] rounded-md bg-white flex items-center justify-center">
-                                                    <input id='rata-rata' name='rata-rata' type="number" class='text-black w-full text-center outline-none bg-transparent' placeholder='nilai'>
+                                                    <input id='rata-rata' type="number" class='text-black w-full text-center outline-none bg-transparent' placeholder='nilai'>
                                                 </div>
                                             </td>
                                             <td align="center"><input type="submit" class="bg-secondary text-white rounded-md w-[82px] h-[25px]"></td>
+                                            </form>
                                         </tr>
                                     @endforeach
                                     @else

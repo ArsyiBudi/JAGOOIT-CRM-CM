@@ -138,41 +138,15 @@
                             <div class=" relative w-full">
                                 <h1 class=" text-left text-lg pb-2">Penawaran</h1>
                                 <p class=" absolute text-xs  text-left date-text">Start Date :
-                                @if($order -> start_offer)
+                                    @if($order -> start_offer)
                                     {{ $order -> start_offer }}
                                     @else
                                     -
                                     @endif
                                 </p>
                                 <p class="absolute top-12 text-xs py-4 text-left date-text">End Date :
-                                @if($order -> end_offer)
+                                    @if($order -> end_offer)
                                     {{ $order -> end_offer }}
-                                    @else
-                                    -
-                                    @endif
-                                </p>
-                            </div>
-                        </li>
-                        <li @if($order -> order_status > 3)
-                            data-content="✓"
-                            class="step step-primary"
-                            @elseif($order -> order_status == 3)
-                            class="step step-primary"
-                            @else
-                            class="step"
-                            @endif >
-                            <div class=" relative w-full">
-                                <h1 class=" text-left text-lg pb-2">Appoinment Negosiasi</h1>
-                                <p class=" absolute text-xs  text-left date-text">Start Date :
-                                @if($order -> start_appointment)
-                                    {{ $order -> start_appointment }}
-                                    @else
-                                    -
-                                    @endif
-                                </p>
-                                <p class="absolute top-12 text-xs py-4 text-left date-text">End Date :
-                                @if($order -> end_appointment)
-                                    {{ $order -> end_appointment }}
                                     @else
                                     -
                                     @endif
@@ -188,17 +162,17 @@
                             class="step"
                             @endif >
                             <div class=" relative w-full">
-                                <h1 class=" text-left text-lg pb-2">User Interview</h1>
-                                <p class=" absolute text-xs  text-left date-text">Start Date : 
-                                @if($order -> start_probation)
-                                    {{ $order -> start_probation }}
+                                <h1 class=" text-left text-lg pb-2">Appoinment Negosiasi</h1>
+                                <p class=" absolute text-xs  text-left date-text">Start Date :
+                                    @if($order -> start_appointment)
+                                    {{ $order -> start_appointment }}
                                     @else
                                     -
                                     @endif
                                 </p>
-                                <p class="absolute top-12 text-xs py-4 text-left date-text">End Date : 
-                                @if($order -> end_probition)
-                                    {{ $order -> end_probition }}
+                                <p class="absolute top-12 text-xs py-4 text-left date-text">End Date :
+                                    @if($order -> end_appointment)
+                                    {{ $order -> end_appointment }}
                                     @else
                                     -
                                     @endif
@@ -214,16 +188,42 @@
                             class="step"
                             @endif >
                             <div class=" relative w-full">
+                                <h1 class=" text-left text-lg pb-2">User Interview</h1>
+                                <p class=" absolute text-xs  text-left date-text">Start Date :
+                                    @if($order -> start_probation)
+                                    {{ $order -> start_probation }}
+                                    @else
+                                    -
+                                    @endif
+                                </p>
+                                <p class="absolute top-12 text-xs py-4 text-left date-text">End Date :
+                                    @if($order -> end_probition)
+                                    {{ $order -> end_probition }}
+                                    @else
+                                    -
+                                    @endif
+                                </p>
+                            </div>
+                        </li>
+                        <li @if($order -> order_status > 6)
+                            data-content="✓"
+                            class="step step-primary"
+                            @elseif($order -> order_status == 6)
+                            class="step step-primary"
+                            @else
+                            class="step"
+                            @endif >
+                            <div class=" relative w-full">
                                 <h1 class=" text-left text-lg pb-2">PO & PKS</h1>
-                                <p class=" absolute text-xs  text-left date-text">Start Date : 
-                                @if($order -> start_popks)
+                                <p class=" absolute text-xs  text-left date-text">Start Date :
+                                    @if($order -> start_popks)
                                     {{ $order -> start_popks }}
                                     @else
                                     -
                                     @endif
                                 </p>
-                                <p class="absolute top-12 text-xs py-4 text-left date-text">End Date : 
-                                @if($order -> end_popks)
+                                <p class="absolute top-12 text-xs py-4 text-left date-text">End Date :
+                                    @if($order -> end_popks)
                                     {{ $order -> end_popks }}
                                     @else
                                     -
@@ -231,7 +231,15 @@
                                 </p>
                             </div>
                         </li>
-                        <li class="step">Onboarding</li>
+                        <li @if($order -> order_status > 7)
+                            data-content="✓"
+                            class="step step-primary"
+                            @elseif($order -> order_status == 7)
+                            class="step step-primary"
+                            @else
+                            class="step"
+                            @endif >
+                            Onboarding</li>
                     </ul>
                 </div>
             </div>

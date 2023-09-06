@@ -38,15 +38,48 @@ class C_Orders extends Controller
         $entries = session('order_per_page', 5);
         $search = session('order_search', '');
 
-        $data = M_Orders::whereHas('leadData', function($query) use ($search){
-            $query -> where('business_name', 'like', "%$search%");
-        })->orWhereHas('globalParams', function($query) use ($search){
-            $query -> where('params_name', 'like', "%$search%");
-        })->paginate($entries);
+        $data = M_Orders::where(function ($query) use ($search){
+            $query -> where('due_date', 'like', "%$search%");
+            // ->orWhereHas('leadData', function($query) use ($search){
+            //     $query -> where('params_name', 'like', "%$search%");
+            // })
+            // ->orWhereHas('globalParams', function($query) use ($search){
+            //     $query -> where('params_name', 'like', "%$search%");
+            // });
+        })->where('order_status', '<', 8)
+        ->paginate($entries);
 
         return view('admin.client.order.list', [
             "title" => "Client | Order List",
             "order" => $data
+        ]);
+    }
+
+    public function fetch_history(Request $request)
+    {
+        $perPage = $request->input('per_page', 5);
+        $search = $request->input('search', '');
+    
+        session(['order_per_page' => $perPage]);
+        session(['order_search' => $search]);
+
+        $entries = session('order_per_page', 5);
+        $search = session('order_search', '');
+
+        $data = M_Orders::where(function ($query) use ($search){
+            $query -> where('due_date', 'like', "%$search")
+            ->orWhereHas('globalParams', function($query) use ($search){
+                $query -> where('params_name', 'like', "%$search%");
+            })
+            -> orWhereHas('leadData', function($query) use ($search){
+                $query -> where('business_name', 'like', "%$search%");
+            });
+        })-> where('order_status', '=', 8)
+        ->paginate($entries);
+
+        return view('admin.client.order.history', [
+            "title" => "Client | Order History",
+            "orders" => $data
         ]);
     }
 
@@ -94,7 +127,7 @@ class C_Orders extends Controller
     
     public function create(Request $request){
         $field = $request -> validate([
-            'business_id' => 'required', 
+            'business_id' => 'required|int', 
             'desired_position' => 'required', 
             'needed_qty' => 'required', 
             'due_date' => 'required', 

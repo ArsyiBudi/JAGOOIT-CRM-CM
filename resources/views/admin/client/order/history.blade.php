@@ -1,244 +1,115 @@
     @extends('admin.layouts.main')
 
     <style>
-    .hide-scrollbar::-webkit-scrollbar {
-        width: 0.4em; /* Width of the scrollbar */
-    }
+        .hide-scrollbar::-webkit-scrollbar {
+            width: 0.4em;
+            /* Width of the scrollbar */
+        }
 
-    .hide-scrollbar::-webkit-scrollbar-thumb {
-        background-color: #555555; /* Color of the scrollbar thumb */
-        border-radius: 8px; /* Rounded corners for the scrollbar thumb */
-    }
+        .hide-scrollbar::-webkit-scrollbar-thumb {
+            background-color: #555555;
+            /* Color of the scrollbar thumb */
+            border-radius: 8px;
+            /* Rounded corners for the scrollbar thumb */
+        }
 
-    .hide-scrollbar::-webkit-scrollbar-thumb:hover {
-        background-color: #777777; /* Color of the scrollbar thumb on hover */
-    }
+        .hide-scrollbar::-webkit-scrollbar-thumb:hover {
+            background-color: #777777;
+            /* Color of the scrollbar thumb on hover */
+        }
 
-    .hide-scrollbar::-webkit-scrollbar-track {
-        background-color: #555555; /* Color of the scrollbar track */
-    }
+        .hide-scrollbar::-webkit-scrollbar-track {
+            background-color: #555555;
+            /* Color of the scrollbar track */
+        }
 
-    .hide-scrollbar::-webkit-scrollbar-track:hover {
-        background-color: #666666; /* Color of the scrollbar track on hover */
-    }
+        .hide-scrollbar::-webkit-scrollbar-track:hover {
+            background-color: #666666;
+            /* Color of the scrollbar track on hover */
+        }
 
-    /* Customize the appearance of the scrollbar wheel */
-    .hide-scrollbar {
-        scrollbar-width: thin;
-        scrollbar-color: #555555 #333333;
-    }
+        /* Customize the appearance of the scrollbar wheel */
+        .hide-scrollbar {
+            scrollbar-width: thin;
+            scrollbar-color: #555555 #333333;
+        }
 
-    /* Customize the appearance of the scrollbar thumb icon */
-    .hide-scrollbar::-webkit-scrollbar-thumb:vertical {
-        background-color: #fff; /* Color of the scrollbar thumb icon */
-    }
-
+        /* Customize the appearance of the scrollbar thumb icon */
+        .hide-scrollbar::-webkit-scrollbar-thumb:vertical {
+            background-color: #fff;
+            /* Color of the scrollbar thumb icon */
+        }
     </style>
 
     @section('container')
     <div class=" overflow-auto mt-28 lg:mt-0">
         <div class="w-full bg-darkSecondary py-10 px-8 rounded-md ">
 
-                <div class="border-b border-white w-full pb-3 mb-3">
-                    <h3 class="text-white font-semibold text-3xl">History Order</h3>
-                </div>
+            <div class="border-b border-white w-full pb-3 mb-3">
+                <h3 class="text-white font-semibold text-3xl">History Order</h3>
+            </div>
 
-                <form class=" block md:flex items-start my-4 justify-between mb-3 w-full">
-                    <div class=" md:block flex items-center justify-between">
-                        <div class="flex gap-3 items-center justify-start">
-                            <p class="text-white text-xs md:text-sm">Show</p>
-                            <div class="flex items-center bg-grey rounded-md md:rounded-lg justify-center py-0 md:py-1 w-[40px] md:w-[60px] px-1">
-                                <input type="text" class=" text-white w-full text-center bg-transparent outline-none" placeholder="5">
-                            </div>
-                            <p class="text-white text-xs md:text-sm">entries</p>
+            <form class=" block md:flex items-start my-4 justify-between mb-3 w-full">
+                <div class=" md:block flex items-center justify-between">
+                    <div class="flex gap-3 items-center justify-start">
+                        <p class="text-white text-xs md:text-sm">Show</p>
+                        <div class="flex items-center bg-grey rounded-md md:rounded-lg justify-center py-0 md:py-1 w-[40px] md:w-[60px] px-1">
+                            <input type="text" class=" text-white w-full text-center bg-transparent outline-none" placeholder="5">
                         </div>
-                    </div>
-                    <div class=" flex items-center gap-5 mt-5 md:mt-0">
-                        <p class=" hidden md:block">Search</p>
-                        <input type="text" class=" outline-none bg-white rounded-md w-full md:w-80 py-1 px-2 text-black font-semibold placeholder-gray-400 placeholder-opacity-100 md:placeholder-opacity-0" placeholder="search">
-                    </div>
-                </form>
-
-                <div class=" border-b border-white w-full rounded-lg mt-4"></div>
-
-                <div class=" hide-scrollbar w-full mt-5 h-72 overflow-auto pr-2">
-                    <table class=" w-full text-xs md:text-sm font-bold ">
-                        <thead>
-                            <tr >
-                                <td  class=" p-4" align="center">No</td>
-                                <td  class=" p-4" align="center">Order ID</td>
-                                <td  class=" p-4" align="center">Nama Perusahaan</td>
-                                <td  class=" p-4" align="center">Due Date</td>
-                                <td  class=" p-4" align="center">Status</td>    
-                                <td  class=" p-4" align="center">Aksi</td>    
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr class=" odd:bg-grey">
-                                <td align="center" class=" p-4">1</td>
-                                <td align="center" class=" p-4">28282828</td>
-                                <td align="center" class=" p-4">Los Santos 88</td>
-                                <td align="center" class=" p-4">12 Agustus 2023</td>
-                                <td align="center" class=" p-4">
-                                    <div class="bg-success rounded-md py-1">
-                                        Done        
-                                    </div>
-                                </td>
-                                <td align="center" class=" p-4"> 
-                                    <div class=" flex items-center gap-2 justify-center">
-                                        <i class="ri-checkbox-circle-line text-lg cursor-pointer" title="Complete Manual"></i>
-
-                                        <a href="/client/order/history/detail/">
-                                            <i class=" text-lg cursor-pointer ri-information-line" title="Detail"></i>
-                                        </a>
-                                        <i class=" text-lg cursor-pointer ri-delete-bin-2-line text-delete" title="Delete"></i>
-                                    </div> 
-                                </td>
-                            </tr>
-
-                            <tr class=" odd:bg-grey">
-                                <td align="center" class=" p-4">2</td>
-                                <td align="center" class=" p-4">28282828</td>
-                                <td align="center" class=" p-4">Los Santos 88</td>
-                                <td align="center" class=" p-4">12 Agustus 2023</td>
-                                <td align="center" class=" p-4">
-                                    <div class="bg-success rounded-md py-1">
-                                        Done        
-                                    </div>
-                                </td>
-                                <td align="center" class=" p-4"> 
-                                    <div class=" flex items-center gap-2 justify-center">
-                                        <i class="ri-checkbox-circle-line text-lg cursor-pointer" title="Complete Manual"></i>
-
-                                        <a href="/client/order/history/detail/">
-                                            <i class=" text-lg cursor-pointer ri-information-line" title="Detail"></i>
-                                        </a>
-                                        <i class=" text-lg cursor-pointer ri-delete-bin-2-line text-delete" title="Delete"></i>
-                                    </div> 
-                                </td>
-                            </tr>
-                            <tr class=" odd:bg-grey">
-                                <td align="center" class=" p-4">3</td>
-                                <td align="center" class=" p-4">28282828</td>
-                                <td align="center" class=" p-4">Los Santos 88</td>
-                                <td align="center" class=" p-4">12 Agustus 2023</td>
-                                <td align="center" class=" p-4">
-                                    <div class="bg-success rounded-md py-1">
-                                        Done        
-                                    </div>
-                                </td>
-                                <td align="center" class=" p-4"> 
-                                    <div class=" flex items-center gap-2 justify-center">
-                                        <i class="ri-checkbox-circle-line text-lg cursor-pointer" title="Complete Manual"></i>
-
-                                        <a href="/client/order/history/detail/">
-                                            <i class=" text-lg cursor-pointer ri-information-line" title="Detail"></i>
-                                        </a>
-                                        <i class=" text-lg cursor-pointer ri-delete-bin-2-line text-delete" title="Delete"></i>
-                                    </div> 
-                                </td>
-                            </tr>
-                            <tr class=" odd:bg-grey">
-                                <td align="center" class=" p-4">4</td>
-                                <td align="center" class=" p-4">28282828</td>
-                                <td align="center" class=" p-4">Los Santos 88</td>
-                                <td align="center" class=" p-4">12 Agustus 2023</td>
-                                <td align="center" class=" p-4">
-                                    <div class="bg-success rounded-md py-1">
-                                        Done        
-                                    </div>
-                                </td>
-                                <td align="center" class=" p-4"> 
-                                    <div class=" flex items-center gap-2 justify-center">
-                                        <i class="ri-checkbox-circle-line text-lg cursor-pointer" title="Complete Manual"></i>
-
-                                        <a href="/client/order/history/detail/">
-                                            <i class=" text-lg cursor-pointer ri-information-line" title="Detail"></i>
-                                        </a>
-                                        <i class=" text-lg cursor-pointer ri-delete-bin-2-line text-delete" title="Delete"></i>
-                                    </div> 
-                                </td>
-                            </tr>
-                            <tr class=" odd:bg-grey">
-                                <td align="center" class=" p-4">5</td>
-                                <td align="center" class=" p-4">28282828</td>
-                                <td align="center" class=" p-4">Los Santos 88</td>
-                                <td align="center" class=" p-4">12 Agustus 2023</td>
-                                <td align="center" class=" p-4">
-                                    <div class="bg-success rounded-md py-1">
-                                        Done        
-                                    </div>
-                                </td>
-                                <td align="center" class=" p-4"> 
-                                    <div class=" flex items-center gap-2 justify-center">
-                                        <i class="ri-checkbox-circle-line text-lg cursor-pointer" title="Complete Manual"></i>
-
-                                        <a href="/client/order/history/detail/">
-                                            <i class=" text-lg cursor-pointer ri-information-line" title="Detail"></i>
-                                        </a>
-                                        <i class=" text-lg cursor-pointer ri-delete-bin-2-line text-delete" title="Delete"></i>
-                                    </div> 
-                                </td>
-                            </tr>
-                            <tr class=" odd:bg-grey">
-                                <td align="center" class=" p-4">6</td>
-                                <td align="center" class=" p-4">28282828</td>
-                                <td align="center" class=" p-4">Los Santos 88</td>
-                                <td align="center" class=" p-4">12 Agustus 2023</td>
-                                <td align="center" class=" p-4">
-                                    <div class="bg-success rounded-md py-1">
-                                        Done        
-                                    </div>
-                                </td>
-                                <td align="center" class=" p-4"> 
-                                    <div class=" flex items-center gap-2 justify-center">
-                                        <i class="ri-checkbox-circle-line text-lg cursor-pointer" title="Complete Manual"></i>
-
-                                        <a href="/client/order/history/detail/">
-                                            <i class=" text-lg cursor-pointer ri-information-line" title="Detail"></i>
-                                        </a>
-                                        <i class=" text-lg cursor-pointer ri-delete-bin-2-line text-delete" title="Delete"></i>
-                                    </div> 
-                                </td>
-                            </tr>
-                            <tr class=" odd:bg-grey">
-                                <td align="center" class=" p-4">7</td>
-                                <td align="center" class=" p-4">28282828</td>
-                                <td align="center" class=" p-4">Los Santos 88</td>
-                                <td align="center" class=" p-4">12 Agustus 2023</td>
-                                <td align="center" class=" p-4">
-                                    <div class="bg-success rounded-md py-1">
-                                        Done        
-                                    </div>
-                                </td>
-                                <td align="center" class=" p-4"> 
-                                    <div class=" flex items-center gap-2 justify-center">
-                                        <i class="ri-checkbox-circle-line text-lg cursor-pointer" title="Complete Manual"></i>
-                                        <a href="/client/order/history/detail/">
-                                            <i class=" text-lg cursor-pointer ri-information-line" title="Detail"></i>
-                                        </a>
-                                        <i class=" text-lg cursor-pointer ri-delete-bin-2-line text-delete" title="Delete"></i>
-                                    </div> 
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-
-                <div class=" flex justify-center items-center gap-3">
-                    <div class="">
-                        <button class=" bg-secondary py-1 px-5 rounded-md cursor-pointer hover:scale-95 my-5">Prev</button>
-                    </div>
-                    <div class=" bg-grey p-1 rounded-md w-8 text-center">
-                        <p>1</p>
-                    </div>
-                    <div class=" bg-grey p-1 rounded-md w-8 text-center">
-                        <p>10</p>
-                    </div>
-                    <div class="">
-                        <button class=" bg-secondary py-1 px-5 rounded-md cursor-pointer hover:scale-95 my-5">Next</button>
+                        <p class="text-white text-xs md:text-sm">entries</p>
                     </div>
                 </div>
+                <div class=" flex items-center gap-5 mt-5 md:mt-0">
+                    <p class=" hidden md:block">Search</p>
+                    <input type="text" class=" outline-none bg-white rounded-md w-full md:w-80 py-1 px-2 text-black font-semibold placeholder-gray-400 placeholder-opacity-100 md:placeholder-opacity-0" placeholder="search">
+                </div>
+            </form>
+
+            <div class=" border-b border-white w-full rounded-lg mt-4"></div>
+
+            <div class=" hide-scrollbar w-full mt-5 h-72 overflow-auto pr-2">
+                <table class=" w-full text-xs md:text-sm font-bold ">
+                    <thead>
+                        <tr>
+                            <td class=" p-4" align="center">No</td>
+                            <td class=" p-4" align="center">Order ID</td>
+                            <td class=" p-4" align="center">Nama Perusahaan</td>
+                            <td class=" p-4" align="center">Due Date</td>
+                            <td class=" p-4" align="center">Status</td>
+                            <td class=" p-4" align="center">Aksi</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($orders as $order)
+                        <tr class=" odd:bg-grey">
+                            <td align="center" class=" p-4">{{ isset($i) ? ++$I : $i = 1 }}</td>
+                            <td align="center" class=" p-4">{{ $order -> id }}</td>
+                            <td align="center" class=" p-4">{{ $order -> leadData -> business_name }}</td>
+                            <td align="center" class=" p-4">{{ $order -> due_date }}</td>
+                            <td align="center" class=" p-4">
+                                <div class="bg-success rounded-md py-1">
+                                    {{ $order -> globalParams -> params_name }}
+                                </div>
+                            </td>
+                            <td align="center" class=" p-4">
+                                <div class=" flex items-center gap-2 justify-center">
+                                    <i class="ri-checkbox-circle-line text-lg cursor-pointer" title="Complete Manual"></i>
+
+                                    <a href="{{  url('/client/order/detail/'. $order -> id) }}">
+                                        <i class=" text-lg cursor-pointer ri-information-line" title="Detail"></i>
+                                    </a>
+                                    <i class=" text-lg cursor-pointer ri-delete-bin-2-line text-delete" title="Delete"></i>
+                                </div>
+                            </td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+
+            <div class=" flex justify-center items-center gap-3">
+                {{ $orders -> links('vendor.pagination.custom-pagination-order') }}
             </div>
         </div>
+    </div>
     @endsection

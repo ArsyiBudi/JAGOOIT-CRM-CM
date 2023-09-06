@@ -56,7 +56,7 @@
                     <div class="flex gap-3 items-center justify-start">
                         <p class="text-white text-xs md:text-sm">Show</p>
                         <div class="flex items-center bg-grey rounded-md md:rounded-lg justify-center py-0 md:py-1 w-[40px] md:w-[60px] px-1">
-                            <input type="text" value="{{ old('per_page', $client->perPage()) }}" name="per_page" min="1" class=" text-white w-full text-center bg-transparent outline-none" placeholder="5">
+                            <input type="number" value="{{ old('per_page', $client->perPage()) }}" name="per_page" min="1" class=" text-white w-full text-center bg-transparent outline-none" placeholder="5">
                         </div>
                         <p class="text-white text-xs md:text-sm">entries</p>
                     </div>
@@ -96,7 +96,7 @@
                         <td align="center" class=" p-4">{{ $row->pic_name }}</td>
                         <td align="center" class=" p-4">{{ $row->pic_contact_number }}</td>
                         <td align="center" class=" p-4">
-                            @if ($row->latestActivity)
+                            @if ($row-> hasOneActivity)
                                 @if ($row->latestActivityParams)
                                     {{ $row->latestActivityParams->params_name }}
                                 @endif

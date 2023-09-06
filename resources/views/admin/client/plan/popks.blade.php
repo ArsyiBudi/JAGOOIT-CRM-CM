@@ -78,9 +78,6 @@
     </div>
     <form action="{{ url(request()->path()) }}" method="post">
         @csrf
-        @if (!empty($field))
-        @method('PATCH')
-        @endif
         <div class="pl-4 mt-5 block md:flex justify-end">
             <div class="flex gap-3 items-center w-full md:w-auto">
                 <label for="endDate">End Date: </label>

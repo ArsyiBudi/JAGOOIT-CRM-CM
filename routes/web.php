@@ -3,6 +3,7 @@
 use App\Http\Controllers\C_Activity;
 use App\Http\Controllers\C_Auth;
 use App\Http\Controllers\C_Leads;
+use App\Http\Controllers\C_Mail;
 use App\Http\Controllers\C_Offer;
 use App\Http\Controllers\C_Orders;
 use App\Http\Controllers\C_Plan;
@@ -10,6 +11,10 @@ use App\Http\Controllers\PenawaranWordController;
 use App\Http\Controllers\TalentController;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Route;
+
+//? TESTING
+Route::get('/send-email', [C_Mail::class, 'index']);
+
 
 
 //set active
@@ -87,11 +92,7 @@ Route::middleware('auth')->group(function () {
 
         //?LEADS ACTIVITY
         Route::prefix('/activity')->group(function () {
-            Route::get('/{leads_id}', function () {
-                return view('admin.leads.activity', [
-                    'title' => "Leads | Create Activity"
-                ]);
-            });
+            Route::get('/{leads_id}', [C_Activity::class, 'fetch_activity']);
             Route::post('/{leads_id}/appointment', [C_Activity::class, 'appointment'])->name('activity.appointment');
             Route::post('/{leads_id}/note', [C_Activity::class, 'note'])->name('activity.note');
             Route::post('/{leads_id}/report', [C_Activity::class, 'report'])->name('activity.report');
@@ -125,12 +126,7 @@ Route::middleware('auth')->group(function () {
 
             //?HISTORY ORDER
             Route::prefix('history')->group(function () {
-                Route::get('/', function () {
-                    return view('admin.client.order.history', [
-                        "title" => "Client | Order History",
-                    ]);
-                });
-               
+                Route::get('/', [C_Orders::class, 'fetch_history']);
             });
 
             //?PLAN ORDER
@@ -145,6 +141,7 @@ Route::middleware('auth')->group(function () {
                 //?TRAINING
                 Route::get('/{order_id}/training', [C_Plan::class, 'fetchTraining']) -> name('fetch_training');
                 Route::post('/{order_id}/training', [C_Plan::class, 'saveTraining'])->name('new_offer');
+                Route::post('/{order_id}/training/{order_details_id}', [C_Plan::class, 'saveTraining'])->name('new_offer');
 
                 //?PENAWARAN
                 Route::get('/{order_id}/penawaran', [C_Plan::class, 'openOffer']) -> name('open_offer');

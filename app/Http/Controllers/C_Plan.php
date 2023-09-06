@@ -35,17 +35,17 @@ class C_Plan extends Controller
         $search = session('talent_search', '');
 
         $talent = M_Talents::where(function($query) use ($search){
-            $query -> where('name', 'like', "%$search%");
-        })
-        ->orWhereHas('posisiTalent',function($query) use ($search){
-            $query -> where('description', 'like', "%$search%");
-        }) 
-        ->orWhereHas('keterampilanTalent',function($query) use ($search){
-            $query -> where('description', 'like', "%$search%");
-        }) 
-        ->orWhereHas('pendidikanTalent',function($query) use ($search){
-            $query -> where('description', 'like', "%$search%");
-        })->where('is_active', '=', '0')->paginate($entries);
+            $query -> where('name', 'like', "%$search%")
+            ->orWhereHas('posisiTalent',function($query) use ($search){
+                $query -> where('description', 'like', "%$search%");
+            }) 
+            ->orWhereHas('keterampilanTalent',function($query) use ($search){
+                $query -> where('description', 'like', "%$search%");
+            }) 
+            ->orWhereHas('pendidikanTalent',function($query) use ($search){
+                $query -> where('description', 'like', "%$search%");
+            });
+        }) ->where('is_active', '=', '0')->paginate($entries);
 
         return view('admin.client.plan.recruitment', [
             "title" => "Plan | Recruitment",

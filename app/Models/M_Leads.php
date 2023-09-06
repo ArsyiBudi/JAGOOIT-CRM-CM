@@ -5,6 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class M_Leads extends Model
 {
@@ -33,7 +35,7 @@ class M_Leads extends Model
         return $this->hasMany(M_Emails::class, 'leads_id');
     }
 
-    public function latestActivity()
+    public function hasOneActivity()
     {
         return $this->hasOne(M_Activity::class, 'leads_id')->latest();
     }
@@ -48,5 +50,15 @@ class M_Leads extends Model
             'id',
             'activity_type_id'
         )->latest();
+    }
+
+    public function ActivityData() : HasMany
+    {
+        return $this -> hasMany(M_Activity::class, 'leads_id');
+    }
+
+    public function hasNote() : HasOne
+    {
+        return $this -> hasOne(M_Activity::class, 'leads_id')->where('activity_type_id', 10)->latest();
     }
 }
