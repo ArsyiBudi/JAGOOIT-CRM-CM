@@ -154,18 +154,10 @@ Route::middleware('auth')->group(function () {
                 Route::post('/{order_id}/penawaran/save', [C_Plan::class, 'offer_save']) -> name('save_offer');
 
                 //?NEGOSIASI
-                Route::get('/{order_id}/negosiasi', function () {
-                    return view('admin.client.plan.negosiasi', [
-                        "title" => "Plan | Negosiasi",
-                    ]);
-                })->name('fetch_negosisasi');
+                Route::get('/{order_id}/negosiasi', [C_Plan::class, 'fetchNegosiasi']) -> name('fetchNegosiasi');
 
                 //?PERCOBAAN
-                Route::get('/{order_id}/percobaan', function () {
-                    return view('admin.client.plan.percobaan', [
-                        "title" => "Plan | Percobaan",
-                    ]);
-                });
+                Route::get('/{order_id}/percobaan', [C_Plan::class, 'fetchPercobaan']) -> name('fetchPercobaan');
 
                 //?PO & PKS
                 Route::get('/{order_id}/popks',[C_Plan::class, 'fetchPopks']);

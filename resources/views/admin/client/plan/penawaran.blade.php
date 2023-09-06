@@ -43,15 +43,6 @@
     </div>
     <form class="" action="{{ url(request()->path()) }}" method="POST">
         @csrf
-        <div class=" mt-5">
-            <div class=" block md:flex justify-end">
-                <div class="flex gap-3 items-center w-full md:w-auto">
-                    <label for="endDate">End Date: </label>
-                    <input type="date" id="endDate" class=" custom-date-input rounded-md bg-primary py-2 px-5 text-white outline-none border-[1px] border-white">
-                </div>
-            </div>
-        </div>
-
         <div class="bg-grey rounded shadow-lg mt-6 p-6  ">
             <div class="border-b pb-3 mb-6">
                 <h2 class="text-2xl md:text-4xl text-white">Form Generate Surat Penawaran</h2>
@@ -65,14 +56,15 @@
                             @csrf
                             <div class=" detail-container flex gap-2">
                                 @if($offer -> offerJob)
-                                    @foreach($offer -> offerJobDetails as $data)
-                                        <div class="bg-white text-black text-opacity-50 text-sm text-center py-1 px-7 rounded-md font-bold flex items-center gap-3">
-                                            <p>{{ $data->needed_job }} ({{ $data->quantity }})</p>
-                                            <span>
-                                                <i class="text-lg cursor-pointer ri-delete-bin-2-line text-delete"></i>
-                                            </span>
-                                        </div>
-                                    @endforeach
+                                @foreach($offer -> offerJobDetails as $data)
+                                <div class="bg-white text-black text-opacity-50 text-sm text-center py-1 px-7 rounded-md font-bold flex items-center gap-3">
+                                    <p>{{ $data->needed_job }} ({{ $data->quantity }})</p>
+
+                                    <span>
+                                        <i class="text-lg cursor-pointer ri-delete-bin-2-line text-delete"></i>
+                                    </span>
+                                </div>
+                                @endforeach
                                 @endif
                             </div>
                         </form>
@@ -115,7 +107,7 @@
                 </div>
             </div>
 
-            
+
 
             <p class="mt-4">Biaya Overtime (perjam)</p>
 

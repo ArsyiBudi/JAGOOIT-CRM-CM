@@ -63,7 +63,21 @@ class C_Plan extends Controller
             "order_id" => $order_id
         ]);
     }
-
+    public function fetchNegosiasi($order_id)
+    {
+        return view('admin.client.plan.negosiasi', [
+            "title" => "Plan | Negosiasi",
+            "order_id" => $order_id,
+        ]);
+    }
+    public function fetchPercobaan($order_id)
+    {
+        return view('admin.client.plan.percobaan', [
+            "title" => "Plan | Percobaan",
+            "order_id" => $order_id,
+        ]);
+    }
+    
     public function fetchPopks($order_id)
     {
         return view('admin.client.plan.popks', [
@@ -76,17 +90,17 @@ class C_Plan extends Controller
 
     public function saveRecruitment(Request $request, $order_id)
     {
-       foreach($request -> talents_id as $talent_id)
-       {
-           M_OrderDetails::create([
-               'talent_id' => $talent_id,
-               'order_id' => $order_id
-           ]);
-           $update = M_Talents::find($talent_id);
-           $update -> is_active = 1;
-           $update -> update();
-       }
-       return redirect('/client/order/plan/'. $order_id .'/training/');
+        foreach($request -> talents_id as $talent_id)
+        {
+            M_OrderDetails::create([
+                'talent_id' => $talent_id,
+                'order_id' => $order_id
+            ]);
+            $update = M_Talents::find($talent_id);
+            $update -> is_active = 1;
+            $update -> update();
+        }
+        return redirect('/client/order/plan/'. $order_id .'/training/');
     }
 
 
@@ -249,6 +263,14 @@ class C_Plan extends Controller
         if($status) return redirect('/client/order/plan/'.$order_id.'/negosiasi');
 
     }
+
+    //?NEGOSIASI CONTROLLER CODE
+    
+
+
+    //?PERCOBAAN CONTROLLER CODE
+
+    
 
     //?POPKS CONTROLLER CODE
     public function popks_create(Request $request)
