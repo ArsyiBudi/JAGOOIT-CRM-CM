@@ -39,5 +39,10 @@ class M_Popks extends Model
         'provider_finance_administrator',
         'jagoit_director',
         'client_director',
-    ];    
+    ];
+
+    public function leadData()
+    {
+         return $this->belongsTo(M_Leads::class, 'leads_id', 'id');
+    }
 }

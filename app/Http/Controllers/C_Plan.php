@@ -9,6 +9,7 @@ use App\Models\M_Orders;
 use App\Models\M_Popks;
 use App\Models\M_Talents;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Nette\Utils\DateTime;
 use PhpOffice\PhpWord\TemplateProcessor;
 
@@ -48,6 +49,32 @@ class C_Plan extends Controller
         ];
         return response()->file($tempFilePath, $headers);
     }
+
+    public function generateWordPopks($order_id ,$popks_letter_id)
+    {
+        $order = M_Orders::find($order_id);
+        $offer = M_Offer::find($order -> offer_letter_id);
+        $replc = [];
+        foreach ($offer->offerJobDetails as $detail) {
+            $replc[] = [
+                'quantity' => $detail->quantity,
+                'needed_job' => $detail->needed_job,
+                'city_location' => $detail->city_location,
+                'contract_duration' => $detail->contract_duration,
+            ];
+        }
+        $popks = M_Popks::find($popks_letter_id);
+        $toDate = Carbon::parse($popks -> end_date);
+        $fromDate = Carbon::parse($popks -> start_date);
+        $months = $toDate->diffInMonths($fromDate);
+        return response([
+            "Busines name" => $popks -> leadData -> business_name,
+            "Perbedaan bulan" => $months,
+            "replc" => $replc
+        ]);
+  
+    }
+
 
     //?BELOW ARE USED FOR HANDLING PLAN ROUTES
     public function handlePlanRoute($order_id)
@@ -310,12 +337,35 @@ class C_Plan extends Controller
 
 
     //?PERCOBAAN CONTROLLER CODE
+    public function savePercobaan($order_id){
+        $selectedTimestamp = time();
+        $selectedDate = new DateTime();
+        $selectedDate->setTimestamp($selectedTimestamp);
 
+
+        $popks = M_Popks::create();
+        $update = M_Orders::find($order_id);
+        $update->popks_letter_id = $popks->id;
+        $update->order_status = 5;
+        if (is_null($update->end_probation) && is_null($update->start_popks)) {
+            $update->end_probation = $selectedDate;
+            $update->start_popks = $selectedDate;
+        }
+        $status = $update->update();
+        if ($status) return redirect('/client/order/plan/' . $order_id . '/popks/');
+    }
 
 
     //?POPKS CONTROLLER CODE
-    public function popks_create(Request $request)
+    public function popks_create(Request $request, $order_id)
     {
+
+        $selectedTimestamp = time();
+        $selectedDate = new DateTime();
+        $selectedDate->setTimestamp($selectedTimestamp);
+        $selectedMonth = $selectedDate->format('m');
+        $selectedYear = $selectedDate->format('Y');
+
         $field = $request->validate([
             'employee_name' => 'required',
             'employee_position' => 'required',
@@ -345,42 +395,44 @@ class C_Plan extends Controller
             'error' => 'error'
         ]);
 
-        $popks = M_Popks::create([
-            'letter_numbers' => '02/JTI/07/2023',
-            'leads_id' => 1,
-            'employee_name' => $field['employee_name'],
-            'employee_position' => $field['employee_position'],
-            'employee_address' => $field['employee_address'],
-            'client_name' => $field['client_name'],
-            'client_position' => $field['client_position'],
-            'client_address' => $field['client_address'],
-            'start_date' => $field['start_date'],
-            'end_date' => $field['end_date'],
-            'nominal_fees' => $field['nominal_fees'],
-            'included_fees' => $field['included_fees'],
-            'weekday_cost' => $field['weekday_cost'],
-            'weekend_cost' => $field['weekend_cost'],
-            'notes' => $field['notes'],
-            'consumption_cost' => $field['consumption_cost'],
-            'transportation_cost' => $field['transportation_cost'],
-            'billing_due_date' => $field['billing_due_date'],
-            'billing_days' => $field['billing_days'],
-            'authorized_by' => $field['authorized_by'],
-            'account_number' => $field['account_number'],
-            'bank_name' => $field['bank_name'],
-            'account_manager_provider' => "Sdr. Septian Nugraha Kudrat",
-            'provider_finance_administrator' => "Sdri. Retno Aliifah",
-            'jagoit_director' => $field['jagoit_director'],
-            'client_director' => $field['client_director'],
+        $order = M_Orders::find($order_id);
+        $popks = M_Popks::find($order -> popks_letter_id);
+        $popks -> letter_numbers = "02/JTI/{$selectedMonth}/{$selectedYear}";
+        $popks -> leads_id = $order -> leads_id;
+        $popks -> employee_name = $field['employee_name'];
+        $popks -> employee_position = $field['employee_position'];
+        $popks -> employee_address = $field['employee_address'];
+        $popks -> client_name = $field['client_name'];
+        $popks -> client_position = $field['client_position'];
+        $popks -> client_address = $field['client_address'];
+        $popks -> start_date = $field['start_date'];
+        $popks -> end_date = $field['end_date'];
+        $popks -> nominal_fees = $field['nominal_fees'];
+        $popks -> included_fees = $field['included_fees'];
+        $popks -> weekday_cost = $field['weekday_cost'];
+        $popks -> weekend_cost = $field['weekend_cost'];
+        $popks -> notes = $field['notes'];
+        $popks -> consumption_cost = $field['consumption_cost'];
+        $popks -> transportation_cost = $field['transportation_cost'];
+        $popks -> billing_due_date = $field['billing_due_date'];
+        $popks -> billing_days = $field['billing_days'];
+        $popks -> authorized_by = $field['authorized_by'];
+        $popks -> account_number = $field['account_number'];
+        $popks -> bank_name = $field['bank_name'];
+        $popks -> jagoit_director = $field['jagoit_director'];
+        $popks -> client_director = $field['client_director'];
+        $status = $popks -> save();
 
-        ]);
-
-        $currentTimestamp = time();
-        $selectedDate = new DateTime();
-        $selectedDate->setTimestamp($currentTimestamp);
-        return response([
-            'end_date' => $selectedDate,
-        ]);
+        
+        if (!$status) {
+            return response([
+                'error' => "Data didn't updated"
+            ]);
+        } else {
+          $generate = $this->generateWordPopks($order_id ,$order->popks_letter_id);
+          return $generate;
+        }
+        // return redirect()->back();
     }
 
     public function popks_send(Request $request, $order_id)
