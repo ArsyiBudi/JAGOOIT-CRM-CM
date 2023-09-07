@@ -152,6 +152,7 @@ Route::middleware('auth')->group(function () {
                 Route::post('/{order_id}/penawaran', [C_Plan::class, 'createOffer'])->name('create_offer');
                 Route::patch('/{order_id}/penawaran', [C_Plan::class, 'offer_send']) -> name('send_offer');
                 Route::post('/{order_id}/penawaran/save', [C_Plan::class, 'offer_save']) -> name('save_offer');
+                Route::delete('/{order_id}/penawaran/{offer_job_detail_id}', [C_Plan::class, 'deleteOfferDetails']) -> name('delete_offer_detail');
 
                 //?NEGOSIASI
                 Route::get('/{order_id}/negosiasi', [C_Plan::class, 'fetchNegosiasi']) -> name('fetchNegosiasi');

@@ -15,7 +15,6 @@
         -webkit-appearance: none;
         margin: 0;
     }
-
 </style>
 
 @section('container')
@@ -41,38 +40,36 @@
             <li></li>
         </ul>
     </div>
-    <form class="" action="{{ url(request()->path()) }}" method="POST">
-        @csrf
-        <div class="bg-grey rounded shadow-lg mt-6 p-6  ">
-            <div class="border-b pb-3 mb-6">
-                <h2 class="text-2xl md:text-4xl text-white">Form Generate Surat Penawaran</h2>
-            </div>
+    <div class="bg-grey rounded shadow-lg mt-6 p-6  ">
+        <div class="border-b pb-3 mb-6">
+            <h2 class="text-2xl md:text-4xl text-white">Form Generate Surat Penawaran</h2>
+        </div>
 
-            <div class="mb-4">
-                <div>
-                    <p class="gap-4">Outsourcing Detail</p>
-                    <div class=" flex items-center gap-2 flex-wrap mt-2">
-                        <form action="">
-                            @csrf
-                            <div class=" detail-container flex gap-2">
-                                @if($offer -> offerJob)
-                                @foreach($offer -> offerJobDetails as $data)
-                                <div class="bg-white text-black text-opacity-50 text-sm text-center py-1 px-7 rounded-md font-bold flex items-center gap-3">
-                                    <p>{{ $data->needed_job }} ({{ $data->quantity }})</p>
-
-                                    <span>
-                                        <i class="text-lg cursor-pointer ri-delete-bin-2-line text-delete"></i>
-                                    </span>
-                                </div>
-                                @endforeach
-                                @endif
-                            </div>
-                        </form>
-                        <button type="button" class="btn bg-white text-darkSecondary text-opacity-50 text-sm text-center py-2 px-3  rounded-md font-bold hover:scale-95 duration-200 hover:bg-white" onclick="my_modal_5.showModal()">Add Detail +</button>
+        <div class="mb-4">
+            <div>
+                <p class="gap-4">Outsourcing Detail</p>
+                <div class=" flex items-center gap-2 flex-wrap mt-2">
+                    <div class=" detail-container flex gap-2">
+                        @if($offer -> offerJob)
+                        @foreach($offer -> offerJobDetails as $data)
+                        <div class="bg-white text-black text-opacity-50 text-sm text-center py-1 px-7 rounded-md font-bold flex items-center gap-3">
+                            <p>{{ $data->needed_job }} ({{ $data->quantity }})</p>
+                            <form action="{{ url(request() -> path() . '/' . $data -> id) }}" method="post" class=" block  mt-3">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="text-lg cursor-pointer ri-delete-bin-2-line text-delete"></button>
+                            </form>
+                        </div>
+                        @endforeach
+                        @endif
                     </div>
+                    <button type="button" class="btn bg-white text-darkSecondary text-opacity-50 text-sm text-center py-2 px-3  rounded-md font-bold hover:scale-95 duration-200 hover:bg-white" onclick="my_modal_5.showModal()">Add Detail +</button>
                 </div>
             </div>
+        </div>
 
+        <form class="" action="{{ url(request()->path()) }}" method="POST">
+            @csrf
             <div class="mb-4">
                 <label for="perihal" class="text-sm text-white">Perihal</label>
                 <input value="{{ old('offer_subject', @$offer->offer_subject) }}" name="offer_subject" id="perihal" type="text" class="mt-1 text-black rounded-md px-2 py-2 w-full bg-white" placeholder="Perihal">
@@ -149,7 +146,7 @@
             <div class="mt-4 flex justify-end">
                 <button type="submit" name="create_offer" class=" w-full  md:w-[188px] bg-secondary text-white text-sm text-center h-[37px] rounded-md hover:scale-95 duration-200">Create</button>
             </div>
-        </div>
+    </div>
     </form>
 
     <form action="{{ url(request() -> path()) }}" method="POST">
@@ -294,9 +291,9 @@
 
 
         var detailData = {
-            qty: qty
-            , needed_job: deskripsi
-            , city_location: lamaKontrak
+            qty: qty,
+            needed_job: deskripsi,
+            city_location: lamaKontrak
         };
 
         console.log(detailData);
@@ -348,8 +345,8 @@
                 canvas.height = 200;
 
                 const renderContext = {
-                    canvasContext: canvas.getContext('2d')
-                    , viewport
+                    canvasContext: canvas.getContext('2d'),
+                    viewport
                 };
 
                 await page.render(renderContext).promise;
@@ -367,7 +364,6 @@
             canvas.style.display = 'none';
         }
     }
-
 </script>
 
 @endsection

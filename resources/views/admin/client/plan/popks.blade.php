@@ -78,12 +78,6 @@
     </div>
     <form action="{{ url(request()->path()) }}" method="post">
         @csrf
-        <div class="pl-4 mt-5 block md:flex justify-end">
-            <div class="flex gap-3 items-center w-full md:w-auto">
-                <label for="endDate">End Date: </label>
-                <input type="date" id="endDate" class=" custom-date-input rounded-md bg-primary py-2 px-5 text-white outline-none border-[1px] border-white">
-            </div>
-        </div>
 
 
         <div class="overflow-auto bg-darkSecondary mt-5 justify-between flex flex-col text-white px-8 py-10 rounded-md gap-y-3">

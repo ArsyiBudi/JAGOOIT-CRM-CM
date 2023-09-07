@@ -72,14 +72,6 @@
         </div>
         <div class=" mt-5">
             <form action="">
-                <div class=" block md:flex justify-between">
-                    <div></div>
-                    <div class="block md:flex gap-3 items-center w-full md:w-auto mt-3 md:mt-0">
-                        <label for="endDate">End Date: </label> <br class=" block md:hidden">
-                        <input type="date" id="endDate" class=" w-full mt-1 md:mt-0 md:w-auto custom-date-input rounded-md bg-primary py-2 px-5 text-white outline-none border-[1px] border-white">
-                    </div>
-                </div>
-
                 <div class="flex flex-col bg-grey p-9 mt-6 rounded-lg gap-2 border-2 border-white  w-full" id="createSection">
                     <div class="bg-white opacity-70 p-2 rounded-md w-full">
                         <textarea name="judul" id="judul" class="text-black opacity-100 w-full p-2 bg-transparent outline-none resize-none" placeholder="Judul" required></textarea> <!-- Menggunakan w-full untuk mengisi textarea secara penuh -->
