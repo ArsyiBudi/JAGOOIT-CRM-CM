@@ -30,6 +30,7 @@ class C_Plan extends Controller
         $phpWord->setValue('weekend', $offer->weekend_cost);
         $phpWord->setValue('konsumsi', $offer->consumption_cost);
         $phpWord->setValue('transPP', $offer->transportation_cost);
+        // $phpWord->setValue('price', $offer->price);
         $replc = [];
         foreach ($offer->offerJobDetails as $detail) {
             $replc[] = [
