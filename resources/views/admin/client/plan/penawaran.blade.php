@@ -238,7 +238,7 @@
                 </thead>
                 <tbody>
                     <tr class=" bg-[#202020]/50">
-                        <td class=" p-5 mt-2" align="center"><input type="text" name="city_location" id="domisili" placeholder="Domisili" class="bg-white outline-none rounded-md text-black p-2 placeholder:text-[#202020]/50"></td>
+                        <td class=" p-5 mt-2" align="center"><input type="text" name="city_location" id="domisili" placeholder="Kota" class="bg-white outline-none rounded-md text-black p-2 placeholder:text-[#202020]/50"></td>
                         <td class=" p-5" align="center"><input id="dsc" name="needed_job" type="text" class="bg-white outline-none rounded-md text-black p-2 placeholder:text-[#202020]/50" placeholder="Outsourcing IT Support"></td>
                         <td class=" p-5" align="center"><input id="qty" name="quantity" type="number" class="bg-white outline-none rounded-md text-black p-2 placeholder:text-[#202020]/50" placeholder="12"></td>
                         <td class=" p-5" align="center"><input id="lamaKontrak" name="contract_duration" type="number" class="bg-white outline-none rounded-md text-black p-2 placeholder:text-[#202020]/50" placeholder="11 Bulan"></td>
