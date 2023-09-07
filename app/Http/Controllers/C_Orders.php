@@ -181,7 +181,9 @@ class C_Orders extends Controller
     public function delete_order($order_id)
     {
         $delete = M_Orders::find($order_id);
-        $delete -> orderDetails -> delete();
+        foreach ($delete->orderDetails as $orderDetail) {
+            $orderDetail->delete();
+        }
         $delete -> delete();
         return redirect() -> back();
     }
