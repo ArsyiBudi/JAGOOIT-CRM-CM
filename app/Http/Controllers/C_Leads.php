@@ -12,66 +12,53 @@ use function PHPUnit\Framework\returnSelf;
 
 class C_Leads extends Controller
 {
+    //? BELOW USED FOR LEADS
     public function fetch(Request $request)
     {
         $perPage = $request->input('per_page', 5);
         $search = $request->input('search', '');
+        $sort = $request->input('sort', 'oldest');
     
         session(['leads_per_page' => $perPage]);
         session(['leads_search' => $search]);
-
+    
         $entries = session('leads_per_page', 5);
         $search = session('leads_search', '');
-
-        $data = M_Leads::where(function ($query) use ($search) {
+    
+        $query = M_Leads::where(function ($query) use ($search) {
             $query->where('business_name', 'like', "%$search%")
-                ->orWhere('business_sector', 'like', "%$search%")
+                ->orWhere('address', 'like', "%$search%")
                 ->orWhere('pic_name', 'like', "%$search%");
-        })->paginate($entries);
-
+        });
+    
+        if ($sort === 'latest') {
+            $query->latest();
+        } elseif ($sort === 'old') {
+            $query->oldest();
+        }
+    
+        $data = $query->paginate($entries);
+    
         return view('admin.leads.menu', [
             "title" => "Leads | Menu",
             "leads" => $data
         ]);
     }
-
-    public function fetch_client(Request $request)
-    {
-        $perPage = $request->input('per_page', 5);
-        $search = $request->input('search', '');
     
-        session(['client_per_page' => $perPage]);
-        session(['client_search' => $search]);
-
-        $entries = session('client_per_page', 5);
-        $search = session('client_search', '');
-
-        $data = M_Leads::where(function ($query) use ($search) {
-            $query->where('business_name', 'like', "%$search%")
-                ->orWhere('business_sector', 'like', "%$search%")
-                ->orWhere('pic_name', 'like', "%$search%");
-        })->where('client_indicator', '=', '1')->paginate($entries);
-
-        return view('admin.client/menu', [
-            "title" => "Client | Menu",
-            "client" => $data
-        ]);
-    }
-
     public function detail($leads_id)
     {
-        $leads_data = M_Leads::where('id', '=', "$leads_id")->get();
+        $leads_data = M_Leads::find($leads_id);
         if (!$leads_data) {
             return response([
                 'error' => "No leads has this id : {{ $leads_id }}"
             ]);
         }
-        return view('admin.leads.detail', [
+        
+    return view('admin.leads.detail', [
             "title" => "Leads | Detail",
             'leads' => $leads_data
         ]);
     }
-
     public function delete($id)
     {
         $lead = M_Leads::find($id);
@@ -79,12 +66,10 @@ class C_Leads extends Controller
             return response()->json(['error' => 'Lead not found'], 404);
         }
 
-        // Delete related emails
         $lead->emails()->delete();
         $lead->delete();
         return redirect('/leads');
     }
-
     public function create(Request $request)
     {
         $field = $request->validate([
@@ -122,5 +107,42 @@ class C_Leads extends Controller
         }
 
         return redirect('/leads');
+    }
+
+    //? BELOW USED FOR CLIENT
+    public function fetch_client(Request $request)
+    {
+        $perPage = $request->input('per_page', 5);
+        $search = $request->input('search', '');
+    
+        session(['client_per_page' => $perPage]);
+        session(['client_search' => $search]);
+
+        $entries = session('client_per_page', 5);
+        $search = session('client_search', '');
+
+        $data = M_Leads::where(function ($query) use ($search) {
+            $query->where('business_name', 'like', "%$search%")
+                ->orWhere('address', 'like', "%$search%")
+                ->orWhere('pic_name', 'like', "%$search%")
+                ->orWhereHas('latestActivityParams', function ($query) use ($search){
+                    $query -> where('params_name', 'like', "%$search%");
+                });
+            })->where('client_indicator', '=', '1')
+        ->paginate($entries);
+
+        return view('admin.client/menu', [
+            "title" => "Client | Menu",
+            "client" => $data
+        ]);
+    }
+
+    public function delete_client($client_id)
+    {
+        $client = M_Leads::find($client_id);
+        $client -> client_indicator = 0;
+        $client -> save();
+
+        return redirect('/client');
     }
 }

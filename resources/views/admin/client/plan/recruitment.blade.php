@@ -76,17 +76,14 @@
                     <input type="text" name="search" class=" bg-[#D9D9D9] outline-none rounded-md text-black py-1  px-8 w-full md:w-auto" placeholder="Search">
                     <i class="ri-search-line absolute top-1 left-2 text-black"></i>
                 </div>
-                <div class=" block md:flex gap-3 items-center w-full md:w-auto mt-3 md:mt-0">
-                    <label for="endDate">End Date: </label> <br class=" block md:hidden">
-                    <input type="date" id="endDate" class=" w-full mt-1 md:mt-0 md:w-auto custom-date-input rounded-md bg-primary py-2 px-5 text-white outline-none border-[1px] border-white">
-                </div>
+              
             </div>
         </form>
         <div class=" bg-darkSecondary w-full px-3 rounded-md mt-4 overflow-auto hide-scrollbar">
             <form action="{{ url(request() -> path()) }}" method="post">
                 @csrf
-            <div class="overflow-auto ">
-                <table class="table overflow-auto">
+                <div class="overflow-auto ">
+                    <table class="table overflow-auto">
                         <!-- head -->
                         <thead>
                             <tr class="text-white">
@@ -104,6 +101,9 @@
                             </tr>
                         </thead>
                         <tbody>
+                            @php
+                            $count = ($talents -> currentPage() - 1) * $talents ->perPage() + 1;
+                            @endphp
                             @foreach ($talents as $talent)
                             <tr>
                                 <td>
@@ -111,7 +111,10 @@
                                         <input name="talents_id[]" value="{{ $talent -> id }}" type="checkbox" class="checgitkbox border-white border-2" />
                                     </label>
                                 </td>
-                                <td align="center">{{ isset($i) ? ++$i : $i = 1  }}</td>
+                                <td align="center">{{ $count  }}</td>
+                                @php
+                                $count++;
+                                @endphp
                                 <td align="center">{{ $talent -> name }}</td>
                                 <td align="center">{{ $talent -> pendidikanTalent -> description }}</td>
                                 <td align="center">{{ $talent -> keterampilanTalent -> description }}</td>
@@ -132,21 +135,21 @@
                 <div class="sticky bottom-0 pb-1 text-sm bg-darkSecondary flex items-center justify-center w-full">
                     {{ $talents -> links('vendor.pagination.custom-pagination') }}
                 </div>
+        </div>
+        <div class="mt-2 flex justify-between items-center gap-1 md:gap-0">
+            <div>
+                <button type="submit" class=" bg-secondary text-white text-sm text-center py-1 px-3 md:px-14 rounded-md font-bold">
+                    <p class=" hidden md:block">Save</p>
+                    <i class="ri-save-3-line block md:hidden"></i>
+                </button>
             </div>
-            <div class="mt-2 flex justify-between items-center gap-1 md:gap-0">
-                <div>
-                    <button type="submit" class=" bg-secondary text-white text-sm text-center py-1 px-3 md:px-14 rounded-md font-bold">
-                        <p class=" hidden md:block">Save</p>
-                        <i class="ri-save-3-line block md:hidden"></i>
-                    </button>
-                </div>
-                <div>
-                    <a href="{{ route('fetch_training', ['order_id' => $order_id]) }}" class="bg-secondary text-white text-sm text-center py-1 px-2 md:px-14 rounded-md font-bold flex items-center">
-                        <p class="hidden md:block">Continue</p>
-                        <i class="ri-arrow-right-line block md:hidden ml-1"></i>
-                    </a>
-                </div>   
+            <div>
+                <a href="{{ route('fetch_training', ['order_id' => $order_id]) }}" class="bg-secondary text-white text-sm text-center py-1 px-2 md:px-14 rounded-md font-bold flex items-center">
+                    <p class="hidden md:block">Continue</p>
+                    <i class="ri-arrow-right-line block md:hidden ml-1"></i>
+                </a>
             </div>
+        </div>
         </form>
     </div>
 </div>

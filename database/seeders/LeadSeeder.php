@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\M_Leads;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -16,7 +17,7 @@ class LeadSeeder extends Seeder
     {
         $faker = Faker::create();
         foreach (range(1, 10) as $value) {
-            DB::table('leads')->insert([
+            M_Leads::create([
                 'business_name' => $faker->domainName(),
                 'business_sector' => 'IT Support',
                 'address' => $faker->streetName(),

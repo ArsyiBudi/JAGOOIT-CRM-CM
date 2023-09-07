@@ -3,6 +3,7 @@
 use App\Http\Controllers\C_Activity;
 use App\Http\Controllers\C_Auth;
 use App\Http\Controllers\C_Leads;
+use App\Http\Controllers\C_Mail;
 use App\Http\Controllers\C_Offer;
 use App\Http\Controllers\C_Orders;
 use App\Http\Controllers\C_Plan;
@@ -10,6 +11,10 @@ use App\Http\Controllers\PenawaranWordController;
 use App\Http\Controllers\TalentController;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Route;
+
+//? TESTING
+Route::get('/send-email/{email}', [C_Mail::class, 'index']);
+Route::get('/generate-offer/{offer_letter_id}', [C_Plan::class, 'generateWordOffer']);
 
 
 //set active
@@ -87,11 +92,7 @@ Route::middleware('auth')->group(function () {
 
         //?LEADS ACTIVITY
         Route::prefix('/activity')->group(function () {
-            Route::get('/{leads_id}', function () {
-                return view('admin.leads.activity', [
-                    'title' => "Leads | Create Activity"
-                ]);
-            });
+            Route::get('/{leads_id}', [C_Activity::class, 'fetch_activity']);
             Route::post('/{leads_id}/appointment', [C_Activity::class, 'appointment'])->name('activity.appointment');
             Route::post('/{leads_id}/note', [C_Activity::class, 'note'])->name('activity.note');
             Route::post('/{leads_id}/report', [C_Activity::class, 'report'])->name('activity.report');
@@ -107,18 +108,17 @@ Route::middleware('auth')->group(function () {
 
     Route::prefix('client')->group(function () {
         Route::get('/', [C_Leads::class, 'fetch_client'])->name('fetch_client');
+        Route::delete('/{client_id}', [C_Leads::class, 'delete_client'])->name('delete_client');
         Route::get('/detail/{client_id}', [C_Leads::class, 'detail']);
         Route::prefix('order')->group(function () {
             Route::get('/', [C_Orders::class, 'fetch'])->name('fetch_order');
+            Route::delete('/{order_id}', [C_Orders::class, 'delete_order'])->name('delete_order');
+            Route::patch('/{order_id}', [C_Orders::class, 'finish_order'])->name('finish_order');
 
             //?DETAIL ORDER
             Route::prefix('detail') -> group(function(){
                 Route::get('/{order_id}', [C_Orders::class, 'detail'])->name('detail_order');
-                Route::get('/{order_id}/timeline', function () {
-                    return view('admin.client.order.timeline', [
-                        "title" => "Client | Order Timeline",
-                    ]);
-                });
+                Route::get('/{order_id}/timeline', [C_Orders::class, 'timeline']);
             });
 
             //?CREATE ORDER
@@ -129,12 +129,7 @@ Route::middleware('auth')->group(function () {
 
             //?HISTORY ORDER
             Route::prefix('history')->group(function () {
-                Route::get('/', function () {
-                    return view('admin.client.order.history', [
-                        "title" => "Client | Order History",
-                    ]);
-                });
-               
+                Route::get('/', [C_Orders::class, 'fetch_history']);
             });
 
             //?PLAN ORDER
@@ -149,25 +144,21 @@ Route::middleware('auth')->group(function () {
                 //?TRAINING
                 Route::get('/{order_id}/training', [C_Plan::class, 'fetchTraining']) -> name('fetch_training');
                 Route::post('/{order_id}/training', [C_Plan::class, 'saveTraining'])->name('new_offer');
+                Route::post('/{order_id}/training/{order_details_id}', [C_Plan::class, 'saveTraining'])->name('new_offer');
 
                 //?PENAWARAN
                 Route::get('/{order_id}/penawaran', [C_Plan::class, 'openOffer']) -> name('open_offer');
                 Route::put('/{order_id}/penawaran', [C_Plan::class, 'addOfferDetails']) -> name('add_offer_details');
                 Route::post('/{order_id}/penawaran', [C_Plan::class, 'createOffer'])->name('create_offer');
-            
+                Route::patch('/{order_id}/penawaran', [C_Plan::class, 'offer_send']) -> name('send_offer');
+                Route::post('/{order_id}/penawaran/save', [C_Plan::class, 'offer_save']) -> name('save_offer');
+                Route::delete('/{order_id}/penawaran/{offer_job_detail_id}', [C_Plan::class, 'deleteOfferDetails']) -> name('delete_offer_detail');
+
                 //?NEGOSIASI
-                Route::get('/{order_id}/negosiasi', function () {
-                    return view('admin.client.plan.negosiasi', [
-                        "title" => "Plan | Negosiasi",
-                    ]);
-                })->name('fetch_negosisasi');
+                Route::get('/{order_id}/negosiasi', [C_Plan::class, 'fetchNegosiasi']) -> name('fetchNegosiasi');
 
                 //?PERCOBAAN
-                Route::get('/{order_id}/percobaan', function () {
-                    return view('admin.client.plan.percobaan', [
-                        "title" => "Plan | Percobaan",
-                    ]);
-                });
+                Route::get('/{order_id}/percobaan', [C_Plan::class, 'fetchPercobaan']) -> name('fetchPercobaan');
 
                 //?PO & PKS
                 Route::get('/{order_id}/popks',[C_Plan::class, 'fetchPopks']);

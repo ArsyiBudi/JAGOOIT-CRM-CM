@@ -43,7 +43,7 @@
             <div class="flex flex-col text-lightGrey space-y-2">
                 <div class="flex flex-row justify-between">
                     <div class="text-2xl">Detail Order</div>
-                    <a class="bg-secondary rounded-md py-2 px-4 text-sm" href="/client/order/history/detail/timeline">Lihat Timeline</a>
+                    <a class="bg-secondary rounded-md py-2 px-4 text-sm" href="{{ url('/client/order/detail/'. $data -> id . '/timeline') }}">Lihat Timeline</a>
                 </div>
                 <div class="divide-y divide-slate-50 gap-4 flex flex-col">
                     <div class="pt-3">
@@ -69,12 +69,12 @@
                     <div class="pt-3">
                         <p>
                             Aktivitas terakhir : <span class="font-bold">
-                                @if ($data-> leadData ->latestActivity)
+                                @if ($data-> leadData -> hasOneActivity)
                                 @if ($data -> leadData ->latestActivityParams)
-                                {{ $data -> leadData ->latestActivityParams->params_name }}
+                                    {{ $data -> leadData ->latestActivityParams->params_name }}
                                 @endif
                                 @else
-                                -
+                                    -
                                 @endif
                             </span>
                         </p>

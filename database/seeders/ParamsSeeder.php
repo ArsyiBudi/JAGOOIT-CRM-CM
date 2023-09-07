@@ -15,7 +15,7 @@ class ParamsSeeder extends Seeder
     public function run(): void
     {
         $params = array(
-            "Recruitment", "Training", "Penawaran", "Appointment Negoisasi", "Masa Percobaan", "PO Selesai", "PO & PKS Selesai", //order_status
+            "Recruitment", "Training", "Penawaran", "Appointment Negoisasi", "Masa Percobaan", "PO Selesai", "PO & PKS Selesai", "Done", //order_status
             "Appointment", "Notes", "Report", //activity_type
             "New", "Offering", "Interested", "Order" //lead_status
         );

@@ -56,7 +56,7 @@
                     <div class="flex gap-3 items-center justify-start">
                         <p class="text-white text-xs md:text-sm">Show</p>
                         <div class="flex items-center bg-grey rounded-md md:rounded-lg justify-center py-0 md:py-1 w-[40px] md:w-[60px] px-1">
-                            <input type="text" value="{{ old('per_page', $client->perPage()) }}" name="per_page" min="1" class=" text-white w-full text-center bg-transparent outline-none" placeholder="5">
+                            <input type="number" value="{{ old('per_page', $client->perPage()) }}" name="per_page" min="1" class=" text-white w-full text-center bg-transparent outline-none" placeholder="5">
                         </div>
                         <p class="text-white text-xs md:text-sm">entries</p>
                     </div>
@@ -88,20 +88,26 @@
                     </tr>
                 </thead>
                 <tbody>
+                    @php
+                    $count = ($client->currentPage() - 1) * $client->perPage() + 1;
+                    @endphp
                     @foreach($client as $row)
                     <tr class=" odd:bg-grey">
-                        <td align="center" class=" p-4">{{ isset($i) ? ++$i : $i = 1 }}</td>
+                        <td align="center" class=" p-4">{{ $count }}</td>
+                        @php
+                        $count++;
+                        @endphp
                         <td align="center" class=" p-4">{{ $row->business_name }}</td>
                         <td align="center" class=" p-4">{{ $row->address }}</td>
                         <td align="center" class=" p-4">{{ $row->pic_name }}</td>
                         <td align="center" class=" p-4">{{ $row->pic_contact_number }}</td>
                         <td align="center" class=" p-4">
-                            @if ($row->latestActivity)
-                                @if ($row->latestActivityParams)
-                                    {{ $row->latestActivityParams->params_name }}
-                                @endif
+                            @if ($row-> hasOneActivity)
+                            @if ($row->latestActivityParams)
+                            {{ $row->latestActivityParams->params_name }}
+                            @endif
                             @else
-                                -
+                            -
                             @endif
                         </td>
                         <td align="center" class=" p-4">{{ $row->statusParam->params_name }}</td>
@@ -110,7 +116,11 @@
                                 <a href="{{ url('/client/detail/'. $row -> id) }}">
                                     <i class="text-lg cursor-pointer ri-information-line"></i>
                                 </a>
-                                <i class=" text-lg cursor-pointer ri-delete-bin-2-line text-delete"></i>
+                                <form action="{{ route('delete_client', ['client_id' => $row -> id]) }}" method="post" class=" block  mt-3" onsubmit="return confirm('Are you sure you want to delete this lead?')">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class=" text-lg cursor-pointer ri-delete-bin-2-line text-delete"></button>
+                                </form>
                             </div>
                         </td>
                     </tr>
@@ -123,4 +133,22 @@
         </div>
     </div>
 </div>
+
+<script>
+    function deleteLead(id) {
+        if (confirm('Are you sure you want to delete this client?')) {
+            $.ajax({
+                url: `/client/${id}`,
+                type: 'DELETE',
+                success: function(response) {
+                    location.reload();
+                },
+                error: function(error) {
+                    console.log(error);
+                }
+            });
+        }
+    }
+</script>
+
 @endsection
