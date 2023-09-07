@@ -54,7 +54,7 @@
                         @foreach($offer -> offerJobDetails as $data)
                         <div class="bg-white text-black text-opacity-50 text-sm text-center py-1 px-7 rounded-md font-bold flex items-center gap-3">
                             <p>{{ $data->needed_job }} ({{ $data->quantity }})</p>
-                            <form action="{{ url(request() -> path() . '/' . $data -> id) }}" method="post" class=" block  mt-3">
+                            <form action="{{ url(request() -> path() . '/' . $data -> id) }}" method="post" class="mb-0">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="text-lg cursor-pointer ri-delete-bin-2-line text-delete"></button>
@@ -218,7 +218,7 @@
 
 <!--modal outsourcing-->
 <dialog id="my_modal_5" class="modal  text-white">
-    <form action="{{ url(request() -> path()) }}" method="post" class="modal-box bg-grey border-2 border-white w-11/12 max-w-5xl">
+    <form action="{{ url(request() -> path()) }}" method="post" class="modal-box bg-grey border-2 border-white w-11/12 max-w-7xl">
         @csrf
         @method('PUT')
         <table class=" w-full">
@@ -228,14 +228,16 @@
                     <td align="center" class="p-3">Pekerjaan</td>
                     <td align="center" class="p-3">Qty</td>
                     <td align="center" class="p-3">Durasi Kontrak (max 12 bulan)</td>
+                    <td align="center" class="p-3">Price</td>
                 </tr>
             </thead>
             <tbody>
                 <tr class=" bg-[#202020]/50">
-                    <td class=" p-5 mt-2" align="center"><input type="text" name="city_location" id="domisili" placeholder="Domisili" class="bg-white outline-none rounded-md text-black p-2 placeholder:text-[#202020]/50"></td>
+                    <td class=" p-5 mt-2" align="center"><input type="text" name="city_location" id="domisili" placeholder="Kota" class="bg-white outline-none rounded-md text-black p-2 placeholder:text-[#202020]/50"></td>
                     <td class=" p-5" align="center"><input id="dsc" name="needed_job" type="text" class="bg-white outline-none rounded-md text-black p-2 placeholder:text-[#202020]/50" placeholder="Outsourcing IT Support"></td>
                     <td class=" p-5" align="center"><input id="qty" name="quantity" type="number" class="bg-white outline-none rounded-md text-black p-2 placeholder:text-[#202020]/50" placeholder="12"></td>
                     <td class=" p-5" align="center"><input id="lamaKontrak" name="contract_duration" type="number" class="bg-white outline-none rounded-md text-black p-2 placeholder:text-[#202020]/50" placeholder="11 Bulan"></td>
+                    <td class=" p-5" align="center"><input id="price" name="price" type="number" class="bg-white outline-none rounded-md text-black p-2 placeholder:text-[#202020]/50" placeholder="xxxxxxx"></td>
                 </tr>
             </tbody>
         </table>
