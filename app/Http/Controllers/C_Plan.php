@@ -204,6 +204,28 @@ class C_Plan extends Controller
         if ($status) return redirect('/client/order/plan/' . $order_id . '/penawaran/');
     }
 
+    public function addGrade(Request $request, $order_id, $order_details_id)
+    {
+        $field = $request -> validate([
+            'pre_score' => 'required',
+            'post_score' => 'required',
+            'group_score' => 'required',
+            'final_score' => 'required',
+        ]);
+        if(!$field) return response(['error' => 'Please fill all the field']);
+
+        $order_detail = M_OrderDetails::find($order_details_id);
+        if(!$order_detail) return response(['error' => 'orang hitam']);
+        $order_detail -> pre_score = $field['pre_score'];
+        $order_detail -> post_score = $field['post_score'];
+        $order_detail -> group_score = $field['group_score'];
+        $order_detail -> final_score = $field['final_score'];
+        $status = $order_detail -> update();
+        
+        if(!$status) return response(['error' => "data didn't updated"]);
+        return redirect() -> back();
+    } 
+
     //?BELOW ARE USED IN OFFER PLAN
     public function openOffer($order_id)
     {

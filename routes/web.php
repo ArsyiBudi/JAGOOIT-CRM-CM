@@ -144,7 +144,7 @@ Route::middleware('auth')->group(function () {
                 //?TRAINING
                 Route::get('/{order_id}/training', [C_Plan::class, 'fetchTraining']) -> name('fetch_training');
                 Route::post('/{order_id}/training', [C_Plan::class, 'saveTraining'])->name('new_offer');
-                Route::post('/{order_id}/training/{order_details_id}', [C_Plan::class, 'saveTraining'])->name('new_offer');
+                Route::patch('/{order_id}/training/{order_details_id}', [C_Plan::class, 'addGrade'])->name('add_grade');
 
                 //?PENAWARAN
                 Route::get('/{order_id}/penawaran', [C_Plan::class, 'openOffer']) -> name('open_offer');
