@@ -159,6 +159,7 @@ Route::middleware('auth')->group(function () {
 
                 //?PERCOBAAN
                 Route::get('/{order_id}/percobaan', [C_Plan::class, 'fetchPercobaan']) -> name('fetchPercobaan');
+                Route::post('/{order_id}/percobaan',[C_Plan::class, 'savePercobaan']) -> name('savePercobaan');
 
                 //?PO & PKS
                 Route::get('/{order_id}/popks',[C_Plan::class, 'fetchPopks']);

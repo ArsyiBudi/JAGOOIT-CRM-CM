@@ -253,10 +253,14 @@
     <div class="flex gap-4 max-sm:w-full max-sm:justify-between">
         <div></div>
         <div>
+            <form action="{{ url(request() -> path()) }}" method="POST">
+                @csrf
             <button type="submit" name="save" class=" w-full bg-secondary text-white text-sm text-center py-1 px-14 rounded-md font-bold hover:scale-95 duration-200">
                 <p class="hidden md:block">Save</p>
                 <i class="ri-save-line block md:hidden"></i>
             </button>
+            </form>
+            
         </div>
 
         <div>
