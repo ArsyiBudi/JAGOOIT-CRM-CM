@@ -94,7 +94,7 @@
                 </div>
                 <div class="flex-auto flex flex-col">
                     Alamat
-                    <input class="rounded-md text-black p-1 outline-none" type="text" name="employee_address" value="{{ old('employee_address',@$field->employee_address)}}" id="">
+                    <input class="rounded-md bg-white text-black p-1 outline-none" type="text" name="employee_address" value="{{ old('employee_address',@$field->employee_address)}}" id="">
                 </div>
             </div>
 
@@ -106,11 +106,11 @@
                 </div>
                 <div class="flex-auto flex flex-col">
                     Jabatan
-                    <input class="rounded-md text-black p-1 outline-none" type="text" name="client_position" value="{{ old('client_position',@$field->client_position)}}" id="">
+                    <input class="rounded-md bg-white text-black p-1 outline-none" type="text" name="client_position" value="{{ old('client_position',@$field->client_position)}}" id="">
                 </div>
                 <div class="flex-auto flex flex-col">
                     Alamat
-                    <input class="rounded-md text-black p-1 outline-none" type="text" name="client_address" value="{{ old('client_address',@$field->client_address)}}" id="">
+                    <input class="rounded-md bg-white text-black p-1 outline-none" type="text" name="client_address" value="{{ old('client_address',@$field->client_address)}}" id="">
                 </div>
             </div>
 
@@ -144,7 +144,7 @@
                 </div>
                 <div class="flex-auto flex flex-col">
                     <label for="catatan-popks">Catatan</label>
-                    <textarea id="catatan-popks" type="text" class=" text-black rounded-md h-full hide-scrollbar resize-none p-1 outline-none" name="notes" value="{{ old('notes',@$field->notes)}}"></textarea>
+                    <textarea id="catatan-popks" type="text" class=" text-black bg-white rounded-md h-full hide-scrollbar resize-none p-1 outline-none" name="notes" value="{{ old('notes',@$field->notes)}}"></textarea>
                 </div>
             </div>
 
@@ -229,7 +229,7 @@
 
             <div class="flex-auto flex flex-col">
                 <label for="desk-popks">Deskripsi</label>
-                <textarea id="desk-popks" type="text" class="p-1 outline-none rounded-md h-[70px] text-black hide-scrollbar resize-none" name="po_descr"></textarea>
+                <textarea id="desk-popks" type="text" class="p-1 outline-none rounded-md h-[70px] text-black hide-scrollbar resize-none bg-white" name="po_descr"></textarea>
             </div>
 
             <div class="mt-4 flex justify-end">

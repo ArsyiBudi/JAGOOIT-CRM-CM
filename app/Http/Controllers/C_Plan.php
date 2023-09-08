@@ -382,6 +382,35 @@ class C_Plan extends Controller
         return response([
             'end_date' => $selectedDate,
         ]);
+    }   
+
+    public function generateWordPoPks($popks_letter_id)
+    {
+        $popks = M_Popks::find($popks_letter_id);
+
+        // salin ini vv
+        $phpWord = new TemplateProcessor('draft_popks.docx');
+        $phpWord->setValue('client_name', $popks->client_name);
+        $phpWord->setValue('client_position', $popks->client_position);
+        $phpWord->setValue('client_address', $popks->client_address);
+        $phpWord->setValue('employee_name', $popks->employee_name);
+        $phpWord->setValue('employee_position', $popks->employee_position);
+        $phpWord->setValue('employee_address', $popks->employee_address);
+        $phpWord->setValue('start_date', $popks->start_date);
+        $phpWord->setValue('end_date', $popks->end_date);
+        $phpWord->setValue('included_fees', $popks->included_fees);
+        $phpWord->setValue('nominal_fees', $popks->nominal_fees);
+        $phpWord->setValue('weekday_cost', $popks->weekday_cost);
+        $phpWord->setValue('weekend_cost', $popks->weekend_cost);
+        $phpWord->setValue('notes', $popks->notes);
+        $phpWord->setValue('consumption_cost', $popks->consumption_cost);
+        $phpWord->setValue('transportation_cost', $popks->transportation_cost);
+        $phpWord->setValue('billing_due_date', $popks->billing_due_date);
+        $phpWord->setValue('billing_days', $popks->billing_days);
+        $phpWord->setValue('authorized_by', $popks->authorized_by);
+        $phpWord->setValue('account_number', $popks->account_number);
+        $phpWord->setValue('bank_name', $popks->bank_name);
+
     }
 
     public function popks_send(Request $request, $order_id)
