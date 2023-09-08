@@ -119,7 +119,7 @@
                 <div>Dari</div>
                 <input class="rounded-md flex-auto text-black bg-white p-1 outline-none" type="date" name="start_date" value="{{ old('start_date',@$field->start_date)}}" id="">
                 <div>Sampai</div>
-                <input class="rounded-md flex-auto text-black bg-white p-1 outline-none" type="date" name="end_date" value="{{ old('end_date',@$field->end_date)}}" id="">
+                <input class="rounded-md flex-auto text-black bg-white  p-1 outline-none" type="date" name="end_date" value="{{ old('end_date',@$field->end_date)}}" id="">
             </div>
 
             <div class="text-xl mt-7">Biaya Kontrak</div>
