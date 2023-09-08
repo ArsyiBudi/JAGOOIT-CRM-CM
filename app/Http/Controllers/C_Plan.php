@@ -63,8 +63,6 @@ class C_Plan extends Controller
             $replc[] = [
                 'qty' => $detail->quantity,
                 'job' => $detail->needed_job,
-                'city_location' => $detail->city_location,
-                'contract_duration' => $detail->contract_duration,
             ];
         }
         $popks = M_Popks::find($popks_letter_id);
@@ -104,8 +102,6 @@ class C_Plan extends Controller
             'Content-Disposition' => 'attachment; filename="Draft PKS.docx"',
         ];
         return response()->file($tempFilePath, $headers);
-
-  
     }
 
 
@@ -478,7 +474,7 @@ class C_Plan extends Controller
             ]);
         } else {
             $generate = $this->generateWordPopks($order_id, $order->popks_letter_id);
-            if ($status) return $generate;
+            if ($generate) return $generate;
         }
         return redirect()->back();
     }   
