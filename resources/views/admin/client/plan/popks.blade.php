@@ -144,7 +144,7 @@
                 </div>
                 <div class="flex-auto flex flex-col">
                     <label for="catatan-popks">Catatan</label>
-                    <textarea id="catatan-popks" type="text" class=" text-black bg-white rounded-md h-full hide-scrollbar resize-none p-1 outline-none" name="notes" value="{{ old('notes',@$field->notes)}}"></textarea>
+                    <textarea id="catatan-popks" type="text" class=" text-black rounded-md h-full hide-scrollbar resize-none" name="notes" >{{ @$field -> notes }}</textarea>
                 </div>
             </div>
 

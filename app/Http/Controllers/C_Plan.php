@@ -179,8 +179,11 @@ class C_Plan extends Controller
 
     public function fetchPopks($order_id)
     {
+        $order = M_Orders::find($order_id);
+        $popks = M_Popks::find($order -> popks_letter_id);
         return view('admin.client.plan.popks', [
             "title" => "Plan | POPKS",
+            "field" => $popks,
             "order_id" => $order_id,
         ]);
     }
