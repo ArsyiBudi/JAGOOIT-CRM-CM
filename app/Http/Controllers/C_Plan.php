@@ -39,8 +39,11 @@ class C_Plan extends Controller
                 'needed_job' => $detail->needed_job,
                 'city_location' => $detail->city_location,
                 'contract_duration' => $detail->contract_duration,
+                'price_person' => $detail->price,
+                'price_total' => $detail->price * ($detail->contract_duration * $detail->quantity)
             ];
         }
+
         $phpWord->cloneBlock('table_block_placeholder', 0, true, false, $replc);
         $tempFilePath = tempnam(sys_get_temp_dir(), 'Surat_Penawaran');
         $phpWord->saveAs($tempFilePath);
@@ -266,7 +269,8 @@ class C_Plan extends Controller
             'needed_job' => 'required',
             'quantity' => 'required',
             'city_location' => 'required',
-            'contract_duration' => 'required'
+            'contract_duration' => 'required',
+            'price' => 'required'
         ]);
         $order = M_Orders::find($order_id);
         $offer_details = M_OfferLetterJobsDetails::create([
@@ -275,6 +279,7 @@ class C_Plan extends Controller
             'quantity' => $field['quantity'],
             'city_location' => $field['city_location'],
             'contract_duration' => $field['contract_duration'],
+            'price' => $field['price']
         ]);
 
         if (!$offer_details) return response(['error' => "Data didn't created"]);
