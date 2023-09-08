@@ -168,19 +168,20 @@ class C_Plan extends Controller
         return redirect('/client/order/plan/'. $order_id .'/training/');
     }
     
-    public function fetch_training(Request $request, $order_id)
+    public function fetchTraining(Request $request, $order_id)
     {
         $searchQuery = $request->input('search', '');
-        $query = M_Orders::where('id', $order_id);
+        $query = M_OrderDetails::where('order_id', $order_id);
         
         if (!empty($searchQuery)) {
-            $query->whereHas('id', function($q) use ($searchQuery) {
-                $q->where('name', 'LIKE', '%' . $searchQuery . '%');
-            });
+                $query->whereHas('talentData', function($q) use ($searchQuery) {
+                    $q->where('name', 'LIKE', '%' . $searchQuery . '%');
+                });
         }
 
-        $talent = M_Orders::where('id', $order_id)->paginate(5);
+        $talent = $query->paginate(5);
 
+        // print_r($talent);
         return view('admin.client.plan.training', [
             "title" => "Plan | Training",
             "datas" => $talent,
@@ -225,7 +226,7 @@ class C_Plan extends Controller
 
 
 
-    
+
     //?BELOW ARE USED IN RECRUITMENT PLAN
     public function saveRecruitment(Request $request, $order_id)
     {
