@@ -63,8 +63,6 @@ class C_Plan extends Controller
             $replc[] = [
                 'qty' => $detail->quantity,
                 'job' => $detail->needed_job,
-                'city_location' => $detail->city_location,
-                'contract_duration' => $detail->contract_duration,
             ];
         }
         $popks = M_Popks::find($popks_letter_id);
@@ -95,6 +93,7 @@ class C_Plan extends Controller
         $phpWord->setValue('authorized_by', $popks->authorized_by);
         $phpWord->setValue('account_number', $popks->account_number);
         $phpWord->setValue('bank_name', $popks->bank_name);
+        $phpWord->setValue('bank_name', $popks->bank_name);
         $phpWord->cloneBlock('block', 0, true, false, $replc);
 
         $tempFilePath = tempnam(sys_get_temp_dir(), 'DRAFT PKS');
@@ -104,8 +103,6 @@ class C_Plan extends Controller
             'Content-Disposition' => 'attachment; filename="Draft PKS.docx"',
         ];
         return response()->file($tempFilePath, $headers);
-
-  
     }
 
 
@@ -157,12 +154,47 @@ class C_Plan extends Controller
         ]);
     }
 
-    public function fetchTraining($order_id)
+    public function save_recruitment(Request $request, $order_id) 
     {
-        $talent = M_Orders::where('id', $order_id)->paginate(5);
+        $talentIds = $request['talents'];
+
+        foreach ($talentIds as $talentId) {
+            M_OrderDetails::create([
+                'talent_id' => $talentId,
+                'order_id'=> $order_id,
+            ]);
+        }
+
+        return redirect('/client/order/plan/'. $order_id .'/training/');
+    }
+    
+    public function fetchTraining(Request $request, $order_id)
+    {
+        $searchQuery = $request->input('search', '');
+        $query = M_OrderDetails::where('order_id', $order_id);
+        
+        if (!empty($searchQuery)) {
+                $query->whereHas('talentData', function($q) use ($searchQuery) {
+                    $q->where('name', 'LIKE', '%' . $searchQuery . '%');
+                });
+        }
+
+        $talent = $query->paginate(5);
+
+        // print_r($talent);
         return view('admin.client.plan.training', [
             "title" => "Plan | Training",
             "datas" => $talent,
+            "order_id" => $order_id
+        ]);
+    }
+    public function openOffer($order_id)
+    {
+        $order = M_Orders::find($order_id);
+        $offer = M_Offer::find($order->offer_letter_id);
+        return view('admin.client.plan.penawaran', [
+            "title" => "Plan | Penawaran",
+            "offer" => $offer,
             "order_id" => $order_id
         ]);
     }
@@ -185,11 +217,16 @@ class C_Plan extends Controller
 
     public function fetchPopks($order_id)
     {
+        $order = M_Orders::find($order_id);
+        $popks = M_Popks::find($order -> popks_letter_id);
         return view('admin.client.plan.popks', [
             "title" => "Plan | POPKS",
+            "field" => $popks,
             "order_id" => $order_id,
         ]);
     }
+
+
 
 
     //?BELOW ARE USED IN RECRUITMENT PLAN
@@ -254,16 +291,6 @@ class C_Plan extends Controller
     } 
 
     //?BELOW ARE USED IN OFFER PLAN
-    public function openOffer($order_id)
-    {
-        $order = M_Orders::find($order_id);
-        $offer = M_Offer::find($order->offer_letter_id);
-        return view('admin.client.plan.penawaran', [
-            "title" => "Plan | Penawaran",
-            "offer" => $offer,
-            "order_id" => $order_id
-        ]);
-    }
 
     public function addOfferDetails(Request $request, $order_id)
     {
@@ -480,7 +507,7 @@ class C_Plan extends Controller
             ]);
         } else {
             $generate = $this->generateWordPopks($order_id, $order->popks_letter_id);
-            if ($status) return $generate;
+            if ($generate) return $generate;
         }
         return redirect()->back();
     }   

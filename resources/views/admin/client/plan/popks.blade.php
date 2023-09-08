@@ -117,9 +117,9 @@
             <div class="text-xl mt-7">Jangka Waktu Kontrak:</div>
             <div class="flex flex-row flex-wrap gap-2">
                 <div>Dari</div>
-                <input class="rounded-md flex-auto text-black bg-white p-1 outline-none" type="text" name="start_date" value="{{ old('start_date',@$field->start_date)}}" id="">
+                <input class="rounded-md flex-auto text-black bg-white p-1 outline-none" type="date" name="start_date" value="{{ old('start_date',@$field->start_date)}}" id="">
                 <div>Sampai</div>
-                <input class="rounded-md flex-auto text-black bg-white p-1 outline-none" type="text" name="end_date" value="{{ old('end_date',@$field->end_date)}}" id="">
+                <input class="rounded-md flex-auto text-black bg-white p-1 outline-none" type="date" name="end_date" value="{{ old('end_date',@$field->end_date)}}" id="">
             </div>
 
             <div class="text-xl mt-7">Biaya Kontrak</div>
@@ -144,7 +144,7 @@
                 </div>
                 <div class="flex-auto flex flex-col">
                     <label for="catatan-popks">Catatan</label>
-                    <textarea id="catatan-popks" type="text" class=" text-black bg-white rounded-md h-full hide-scrollbar resize-none p-1 outline-none" name="notes" value="{{ old('notes',@$field->notes)}}"></textarea>
+                    <textarea id="catatan-popks" type="text" class=" text-black rounded-md h-full hide-scrollbar resize-none" name="notes" >{{ @$field -> notes }}</textarea>
                 </div>
             </div>
 
