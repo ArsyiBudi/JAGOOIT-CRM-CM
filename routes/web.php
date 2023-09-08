@@ -144,7 +144,7 @@ Route::middleware('auth')->group(function () {
                 //?TRAINING
                 Route::get('/{order_id}/training', [C_Plan::class, 'fetchTraining']) -> name('fetch_training');
                 Route::post('/{order_id}/training', [C_Plan::class, 'saveTraining'])->name('new_offer');
-                Route::post('/{order_id}/training/{order_details_id}', [C_Plan::class, 'saveTraining'])->name('new_offer');
+                Route::patch('/{order_id}/training/{order_details_id}', [C_Plan::class, 'addGrade'])->name('add_grade');
 
                 //?PENAWARAN
                 Route::get('/{order_id}/penawaran', [C_Plan::class, 'openOffer']) -> name('open_offer');
@@ -159,6 +159,7 @@ Route::middleware('auth')->group(function () {
 
                 //?PERCOBAAN
                 Route::get('/{order_id}/percobaan', [C_Plan::class, 'fetchPercobaan']) -> name('fetchPercobaan');
+                Route::post('/{order_id}/percobaan',[C_Plan::class, 'savePercobaan']) -> name('savePercobaan');
 
                 //?PO & PKS
                 Route::get('/{order_id}/popks',[C_Plan::class, 'fetchPopks']);
