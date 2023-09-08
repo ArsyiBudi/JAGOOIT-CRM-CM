@@ -94,12 +94,6 @@ class C_Plan extends Controller
         $phpWord->setValue('bank_name', $popks->bank_name);
         $phpWord->cloneBlock('block', 0, true, false, $replc);
 
-        // return response([
-        //     "Busines name" => $popks -> leadData -> business_name,
-        //     "Perbedaan bulan" => $months,
-        //     "replc" => $replc
-        // ]);
-
         $tempFilePath = tempnam(sys_get_temp_dir(), 'DRAFT PKS');
         $phpWord->saveAs($tempFilePath);
         $headers = [
@@ -242,20 +236,12 @@ class C_Plan extends Controller
 
     public function addGrade(Request $request, $order_id, $order_details_id)
     {
-        $field = $request -> validate([
-            'pre_score' => 'required',
-            'post_score' => 'required',
-            'group_score' => 'required',
-            'final_score' => 'required',
-        ]);
-        if(!$field) return response(['error' => 'Please fill all the field']);
-
         $order_detail = M_OrderDetails::find($order_details_id);
         if(!$order_detail) return response(['error' => 'orang hitam']);
-        $order_detail -> pre_score = $field['pre_score'];
-        $order_detail -> post_score = $field['post_score'];
-        $order_detail -> group_score = $field['group_score'];
-        $order_detail -> final_score = $field['final_score'];
+        $order_detail -> pre_score = $request -> pre_score;
+        $order_detail -> post_score = $request -> post_score;
+        $order_detail -> group_score = $request -> group_score;
+        $order_detail -> final_score = $request -> final_score;
         $status = $order_detail -> update();
         
         if(!$status) return response(['error' => "data didn't updated"]);
@@ -481,14 +467,15 @@ class C_Plan extends Controller
         $popks -> client_director = $field['client_director'];
         $status = $popks -> save();
 
-    
-
-        $currentTimestamp = time();
-        $selectedDate = new DateTime();
-        $selectedDate->setTimestamp($currentTimestamp);
-        return response([
-            'end_date' => $selectedDate,
-        ]);
+        if (!$status) {
+            return response([
+                'error' => "Data didn't updated"
+            ]);
+        } else {
+            $generate = $this->generateWordPopks($order_id, $order->popks_letter_id);
+            if ($status) return $generate;
+        }
+        return redirect()->back();
     }   
 
 
