@@ -45,7 +45,7 @@
 <div class="pt-20 pb-2 lg:pt-0">
 </div>
 <div class="overflow-auto bg-darkSecondary lg:pt-0 h-[90vh] rounded-md">
-    <div class="w-full px-8 flex flex-col">
+    <div class="w-full bg-darkSecondary px-8 flex flex-col">
         <div class="pt-10 bg-darkSecondary">
             <div class="border-b border-white w-full pb-3 mb-3">
                 <h3 class="text-white font-semibold text-3xl">Data Clients</h3>

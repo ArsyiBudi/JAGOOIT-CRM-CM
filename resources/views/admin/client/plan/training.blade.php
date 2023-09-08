@@ -78,10 +78,10 @@
     </div>
 
     <div class=" mt-5">
-        <form action="">
+        <form action="{{ url(request() -> path()) }}" method="get">
             <div class=" block md:flex justify-between">
                 <div class=" relative w-full md:w-auto">
-                    <input type="text" name="search"  class=" bg-[#D9D9D9] outline-none rounded-md text-black py-1  px-8 w-full md:w-auto" placeholder="Search">
+                    <input type="text" name="search" value="{{ old('search', session('talent_search')) }}" class=" bg-[#D9D9D9] outline-none rounded-md text-black py-1  px-8 w-full md:w-auto" placeholder="Search">
                     <i class="ri-search-line absolute top-1 left-2 text-black"></i>
                 </div>
             </div>
@@ -105,46 +105,56 @@
                     </thead>
                     <tbody>
                         <div>
-                            @foreach($datas as $data)
-                            @if($data -> talentData)
-                            <tr data-row="{{ $data->id }}">
-                                <form action="{{ url(request() -> path() . '/' . $data -> id) }}" method="post">
-                                    @csrf
-                                    @method('PATCH')
-                                    <th align="center">{{ isset($i) ? ++$i : $i = 1  }}</th>
-                                    <td align="center">{{ $data -> talentData -> name}}</td>
-                                    <td align="center">
-                                        <div class="w-[86px] h-[27px] rounded-md bg-white flex items-center justify-center">
-                                            <input id='pre-test' name='pre_score' type="number" value="{{ old('pre_score', @$data -> pre_score) }}" class='text-black w-full text-center outline-none bg-transparent' placeholder='nilai'>
-                                        </div>
-                                    </td>
-                                    <td align="center">
-                                        <div class="w-[86px] h-[27px] rounded-md bg-white flex items-center justify-center">
-                                            <input id='post-test' name='post_score' type="number" value="{{ old('pre_score', @$data -> post_score) }}" class='text-black w-full text-center outline-none bg-transparent' placeholder='nilai'>
-                                        </div>
-                                    </td>
-                                    <td align="center">
-                                        <div class="w-[86px] h-[27px] rounded-md bg-white flex items-center justify-center">
-                                            <input id='nilai-kelompok' name='group_score' type="number" value="{{ old('pre_score', @$data -> group_score) }}" class='text-black w-full text-center outline-none bg-transparent' placeholder='nilai'>
-                                        </div>
-                                    </td align="center">
-                                    <td align="center">
-                                        <div class="w-[86px] h-[27px] rounded-md bg-white flex items-center justify-center">
-                                            <input id='nilai-akhir' name='final_score' type="number" value="{{ old('pre_score', @$data -> final_score) }}" class='text-black w-full text-center outline-none bg-transparent' placeholder='nilai'>
-                                        </div>
-                                    </td>
-                                    <td align="center">
-                                        <div class="w-[86px] h-[27px] rounded-md bg-white flex items-center justify-center">
-                                            <input disabled id='rata-rata' name='average_score' type="number" value="{{ old('average_score', ($data->pre_score + $data->post_score + $data->group_score + $data->final_score) / 4) }}" class='text-black w-full text-center outline-none bg-transparent' placeholder='0'>
-                                        </div>
-                                    </td>
-                                    <td align="center"><input type="submit" class="bg-secondary text-white rounded-md w-[82px] h-[25px]"></td>
-                                </form>
-                            </tr>
+                            @php
+                            $count = ($datas->currentPage() - 1) * $datas->perPage() + 1;
+                            @endphp
+                            @if ($datas->isEmpty())
+                            <p>No data available.</p>
                             @else
-                            No Talent Data
+                                @foreach($datas as $data)
+                                @if($data -> talentData)
+                                <tr data-row="{{ $data->id }}">
+                                    <form action="{{ url(request() -> path() . '/' . $data -> id) }}" method="post">
+                                        @csrf
+                                        @method('PATCH')
+                                        <th align="center">{{ $count  }}</th>
+                                        @php
+                                        $count++;
+                                        @endphp
+                                        <td align="center">{{ $data -> talentData -> name}}</td>
+                                        <td align="center">
+                                            <div class="w-[86px] h-[27px] rounded-md bg-white flex items-center justify-center">
+                                                <input id='pre-test' name='pre_score' type="number" value="{{ old('pre_score', @$data -> pre_score) }}" class='text-black w-full text-center outline-none bg-transparent' placeholder='nilai'>
+                                            </div>
+                                        </td>
+                                        <td align="center">
+                                            <div class="w-[86px] h-[27px] rounded-md bg-white flex items-center justify-center">
+                                                <input id='post-test' name='post_score' type="number" value="{{ old('pre_score', @$data -> post_score) }}" class='text-black w-full text-center outline-none bg-transparent' placeholder='nilai'>
+                                            </div>
+                                        </td>
+                                        <td align="center">
+                                            <div class="w-[86px] h-[27px] rounded-md bg-white flex items-center justify-center">
+                                                <input id='nilai-kelompok' name='group_score' type="number" value="{{ old('pre_score', @$data -> group_score) }}" class='text-black w-full text-center outline-none bg-transparent' placeholder='nilai'>
+                                            </div>
+                                        </td align="center">
+                                        <td align="center">
+                                            <div class="w-[86px] h-[27px] rounded-md bg-white flex items-center justify-center">
+                                                <input id='nilai-akhir' name='final_score' type="number" value="{{ old('pre_score', @$data -> final_score) }}" class='text-black w-full text-center outline-none bg-transparent' placeholder='nilai'>
+                                            </div>
+                                        </td>
+                                        <td align="center">
+                                            <div class="w-[86px] h-[27px] rounded-md bg-white flex items-center justify-center">
+                                                <input disabled id='rata-rata' name='average_score' type="number" value="{{ old('average_score', ($data->pre_score + $data->post_score + $data->group_score + $data->final_score) / 4) }}" class='text-black w-full text-center outline-none bg-transparent' placeholder='0'>
+                                            </div>
+                                        </td>
+                                        <td align="center"><input type="submit" class="bg-secondary text-white rounded-md w-[82px] h-[25px] cursor-pointer"></td>
+                                    </form>
+                                </tr>
+                                @else
+                                No Talent Data
+                                @endif
+                                @endforeach
                             @endif
-                            @endforeach
                         </div>
                     </tbody>
                 </table>
@@ -157,7 +167,7 @@
         <div class="mt-2 flex justify-between items-center gap-1 md:gap-0">
             <div>
                 <div>
-                    <a href="{{ url('/client/order/plan/'. $order_id . '/recruitment') }}" class="bg-secondary text-white text-sm text-center py-1 px-2 md:px-14 rounded-md font-bold flex items-center hover:scale-95 duration-200">
+                    <a href="{{ url('/client/order/plan/'. $order -> id . '/recruitment') }}" class="bg-secondary text-white text-sm text-center py-1 px-2 md:px-14 rounded-md font-bold flex items-center hover:scale-95 duration-200">
                         <p class="hidden md:block">Back</p>
                         <i class="ri-arrow-left-line block md:hidden ml-1"></i>
                     </a>
@@ -166,8 +176,7 @@
             </div>
             <div class="flex gap-4 max-sm:w-full max-sm:justify-between">
                 <div></div>
-                @foreach($datas as $data)
-                @if($data -> talentData)
+                @if($order -> hasOneTalent)
                 <div>
                     <form action="{{ url(request() -> path()) }}" method="POST">
                         @csrf
@@ -179,8 +188,8 @@
                 </div>
 
                 <div>
-                    @if($data -> offer_letter_id)
-                    <form method="get" action="{{ route('open_offer', ['order_id' => $data -> id]) }}">
+                    @if($order -> offer_letter_id)
+                    <form method="get" action="{{ route('open_offer', ['order_id' => $order -> id]) }}">
                         <button>
                             <div class=" bg-secondary text-white text-sm text-center py-1 px-3 md:px-14 rounded-md font-bold hover:scale-95 duration-200">
                                 <p class="hidden md:inline">Continue</p>
@@ -192,7 +201,6 @@
                     @else
                     Please pick one talent
                     @endif
-                    @endforeach
                 </div>
             </div>
         </div>

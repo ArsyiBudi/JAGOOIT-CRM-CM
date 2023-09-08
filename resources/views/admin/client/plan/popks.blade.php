@@ -82,7 +82,7 @@
 
         <div class="overflow-auto bg-darkSecondary mt-5 justify-between flex flex-col text-white px-8 py-10 rounded-md gap-y-3">
 
-            <div class="text-xl">JagoIT:</div>
+            <div class="text-xl">JagooIT:</div>
             <div class="flex flex-row flex-wrap gap-2">
                 <div class="flex-auto flex flex-col">
                     Nama
@@ -144,7 +144,7 @@
                 </div>
                 <div class="flex-auto flex flex-col">
                     <label for="catatan-popks">Catatan</label>
-                    <textarea id="catatan-popks" type="text" class=" text-black rounded-md h-full hide-scrollbar resize-none" name="notes" >{{ @$field -> notes }}</textarea>
+                    <textarea id="catatan-popks" type="text" class=" text-black rounded-md h-full hide-scrollbar resize-none" name="notes" >@if($field -> notes){{ $field -> notes }}@endif</textarea>
                 </div>
             </div>
 
