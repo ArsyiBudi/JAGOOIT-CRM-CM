@@ -124,7 +124,6 @@
                                         <a href="/client/plan/create/recruitment">
                                             <i class=" text-lg cursor-pointer ri-information-line"></i>
                                         </a>
-                                        <i class=" text-lg cursor-pointer ri-delete-bin-2-line text-delete"></i>
                                     </div>
                                 </td>
                             </tr>
