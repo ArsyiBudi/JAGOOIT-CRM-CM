@@ -139,7 +139,7 @@
                                             <input disabled id='rata-rata' name='average_score' type="number" value="{{ old('average_score', ($row->pre_score + $row->post_score + $row->group_score + $row->final_score) / 4) }}" class='text-black w-full text-center outline-none bg-transparent' placeholder='0'>
                                         </div>
                                     </td>
-                                    <td align="center"><input type="submit" class="bg-secondary text-white rounded-md w-[82px] h-[25px]"></td>
+                                    <td align="center"><input type="submit" class="bg-secondary text-white rounded-md w-[82px] h-[25px] cursor-pointer"></td>
                                 </form>
                             </tr>
                             @endforeach

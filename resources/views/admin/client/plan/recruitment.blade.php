@@ -108,7 +108,7 @@
                             <tr>
                                 <td>
                                     <label>
-                                        <input name="talents_id[]" value="{{ $talent -> id }}" type="checkbox" class="checgitkbox border-white border-2" />
+                                        <input name="talents_id[]" value="{{ $talent -> id }}" type="checkbox" class="checkbox border-white border-2" />
                                     </label>
                                 </td>
                                 <td align="center">{{ $count  }}</td>
@@ -124,7 +124,6 @@
                                         <a href="/client/plan/create/recruitment">
                                             <i class=" text-lg cursor-pointer ri-information-line"></i>
                                         </a>
-                                        <i class=" text-lg cursor-pointer ri-delete-bin-2-line text-delete"></i>
                                     </div>
                                 </td>
                             </tr>
