@@ -82,9 +82,15 @@
                     </tr>
                 </thead>
                 <tbody>
+                    @php
+                    $count = ($order->currentPage() - 1) * $order->perPage() + 1;
+                    @endphp
                     @foreach($order as $row)
                     <tr class=" odd:bg-grey">
-                        <td align="center" class=" p-4">{{ isset($i) ? ++$i : $i = 1 }}</td>
+                        <td align="center" class=" p-4">{{ $count }}</td>
+                        @php
+                        $count++;
+                        @endphp
                         <td align="center" class=" p-4">{{ $row -> id  }}</td>
                         <td align="center" class=" p-4">{{ $row -> leadData -> business_name }}</td>
                         <td align="center" class=" p-4">{{ $row -> due_date }}</td>
@@ -93,14 +99,22 @@
                         </td>
                         <td align="center" class=" p-4">
                             <div class=" flex justify-center items-center gap-2">
-                                <i class="ri-checkbox-circle-line text-2xl cursor-pointer" title="Complete Manual"></i>
-                                <a href="{{ route('fetch_recruitment', ['order_id' => $row -> id]) }}">
+                                <form action="{{ route('finish_order', ['order_id' => $row -> id]) }}" method="post" class=" block  mt-3">
+                                    @csrf
+                                    @method('patch')
+                                    <button type="submit" class="ri-checkbox-circle-line text-2xl cursor-pointer" title="Complete Manual"></button>
+                                </form>
+                                <a href="{{ route('handle_plan', ['order_id' => $row -> id]) }}">
                                     <i class="ri-calendar-todo-fill text-2xl" title="Plan"></i>
                                 </a>
                                 <a href="{{ route('detail_order', ['order_id' => $row -> id]) }}">
                                     <i class="ri-information-line text-2xl" title="Detail"></i>
                                 </a>
-                                <i class="ri-delete-bin-2-line text-2xl text-delete cursor-pointer" title="Delete"></i>
+                                <form action="{{ route('delete_order', ['order_id' => $row -> id]) }}" method="post" class=" block  mt-3">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="ri-delete-bin-2-line text-2xl text-delete cursor-pointer" title="Delete"></button>
+                                </form>
                             </div>
                         </td>
                     </tr>
@@ -117,4 +131,4 @@
 
         </div>
     </div>
-@endsection
+    @endsection

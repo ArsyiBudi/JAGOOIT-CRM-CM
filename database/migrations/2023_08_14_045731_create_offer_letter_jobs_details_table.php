@@ -18,6 +18,7 @@ return new class extends Migration
             $table->integer('quantity');
             $table->string('city_location');
             $table->integer('contract_duration');
+            $table->timestamps();
         });
     }
 

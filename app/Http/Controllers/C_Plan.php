@@ -9,35 +9,113 @@ use App\Models\M_Orders;
 use App\Models\M_Popks;
 use App\Models\M_Talents;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Nette\Utils\DateTime;
 use PhpOffice\PhpWord\TemplateProcessor;
 
 class C_Plan extends Controller
 {
+    //?BELOW ARE USED FOR GENERATING WORD FILE
+    public function generateWordOffer($offer_letter_id)
+    {
+        $offer = M_Offer::find($offer_letter_id);
+        $phpWord = new TemplateProcessor('template.docx');
+        $phpWord->setValue('no_surat', $offer->letter_number);
+        $phpWord->setValue('perihal', $offer->offer_subject);
+        $phpWord->setValue('kepada', $offer->recipient_name);
+        $phpWord->setValue('tempat', $offer->location);
+        $phpWord->setValue('tanggal', $offer->date);
+        $phpWord->setValue('ditawarkan', $offer->context);
+        $phpWord->setValue('jumlahTalent', $offer->talent_total);
+        $phpWord->setValue('weekday', $offer->weekday_cost);
+        $phpWord->setValue('weekend', $offer->weekend_cost);
+        $phpWord->setValue('konsumsi', $offer->consumption_cost);
+        $phpWord->setValue('transPP', $offer->transportation_cost);
+        $replc = [];
+        foreach ($offer->offerJobDetails as $detail) {
+            $replc[] = [
+                'quantity' => $detail->quantity,
+                'needed_job' => $detail->needed_job,
+                'city_location' => $detail->city_location,
+                'contract_duration' => $detail->contract_duration,
+            ];
+        }
+        $phpWord->cloneBlock('table_block_placeholder', 0, true, false, $replc);
+        $tempFilePath = tempnam(sys_get_temp_dir(), 'Surat_Penawaran');
+        $phpWord->saveAs($tempFilePath);
+        $headers = [
+            'Content-Type' => 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+            'Content-Disposition' => 'attachment; filename="Surat_Penawaran.docx"',
+        ];
+        return response()->file($tempFilePath, $headers);
+    }
+
+    public function generateWordPopks($order_id ,$popks_letter_id)
+    {
+        $order = M_Orders::find($order_id);
+        $offer = M_Offer::find($order -> offer_letter_id);
+        $replc = [];
+        foreach ($offer->offerJobDetails as $detail) {
+            $replc[] = [
+                'quantity' => $detail->quantity,
+                'needed_job' => $detail->needed_job,
+                'city_location' => $detail->city_location,
+                'contract_duration' => $detail->contract_duration,
+            ];
+        }
+        $popks = M_Popks::find($popks_letter_id);
+        $toDate = Carbon::parse($popks -> end_date);
+        $fromDate = Carbon::parse($popks -> start_date);
+        $months = $toDate->diffInMonths($fromDate);
+        return response([
+            "Busines name" => $popks -> leadData -> business_name,
+            "Perbedaan bulan" => $months,
+            "replc" => $replc
+        ]);
+  
+    }
+
+
+    //?BELOW ARE USED FOR HANDLING PLAN ROUTES
+    public function handlePlanRoute($order_id)
+    {
+        $selectedTimestamp = time();
+        $selectedDate = new DateTime();
+        $selectedDate->setTimestamp($selectedTimestamp);
+
+        $order = M_Orders::find($order_id);
+        if (is_null($order->start_recruitment)) {
+            $order->start_recruitment = $selectedDate;
+            $order->save();
+        }
+        $routes = ['', 'recruitment', 'training', 'penawaran', 'negosiasi', 'percobaan', 'popks', 'popks', ''];
+        return redirect("/client/order/plan/$order_id/{$routes[$order->order_status]}");
+    }
+
     //?BELOW ARE TO FETCH A DATA
     public function fetchRecruitment(Request $request, $order_id)
     {
         $perPage = $request->input('per_page', 5);
         $search = $request->input('search', '');
-    
+
         session(['talent_per_page' => $perPage]);
         session(['talent_search' => $search]);
 
         $entries = session('talent_per_page', 5);
         $search = session('talent_search', '');
 
-        $talent = M_Talents::where(function($query) use ($search){
-            $query -> where('name', 'like', "%$search%");
-        })
-        ->orWhereHas('posisiTalent',function($query) use ($search){
-            $query -> where('description', 'like', "%$search%");
-        }) 
-        ->orWhereHas('keterampilanTalent',function($query) use ($search){
-            $query -> where('description', 'like', "%$search%");
-        }) 
-        ->orWhereHas('pendidikanTalent',function($query) use ($search){
-            $query -> where('description', 'like', "%$search%");
-        })->paginate($entries);
+        $talent = M_Talents::where(function ($query) use ($search) {
+            $query->where('name', 'like', "%$search%")
+                ->orWhereHas('posisiTalent', function ($query) use ($search) {
+                    $query->where('description', 'like', "%$search%");
+                })
+                ->orWhereHas('keterampilanTalent', function ($query) use ($search) {
+                    $query->where('description', 'like', "%$search%");
+                })
+                ->orWhereHas('pendidikanTalent', function ($query) use ($search) {
+                    $query->where('description', 'like', "%$search%");
+                });
+        })->where('is_active', '=', '0')->paginate($entries);
 
         return view('admin.client.plan.recruitment', [
             "title" => "Plan | Recruitment",
@@ -76,45 +154,109 @@ class C_Plan extends Controller
         return view('admin.client.plan.training', [
             "title" => "Plan | Training",
             "datas" => $talent,
+            "order_id" => $order_id
+        ]);
+    }
+    public function fetchNegosiasi($order_id)
+    {
+        return view('admin.client.plan.negosiasi', [
+            "title" => "Plan | Negosiasi",
             "order_id" => $order_id,
-            "searchQuery" => $searchQuery
         ]);
     }
+    public function fetchPercobaan($order_id)
+    {
+        return view('admin.client.plan.percobaan', [
+            "title" => "Plan | Percobaan",
+            "order_id" => $order_id,
+        ]);
+    }
+
+    public function fetchPopks($order_id)
+    {
+        return view('admin.client.plan.popks', [
+            "title" => "Plan | POPKS",
+            "order_id" => $order_id,
+        ]);
+    }
+
+
+
     
-    // BELOW IS USED FOR SEARCH
-    public function search($order_id){
-        $searchQuery = $request->input('query');
-        $talent = M_Talents::where('name', 'like', '%' . $searchQuery . '%')
-            ->orWhere('skills', 'like', '%' . $searchQuery . '%')
-            ->orWhere('description', 'like', '%' . $searchQuery . '%')
-            ->get();
+    //?BELOW ARE USED IN RECRUITMENT PLAN
+    public function saveRecruitment(Request $request, $order_id)
+    {
+        $selectedTimestamp = time();
+        $selectedDate = new DateTime();
+        $selectedDate->setTimestamp($selectedTimestamp);
+        $updateOrder = M_Orders::find($order_id);
+        $updateOrder ->order_status = 2;
+        
+        foreach ($request->talents_id as $talent_id) {
+            M_OrderDetails::create([
+                'talent_id' => $talent_id,
+                'order_id' => $order_id
+            ]);
+            $update = M_Talents::find($talent_id);
+            $update->is_active = 1;
+            $update->save();
+        }
 
-        return view('admin.client.plan.recruitment', [
-            "title" => "Plan | Recruitment",
-            'talents' => $talent
-        ]);
-
+        if (is_null($updateOrder->end_recruitment) && is_null($updateOrder->start_training)) {
+            $updateOrder->end_recruitment = $selectedDate;
+            $updateOrder->start_training = $selectedDate;
+        }
+        $updateOrder->save();
+        return redirect('/client/order/plan/' . $order_id . '/training/');
     }
 
 
-
-
-
-    //?BELOW ARE USED IN OFFER PLAN
+    //?BELOW ARE USED IN TRAINING PLAN
     public function saveTraining($order_id)
     {
+        $selectedTimestamp = time();
+        $selectedDate = new DateTime();
+        $selectedDate->setTimestamp($selectedTimestamp);
+
         $offer = M_Offer::create();
         $update = M_Orders::find($order_id);
-        $update -> offer_letter_id = $offer -> id;
-        $update -> order_status = 2;
-        $status = $update -> update();
-        if($status) return redirect('/client/order/plan/'. $order_id .'/penawaran/');
+        $update->offer_letter_id = $offer->id;
+        $update->order_status = 3;
+        if (is_null($update->end_training) && is_null($update->start_offer)) {
+            $update->end_training = $selectedDate;
+            $update->start_offer = $selectedDate;
+        }
+        $status = $update->update();
+        if ($status) return redirect('/client/order/plan/' . $order_id . '/penawaran/');
     }
 
+    public function addGrade(Request $request, $order_id, $order_details_id)
+    {
+        $field = $request -> validate([
+            'pre_score' => 'required',
+            'post_score' => 'required',
+            'group_score' => 'required',
+            'final_score' => 'required',
+        ]);
+        if(!$field) return response(['error' => 'Please fill all the field']);
+
+        $order_detail = M_OrderDetails::find($order_details_id);
+        if(!$order_detail) return response(['error' => 'orang hitam']);
+        $order_detail -> pre_score = $field['pre_score'];
+        $order_detail -> post_score = $field['post_score'];
+        $order_detail -> group_score = $field['group_score'];
+        $order_detail -> final_score = $field['final_score'];
+        $status = $order_detail -> update();
+        
+        if(!$status) return response(['error' => "data didn't updated"]);
+        return redirect() -> back();
+    } 
+
+    //?BELOW ARE USED IN OFFER PLAN
     public function openOffer($order_id)
     {
         $order = M_Orders::find($order_id);
-        $offer = M_Offer::find($order -> offer_letter_id);
+        $offer = M_Offer::find($order->offer_letter_id);
         return view('admin.client.plan.penawaran', [
             "title" => "Plan | Penawaran",
             "offer" => $offer,
@@ -124,7 +266,7 @@ class C_Plan extends Controller
 
     public function addOfferDetails(Request $request, $order_id)
     {
-        $field = $request -> validate([
+        $field = $request->validate([
             'needed_job' => 'required',
             'quantity' => 'required',
             'city_location' => 'required',
@@ -132,20 +274,32 @@ class C_Plan extends Controller
         ]);
         $order = M_Orders::find($order_id);
         $offer_details = M_OfferLetterJobsDetails::create([
-            'offer_letters_id' => $order -> offer_letter_id,
+            'offer_letters_id' => $order->offer_letter_id,
             'needed_job' => $field['needed_job'],
             'quantity' => $field['quantity'],
             'city_location' => $field['city_location'],
             'contract_duration' => $field['contract_duration'],
         ]);
 
-        if(!$offer_details) return response(['error' => "Data didn't created"]);
-        return redirect('open_offer');
+        if (!$offer_details) return response(['error' => "Data didn't created"]);
+        return redirect()->back();
+    }
+
+    public function deleteOfferDetails($order_id, $offer_job_detail_id)
+    {
+        $delete = M_OfferLetterJobsDetails::find($offer_job_detail_id);
+        $delete->delete();
+        return redirect()->back();
     }
 
     public function createOffer(Request $request, $order_id)
     {
-        $order = M_Orders::find($order_id);
+        $selectedTimestamp = time();
+        $selectedDate = new DateTime();
+        $selectedDate->setTimestamp($selectedTimestamp);
+        $selectedMonth = $selectedDate->format('m');
+        $selectedYear = $selectedDate->format('Y');
+
         $input = $request->validate([
             'offer_subject' => 'required',
             'recipient_name' => 'required',
@@ -160,80 +314,106 @@ class C_Plan extends Controller
         ]);
         if (!$input) return response(['error' => 'error'], 404);
 
+        $order = M_Orders::find($order_id);
+        $offer = M_Offer::find($order->offer_letter_id);
+        if (!$offer) return response([
+            'error' => "No offer has this id: $order -> offer_letter_id"
+        ]);
+
+        $offer->letter_number = "JTI/{$selectedMonth}/SP/{$selectedYear}";
+        $offer->offer_subject = $input['offer_subject'];
+        $offer->recipient_name = $input['recipient_name'];
+        $offer->location = $input['location'];
+        $offer->date = $input['date'];
+        $offer->context = $input['context'];
+        $offer->talent_total = $input['talent_total'];
+        $offer->weekday_cost = $input['weekday_cost'];
+        $offer->weekend_cost = $input['weekend_cost'];
+        $offer->consumption_cost = $input['consumption_cost'];
+        $offer->transportation_cost = $input['transportation_cost'];
+        $status = $offer->save();
+        if (!$status) {
+            return response([
+                'error' => "Data didn't updated"
+            ]);
+        } else {
+            $status = $this->generateWordOffer($order->offer_letter_id);
+            if ($status) return $status;
+        }
+        return redirect()->back();
+    }
+
+    public function offer_send(Request $request, $order_id)
+    {
+        $field = $request->validate([
+            'cv_file' => 'required',
+            'cv_desc' => 'required',
+        ]);
+        if (!$field) return response([
+            'error' => 'error'
+        ]);
+        $offer = M_Orders::find($order_id);
+        $offer->cv_file = $field['cv_file'];
+        $offer->cv_description = $field['cv_desc'];
+        $status = $offer->update();
+        if (!$status) {
+            return response([
+                'error' => "data didn't updated"
+            ]);
+        }
+        return redirect()->back();
+    }
+
+    public function offer_save($order_id)
+    {
+        $currentTimestamp = time();
+        $selectedDate = new DateTime();
+        $selectedDate->setTimestamp($currentTimestamp);
+
+        $offer = M_Offer::create();
+        $update = M_Orders::find($order_id);
+        $update->offer_letter_id = $offer->id;
+        $update->order_status = 3;
+        $update->end_offer = $selectedDate;
+        $update->start_appointment = $selectedDate;
+        $status = $update->update();
+        if ($status) return redirect('/client/order/plan/' . $order_id . '/negosiasi');
+    }
+
+    //?NEGOSIASI CONTROLLER CODE
+
+
+
+    //?PERCOBAAN CONTROLLER CODE
+    public function savePercobaan($order_id){
+        $selectedTimestamp = time();
+        $selectedDate = new DateTime();
+        $selectedDate->setTimestamp($selectedTimestamp);
+
+
+        $popks = M_Popks::create();
+        $update = M_Orders::find($order_id);
+        $update->popks_letter_id = $popks->id;
+        $update->order_status = 5;
+        if (is_null($update->end_probation) && is_null($update->start_popks)) {
+            $update->end_probation = $selectedDate;
+            $update->start_popks = $selectedDate;
+        }
+        $status = $update->update();
+        if ($status) return redirect('/client/order/plan/' . $order_id . '/popks/');
+    }
+
+
+    //?POPKS CONTROLLER CODE
+    public function popks_create(Request $request, $order_id)
+    {
+
         $selectedTimestamp = time();
         $selectedDate = new DateTime();
         $selectedDate->setTimestamp($selectedTimestamp);
         $selectedMonth = $selectedDate->format('m');
         $selectedYear = $selectedDate->format('Y');
 
-        $findid = M_Offer::find($order -> offer_letter_id);
-        if(!$findid) return response(['error' => "No offer has this id: $order -> offer_letter_id"]);
-
-        $findid->letter_number = "JTI/{$selectedMonth}/SP/{$selectedYear}";
-        $findid->offer_subject = $input['offer_subject'];
-        $findid->recipient_name = $input['recipient_name'];
-        $findid->location = $input['location'];
-        $findid->date = $input['date'];
-        $findid->context = $input['context'];
-        $findid->talent_total = $input['talent_total'];
-        $findid->weekday_cost = $input['weekday_cost'];
-        $findid->weekend_cost = $input['weekend_cost'];
-        $findid->consumption_cost = $input['consumption_cost'];
-        $findid->transportation_cost = $input['transportation_cost'];
-        $status = $findid -> save();
-        if (!$status) {
-            return response([
-                'error' => "Data didn't updated"
-            ]);
-        }
-
-        $phpWord = new TemplateProcessor('template.docx');
-        $phpWord->setValue('perihal', $input['offer_subject']);
-        $phpWord->setValue('kepada', $input['recipient_name']);
-        $phpWord->setValue('tempat', $input['location']);
-        $phpWord->setValue('tanggal', $input['date']);
-        $phpWord->setValue('ditawarkan', $input['context']);
-        $phpWord->setValue('jumlahTalent', $input['talent_total']);
-        $phpWord->setValue('weekday', $input['weekday_cost']);
-        $phpWord->setValue('weekend', $input['weekend_cost']);
-        $phpWord->setValue('konsumsi', $input['consumption_cost']);
-        $phpWord->setValue('transPP', $input['transportation_cost']);
-        $replc = array(
-            array('qty' => '12', 'needed_job' => 'BE', 'city_location' => 'Liverpool'),
-            array('qty' => '11', 'needed_job' => 'FE', 'city_location' => 'Manchester'),
-            array('qty' => '1', 'needed_job' => 'BE', 'city_location' => 'Londo'),
-        );
-        $phpWord->cloneBlock('table_block_placeholder', 0, true, false, $replc);
-        $tempFilePath = tempnam(sys_get_temp_dir(), 'Surat_Penawaran');
-        $phpWord->saveAs($tempFilePath);
-        $headers = [
-            'Content-Type' => 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
-            'Content-Disposition' => 'attachment; filename="Surat_Penawaran.docx"',
-        ];
-        return response()->file($tempFilePath, $headers);
-    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    public function popks_create(Request $request)
-    {
         $field = $request->validate([
             'employee_name' => 'required',
             'employee_position' => 'required',
@@ -263,43 +443,44 @@ class C_Plan extends Controller
             'error' => 'error'
         ]);
 
-        $popks = M_Popks::create([
-            'letter_numbers' => '02/JTI/07/2023',
-            'leads_id' => 1,
-            'employee_name' => $field['employee_name'],
-            'employee_position' => $field['employee_position'],
-            'employee_address' => $field['employee_address'],
-            'client_name' => $field['client_name'],
-            'client_position' => $field['client_position'],
-            'client_address' => $field['client_address'],
-            'start_date' => $field['start_date'],
-            'end_date' => $field['end_date'],
-            'nominal_fees' => $field['nominal_fees'],
-            'included_fees' => $field['included_fees'],
-            'weekday_cost' => $field['weekday_cost'],
-            'weekend_cost' => $field['weekend_cost'],
-            'notes' => $field['notes'],
-            'consumption_cost' => $field['consumption_cost'],
-            'transportation_cost' => $field['transportation_cost'],
-            'billing_due_date' => $field['billing_due_date'],
-            'billing_days' => $field['billing_days'],
-            'authorized_by' => $field['authorized_by'],
-            'account_number' => $field['account_number'],
-            'bank_name' => $field['bank_name'],
-            'account_manager_provider' => "Sdr. Septian Nugraha Kudrat",
-            'provider_finance_administrator' => "Sdri. Retno Aliifah",
-            'jagoit_director' => $field['jagoit_director'],
-            'client_director' => $field['client_director'],
+        $order = M_Orders::find($order_id);
+        $popks = M_Popks::find($order -> popks_letter_id);
+        $popks -> letter_numbers = "02/JTI/{$selectedMonth}/{$selectedYear}";
+        $popks -> leads_id = $order -> leads_id;
+        $popks -> employee_name = $field['employee_name'];
+        $popks -> employee_position = $field['employee_position'];
+        $popks -> employee_address = $field['employee_address'];
+        $popks -> client_name = $field['client_name'];
+        $popks -> client_position = $field['client_position'];
+        $popks -> client_address = $field['client_address'];
+        $popks -> start_date = $field['start_date'];
+        $popks -> end_date = $field['end_date'];
+        $popks -> nominal_fees = $field['nominal_fees'];
+        $popks -> included_fees = $field['included_fees'];
+        $popks -> weekday_cost = $field['weekday_cost'];
+        $popks -> weekend_cost = $field['weekend_cost'];
+        $popks -> notes = $field['notes'];
+        $popks -> consumption_cost = $field['consumption_cost'];
+        $popks -> transportation_cost = $field['transportation_cost'];
+        $popks -> billing_due_date = $field['billing_due_date'];
+        $popks -> billing_days = $field['billing_days'];
+        $popks -> authorized_by = $field['authorized_by'];
+        $popks -> account_number = $field['account_number'];
+        $popks -> bank_name = $field['bank_name'];
+        $popks -> jagoit_director = $field['jagoit_director'];
+        $popks -> client_director = $field['client_director'];
+        $status = $popks -> save();
 
-        ]);
-
-        $currentTimestamp = time();
-        $selectedDate = new DateTime();
-        $selectedDate->setTimestamp($currentTimestamp);
-        return response([
-            'end_date' => $selectedDate,
-        ]);
-
+        
+        if (!$status) {
+            return response([
+                'error' => "Data didn't updated"
+            ]);
+        } else {
+          $generate = $this->generateWordPopks($order_id ,$order->popks_letter_id);
+          return $generate;
+        }
+        // return redirect()->back();
     }
 
     public function popks_send(Request $request, $order_id)
@@ -321,5 +502,20 @@ class C_Plan extends Controller
         if ($status) {
             return redirect('/client/order');
         }
+    }
+
+    public function popks_save($order_id)
+    {
+        $currentTimestamp = time();
+        $selectedDate = new DateTime();
+        $selectedDate->setTimestamp($currentTimestamp);
+
+        $offer = M_Offer::create();
+        $update = M_Orders::find($order_id);
+        $update->offer_letter_id = $offer->id;
+        $update->order_status = 7;
+        $update->end_popks = $selectedDate;
+        $status = $update->update();
+        if ($status) return redirect('/client/order');
     }
 }

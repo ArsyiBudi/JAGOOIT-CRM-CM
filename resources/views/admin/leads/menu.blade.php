@@ -90,20 +90,26 @@
                     </tr>
                 </thead>
                 <tbody>
+                    @php
+                    $count = ($leads->currentPage() - 1) * $leads->perPage() + 1;
+                    @endphp
                     @foreach($leads as $row)
                     <tr class=" odd:bg-grey">
-                        <td align="center" class=" p-4">{{ $row->id }}</td>
+                        <td align="center" class=" p-4">{{ $count }}</td>
+                        @php
+                        $count++;
+                        @endphp
                         <td align="center" class=" p-4">{{ $row->business_name }}</td>
                         <td align="center" class=" p-4">{{ $row->address }}</td>
                         <td align="center" class=" p-4">{{ $row->pic_name }}</td>
                         <td align="center" class=" p-4">{{ $row->pic_contact_number }}</td>
                         <td align="center" class=" p-4">
-                            @if ($row->latestActivity)
-                                @if ($row->latestActivityParams)
-                                    {{ $row->latestActivityParams->params_name }}
-                                @endif
+                            @if ($row-> hasOneActivity)
+                            @if ($row->latestActivityParams)
+                            {{ $row->latestActivityParams->params_name }}
+                            @endif
                             @else
-                                -
+                            -
                             @endif
                         </td>
                         <td align="center" class=" p-4">{{ $row->statusParam->params_name }}</td>

@@ -6,9 +6,18 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\ActivityModel;
 use App\Models\M_Activity;
+use App\Models\M_Leads;
 
 class C_Activity extends Controller
 {
+    public function fetch_activity($leads_id)
+    {
+        $lead = M_Leads::find($leads_id);
+        return view('admin.leads.activity', [
+            'title' => "Leads | Create Activity",
+            'lead' => $lead
+        ]);
+    }
     public function appointment(Request $request, $leads_id){
         $field = $request->validate([
             'judul'=>'required',
@@ -18,7 +27,7 @@ class C_Activity extends Controller
         ]);
         
         $activity = M_Activity::create([
-            'activity_type_id'=>'8',
+            'activity_type_id'=>'9',
             'leads_id'=>$leads_id,
             'xs1'=>$field['judul'],
             'xs2'=>$field['lokasi'],
@@ -29,7 +38,7 @@ class C_Activity extends Controller
         if(!$activity) return response([
             'error' => 'Error Occured',
         ]);
-        return redirect('/leads')->with('success', 'Data berhasil ditambahkan.');
+        return redirect('/leads/'. $leads_id . '/detail')->with('success', 'Data berhasil ditambahkan.');
     }
     public function note(Request $request, $leads_id){
         $field = $request->validate([
@@ -37,7 +46,7 @@ class C_Activity extends Controller
         ]);
         
         $activity = M_Activity::create([
-            'activity_type_id'=>'9',
+            'activity_type_id'=>'10',
             'leads_id'=> $leads_id,
             'desc'=>$field['deskripsinote'],
         ]);
@@ -45,7 +54,7 @@ class C_Activity extends Controller
         if(!$activity) return response([
             'error' => 'Error Occured'
         ]);
-        return redirect('/leads')->with('success', 'Data berhasil ditambahkan.');
+        return redirect('/leads/'. $leads_id . '/detail')->with('success', 'Data berhasil ditambahkan.');
     }
     public function report(Request $request, $leads_id){
         $field = $request->validate([
@@ -53,8 +62,9 @@ class C_Activity extends Controller
             'file' => 'required|file',
             'deskripsireport' => 'required',
         ]);
+
         $activity = M_Activity::create([
-            'activity_type_id' => '10',
+            'activity_type_id' => '11',
             'leads_id' => $leads_id,
             'xs1' => $field['judulreport'],
             'xs2' => $field['file'],
@@ -67,6 +77,6 @@ class C_Activity extends Controller
             ]);
         }
 
-        return redirect('/leads')->with('success', 'Data berhasil ditambahkan.');
+        return redirect('/leads/'. $leads_id . '/detail')->with('success', 'Data berhasil ditambahkan.');
     }
 }

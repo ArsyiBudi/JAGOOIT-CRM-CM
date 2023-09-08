@@ -15,57 +15,24 @@ class C_Orders extends Controller
     {
         $unique = false;
         $randomId = '';
-
         while (!$unique) {
-            $randomId = strtoupper(substr(md5(microtime()), 0, 8)); // Generate a random ID
-            
-            // Check if the generated ID already exists in the orders table
+            $randomId = strtoupper(substr(md5(microtime()), 0, 8));
             if (!M_Orders::where('id', $randomId)->exists()) {
                 $unique = true;
             }
         }
-
         return $randomId;
     }
 
-    public function fetch(Request $request){
-        $perPage = $request->input('per_page', 5);
-        $search = $request->input('search', '');
-    
-        session(['order_per_page' => $perPage]);
-        session(['order_search' => $search]);
-
-        $entries = session('order_per_page', 5);
-        $search = session('order_search', '');
-
-        $data = M_Orders::whereHas('leadData', function($query) use ($search){
-            $query -> where('business_name', 'like', "%$search%");
-        })->orWhereHas('globalParams', function($query) use ($search){
-            $query -> where('params_name', 'like', "%$search%");
-        })->paginate($entries);
-
-        return view('admin.client.order.list', [
-            "title" => "Client | Order List",
-            "order" => $data
-        ]);
-    }
-
-    public function newOrder(){
-        $leads = M_Leads::all();
-        $randomId = $this -> generateUniqueRandomId();
-        return view('admin.client.order.create', [
-            "title" => "Client | Create Order",
-            "leads" => $leads,
-            "randomId" => $randomId
-        ]);
-    }
-    public function track(Request $request){
-        $field = $request -> validate([
+    //? CODE BELOW ARE USED FOR TRACK
+    public function track(Request $request)
+    {
+        $field = $request->validate([
             'order_id' => 'required'
         ]);
 
         $order_data = M_Orders::find($field['order_id']);
-        if(!$order_data){
+        if (!$order_data) {
             return response([
                 'message' => "No order has an id of {$field['order_id']}"
             ], 401);
@@ -75,21 +42,108 @@ class C_Orders extends Controller
             "order" => $order_data
         ]);
     }
-    
-    public function create(Request $request){
-        $field = $request -> validate([
-            'business_id' => 'required', 
-            'desired_position' => 'required', 
-            'needed_qty' => 'required', 
-            'due_date' => 'required', 
-            'description' => 'required', 
-            'characteristic_desc' => 'required', 
-            'skills_desc' => 'required', 
+
+    public function timeline($order_id)
+    {
+        $order_data = M_Orders::find($order_id);
+        $lead_data = M_Leads::find($order_data->leads_id);
+        if (!$order_data) {
+            return response([
+                'message' => "No order has an id of $order_id"
+            ], 401);
+        };
+        return view('admin.client.order.timeline', [
+            "title" => "Client | Order Timeline",
+            "order" => $order_data,
+            "lead" => $lead_data
+        ]);
+    }
+
+
+    //? CODE BELOW USED FOR FETCH DATA
+    public function fetch(Request $request)
+    {
+        $perPage = $request->input('per_page', 5);
+        $search = $request->input('search', '');
+
+        session(['order_per_page' => $perPage]);
+        session(['order_search' => $search]);
+
+        $entries = session('order_per_page', 5);
+        $search = session('order_search', '');
+
+        $data = M_Orders::where(function ($query) use ($search) {
+            $query->where('due_date', 'like', "%$search%");
+            // ->orWhereHas('leadData', function($query) use ($search){
+            //     $query -> where('params_name', 'like', "%$search%");
+            // })
+            // ->orWhereHas('globalParams', function($query) use ($search){
+            //     $query -> where('params_name', 'like', "%$search%");
+            // });
+        })->where('order_status', '<', 8)
+        ->paginate($entries);
+
+        return view('admin.client.order.list', [
+            "title" => "Client | Order List",
+            "order" => $data
+        ]);
+    }
+
+    public function fetch_history(Request $request)
+    {
+        $perPage = $request->input('per_page', 5);
+        $search = $request->input('search', '');
+
+        session(['order_per_page' => $perPage]);
+        session(['order_search' => $search]);
+
+        $entries = session('order_per_page', 5);
+        $search = session('order_search', '');
+
+        $data = M_Orders::where(function ($query) use ($search) {
+            $query->where('due_date', 'like', "%$search")
+                ->orWhereHas('globalParams', function ($query) use ($search) {
+                    $query->where('params_name', 'like', "%$search%");
+                })
+                ->orWhereHas('leadData', function ($query) use ($search) {
+                    $query->where('business_name', 'like', "%$search%");
+                });
+        })->where('order_status', '=', 8)
+            ->paginate($entries);
+
+        return view('admin.client.order.history', [
+            "title" => "Client | Order History",
+            "orders" => $data
+        ]);
+    }
+
+    //?CODE BELOW ARE USED FOR CREATING ORDER
+    public function newOrder()
+    {
+        $leads = M_Leads::all();
+        $randomId = $this->generateUniqueRandomId();
+        return view('admin.client.order.create', [
+            "title" => "Client | Create Order",
+            "leads" => $leads,
+            "randomId" => $randomId
+        ]);
+    }
+   
+    public function create(Request $request)
+    {
+        $field = $request->validate([
+            'business_id' => 'required|int',
+            'desired_position' => 'required',
+            'needed_qty' => 'required',
+            'due_date' => 'required',
+            'description' => 'required',
+            'characteristic_desc' => 'required',
+            'skills_desc' => 'required',
             'budget_estimation' => 'required',
             'tor_file' => 'required'
         ]);
         $order = M_Orders::create([
-            'id' => $request -> id,
+            'id' => $request->id,
             'leads_id' => $field['business_id'],
             'desired_position' => $field['desired_position'],
             'needed_qty' => $field['needed_qty'],
@@ -101,28 +155,42 @@ class C_Orders extends Controller
             'tor_file' => $field['tor_file'],
         ]);
 
-        if(!$order){
+        if (!$order) {
             return response([
                 'error' => 'error'
             ]);
         }
-
         $update = M_Leads::find($field['business_id']);
-        $update -> client_indicator = 1;
+        $update->client_indicator = 1;
         $status = $update->update();
-
-        
-        if($status){
+        if ($status) {
             return redirect('/client');
         }
     }
 
-    public function detail($order_id){
+    //?THIS CODE ARE USED FOR SINGLE ORDER
+    public function detail($order_id)
+    {
         $data = M_Orders::where('id', '=', "$order_id")->first();
         return view('admin.client.order.detail', [
             "title" => "Client | Detail Order",
             "data" => $data
         ]);
     }
-    
+
+    public function delete_order($order_id)
+    {
+        $delete = M_Orders::find($order_id);
+        $delete -> orderDetails -> delete();
+        $delete -> delete();
+        return redirect() -> back();
+    }
+
+    public function finish_order($order_id)
+    {
+        $update = M_Orders::find($order_id);
+        $update -> order_status = 8;
+        $update -> update();
+        return redirect() -> back();
+    }
 }
