@@ -144,7 +144,7 @@
                 </div>
                 <div class="flex-auto flex flex-col">
                     <label for="catatan-popks">Catatan</label>
-                    <textarea id="catatan-popks" type="text" class=" text-black rounded-md h-full hide-scrollbar resize-none" name="notes" >@if($field -> notes){{ $field -> notes }}@endif</textarea>
+                    <textarea id="catatan-popks" type="text" class=" text-black rounded-md h-full hide-scrollbar resize-none" name="notes">@if(@$field -> notes){{ @$field -> notes }}@endif</textarea>
                 </div>
             </div>
 
