@@ -58,8 +58,8 @@ class C_Plan extends Controller
         $replc = [];
         foreach ($offer->offerJobDetails as $detail) {
             $replc[] = [
-                'quantity' => $detail->quantity,
-                'needed_job' => $detail->needed_job,
+                'qty' => $detail->quantity,
+                'job' => $detail->needed_job,
                 'city_location' => $detail->city_location,
                 'contract_duration' => $detail->contract_duration,
             ];
@@ -70,12 +70,14 @@ class C_Plan extends Controller
         $months = $toDate->diffInMonths($fromDate);
 
         $phpWord = new TemplateProcessor('draft_popks.docx');
+        $phpWord->setValue('perusahaan_client', $popks -> leadData -> business_name);
         $phpWord->setValue('client_name', $popks->client_name);
         $phpWord->setValue('client_position', $popks->client_position);
         $phpWord->setValue('client_address', $popks->client_address);
         $phpWord->setValue('employee_name', $popks->employee_name);
         $phpWord->setValue('employee_position', $popks->employee_position);
         $phpWord->setValue('employee_address', $popks->employee_address);
+        $phpWord->setValue('month', $months);
         $phpWord->setValue('start_date', $popks->start_date);
         $phpWord->setValue('end_date', $popks->end_date);
         $phpWord->setValue('included_fees', $popks->included_fees);
@@ -90,13 +92,21 @@ class C_Plan extends Controller
         $phpWord->setValue('authorized_by', $popks->authorized_by);
         $phpWord->setValue('account_number', $popks->account_number);
         $phpWord->setValue('bank_name', $popks->bank_name);
+        $phpWord->cloneBlock('block', 0, true, false, $replc);
 
-        return response([
-            "Busines name" => $popks -> leadData -> business_name,
-            "Perbedaan bulan" => $months,
-            "replc" => $replc
-        ]);
+        // return response([
+        //     "Busines name" => $popks -> leadData -> business_name,
+        //     "Perbedaan bulan" => $months,
+        //     "replc" => $replc
+        // ]);
 
+        $tempFilePath = tempnam(sys_get_temp_dir(), 'DRAFT PKS');
+        $phpWord->saveAs($tempFilePath);
+        $headers = [
+            'Content-Type' => 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+            'Content-Disposition' => 'attachment; filename="Draft PKS.docx"',
+        ];
+        return response()->file($tempFilePath, $headers);
 
   
     }
