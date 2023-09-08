@@ -31,7 +31,6 @@ class C_Plan extends Controller
         $phpWord->setValue('weekend', $offer->weekend_cost);
         $phpWord->setValue('konsumsi', $offer->consumption_cost);
         $phpWord->setValue('transPP', $offer->transportation_cost);
-        // $phpWord->setValue('price', $offer->price);
         $replc = [];
         foreach ($offer->offerJobDetails as $detail) {
             $replc[] = [
@@ -39,8 +38,8 @@ class C_Plan extends Controller
                 'needed_job' => $detail->needed_job,
                 'city_location' => $detail->city_location,
                 'contract_duration' => $detail->contract_duration,
-                'price_person' => $detail->price,
-                'price_total' => $detail->price * ($detail->contract_duration * $detail->quantity)
+                'price' => $detail->price,
+                'price_total' => ($detail->price * $detail->contract_duration) * $detail->quantity
             ];
         }
 
@@ -71,7 +70,7 @@ class C_Plan extends Controller
         $months = $toDate->diffInMonths($fromDate);
 
         $phpWord = new TemplateProcessor('draft_popks.docx');
-        $phpWord->setValue('perusahaan_client', $popks -> leadData -> business_name);
+        $phpWord->setValue('client_company', $popks -> leadData -> business_name);
         $phpWord->setValue('client_name', $popks->client_name);
         $phpWord->setValue('client_position', $popks->client_position);
         $phpWord->setValue('client_address', $popks->client_address);
@@ -93,6 +92,8 @@ class C_Plan extends Controller
         $phpWord->setValue('authorized_by', $popks->authorized_by);
         $phpWord->setValue('account_number', $popks->account_number);
         $phpWord->setValue('bank_name', $popks->bank_name);
+        $phpWord->setValue('jagooit_director', $popks->jagoit_director);
+        $phpWord->setValue('client_director', $popks->client_director);
         $phpWord->cloneBlock('block', 0, true, false, $replc);
 
         $tempFilePath = tempnam(sys_get_temp_dir(), 'DRAFT PKS');

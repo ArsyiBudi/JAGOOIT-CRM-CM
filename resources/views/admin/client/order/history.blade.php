@@ -42,7 +42,9 @@
     </style>
 
     @section('container')
-    <div class=" overflow-auto mt-28 lg:mt-0">
+    <div class="pt-20 pb-2 lg:pt-0">
+    </div>
+    <div class=" overflow-auto bg-darkSecondary lg:pt-0 h-[90vh] rounded-md">
         <div class="w-full bg-darkSecondary py-10 px-8 rounded-md ">
 
             <div class="border-b border-white w-full pb-3 mb-3">
