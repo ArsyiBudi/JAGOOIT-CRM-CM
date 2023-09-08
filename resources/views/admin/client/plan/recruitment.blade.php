@@ -108,7 +108,7 @@
                             <tr>
                                 <td>
                                     <label>
-                                        <input name="talents_id[]" value="{{ $talent -> id }}" type="checkbox" class="checgitkbox border-white border-2" />
+                                        <input name="talents_id[]" value="{{ $talent -> id }}" type="checkbox" class="checkbox border-white border-2" />
                                     </label>
                                 </td>
                                 <td align="center">{{ $count  }}</td>
