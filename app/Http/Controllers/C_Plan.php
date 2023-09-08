@@ -175,9 +175,11 @@ class C_Plan extends Controller
     }
     public function fetchPercobaan($order_id)
     {
+        $talent = M_OrderDetails::where('order_id', $order_id)->paginate(5);
         return view('admin.client.plan.percobaan', [
             "title" => "Plan | Percobaan",
             "order_id" => $order_id,
+            "talents" => $talent
         ]);
     }
 

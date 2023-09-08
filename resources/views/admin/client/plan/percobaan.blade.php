@@ -98,18 +98,24 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <!-- row 1 -->
+                            @php
+                            $count = ($talents->currentPage() - 1) * $talents->perPage() + 1;
+                            @endphp
+                            @foreach($talents as $talent)
                             <tr>
                                 <th>
                                     <label>
                                         <input type="checkbox" class="checkbox border-white border-2" />
                                     </label>
                                 </th>
-                                <td align="center">1</td>
-                                <td align="center">Rustari Fuad</td>
-                                <td align="center">Kurang Tahu</td>
-                                <td align="center">Ngaji</td>
-                                <td align="center"> <input type="text" name="" id="" class=" outline-none bg-white p-2 rounded-md w-20 text-black font-medium"></td>
+                                <td align="center">{{ $count }}</td>
+                                @php
+                                $count++;
+                                @endphp
+                                <td align="center">{{ $talent->talentData->name }}</td>
+                                <td align="center">{{ $talent->talentData->pendidikanTalent->description }}</td>
+                                <td align="center">{{ $talent->talentData->keterampilanTalent->description }}</td>
+                                <td align="center">{{ $talent->talentData->posisiTalent->description }}</td>
                                 <td align="center">
                                     <div class=" flex items-center gap-2">
                                         <a href="/client/plan/create/recruitment">
@@ -119,124 +125,12 @@
                                     </div>
                                 </td>
                             </tr>
-                            <!-- row 2 -->
-                            <tr>
-                                <th>
-                                    <label>
-                                        <input type="checkbox" class="checkbox border-white border-2" />
-                                    </label>
-                                </th>
-                                <td align="center">1</td>
-                                <td align="center">Rustari Fuad</td>
-                                <td align="center">Kurang Tahu</td>
-                                <td align="center">Ngaji</td>
-                                <td align="center"> <input type="text" name="" id="" class=" outline-none bg-white p-2 rounded-md w-20 text-black font-medium"></td>
-                                <td align="center">
-                                    <div class=" flex items-center gap-2">
-                                        <a href="/client/plan/create/recruitment">
-                                            <i class=" text-lg cursor-pointer ri-information-line"></i>
-                                        </a>
-                                        <i class=" text-lg cursor-pointer ri-delete-bin-2-line text-delete"></i>
-                                    </div>
-                                </td>
-                            </tr>
-                            <!-- row 3 -->
-                            <tr>
-                                <th>
-                                    <label>
-                                        <input type="checkbox" class="checkbox border-white border-2" />
-                                    </label>
-                                </th>
-                                <td align="center">1</td>
-                                <td align="center">Rustari Fuad</td>
-                                <td align="center">Kurang Tahu</td>
-                                <td align="center">Ngaji</td>
-                                <td align="center"> <input type="text" name="" id="" class=" outline-none bg-white p-2 rounded-md w-20 text-black font-medium"></td>
-                                <td align="center">
-                                    <div class=" flex items-center gap-2">
-                                        <a href="/client/plan/create/recruitment">
-                                            <i class=" text-lg cursor-pointer ri-information-line"></i>
-                                        </a>
-                                        <i class=" text-lg cursor-pointer ri-delete-bin-2-line text-delete"></i>
-                                    </div>
-                                </td>
-                            </tr>
-                            <!-- row 4 -->
-                            <tr>
-                                <th>
-                                    <label>
-                                        <input type="checkbox" class="checkbox border-white border-2" />
-                                    </label>
-                                </th>
-                                <td align="center">1</td>
-                                <td align="center">Rustari Fuad</td>
-                                <td align="center">Kurang Tahu</td>
-                                <td align="center">Ngaji</td>
-                                <td align="center"> <input type="text" name="" id="" class=" outline-none bg-white p-2 rounded-md w-20 text-black font-medium"></td>
-                                <td align="center">
-                                    <div class=" flex items-center gap-2">
-                                        <a href="/client/plan/create/recruitment">
-                                            <i class=" text-lg cursor-pointer ri-information-line"></i>
-                                        </a>
-                                        <i class=" text-lg cursor-pointer ri-delete-bin-2-line text-delete"></i>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th>
-                                    <label>
-                                        <input type="checkbox" class="checkbox border-white border-2" />
-                                    </label>
-                                </th>
-                                <td align="center">1</td>
-                                <td align="center">Rustari Fuad</td>
-                                <td align="center">Kurang Tahu</td>
-                                <td align="center">Ngaji</td>
-                                <td align="center"> <input type="text" name="" id="" class=" outline-none bg-white p-2 rounded-md w-20 text-black font-medium"></td>
-                                <td align="center">
-                                    <div class=" flex items-center gap-2">
-                                        <a href="/client/plan/create/recruitment">
-                                            <i class=" text-lg cursor-pointer ri-information-line"></i>
-                                        </a>
-                                        <i class=" text-lg cursor-pointer ri-delete-bin-2-line text-delete"></i>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th>
-                                    <label>
-                                        <input type="checkbox" class="checkbox border-white border-2" />
-                                    </label>
-                                </th>
-                                <td align="center">1</td>
-                                <td align="center">Rustari Fuad</td>
-                                <td align="center">Kurang Tahu</td>
-                                <td align="center">Ngaji</td>
-                                <td align="center"> <input type="text" name="" id="" class=" outline-none bg-white p-2 rounded-md w-20 text-black font-medium"></td>
-                                <td align="center">
-                                    <div class=" flex items-center gap-2">
-                                        <a href="/client/plan/create/recruitment">
-                                            <i class=" text-lg cursor-pointer ri-information-line"></i>
-                                        </a>
-                                        <i class=" text-lg cursor-pointer ri-delete-bin-2-line text-delete"></i>
-                                    </div>
-                                </td>
-                            </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
                 <div class="sticky bottom-0 pb-1 text-sm bg-darkSecondary flex items-center justify-center w-full">
-
-                    <div class="flex gap-3 items-center">
-                        <button class="bg-secondary hover:scale-95 duration-200 py-1 px-3 md:px-5 rounded-lg flex items-center justify-center my-5">Prev</button>
-                        <div class="rounded-lg p-1 w-8 bg-grey flex items-center justify-center" onclick="{{ url('/client/detail') }}">
-                            <p>1</p>
-                        </div>
-                        <div class="rounded-lg p-1 w-8 bg-grey flex items-center justify-center">
-                            <p>10</p>
-                        </div>
-                        <button class="bg-secondary hover:scale-95 duration-200 py-1 px-3 md:px-5 rounded-lg flex items-center justify-center my-5">Next</button>
-                    </div>
+                    {{ $talents -> links('vendor.pagination.custom-pagination') }}
                 </div>
             </div>
             <div class="mt-2 flex justify-between items-center gap-1 md:gap-0">
@@ -255,12 +149,12 @@
         <div>
             <form action="{{ url(request() -> path()) }}" method="POST">
                 @csrf
-            <button type="submit" name="save" class=" w-full bg-secondary text-white text-sm text-center py-1 px-14 rounded-md font-bold hover:scale-95 duration-200">
-                <p class="hidden md:block">Save</p>
-                <i class="ri-save-line block md:hidden"></i>
-            </button>
+                <button type="submit" name="save" class=" w-full bg-secondary text-white text-sm text-center py-1 px-14 rounded-md font-bold hover:scale-95 duration-200">
+                    <p class="hidden md:block">Save</p>
+                    <i class="ri-save-line block md:hidden"></i>
+                </button>
             </form>
-            
+
         </div>
 
         <div>
