@@ -147,19 +147,21 @@ Route::middleware('auth')->group(function () {
                 Route::patch('/{order_id}/training/{order_details_id}', [C_Plan::class, 'addGrade'])->name('add_grade');
 
                 //?PENAWARAN
-                Route::get('/{order_id}/penawaran', [C_Plan::class, 'openOffer']) -> name('open_offer');
+                Route::get('/{order_id}/penawaran', [C_Plan::class, 'fetchOffer']) -> name('fetchOffer');
                 Route::put('/{order_id}/penawaran', [C_Plan::class, 'addOfferDetails']) -> name('add_offer_details');
                 Route::post('/{order_id}/penawaran', [C_Plan::class, 'createOffer'])->name('create_offer');
                 Route::patch('/{order_id}/penawaran', [C_Plan::class, 'offer_send']) -> name('send_offer');
                 Route::post('/{order_id}/penawaran/save', [C_Plan::class, 'offer_save']) -> name('save_offer');
                 Route::delete('/{order_id}/penawaran/{offer_job_detail_id}', [C_Plan::class, 'deleteOfferDetails']) -> name('delete_offer_detail');
-
+                
                 //?NEGOSIASI
                 Route::get('/{order_id}/negosiasi', [C_Plan::class, 'fetchNegosiasi']) -> name('fetchNegosiasi');
-
+                Route::post('/{order_id}/negosiasi',[C_Plan::class, 'saveNegosiasi']) -> name('saveNegosiasi');
+                
                 //?PERCOBAAN
                 Route::get('/{order_id}/percobaan', [C_Plan::class, 'fetchPercobaan']) -> name('fetchPercobaan');
                 Route::post('/{order_id}/percobaan',[C_Plan::class, 'savePercobaan']) -> name('savePercobaan');
+                Route::get('/{order_id}/percobaan/{talent_id}', [C_Plan::class, 'deletePercobaan']) -> name('deletePercobaan');
 
                 //?PO & PKS
                 Route::get('/{order_id}/popks',[C_Plan::class, 'fetchPopks']);

@@ -176,7 +176,7 @@ class C_Plan extends Controller
             "order" => $order,
         ]);
     }
-    public function openOffer($order_id)
+    public function fetchOffer($order_id)
     {
         $order = M_Orders::find($order_id);
         $offer = M_Offer::find($order->offer_letter_id);
@@ -215,9 +215,7 @@ class C_Plan extends Controller
     }
 
 
-
-
-    //?BELOW ARE USED IN RECRUITMENT PLAN
+    //?RECRUITMENT PLAN CODE
     public function saveRecruitment(Request $request, $order_id)
     {
         $selectedTimestamp = time();
@@ -245,7 +243,7 @@ class C_Plan extends Controller
     }
 
 
-    //?BELOW ARE USED IN TRAINING PLAN
+    //?TRAINING PLAN CODE
     public function saveTraining($order_id)
     {
         $selectedTimestamp = time();
@@ -278,7 +276,17 @@ class C_Plan extends Controller
         return redirect()->back();
     }
 
-    //?BELOW ARE USED IN OFFER PLAN
+    //?OFFER PLAN CODE
+    public function openOffer($order_id)
+    {
+        $order = M_Orders::find($order_id);
+        $offer = M_Offer::find($order->offer_letter_id);
+        return view('admin.client.plan.penawaran', [
+            "title" => "Plan | Penawaran",
+            "offer" => $offer,
+            "order_id" => $order_id
+        ]);
+    }
 
     public function addOfferDetails(Request $request, $order_id)
     {
@@ -400,20 +408,37 @@ class C_Plan extends Controller
 
     //?NEGOSIASI CONTROLLER CODE
 
-
+public function saveNegosiasi($order_id){
+        $currentTimestamp = time();
+        $selectedDate = new DateTime();
+        $selectedDate->setTimestamp($currentTimestamp);
+        $update = M_Orders::find($order_id);
+        $update->order_status = 4;
+        if (is_null($update->end_appointment) && is_null($update->start_probation)) {
+            $update->end_appointment = $selectedDate;
+            $update->start_probation = $selectedDate;
+        }
+        $status = $update->update();
+        if ($status) return redirect('/client/order/plan/' . $order_id . '/percobaan/');
+    }
 
     //?PERCOBAAN CONTROLLER CODE
-    public function savePercobaan($order_id)
+    public function savePercobaan(Request $request, $order_id)
     {
-        $selectedTimestamp = time();
+        $currentTimestamp = time();
         $selectedDate = new DateTime();
-        $selectedDate->setTimestamp($selectedTimestamp);
-
-
-        $popks = M_Popks::create();
+        $selectedDate->setTimestamp($currentTimestamp);
         $update = M_Orders::find($order_id);
-        $update->popks_letter_id = $popks->id;
         $update->order_status = 5;
+
+        foreach ($request->talents_id as $talent_id) {
+            $updateTalent = M_OrderDetails::find($talent_id);
+            $updateActive = M_Talents::find($updateTalent->talent_id);
+            $updateActive->is_active = 0;
+            $updateTalent->recruitment_status = 1;
+            $updateActive->save();
+            $updateTalent->save();
+        }
         if (is_null($update->end_probation) && is_null($update->start_popks)) {
             $update->end_probation = $selectedDate;
             $update->start_popks = $selectedDate;
@@ -421,7 +446,15 @@ class C_Plan extends Controller
         $status = $update->update();
         if ($status) return redirect('/client/order/plan/' . $order_id . '/popks/');
     }
-
+    public function deletePercobaan($order_id, $talent_id)
+    {
+        $delete = M_OrderDetails::find($talent_id);
+        $updateActive = M_Talents::find($delete->talent_id);
+        $updateActive->is_active = 0;
+        $updateActive->save();
+        $delete->delete();
+        return redirect()->back();
+    }
 
     //?POPKS CONTROLLER CODE
     public function popks_create(Request $request, $order_id)
@@ -528,12 +561,14 @@ class C_Plan extends Controller
         $currentTimestamp = time();
         $selectedDate = new DateTime();
         $selectedDate->setTimestamp($currentTimestamp);
-
         $offer = M_Offer::create();
         $update = M_Orders::find($order_id);
         $update->offer_letter_id = $offer->id;
         $update->order_status = 7;
-        $update->end_popks = $selectedDate;
+
+        if (is_null($update->end_popks)) {
+            $update->end_popks = $selectedDate;
+        }
         $status = $update->update();
         if ($status) return redirect('/client/order');
     }

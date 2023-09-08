@@ -52,6 +52,7 @@
             max-width: 100%;
             /* Optional: Restrict the width of the element */
         }
+
     </style>
 
 </head>
@@ -206,8 +207,8 @@
                             @endif
                         </p>
                         <p class="absolute top-12 text-xs py-4 text-left date-text">End Date :
-                            @if($order -> end_probition)
-                            {{ $order -> end_probition }}
+                            @if($order -> end_probation)
+                            {{ $order -> end_probation }}
                             @else
                             -
                             @endif

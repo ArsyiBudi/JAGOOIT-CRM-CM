@@ -71,7 +71,8 @@
         </ul>
     </div>
     <div class=" mt-5">
-        <form action="">
+        <form action="{{ url(request() -> path()) }}" method="POST">
+            @csrf
             <div class=" block md:flex justify-between">
                 <div class=" relative w-full md:w-auto">
                     <input type="text" class=" bg-[#D9D9D9] outline-none rounded-md text-black py-1  px-8 w-full md:w-auto">
@@ -103,11 +104,14 @@
                             @endphp
                             @foreach($talents as $talent)
                             <tr>
-                                <th>
+                                <td>
                                     <label>
-                                        <input type="checkbox" class="checkbox border-white border-2" />
+                                        <input name="talents_id[]" value="{{ $talent -> id }}" type="checkbox" class="checkbox border-white border-2" @checked($talent->recruitment_status==1)
+                                        @if($talent->recruitment_status==1)
+                                        disabled
+                                        @endif/>
                                     </label>
-                                </th>
+                                </td>
                                 <td align="center">{{ $count }}</td>
                                 @php
                                 $count++;
@@ -121,7 +125,7 @@
                                         <a href="/client/plan/create/recruitment">
                                             <i class=" text-lg cursor-pointer ri-information-line"></i>
                                         </a>
-                                        <i class=" text-lg cursor-pointer ri-delete-bin-2-line text-delete"></i>
+                                        <a href="{{ url(request()->path().'/'.$talent->id) }}"><i class=" text-lg cursor-pointer ri-delete-bin-2-line text-delete"></i></a>
                                     </div>
                                 </td>
                             </tr>
@@ -141,31 +145,28 @@
                             <i class="ri-arrow-left-line block md:hidden ml-1"></i>
                         </a>
                     </div>
+
+                </div>
+                <div class="flex gap-4 max-sm:w-full max-sm:justify-between">
+                    <div></div>
+                    <div>
+                        <button type="submit" name="savePercobaan" class=" w-full bg-secondary text-white text-sm text-center py-1 px-14 rounded-md font-bold hover:scale-95 duration-200">
+                            <p class="hidden md:block">Save</p>
+                            <i class="ri-save-line block md:hidden"></i>
+                        </button>
         </form>
 
     </div>
-    <div class="flex gap-4 max-sm:w-full max-sm:justify-between">
-        <div></div>
-        <div>
-            <form action="{{ url(request() -> path()) }}" method="POST">
-                @csrf
-                <button type="submit" name="save" class=" w-full bg-secondary text-white text-sm text-center py-1 px-14 rounded-md font-bold hover:scale-95 duration-200">
-                    <p class="hidden md:block">Save</p>
-                    <i class="ri-save-line block md:hidden"></i>
-                </button>
-            </form>
 
-        </div>
-
-        <div>
-            <a href="{{ url('/client/order/plan/'.$order_id.'/popks') }}">
-                <div class=" bg-secondary text-white text-sm text-center py-1 px-3 md:px-14 rounded-md font-bold hover:scale-95 duration-200">
-                    <p class="hidden md:inline">Continue</p>
-                    <i class="ri-arrow-right-line block md:hidden"></i>
-                </div>
-            </a>
-        </div>
+    <div>
+        <a href="{{ url('/client/order/plan/'.$order_id.'/popks') }}">
+            <div class=" bg-secondary text-white text-sm text-center py-1 px-3 md:px-14 rounded-md font-bold hover:scale-95 duration-200">
+                <p class="hidden md:inline">Continue</p>
+                <i class="ri-arrow-right-line block md:hidden"></i>
+            </div>
+        </a>
     </div>
+</div>
 </div>
 </div>
 </div>

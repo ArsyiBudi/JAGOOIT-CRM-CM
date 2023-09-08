@@ -44,6 +44,7 @@
         filter: invert(1);
         /* This inverts the icon color */
     }
+
 </style>
 
 @section('container')
@@ -165,5 +166,6 @@
             selectedTalents.push(id);
         }
     }
+
 </script>
 @endsection
