@@ -16,6 +16,7 @@ class M_OfferLetterJobsDetails extends Model
         'needed_job',
         'quantity',
         'city_location',
-        'contract_duration'
+        'contract_duration',
+        'price'
     ];
 }

@@ -86,15 +86,15 @@
             <div class="flex flex-row flex-wrap gap-2">
                 <div class="flex-auto flex flex-col">
                     Nama
-                    <input class="rounded-md text-black" type="text" name="employee_name" value="{{ old('employee_name',@$field->employee_name)}}" id="">
+                    <input class="rounded-md text-black bg-white p-1 outline-none" type="text" name="employee_name" value="{{ old('employee_name',@$field->employee_name)}}" id="">
                 </div>
                 <div class="flex-auto flex flex-col ">
                     Jabatan
-                    <input class="rounded-md text-black" type="text" name="employee_position" value="{{ old('employee_position',@$field->employee_position)}}" id="">
+                    <input class="rounded-md text-black bg-white p-1 outline-none" type="text" name="employee_position" value="{{ old('employee_position',@$field->employee_position)}}" id="">
                 </div>
                 <div class="flex-auto flex flex-col">
                     Alamat
-                    <input class="rounded-md text-black" type="text" name="employee_address" value="{{ old('employee_address',@$field->employee_address)}}" id="">
+                    <input class="rounded-md bg-white text-black p-1 outline-none" type="text" name="employee_address" value="{{ old('employee_address',@$field->employee_address)}}" id="">
                 </div>
             </div>
 
@@ -102,35 +102,35 @@
             <div class="flex flex-row flex-wrap gap-2">
                 <div class="flex-auto flex flex-col">
                     Nama
-                    <input class="rounded-md text-black" type="text" name="client_name" value="{{ old('client_name',@$field->client_name)}}" id="">
+                    <input class="rounded-md text-black bg-white p-1 outline-none" type="text" name="client_name" value="{{ old('client_name',@$field->client_name)}}" id="">
                 </div>
                 <div class="flex-auto flex flex-col">
                     Jabatan
-                    <input class="rounded-md text-black" type="text" name="client_position" value="{{ old('client_position',@$field->client_position)}}" id="">
+                    <input class="rounded-md bg-white text-black p-1 outline-none" type="text" name="client_position" value="{{ old('client_position',@$field->client_position)}}" id="">
                 </div>
                 <div class="flex-auto flex flex-col">
                     Alamat
-                    <input class="rounded-md text-black" type="text" name="client_address" value="{{ old('client_address',@$field->client_address)}}" id="">
+                    <input class="rounded-md bg-white text-black p-1 outline-none" type="text" name="client_address" value="{{ old('client_address',@$field->client_address)}}" id="">
                 </div>
             </div>
 
             <div class="text-xl mt-7">Jangka Waktu Kontrak:</div>
             <div class="flex flex-row flex-wrap gap-2">
                 <div>Dari</div>
-                <input class="rounded-md flex-auto text-black" type="text" name="start_date" value="{{ old('start_date',@$field->start_date)}}" id="">
+                <input class="rounded-md flex-auto text-black bg-white p-1 outline-none" type="date" name="start_date" value="{{ old('start_date',@$field->start_date)}}" id="">
                 <div>Sampai</div>
-                <input class="rounded-md flex-auto text-black" type="text" name="end_date" value="{{ old('end_date',@$field->end_date)}}" id="">
+                <input class="rounded-md flex-auto text-black bg-white p-1 outline-none" type="date" name="end_date" value="{{ old('end_date',@$field->end_date)}}" id="">
             </div>
 
             <div class="text-xl mt-7">Biaya Kontrak</div>
             <div class="flex flex-row flex-wrap gap-2">
                 <div class="flex-auto flex flex-col">
                     Termasuk Biaya
-                    <input type="text" class="rounded-md text-black" name="included_fees" value="{{ old('included_fees',@$field->included_fees)}}" id="">
+                    <input type="text" class="rounded-md text-black bg-white p-1 outline-none" name="included_fees" value="{{ old('included_fees',@$field->included_fees)}}" id="">
                 </div>
                 <div class="flex-auto flex flex-col">
                     Nominal
-                    <input type="text" class="rounded-md text-black" name="nominal_fees" value="{{ old('nominal_fees',@$field->nominal_fees)}}" id="">
+                    <input type="text" class="rounded-md text-black bg-white p-1 outline-none" name="nominal_fees" value="{{ old('nominal_fees',@$field->nominal_fees)}}" id="">
                 </div>
             </div>
 
@@ -138,13 +138,13 @@
             <div class="flex flex-row flex-wrap gap-2">
                 <div class="flex-auto flex flex-col">
                     <div>Weekday</div>
-                    <input type="text" class="rounded-md text-black" name="weekday_cost" value="{{ old('weekday_cost',@$field->weekday_cost)}}">
+                    <input type="text" class="rounded-md text-black bg-white p-1 outline-none" name="weekday_cost" value="{{ old('weekday_cost',@$field->weekday_cost)}}">
                     <div>Weekend</div>
-                    <input type="text" class="rounded-md text-black" name="weekend_cost" value="{{ old('weekend_cost',@$field->weekend_cost)}}">
+                    <input type="text" class="rounded-md text-black bg-white p-1 outline-none" name="weekend_cost" value="{{ old('weekend_cost',@$field->weekend_cost)}}">
                 </div>
                 <div class="flex-auto flex flex-col">
                     <label for="catatan-popks">Catatan</label>
-                    <textarea id="catatan-popks" type="text" class=" text-black rounded-md h-full hide-scrollbar resize-none" name="notes" value="{{ old('notes',@$field->notes)}}"></textarea>
+                    <textarea id="catatan-popks" type="text" class=" text-black rounded-md h-full hide-scrollbar resize-none" name="notes" >{{ @$field -> notes }}</textarea>
                 </div>
             </div>
 
@@ -152,20 +152,20 @@
             <div class="flex flex-row flex-wrap gap-2">
                 <div class="flex-auto flex flex-col">
                     <div>Konsumsi (perhari)</div>
-                    <input type="text" class="rounded-md text-black" name="consumption_cost" value="{{ old('consumption_cost',@$field->consumption_cost)}}">
+                    <input type="text" class="rounded-md text-black bg-white p-1 outline-none" name="consumption_cost" value="{{ old('consumption_cost',@$field->consumption_cost)}}">
                 </div>
                 <div class="flex-auto flex flex-col">
                     Transport Pulang-Pergi Standar JKT-BDG
-                    <input type="text" class="rounded-md h-full text-black" name="transportation_cost" value="{{ old('transportation_cost',@$field->transportation_cost)}}">
+                    <input type="text" class="rounded-md h-full text-black bg-white p-1 outline-none" name="transportation_cost" value="{{ old('transportation_cost',@$field->transportation_cost)}}">
                 </div>
             </div>
 
             <div class="text-xl mt-7">Invoice Tagihan</div>
             <div class="flex flex-row flex-wrap gap-2">
                 Tanggal
-                <input type="date" class="w-10 text-black rounded-md" name="billing_due_date" value="{{ old('billing_due_date',@$field->billing_due_date)}}">
+                <input type="date" class="w-10 text-black rounded-md p-1 outline-none" name="billing_due_date" value="{{ old('billing_due_date',@$field->billing_due_date)}}">
                 Setiap Bulan dan Pembayaran Selambat-Lambatnya
-                <input type="number" class="text-black rounded-md" name="billing_days" value="{{ old('billing_days',@$field->billing_days)}}">
+                <input type="number" class="text-black bg-white rounded-md p-1 outline-none" name="billing_days" value="{{ old('billing_days',@$field->billing_days)}}">
                 Hari
             </div>
 
@@ -173,27 +173,27 @@
             <div class="flex flex-row flex-wrap gap-2">
                 <div class="flex-auto flex flex-col">
                     Atas Nama
-                    <input type="text" class="rounded-md text-black" name="authorized_by" value="{{ old('authorized_by',@$field->authorized_by)}}">
+                    <input type="text" class="rounded-md text-black bg-white p-1 outline-none" name="authorized_by" value="{{ old('authorized_by',@$field->authorized_by)}}">
                 </div>
                 <div class="flex-auto flex flex-col">
                     Nama Bank
-                    <input type="text" class="rounded-md text-black" name="bank_name" value="{{ old('bank_name',@$field->bank_name)}}">
+                    <input type="text" class="rounded-md text-black bg-white p-1 outline-none" name="bank_name" value="{{ old('bank_name',@$field->bank_name)}}">
                 </div>
             </div>
             <div class="flex-auto flex flex-col">
                 No. Rekening
-                <input type="text" class="rounded-md text-black" name="account_number" value="{{ old('account_number',@$field->account_number)}}">
+                <input type="text" class="rounded-md text-black bg-white p-1 outline-none" name="account_number" value="{{ old('account_number',@$field->account_number)}}">
             </div>
 
             <div class="text-xl mt-7">Mengetahui</div>
             <div class="flex flex-row flex-wrap gap-2">
                 <div class="flex-auto flex flex-col">
                     Direktur JagooIT
-                    <input type="text" class="rounded-md text-black" name="jagoit_director" value="{{ old('jagoit_director',@$field->jagoit_director)}}">
+                    <input type="text" class="rounded-md text-black bg-white p-1 outline-none" name="jagoit_director" value="{{ old('jagoit_director',@$field->jagoit_director)}}">
                 </div>
                 <div class="flex-auto flex flex-col">
                     Direktur Klien
-                    <input type="text" class="rounded-md text-black" name="client_director" value="{{ old('client_director',@$field->client_director)}}">
+                    <input type="text" class="rounded-md text-black bg-white p-1 outline-none" name="client_director" value="{{ old('client_director',@$field->client_director)}}">
                 </div>
             </div>
 
@@ -219,7 +219,7 @@
 
                     <canvas id="pdf-preview" style="display: none;" class=" w-[355px] rounded-md my-3"></canvas>
                     <label for="file-pks" class="flex justify-center items-center cursor-pointer bg-white py-2 rounded-lg h-[56px] w-[335px]" id="container-pks">
-                        <input id="file-pks" type="file" class="text-black rounded-lg hidden bg-white" name="file-pks" onchange="previewFile()">
+                        <input id="file-pks" type="file" class="text-black rounded-lg hidden bg-white p-1 outline-none" name="file-pks" onchange="previewFile()">
                         <span id="file-upload-label" class=" text-white font-semibold cursor-pointer font-quicksand">
                             <i class="ri-upload-2-fill text-3xl text-black"></i>
                         </span>
@@ -229,7 +229,7 @@
 
             <div class="flex-auto flex flex-col">
                 <label for="desk-popks">Deskripsi</label>
-                <textarea id="desk-popks" type="text" class="rounded-md h-[70px] text-black hide-scrollbar resize-none" name="po_descr"></textarea>
+                <textarea id="desk-popks" type="text" class="p-1 outline-none rounded-md h-[70px] text-black hide-scrollbar resize-none bg-white" name="po_descr"></textarea>
             </div>
 
             <div class="mt-4 flex justify-end">
@@ -288,7 +288,7 @@
             containerInput.style.height = 'auto';
             containerInput.style.backgroundColor = '#EC512E'
         } else {
-            fileUploadLabel.innerHTML = '<i class="ri-upload-2-fill text-3xl text-black"></i>';
+            fileUploadLabel.innerHTML = '<i class="ri-upload-2-fill text-3xl text-black bg-white"></i>';
         }
 
         if (fileInput.files && fileInput.files[0]) {

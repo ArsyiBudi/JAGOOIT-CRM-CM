@@ -31,6 +31,7 @@ class C_Plan extends Controller
         $phpWord->setValue('weekend', $offer->weekend_cost);
         $phpWord->setValue('konsumsi', $offer->consumption_cost);
         $phpWord->setValue('transPP', $offer->transportation_cost);
+        // $phpWord->setValue('price', $offer->price);
         $replc = [];
         foreach ($offer->offerJobDetails as $detail) {
             $replc[] = [
@@ -38,8 +39,11 @@ class C_Plan extends Controller
                 'needed_job' => $detail->needed_job,
                 'city_location' => $detail->city_location,
                 'contract_duration' => $detail->contract_duration,
+                'price_person' => $detail->price,
+                'price_total' => $detail->price * ($detail->contract_duration * $detail->quantity)
             ];
         }
+
         $phpWord->cloneBlock('table_block_placeholder', 0, true, false, $replc);
         $tempFilePath = tempnam(sys_get_temp_dir(), 'Surat_Penawaran');
         $phpWord->saveAs($tempFilePath);
@@ -57,22 +61,48 @@ class C_Plan extends Controller
         $replc = [];
         foreach ($offer->offerJobDetails as $detail) {
             $replc[] = [
-                'quantity' => $detail->quantity,
-                'needed_job' => $detail->needed_job,
-                'city_location' => $detail->city_location,
-                'contract_duration' => $detail->contract_duration,
+                'qty' => $detail->quantity,
+                'job' => $detail->needed_job,
             ];
         }
         $popks = M_Popks::find($popks_letter_id);
         $toDate = Carbon::parse($popks -> end_date);
         $fromDate = Carbon::parse($popks -> start_date);
         $months = $toDate->diffInMonths($fromDate);
-        return response([
-            "Busines name" => $popks -> leadData -> business_name,
-            "Perbedaan bulan" => $months,
-            "replc" => $replc
-        ]);
-  
+
+        $phpWord = new TemplateProcessor('draft_popks.docx');
+        $phpWord->setValue('perusahaan_client', $popks -> leadData -> business_name);
+        $phpWord->setValue('client_name', $popks->client_name);
+        $phpWord->setValue('client_position', $popks->client_position);
+        $phpWord->setValue('client_address', $popks->client_address);
+        $phpWord->setValue('employee_name', $popks->employee_name);
+        $phpWord->setValue('employee_position', $popks->employee_position);
+        $phpWord->setValue('employee_address', $popks->employee_address);
+        $phpWord->setValue('month', $months);
+        $phpWord->setValue('start_date', $popks->start_date);
+        $phpWord->setValue('end_date', $popks->end_date);
+        $phpWord->setValue('included_fees', $popks->included_fees);
+        $phpWord->setValue('nominal_fees', $popks->nominal_fees);
+        $phpWord->setValue('weekday_cost', $popks->weekday_cost);
+        $phpWord->setValue('weekend_cost', $popks->weekend_cost);
+        $phpWord->setValue('notes', $popks->notes);
+        $phpWord->setValue('consumption_cost', $popks->consumption_cost);
+        $phpWord->setValue('transportation_cost', $popks->transportation_cost);
+        $phpWord->setValue('billing_due_date', $popks->billing_due_date);
+        $phpWord->setValue('billing_days', $popks->billing_days);
+        $phpWord->setValue('authorized_by', $popks->authorized_by);
+        $phpWord->setValue('account_number', $popks->account_number);
+        $phpWord->setValue('bank_name', $popks->bank_name);
+        $phpWord->setValue('bank_name', $popks->bank_name);
+        $phpWord->cloneBlock('block', 0, true, false, $replc);
+
+        $tempFilePath = tempnam(sys_get_temp_dir(), 'DRAFT PKS');
+        $phpWord->saveAs($tempFilePath);
+        $headers = [
+            'Content-Type' => 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+            'Content-Disposition' => 'attachment; filename="Draft PKS.docx"',
+        ];
+        return response()->file($tempFilePath, $headers);
     }
 
 
@@ -157,6 +187,16 @@ class C_Plan extends Controller
             "order_id" => $order_id
         ]);
     }
+    public function openOffer($order_id)
+    {
+        $order = M_Orders::find($order_id);
+        $offer = M_Offer::find($order->offer_letter_id);
+        return view('admin.client.plan.penawaran', [
+            "title" => "Plan | Penawaran",
+            "offer" => $offer,
+            "order_id" => $order_id
+        ]);
+    }
     public function fetchNegosiasi($order_id)
     {
         return view('admin.client.plan.negosiasi', [
@@ -174,8 +214,11 @@ class C_Plan extends Controller
 
     public function fetchPopks($order_id)
     {
+        $order = M_Orders::find($order_id);
+        $popks = M_Popks::find($order -> popks_letter_id);
         return view('admin.client.plan.popks', [
             "title" => "Plan | POPKS",
+            "field" => $popks,
             "order_id" => $order_id,
         ]);
     }
@@ -232,20 +275,12 @@ class C_Plan extends Controller
 
     public function addGrade(Request $request, $order_id, $order_details_id)
     {
-        $field = $request -> validate([
-            'pre_score' => 'required',
-            'post_score' => 'required',
-            'group_score' => 'required',
-            'final_score' => 'required',
-        ]);
-        if(!$field) return response(['error' => 'Please fill all the field']);
-
         $order_detail = M_OrderDetails::find($order_details_id);
         if(!$order_detail) return response(['error' => 'orang hitam']);
-        $order_detail -> pre_score = $field['pre_score'];
-        $order_detail -> post_score = $field['post_score'];
-        $order_detail -> group_score = $field['group_score'];
-        $order_detail -> final_score = $field['final_score'];
+        $order_detail -> pre_score = $request -> pre_score;
+        $order_detail -> post_score = $request -> post_score;
+        $order_detail -> group_score = $request -> group_score;
+        $order_detail -> final_score = $request -> final_score;
         $status = $order_detail -> update();
         
         if(!$status) return response(['error' => "data didn't updated"]);
@@ -253,16 +288,6 @@ class C_Plan extends Controller
     } 
 
     //?BELOW ARE USED IN OFFER PLAN
-    public function openOffer($order_id)
-    {
-        $order = M_Orders::find($order_id);
-        $offer = M_Offer::find($order->offer_letter_id);
-        return view('admin.client.plan.penawaran', [
-            "title" => "Plan | Penawaran",
-            "offer" => $offer,
-            "order_id" => $order_id
-        ]);
-    }
 
     public function addOfferDetails(Request $request, $order_id)
     {
@@ -270,7 +295,8 @@ class C_Plan extends Controller
             'needed_job' => 'required',
             'quantity' => 'required',
             'city_location' => 'required',
-            'contract_duration' => 'required'
+            'contract_duration' => 'required',
+            'price' => 'required'
         ]);
         $order = M_Orders::find($order_id);
         $offer_details = M_OfferLetterJobsDetails::create([
@@ -279,6 +305,7 @@ class C_Plan extends Controller
             'quantity' => $field['quantity'],
             'city_location' => $field['city_location'],
             'contract_duration' => $field['contract_duration'],
+            'price' => $field['price']
         ]);
 
         if (!$offer_details) return response(['error' => "Data didn't created"]);
@@ -471,17 +498,17 @@ class C_Plan extends Controller
         $popks -> client_director = $field['client_director'];
         $status = $popks -> save();
 
-        
         if (!$status) {
             return response([
                 'error' => "Data didn't updated"
             ]);
         } else {
-          $generate = $this->generateWordPopks($order_id ,$order->popks_letter_id);
-          return $generate;
+            $generate = $this->generateWordPopks($order_id, $order->popks_letter_id);
+            if ($generate) return $generate;
         }
-        // return redirect()->back();
-    }
+        return redirect()->back();
+    }   
+
 
     public function popks_send(Request $request, $order_id)
     {
