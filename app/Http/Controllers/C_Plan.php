@@ -53,24 +53,19 @@ class C_Plan extends Controller
         return response()->file($tempFilePath, $headers);
     }
 
-    public function generateWordPopks($order_id ,$popks_letter_id)
+    public function generateWordPopks($order_id, $popks_letter_id, $years)
     {
         $order = M_Orders::find($order_id);
-        $offer = M_Offer::find($order -> offer_letter_id);
-        $replc = [];
-        foreach ($offer->offerJobDetails as $detail) {
-            $replc[] = [
-                'qty' => $detail->quantity,
-                'job' => $detail->needed_job,
-            ];
-        }
+        $offer = M_Offer::find($order->offer_letter_id);
+        $offerJobDetails = $offer->offerJobDetails->take(2);
         $popks = M_Popks::find($popks_letter_id);
-        $toDate = Carbon::parse($popks -> end_date);
-        $fromDate = Carbon::parse($popks -> start_date);
+        $toDate = Carbon::parse($popks->end_date);
+        $fromDate = Carbon::parse($popks->start_date);
         $months = $toDate->diffInMonths($fromDate);
-
+        
         $phpWord = new TemplateProcessor('draft_popks.docx');
-        $phpWord->setValue('client_company', $popks -> leadData -> business_name);
+        $phpWord->setValue('letter_numbers', $popks -> letter_numbers);
+        $phpWord->setValue('client_company', $popks->leadData->business_name);
         $phpWord->setValue('client_name', $popks->client_name);
         $phpWord->setValue('client_position', $popks->client_position);
         $phpWord->setValue('client_address', $popks->client_address);
@@ -94,8 +89,16 @@ class C_Plan extends Controller
         $phpWord->setValue('bank_name', $popks->bank_name);
         $phpWord->setValue('jagooit_director', $popks->jagoit_director);
         $phpWord->setValue('client_director', $popks->client_director);
-        $phpWord->cloneBlock('block', 0, true, false, $replc);
-
+        $phpWord->setValue('selectedYear', $years);
+        $replc = [];
+        foreach ($offerJobDetails as $detail) {
+            $replc[] = [
+                'qty' => $detail->quantity,
+                'job' => $detail->needed_job,
+            ];
+        }
+        $phpWord->cloneBlock('block', count($replc), true, false, $replc);
+        
         $tempFilePath = tempnam(sys_get_temp_dir(), 'DRAFT PKS');
         $phpWord->saveAs($tempFilePath);
         $headers = [
@@ -125,13 +128,10 @@ class C_Plan extends Controller
     //?BELOW ARE TO FETCH A DATA
     public function fetchRecruitment(Request $request, $order_id)
     {
-        $perPage = $request->input('per_page', 5);
         $search = $request->input('search', '');
 
-        session(['talent_per_page' => $perPage]);
         session(['talent_search' => $search]);
 
-        $entries = session('talent_per_page', 5);
         $search = session('talent_search', '');
 
         $talent = M_Talents::where(function ($query) use ($search) {
@@ -145,7 +145,7 @@ class C_Plan extends Controller
                 ->orWhereHas('pendidikanTalent', function ($query) use ($search) {
                     $query->where('description', 'like', "%$search%");
                 });
-        })->where('is_active', '=', '0')->paginate($entries);
+        })->where('is_active', '=', '0')->paginate(5);
 
         return view('admin.client.plan.recruitment', [
             "title" => "Plan | Recruitment",
@@ -154,12 +154,35 @@ class C_Plan extends Controller
         ]);
     }
 
-    public function fetchTraining($order_id)
+    public function fetchTraining(Request $request, $order_id)
     {
-        $talent = M_Orders::where('id', $order_id)->paginate(5);
+        $order = M_Orders::find($order_id);
+        $searchQuery = $request->input('search', '');
+        session(['talent_search' => $searchQuery]);
+        $searchQuery = session('talent_search', '');
+        $query = M_OrderDetails::where('order_id', $order->id);
+
+        if (!empty($searchQuery)) {
+            $query->whereHas('talentData', function ($q) use ($searchQuery) {
+                $q->where('name', 'LIKE', '%' . $searchQuery . '%');
+            });
+        }
+
+        $talent = $query->paginate(5);
+
         return view('admin.client.plan.training', [
             "title" => "Plan | Training",
             "datas" => $talent,
+            "order" => $order,
+        ]);
+    }
+    public function openOffer($order_id)
+    {
+        $order = M_Orders::find($order_id);
+        $offer = M_Offer::find($order->offer_letter_id);
+        return view('admin.client.plan.penawaran', [
+            "title" => "Plan | Penawaran",
+            "offer" => $offer,
             "order_id" => $order_id
         ]);
     }
@@ -180,11 +203,16 @@ class C_Plan extends Controller
 
     public function fetchPopks($order_id)
     {
+        $order = M_Orders::find($order_id);
+        $popks = M_Popks::find($order->popks_letter_id);
         return view('admin.client.plan.popks', [
             "title" => "Plan | POPKS",
+            "field" => $popks,
             "order_id" => $order_id,
         ]);
     }
+
+
 
 
     //?BELOW ARE USED IN RECRUITMENT PLAN
@@ -194,8 +222,8 @@ class C_Plan extends Controller
         $selectedDate = new DateTime();
         $selectedDate->setTimestamp($selectedTimestamp);
         $updateOrder = M_Orders::find($order_id);
-        $updateOrder ->order_status = 2;
-        
+        $updateOrder->order_status = 2;
+
         foreach ($request->talents_id as $talent_id) {
             M_OrderDetails::create([
                 'talent_id' => $talent_id,
@@ -237,28 +265,18 @@ class C_Plan extends Controller
     public function addGrade(Request $request, $order_id, $order_details_id)
     {
         $order_detail = M_OrderDetails::find($order_details_id);
-        if(!$order_detail) return response(['error' => 'orang hitam']);
-        $order_detail -> pre_score = $request -> pre_score;
-        $order_detail -> post_score = $request -> post_score;
-        $order_detail -> group_score = $request -> group_score;
-        $order_detail -> final_score = $request -> final_score;
-        $status = $order_detail -> update();
-        
-        if(!$status) return response(['error' => "data didn't updated"]);
-        return redirect() -> back();
-    } 
+        if (!$order_detail) return response(['error' => 'orang hitam']);
+        $order_detail->pre_score = $request->pre_score;
+        $order_detail->post_score = $request->post_score;
+        $order_detail->group_score = $request->group_score;
+        $order_detail->final_score = $request->final_score;
+        $status = $order_detail->update();
+
+        if (!$status) return response(['error' => "data didn't updated"]);
+        return redirect()->back();
+    }
 
     //?BELOW ARE USED IN OFFER PLAN
-    public function openOffer($order_id)
-    {
-        $order = M_Orders::find($order_id);
-        $offer = M_Offer::find($order->offer_letter_id);
-        return view('admin.client.plan.penawaran', [
-            "title" => "Plan | Penawaran",
-            "offer" => $offer,
-            "order_id" => $order_id
-        ]);
-    }
 
     public function addOfferDetails(Request $request, $order_id)
     {
@@ -383,7 +401,8 @@ class C_Plan extends Controller
 
 
     //?PERCOBAAN CONTROLLER CODE
-    public function savePercobaan($order_id){
+    public function savePercobaan($order_id)
+    {
         $selectedTimestamp = time();
         $selectedDate = new DateTime();
         $selectedDate->setTimestamp($selectedTimestamp);
@@ -442,43 +461,43 @@ class C_Plan extends Controller
         ]);
 
         $order = M_Orders::find($order_id);
-        $popks = M_Popks::find($order -> popks_letter_id);
-        $popks -> letter_numbers = "02/JTI/{$selectedMonth}/{$selectedYear}";
-        $popks -> leads_id = $order -> leads_id;
-        $popks -> employee_name = $field['employee_name'];
-        $popks -> employee_position = $field['employee_position'];
-        $popks -> employee_address = $field['employee_address'];
-        $popks -> client_name = $field['client_name'];
-        $popks -> client_position = $field['client_position'];
-        $popks -> client_address = $field['client_address'];
-        $popks -> start_date = $field['start_date'];
-        $popks -> end_date = $field['end_date'];
-        $popks -> nominal_fees = $field['nominal_fees'];
-        $popks -> included_fees = $field['included_fees'];
-        $popks -> weekday_cost = $field['weekday_cost'];
-        $popks -> weekend_cost = $field['weekend_cost'];
-        $popks -> notes = $field['notes'];
-        $popks -> consumption_cost = $field['consumption_cost'];
-        $popks -> transportation_cost = $field['transportation_cost'];
-        $popks -> billing_due_date = $field['billing_due_date'];
-        $popks -> billing_days = $field['billing_days'];
-        $popks -> authorized_by = $field['authorized_by'];
-        $popks -> account_number = $field['account_number'];
-        $popks -> bank_name = $field['bank_name'];
-        $popks -> jagoit_director = $field['jagoit_director'];
-        $popks -> client_director = $field['client_director'];
-        $status = $popks -> save();
+        $popks = M_Popks::find($order->popks_letter_id);
+        $popks->letter_numbers = "{$popks->id}/JTI/PKS.{$selectedMonth}/{$selectedYear}";
+        $popks->leads_id = $order->leads_id;
+        $popks->employee_name = $field['employee_name'];
+        $popks->employee_position = $field['employee_position'];
+        $popks->employee_address = $field['employee_address'];
+        $popks->client_name = $field['client_name'];
+        $popks->client_position = $field['client_position'];
+        $popks->client_address = $field['client_address'];
+        $popks->start_date = $field['start_date'];
+        $popks->end_date = $field['end_date'];
+        $popks->nominal_fees = $field['nominal_fees'];
+        $popks->included_fees = $field['included_fees'];
+        $popks->weekday_cost = $field['weekday_cost'];
+        $popks->weekend_cost = $field['weekend_cost'];
+        $popks->notes = $field['notes'];
+        $popks->consumption_cost = $field['consumption_cost'];
+        $popks->transportation_cost = $field['transportation_cost'];
+        $popks->billing_due_date = $field['billing_due_date'];
+        $popks->billing_days = $field['billing_days'];
+        $popks->authorized_by = $field['authorized_by'];
+        $popks->account_number = $field['account_number'];
+        $popks->bank_name = $field['bank_name'];
+        $popks->jagoit_director = $field['jagoit_director'];
+        $popks->client_director = $field['client_director'];
+        $status = $popks->save();
 
         if (!$status) {
             return response([
                 'error' => "Data didn't updated"
             ]);
         } else {
-            $generate = $this->generateWordPopks($order_id, $order->popks_letter_id);
+            $generate = $this->generateWordPopks($order_id, $order->popks_letter_id, $selectedYear);
             if ($generate) return $generate;
         }
         return redirect()->back();
-    }   
+    }
 
 
     public function popks_send(Request $request, $order_id)

@@ -137,12 +137,12 @@ Route::middleware('auth')->group(function () {
                 //?Plan Handler
                 Route::get('/{order_id}', [C_Plan::class, 'handlePlanRoute']) -> name('handle_plan');
                 //?RECRUITMENT
-                Route::get('/{order_id}/recruitment', [C_Plan::class, 'fetchRecruitment'])->name('fetch_recruitment');
+                Route::get('/{order_id}/recruitment', [C_Plan::class, 'fetchRecruitment'])->name('fetchRecruitment');
+                Route::post('/{order_id}/recruitment', [C_Plan::class, 'saveRecruitment'])->name('save_recruitment');
                 Route::delete('/{order_id}/recruitment', [TalentController::class, 'destroy']);
-                Route::post('/{order_id}/recruitment', [C_Plan::class, 'saveRecruitment']) -> name('fetch_training');
 
                 //?TRAINING
-                Route::get('/{order_id}/training', [C_Plan::class, 'fetchTraining']) -> name('fetch_training');
+                Route::get('/{order_id}/training', [C_Plan::class, 'fetchTraining']) -> name('fetchTraining');
                 Route::post('/{order_id}/training', [C_Plan::class, 'saveTraining'])->name('new_offer');
                 Route::patch('/{order_id}/training/{order_details_id}', [C_Plan::class, 'addGrade'])->name('add_grade');
 
