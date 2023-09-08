@@ -71,14 +71,14 @@
     </div>
     <div class=" mt-5">
         <form action="{{ route('save_recruitment', ['order_id' => $order_id]) }}" method="POST">
-            @csrf 
+            @csrf
 
             <div class=" block md:flex justify-between">
                 <div class=" relative w-full md:w-auto">
                     <input type="text" name="search" class=" bg-[#D9D9D9] outline-none rounded-md text-black py-1  px-8 w-full md:w-auto" placeholder="Search">
                     <i class="ri-search-line absolute top-1 left-2 text-black"></i>
                 </div>
-              
+
             </div>
         </form>
         <div class=" bg-darkSecondary w-full px-3 rounded-md mt-4 overflow-auto hide-scrollbar">
@@ -165,8 +165,5 @@
             selectedTalents.push(id);
         }
     }
-
-
-
 </script>
 @endsection
