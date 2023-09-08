@@ -155,9 +155,34 @@ class C_Plan extends Controller
         ]);
     }
 
-    public function fetchTraining($order_id)
+    public function save_recruitment(Request $request, $order_id) 
     {
-        $talent = M_Orders::where('id', $order_id)->paginate(5);
+        $talentIds = $request['talents'];
+
+        foreach ($talentIds as $talentId) {
+            M_OrderDetails::create([
+                'talent_id' => $talentId,
+                'order_id'=> $order_id,
+            ]);
+        }
+
+        return redirect('/client/order/plan/'. $order_id .'/training/');
+    }
+    
+    public function fetchTraining(Request $request, $order_id)
+    {
+        $searchQuery = $request->input('search', '');
+        $query = M_OrderDetails::where('order_id', $order_id);
+        
+        if (!empty($searchQuery)) {
+                $query->whereHas('talentData', function($q) use ($searchQuery) {
+                    $q->where('name', 'LIKE', '%' . $searchQuery . '%');
+                });
+        }
+
+        $talent = $query->paginate(5);
+
+        // print_r($talent);
         return view('admin.client.plan.training', [
             "title" => "Plan | Training",
             "datas" => $talent,
@@ -199,6 +224,8 @@ class C_Plan extends Controller
             "order_id" => $order_id,
         ]);
     }
+
+
 
 
     //?BELOW ARE USED IN RECRUITMENT PLAN
