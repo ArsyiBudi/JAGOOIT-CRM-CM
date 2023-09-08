@@ -93,6 +93,7 @@ class C_Plan extends Controller
         $phpWord->setValue('authorized_by', $popks->authorized_by);
         $phpWord->setValue('account_number', $popks->account_number);
         $phpWord->setValue('bank_name', $popks->bank_name);
+        $phpWord->setValue('bank_name', $popks->bank_name);
         $phpWord->cloneBlock('block', 0, true, false, $replc);
 
         $tempFilePath = tempnam(sys_get_temp_dir(), 'DRAFT PKS');
@@ -159,6 +160,16 @@ class C_Plan extends Controller
         return view('admin.client.plan.training', [
             "title" => "Plan | Training",
             "datas" => $talent,
+            "order_id" => $order_id
+        ]);
+    }
+    public function openOffer($order_id)
+    {
+        $order = M_Orders::find($order_id);
+        $offer = M_Offer::find($order->offer_letter_id);
+        return view('admin.client.plan.penawaran', [
+            "title" => "Plan | Penawaran",
+            "offer" => $offer,
             "order_id" => $order_id
         ]);
     }
@@ -251,16 +262,6 @@ class C_Plan extends Controller
     } 
 
     //?BELOW ARE USED IN OFFER PLAN
-    public function openOffer($order_id)
-    {
-        $order = M_Orders::find($order_id);
-        $offer = M_Offer::find($order->offer_letter_id);
-        return view('admin.client.plan.penawaran', [
-            "title" => "Plan | Penawaran",
-            "offer" => $offer,
-            "order_id" => $order_id
-        ]);
-    }
 
     public function addOfferDetails(Request $request, $order_id)
     {
