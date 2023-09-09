@@ -42,9 +42,11 @@ class C_Plan extends Controller
                 'price_total' => ($detail->price * $detail->contract_duration) * $detail->quantity
             ];
         }
-
+        
         $phpWord->cloneBlock('table_block_placeholder', 0, true, false, $replc);
         $tempFilePath = tempnam(sys_get_temp_dir(), 'Surat_Penawaran');
+
+
         $phpWord->saveAs($tempFilePath);
         $headers = [
             'Content-Type' => 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
@@ -57,7 +59,6 @@ class C_Plan extends Controller
     {
         $order = M_Orders::find($order_id);
         $offer = M_Offer::find($order->offer_letter_id);
-        $offerJobDetails = $offer->offerJobDetails->take(2);
         $popks = M_Popks::find($popks_letter_id);
         $toDate = Carbon::parse($popks->end_date);
         $fromDate = Carbon::parse($popks->start_date);
@@ -91,13 +92,13 @@ class C_Plan extends Controller
         $phpWord->setValue('client_director', $popks->client_director);
         $phpWord->setValue('selectedYear', $years);
         $replc = [];
-        foreach ($offerJobDetails as $detail) {
+        foreach ($offer->offerJobDetails as $detail) {
             $replc[] = [
                 'qty' => $detail->quantity,
                 'job' => $detail->needed_job,
             ];
         }
-        $phpWord->cloneBlock('block', count($replc), true, false, $replc);
+        $phpWord->cloneBlock('block', 2, true, false, $replc);
         
         $tempFilePath = tempnam(sys_get_temp_dir(), 'DRAFT PKS');
         $phpWord->saveAs($tempFilePath);
@@ -105,6 +106,7 @@ class C_Plan extends Controller
             'Content-Type' => 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
             'Content-Disposition' => 'attachment; filename="Draft PKS.docx"',
         ];
+
         return response()->file($tempFilePath, $headers);
     }
 

@@ -15,7 +15,9 @@ use Illuminate\Support\Facades\Route;
 //? TESTING
 Route::get('/send-email/{email}', [C_Mail::class, 'index']);
 Route::get('/generate-offer/{offer_letter_id}', [C_Plan::class, 'generateWordOffer']);
-
+Route::get('/email', function() {
+    return view('emails.testmail');
+});
 
 //set active
 function set_active($routes)
