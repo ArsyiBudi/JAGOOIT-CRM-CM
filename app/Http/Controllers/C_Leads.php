@@ -31,14 +31,8 @@ class C_Leads extends Controller
             $query->where('business_name', 'like', "%$search%")
                 ->orWhere('address', 'like', "%$search%")
                 ->orWhere('pic_name', 'like', "%$search%");
-        });
-    
-        if ($sort === 'latest') {
-            $query->latest();
-        } elseif ($sort === 'old') {
-            $query->oldest();
-        }
-    
+        })->latest();
+        
         $data = $query->paginate($entries);
     
         return view('admin.leads.menu', [
