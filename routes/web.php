@@ -101,11 +101,12 @@ Route::middleware('auth')->group(function () {
         });
 
         //?LEADS OFFER
-        Route::get('/offer/{order_id}', function () {
+        Route::get('/offer/{leads_id}', function () {
             return view('admin.leads.offer', [
                 "title" => "Leads | Create Offer",
             ]);
         });
+        Route::post('/offer/{leads_id}', [C_Leads::class, 'sendOffer']);
     });
 
     Route::prefix('client')->group(function () {
