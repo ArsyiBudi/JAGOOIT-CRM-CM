@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\TestMail;
 use App\Models\M_Emails;
 use App\Models\M_Leads;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 use Symfony\Component\HttpKernel\Event\ResponseEvent;
 
 use function PHPUnit\Framework\returnSelf;
@@ -29,14 +31,8 @@ class C_Leads extends Controller
             $query->where('business_name', 'like', "%$search%")
                 ->orWhere('address', 'like', "%$search%")
                 ->orWhere('pic_name', 'like', "%$search%");
-        });
-    
-        if ($sort === 'latest') {
-            $query->latest();
-        } elseif ($sort === 'old') {
-            $query->oldest();
-        }
-    
+        })->latest();
+        
         $data = $query->paginate($entries);
     
         return view('admin.leads.menu', [
@@ -144,5 +140,19 @@ class C_Leads extends Controller
         $client -> save();
 
         return redirect('/client');
+    }
+
+    public function sendOffer(Request $request,$leads_id)
+    {
+        $lead = M_Leads::find($leads_id);
+        $mailData = [
+            'description' => $request -> description,
+            'lead_data' => $lead
+        ];
+        $mailSubject = $request -> subject;
+        if(!$lead -> hasOneEmail) return response(['error' => 'No Email Detected']);
+
+        Mail::to($lead -> hasOneEmail -> email_name)->send(new TestMail($mailData, $mailSubject));
+        return redirect()->back();
     }
 }

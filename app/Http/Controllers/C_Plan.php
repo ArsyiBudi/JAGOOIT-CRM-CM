@@ -45,6 +45,8 @@ class C_Plan extends Controller
 
         $phpWord->cloneBlock('table_block_placeholder', 0, true, false, $replc);
         $tempFilePath = tempnam(sys_get_temp_dir(), 'Surat_Penawaran');
+
+
         $phpWord->saveAs($tempFilePath);
         $headers = [
             'Content-Type' => 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
@@ -57,14 +59,13 @@ class C_Plan extends Controller
     {
         $order = M_Orders::find($order_id);
         $offer = M_Offer::find($order->offer_letter_id);
-        $offerJobDetails = $offer->offerJobDetails->take(2);
         $popks = M_Popks::find($popks_letter_id);
         $toDate = Carbon::parse($popks->end_date);
         $fromDate = Carbon::parse($popks->start_date);
         $months = $toDate->diffInMonths($fromDate);
-        
+
         $phpWord = new TemplateProcessor('draft_popks.docx');
-        $phpWord->setValue('letter_numbers', $popks -> letter_numbers);
+        $phpWord->setValue('letter_numbers', $popks->letter_numbers);
         $phpWord->setValue('client_company', $popks->leadData->business_name);
         $phpWord->setValue('client_name', $popks->client_name);
         $phpWord->setValue('client_position', $popks->client_position);
@@ -90,21 +91,23 @@ class C_Plan extends Controller
         $phpWord->setValue('jagooit_director', $popks->jagoit_director);
         $phpWord->setValue('client_director', $popks->client_director);
         $phpWord->setValue('selectedYear', $years);
-        $replc = [];
-        foreach ($offerJobDetails as $detail) {
-            $replc[] = [
-                'qty' => $detail->quantity,
-                'job' => $detail->needed_job,
-            ];
+        $replc = '';
+        foreach ($offer->offerJobDetails as $detail) {
+            $replc .= $detail->quantity . ' orang ' . $detail->needed_job . ', ';
         }
-        $phpWord->cloneBlock('block', count($replc), true, false, $replc);
-        
+
+        // Remove the trailing comma and space
+        $replc = rtrim($replc, ', ');
+        // Replace a placeholder with the concatenated string
+        $phpWord->setValue('jobDetails', $replc);
+
         $tempFilePath = tempnam(sys_get_temp_dir(), 'DRAFT PKS');
-        $phpWord->saveAs($tempFilePath);
+    $phpWord->saveAs($tempFilePath);
         $headers = [
             'Content-Type' => 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
             'Content-Disposition' => 'attachment; filename="Draft PKS.docx"',
         ];
+
         return response()->file($tempFilePath, $headers);
     }
 
@@ -405,7 +408,8 @@ class C_Plan extends Controller
 
     //?NEGOSIASI CONTROLLER CODE
 
-public function saveNegosiasi($order_id){
+    public function saveNegosiasi($order_id)
+    {
         $currentTimestamp = time();
         $selectedDate = new DateTime();
         $selectedDate->setTimestamp($currentTimestamp);
@@ -427,6 +431,10 @@ public function saveNegosiasi($order_id){
         $selectedDate->setTimestamp($currentTimestamp);
         $update = M_Orders::find($order_id);
         $update->order_status = 5;
+        if(is_null($update -> popks_letter_id)){
+            $popks = M_Popks::create();
+            $update -> popks_letter_id = $popks -> id;
+        }
 
         foreach ($request->talents_id as $talent_id) {
             $updateTalent = M_OrderDetails::find($talent_id);

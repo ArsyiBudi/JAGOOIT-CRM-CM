@@ -15,7 +15,9 @@ use Illuminate\Support\Facades\Route;
 //? TESTING
 Route::get('/send-email/{email}', [C_Mail::class, 'index']);
 Route::get('/generate-offer/{offer_letter_id}', [C_Plan::class, 'generateWordOffer']);
-
+Route::get('/email', function() {
+    return view('emails.testmail');
+});
 
 //set active
 function set_active($routes)
@@ -99,11 +101,12 @@ Route::middleware('auth')->group(function () {
         });
 
         //?LEADS OFFER
-        Route::get('/offer/{order_id}', function () {
+        Route::get('/offer/{leads_id}', function () {
             return view('admin.leads.offer', [
                 "title" => "Leads | Create Offer",
             ]);
         });
+        Route::post('/offer/{leads_id}', [C_Leads::class, 'sendOffer']);
     });
 
     Route::prefix('client')->group(function () {
