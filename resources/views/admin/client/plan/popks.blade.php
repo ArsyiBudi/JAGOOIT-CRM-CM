@@ -72,7 +72,7 @@
             </li>
             <li class="step step-primary">
             </li>
-            <li class="step"></li>
+            <li class="step step-primary"></li>
             <li></li>
         </ul>
     </div>
