@@ -14,12 +14,14 @@ class TestMail extends Mailable
     use Queueable, SerializesModels;
 
     public $mailData;
+    protected $mailSubject;
     /**
      * Create a new message instance.
      */
-    public function __construct($mailData)
+    public function __construct($mailData, $mailSubject)
     {
         $this -> mailData = $mailData;
+        $this->subject = $mailSubject;
     }
 
     /**
@@ -28,7 +30,7 @@ class TestMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Jago IT',
+            subject: $this -> mailSubject,
         );
     }
 

@@ -108,15 +108,16 @@
         </select>
         </div>
             <div id="formContainer" class="w-full">
-                <form id="form1" class="hidden">
+                <form id="form1" class="hidden" action="{{ url(request() -> path()) }}" method="post">
+                    @csrf
                     <div class="bg-white opacity-70 rounded-md w-full mb-4 p-2">
-                        <textarea required name="subjek" id="subjek" class="bg-transparent p-2 outline-none text-black w-full resize-none" placeholder="Subjek"></textarea>
+                        <textarea required name="subject" id="subjek" class="bg-transparent p-2 outline-none text-black w-full resize-none" placeholder="Subjek"></textarea>
                     </div>
                     <div class="bg-white opacity-70 rounded-md w-full mb-2 p-2 h-[200px]">
-                        <textarea required name="deskripsinote" id="deskripsinote" class="bg-transparent p-2 outline-none text-black w-full h-full resize-none" placeholder="Deskripsi"></textarea>
+                        <textarea required name="description" id="deskripsinote" class="bg-transparent p-2 outline-none text-black w-full h-full resize-none" placeholder="Deskripsi"></textarea>
                     </div>
                     <div class="w-[97px] mx-auto">
-                        <input required type="submit" class="bg-secondary text-white rounded-md px-4 mt-5 py-2 h-[37px] cursor-pointer hover:scale-95 duration-200">
+                        <input type="submit" class="bg-secondary text-white rounded-md px-4 mt-5 py-2 h-[37px] cursor-pointer hover:scale-95 duration-200">
                     </div>
                 </form>
                 <form id="form2" class="hidden">

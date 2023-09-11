@@ -30,6 +30,11 @@ class M_Leads extends Model
         return $this->belongsTo(M_GlobalParams::class, 'lead_status', 'id_params');
     }
 
+    public function hasOneEmail() : HasOne
+    {
+        return $this -> hasOne(M_Emails::class, 'leads_id');
+    }
+
     public function emails()
     {
         return $this->hasMany(M_Emails::class, 'leads_id');

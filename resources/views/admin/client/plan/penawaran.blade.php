@@ -131,7 +131,7 @@
                     <label for="konsumsi" class="text-sm text-white">Konsumsi (perhari)</label>
                     <div class=" mt-2 flex items-center gap-0">
                         <label for="konsumsi" class=" bg-white p-2 rounded-tl-md rounded-bl-md text-black border-grey border-r-[1px] w-10">RP.</label>
-                        <input name="consumption_cost" value="{{ old('consumption_cost', $offer -> consumption_cost) }}" type="number" id="konsumsi" placeholder="Konsumsi" class=" text-black bg-white w-full p-2 outline-none rounded-tr-md rounded-br-md">
+                        <input name="consumption_cost" value="{{ old('consumption_cost', $offer -> consumption_cost) }}" type="number" id="numberInput" placeholder="Konsumsi" class=" text-black bg-white w-full p-2 outline-none rounded-tr-md rounded-br-md">
                     </div>
                 </div>
                 <div class=" w-full md:w-1/2 mt-2 md:mt-0">
@@ -247,9 +247,12 @@
     </form>
 </dialog>
 
+
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.11.338/pdf.min.js"></script>
 
 <script>
+    
     const my_modal_5 = document.getElementById('my_modal_5');
 
     function showModal() {

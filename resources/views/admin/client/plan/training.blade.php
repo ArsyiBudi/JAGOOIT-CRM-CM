@@ -51,6 +51,7 @@
         -webkit-appearance: none;
         margin: 0;
     }
+
 </style>
 
 @section('container')
@@ -78,10 +79,10 @@
     </div>
 
     <div class=" mt-5">
-        <form action="">
+        <form action="{{ url(request() -> path()) }}" method="get">
             <div class=" block md:flex justify-between">
                 <div class=" relative w-full md:w-auto">
-                    <input type="text" name="search"  class=" bg-[#D9D9D9] outline-none rounded-md text-black py-1  px-8 w-full md:w-auto" placeholder="Search">
+                    <input type="text" name="search" value="{{ old('search', session('talent_search')) }}" class=" bg-[#D9D9D9] outline-none rounded-md text-black py-1  px-8 w-full md:w-auto" placeholder="Search">
                     <i class="ri-search-line absolute top-1 left-2 text-black"></i>
                 </div>
             </div>
@@ -105,13 +106,22 @@
                     </thead>
                     <tbody>
                         <div>
+                            @php
+                            $count = ($datas->currentPage() - 1) * $datas->perPage() + 1;
+                            @endphp
+                            @if ($datas->isEmpty())
+                            <p>No data available.</p>
+                            @else
                             @foreach($datas as $data)
                             @if($data -> talentData)
                             <tr data-row="{{ $data->id }}">
                                 <form action="{{ url(request() -> path() . '/' . $data -> id) }}" method="post">
                                     @csrf
                                     @method('PATCH')
-                                    <th align="center">{{ isset($i) ? ++$i : $i = 1  }}</th>
+                                    <th align="center">{{ $count  }}</th>
+                                    @php
+                                    $count++;
+                                    @endphp
                                     <td align="center">{{ $data -> talentData -> name}}</td>
                                     <td align="center">
                                         <div class="w-[86px] h-[27px] rounded-md bg-white flex items-center justify-center">
@@ -145,6 +155,7 @@
                             No Talent Data
                             @endif
                             @endforeach
+                            @endif
                         </div>
                     </tbody>
                 </table>
@@ -157,7 +168,7 @@
         <div class="mt-2 flex justify-between items-center gap-1 md:gap-0">
             <div>
                 <div>
-                    <a href="{{ url('/client/order/plan/'. $order_id . '/recruitment') }}" class="bg-secondary text-white text-sm text-center py-1 px-2 md:px-14 rounded-md font-bold flex items-center hover:scale-95 duration-200">
+                    <a href="{{ url('/client/order/plan/'. $order -> id . '/recruitment') }}" class="bg-secondary text-white text-sm text-center py-1 px-2 md:px-14 rounded-md font-bold flex items-center hover:scale-95 duration-200">
                         <p class="hidden md:block">Back</p>
                         <i class="ri-arrow-left-line block md:hidden ml-1"></i>
                     </a>
@@ -166,8 +177,7 @@
             </div>
             <div class="flex gap-4 max-sm:w-full max-sm:justify-between">
                 <div></div>
-                @foreach($datas as $data)
-                @if($data -> talentData)
+                @if($order -> hasOneTalent)
                 <div>
                     <form action="{{ url(request() -> path()) }}" method="POST">
                         @csrf
@@ -179,8 +189,8 @@
                 </div>
 
                 <div>
-                    @if($data -> offer_letter_id)
-                    <form method="get" action="{{ route('open_offer', ['order_id' => $data -> id]) }}">
+                    @if($order -> offer_letter_id)
+                    <form method="get" action="{{ route('fetchOffer', ['order_id' => $order -> id]) }}">
                         <button>
                             <div class=" bg-secondary text-white text-sm text-center py-1 px-3 md:px-14 rounded-md font-bold hover:scale-95 duration-200">
                                 <p class="hidden md:inline">Continue</p>
@@ -192,7 +202,6 @@
                     @else
                     Please pick one talent
                     @endif
-                    @endforeach
                 </div>
             </div>
         </div>
