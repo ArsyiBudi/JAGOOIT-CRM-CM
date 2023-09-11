@@ -254,7 +254,7 @@ class C_Plan extends Controller
         $selectedDate->setTimestamp($selectedTimestamp);
 
         $update = M_Orders::find($order_id);
-        if(is_null($update -> offer_letter_id)){
+        if (is_null($update->offer_letter_id)) {
             $offer = M_Offer::create();
             $update->offer_letter_id = $offer->id;
         }
@@ -381,16 +381,17 @@ class C_Plan extends Controller
             return response([
                 'error' => 'error'
             ]);
+        if (!$field)
+            return back()->with('error', 'Data gagal dikirim');
         $offer = M_Orders::find($order_id);
         $offer->cv_file = $field['cv_file'];
         $offer->cv_description = $field['cv_desc'];
         $status = $offer->update();
         if (!$status) {
-            return response([
-                'error' => "data didn't updated"
-            ]);
+            return back()->with('error', "Data didn't updated");
+        } else {
+            return back()->with('success', "Data has been send");
         }
-        return redirect()->back();
     }
 
     public function offer_save($order_id)
@@ -440,7 +441,7 @@ class C_Plan extends Controller
             $popks = M_Popks::create();
             $update->popks_letter_id = $popks->id;
         }
-        if(!is_null($request -> talents_id)){
+        if (!is_null($request->talents_id)) {
             foreach ($request->talents_id as $talent_id) {
                 $updateTalent = M_OrderDetails::find($talent_id);
                 $updateActive = M_Talents::find($updateTalent->talent_id);
