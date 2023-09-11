@@ -102,7 +102,7 @@ class C_Plan extends Controller
         $phpWord->setValue('jobDetails', $replc);
 
         $tempFilePath = tempnam(sys_get_temp_dir(), 'DRAFT PKS');
-    $phpWord->saveAs($tempFilePath);
+        $phpWord->saveAs($tempFilePath);
         $headers = [
             'Content-Type' => 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
             'Content-Disposition' => 'attachment; filename="Draft PKS.docx"',
@@ -186,7 +186,7 @@ class C_Plan extends Controller
         return view('admin.client.plan.penawaran', [
             "title" => "Plan | Penawaran",
             "offer" => $offer,
-            "order_id" => $order_id
+            "order" => $order
         ]);
     }
     public function fetchNegosiasi($order_id)
@@ -253,9 +253,11 @@ class C_Plan extends Controller
         $selectedDate = new DateTime();
         $selectedDate->setTimestamp($selectedTimestamp);
 
-        $offer = M_Offer::create();
         $update = M_Orders::find($order_id);
-        $update->offer_letter_id = $offer->id;
+        if(is_null($update -> offer_letter_id)){
+            $offer = M_Offer::create();
+            $update->offer_letter_id = $offer->id;
+        }
         $update->order_status = 3;
         if (is_null($update->end_training) && is_null($update->start_offer)) {
             $update->end_training = $selectedDate;
@@ -280,16 +282,6 @@ class C_Plan extends Controller
     }
 
     //?OFFER PLAN CODE
-    public function openOffer($order_id)
-    {
-        $order = M_Orders::find($order_id);
-        $offer = M_Offer::find($order->offer_letter_id);
-        return view('admin.client.plan.penawaran', [
-            "title" => "Plan | Penawaran",
-            "offer" => $offer,
-            "order_id" => $order_id
-        ]);
-    }
 
     public function addOfferDetails(Request $request, $order_id)
     {
@@ -434,18 +426,19 @@ class C_Plan extends Controller
         $selectedDate->setTimestamp($currentTimestamp);
         $update = M_Orders::find($order_id);
         $update->order_status = 5;
-        if(is_null($update -> popks_letter_id)){
+        if (is_null($update->popks_letter_id)) {
             $popks = M_Popks::create();
-            $update -> popks_letter_id = $popks -> id;
+            $update->popks_letter_id = $popks->id;
         }
-
-        foreach ($request->talents_id as $talent_id) {
-            $updateTalent = M_OrderDetails::find($talent_id);
-            $updateActive = M_Talents::find($updateTalent->talent_id);
-            $updateActive->is_active = 0;
-            $updateTalent->recruitment_status = 1;
-            $updateActive->save();
-            $updateTalent->save();
+        if(!is_null($request -> talents_id)){
+            foreach ($request->talents_id as $talent_id) {
+                $updateTalent = M_OrderDetails::find($talent_id);
+                $updateActive = M_Talents::find($updateTalent->talent_id);
+                $updateActive->is_active = 0;
+                $updateTalent->recruitment_status = 1;
+                $updateActive->save();
+                $updateTalent->save();
+            }
         }
         if (is_null($update->end_probation) && is_null($update->start_popks)) {
             $update->end_probation = $selectedDate;

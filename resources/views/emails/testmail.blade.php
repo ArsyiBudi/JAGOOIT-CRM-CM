@@ -19,7 +19,7 @@
     <p>Account Manager</p><br>
 
     <div>
-        <img src="/jagoLogo.png" alt="">
+        <img src="https://drive.google.com/file/d/1PGOKc36gkC---PqfHBDNiuhKi0VyhgiW/view?usp=sharing" alt="">
         <h4 class="text-gray-600">PT. Jago Talenta Indonesia</h4>
         <h4 class="text-gray-600">Komp. Buah Batu Regency Kav A1. No. 9</h4>
         <h4 class="text-gray-600">Kel. Kujangsari, Kec. Bandung Kidul</h4>
