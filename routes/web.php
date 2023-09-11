@@ -101,11 +101,7 @@ Route::middleware('auth')->group(function () {
         });
 
         //?LEADS OFFER
-        Route::get('/offer/{leads_id}', function () {
-            return view('admin.leads.offer', [
-                "title" => "Leads | Create Offer",
-            ]);
-        });
+        Route::get('/offer/{leads_id}', [C_Leads::class, 'openOffer']);
         Route::post('/offer/{leads_id}', [C_Leads::class, 'sendOffer']);
     });
 
