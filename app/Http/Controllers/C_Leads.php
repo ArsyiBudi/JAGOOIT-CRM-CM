@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Mail\TestMail;
 use App\Models\M_Emails;
 use App\Models\M_Leads;
+use App\Models\M_Orders;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
@@ -14,33 +15,46 @@ use function PHPUnit\Framework\returnSelf;
 
 class C_Leads extends Controller
 {
+    public function generateUniqueRandomId()
+    {
+        $unique = false;
+        $randomId = '';
+        while (!$unique) {
+            $randomId = strtoupper(substr(md5(microtime()), 0, 8));
+            if (!M_Orders::where('id', $randomId)->exists()) {
+                $unique = true;
+            }
+        }
+        return $randomId;
+    }
+
     //? BELOW USED FOR LEADS
     public function fetch(Request $request)
     {
         $perPage = $request->input('per_page', 5);
         $search = $request->input('search', '');
         $sort = $request->input('sort', 'oldest');
-    
+
         session(['leads_per_page' => $perPage]);
         session(['leads_search' => $search]);
-    
+
         $entries = session('leads_per_page', 5);
         $search = session('leads_search', '');
-    
+
         $query = M_Leads::where(function ($query) use ($search) {
             $query->where('business_name', 'like', "%$search%")
                 ->orWhere('address', 'like', "%$search%")
                 ->orWhere('pic_name', 'like', "%$search%");
         })->latest();
-        
+
         $data = $query->paginate($entries);
-    
+
         return view('admin.leads.menu', [
             "title" => "Leads | Menu",
             "leads" => $data
         ]);
     }
-    
+
     public function detail($leads_id)
     {
         $leads_data = M_Leads::find($leads_id);
@@ -49,8 +63,8 @@ class C_Leads extends Controller
                 'error' => "No leads has this id : {{ $leads_id }}"
             ]);
         }
-        
-    return view('admin.leads.detail', [
+
+        return view('admin.leads.detail', [
             "title" => "Leads | Detail",
             'leads' => $leads_data
         ]);
@@ -110,7 +124,7 @@ class C_Leads extends Controller
     {
         $perPage = $request->input('per_page', 5);
         $search = $request->input('search', '');
-    
+
         session(['client_per_page' => $perPage]);
         session(['client_search' => $search]);
 
@@ -121,11 +135,11 @@ class C_Leads extends Controller
             $query->where('business_name', 'like', "%$search%")
                 ->orWhere('address', 'like', "%$search%")
                 ->orWhere('pic_name', 'like', "%$search%")
-                ->orWhereHas('latestActivityParams', function ($query) use ($search){
-                    $query -> where('params_name', 'like', "%$search%");
+                ->orWhereHas('latestActivityParams', function ($query) use ($search) {
+                    $query->where('params_name', 'like', "%$search%");
                 });
-            })->where('client_indicator', '=', '1')
-        ->paginate($entries);
+        })->where('client_indicator', '=', '1')
+            ->paginate($entries);
 
         return view('admin.client/menu', [
             "title" => "Client | Menu",
@@ -136,8 +150,8 @@ class C_Leads extends Controller
     public function delete_client($client_id)
     {
         $client = M_Leads::find($client_id);
-        $client -> client_indicator = 0;
-        $client -> save();
+        $client->client_indicator = 0;
+        $client->save();
 
         return redirect('/client');
     }
@@ -147,21 +161,33 @@ class C_Leads extends Controller
     public function openOffer($leads_id)
     {
         $lead = M_Leads::find($leads_id);
+        $randomId = $this->generateUniqueRandomId();
         return view('admin.leads.offer', [
             "title" => "Leads | Create Offer",
-            "lead" => $lead
+            "lead" => $lead,
+            "randomId" => $randomId
         ]);
     }
-    public function sendOffer(Request $request,$leads_id)
+    public function sendOffer(Request $request, $leads_id)
     {
         $lead = M_Leads::find($leads_id);
         $mailData = [
-            'description' => $request -> description,
+            'description' => $request->description,
             'lead_data' => $lead
         ];
-        $mailSubject = $request -> subject;
-        if(!$lead -> hasOneEmail) return response(['error' => "No Email detected in {$lead -> business_name}"]);
-        Mail::to($request -> email_name)->send(new TestMail($mailData, $mailSubject));
+        $mailSubject = $request->subject;
+        if (!$lead->hasOneEmail) return response(['error' => "No Email detected in {$lead->business_name}"]);
+
+        $email = new TestMail($mailData, $mailSubject);
+
+        if ($request->hasFile('attachment')) {
+            $file = $request->file('attachment');
+            $email->attach($file->getRealPath(), [
+                'as' => $file->getClientOriginalName(),
+                'mime' => $file->getMimeType(),
+            ]);
+        }
+        Mail::to($request->email_name)->send($email);
         return redirect()->back();
     }
 }
