@@ -35,7 +35,7 @@ class M_Leads extends Model
         return $this -> hasOne(M_Emails::class, 'leads_id');
     }
 
-    public function emails()
+    public function emails() : HasMany
     {
         return $this->hasMany(M_Emails::class, 'leads_id');
     }

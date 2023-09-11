@@ -142,6 +142,16 @@ class C_Leads extends Controller
         return redirect('/client');
     }
 
+
+    //?THIS CODE ARE FOR OFFER
+    public function openOffer($leads_id)
+    {
+        $lead = M_Leads::find($leads_id);
+        return view('admin.leads.offer', [
+            "title" => "Leads | Create Offer",
+            "lead" => $lead
+        ]);
+    }
     public function sendOffer(Request $request,$leads_id)
     {
         $lead = M_Leads::find($leads_id);
@@ -150,9 +160,8 @@ class C_Leads extends Controller
             'lead_data' => $lead
         ];
         $mailSubject = $request -> subject;
-        if(!$lead -> hasOneEmail) return response(['error' => 'No Email Detected']);
-
-        Mail::to($lead -> hasOneEmail -> email_name)->send(new TestMail($mailData, $mailSubject));
+        if(!$lead -> hasOneEmail) return response(['error' => "No Email detected in {$lead -> business_name}"]);
+        Mail::to($request -> email_name)->send(new TestMail($mailData, $mailSubject));
         return redirect()->back();
     }
 }

@@ -95,10 +95,7 @@ class C_Plan extends Controller
         foreach ($offer->offerJobDetails as $detail) {
             $replc .= $detail->quantity . ' orang ' . $detail->needed_job . ', ';
         }
-
-        // Remove the trailing comma and space
         $replc = rtrim($replc, ', ');
-        // Replace a placeholder with the concatenated string
         $phpWord->setValue('jobDetails', $replc);
 
         $tempFilePath = tempnam(sys_get_temp_dir(), 'DRAFT PKS');
