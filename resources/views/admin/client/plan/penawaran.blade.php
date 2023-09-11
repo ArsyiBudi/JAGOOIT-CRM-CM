@@ -125,31 +125,21 @@
                 <div class=" w-full md:w-1/2">
                     <label for="weekday" class="text-sm text-white">Weekday</label>
                     <div class=" mt-2 flex items-center gap-0">
-<<<<<<< HEAD
-                        <label for="weekday" class=" bg-white p-2 rounded-tl-md rounded-bl-md text-black border-grey border-r-[1px] w-10">RP.</label>
-                        <input name="weekday_cost" value="{{ old('weekday_cost', @$offer -> weekday_cost) }}" type="number" id="weekday" placeholder="Weekday Overtime" class=" text-black bg-white w-full p-2 outline-none rounded-tr-md rounded-br-md ">
-=======
                         <label for="weekday"
                             class=" bg-white p-2 rounded-tl-md rounded-bl-md text-black border-grey border-r-[1px] w-10">RP.</label>
                         <input name="weekday_cost" value="{{ old('weekday_cost', $offer -> weekday_cost) }}"
                             type="number" id="weekday" placeholder="Weekday Overtime"
                             class=" text-black bg-white w-full p-2 outline-none rounded-tr-md rounded-br-md ">
->>>>>>> 673133a (fix timeline plan)
                     </div>
                 </div>
                 <div class=" w-full md:w-1/2 mt-2 md:mt-0">
                     <label for="Weekend" class="text-sm text-white">Weekend</label>
                     <div class=" mt-2 flex items-center gap-0">
-<<<<<<< HEAD
-                        <label for="Weekend" class=" bg-white p-2 rounded-tl-md rounded-bl-md text-black border-grey border-r-[1px] w-10">RP.</label>
-                        <input name="weekend_cost" value="{{ old('weekend_cost', @$offer -> weekend_cost) }}" type="number" id="Weekend" placeholder="Weekend Overtime" class=" text-black bg-white w-full p-2 outline-none rounded-tr-md rounded-br-md">
-=======
                         <label for="Weekend"
                             class=" bg-white p-2 rounded-tl-md rounded-bl-md text-black border-grey border-r-[1px] w-10">RP.</label>
                         <input name="weekend_cost" value="{{ old('weekend_cost', $offer -> weekend_cost) }}"
                             type="number" id="Weekend" placeholder="Weekend Overtime"
                             class=" text-black bg-white w-full p-2 outline-none rounded-tr-md rounded-br-md">
->>>>>>> 673133a (fix timeline plan)
                     </div>
                 </div>
             </div>
@@ -159,32 +149,22 @@
                 <div class=" w-full md:w-1/2">
                     <label for="konsumsi" class="text-sm text-white">Konsumsi (perhari)</label>
                     <div class=" mt-2 flex items-center gap-0">
-<<<<<<< HEAD
-                        <label for="konsumsi" class=" bg-white p-2 rounded-tl-md rounded-bl-md text-black border-grey border-r-[1px] w-10">RP.</label>
-                        <input name="consumption_cost" value="{{ old('consumption_cost', @$offer -> consumption_cost) }}" type="number" id="numberInput" placeholder="Konsumsi" class=" text-black bg-white w-full p-2 outline-none rounded-tr-md rounded-br-md">
-=======
                         <label for="konsumsi"
                             class=" bg-white p-2 rounded-tl-md rounded-bl-md text-black border-grey border-r-[1px] w-10">RP.</label>
                         <input name="consumption_cost" value="{{ old('consumption_cost', $offer -> consumption_cost) }}"
                             type="number" id="numberInput" placeholder="Konsumsi"
                             class=" text-black bg-white w-full p-2 outline-none rounded-tr-md rounded-br-md">
->>>>>>> 673133a (fix timeline plan)
                     </div>
                 </div>
                 <div class=" w-full md:w-1/2 mt-2 md:mt-0">
                     <label for="transport" class="text-sm text-white">Transport Pulang-Pergi Standar JKT-BDG</label>
                     <div class=" mt-2 flex items-center gap-0">
-<<<<<<< HEAD
-                        <label for="transport" class=" bg-white p-2 rounded-tl-md rounded-bl-md text-black border-grey border-r-[1px] w-10">RP.</label>
-                        <input name="transportation_cost" value="{{ old('transportation_cost', @$offer -> transportation_cost) }}" type="number" id="transport" placeholder="Transport" class=" text-black bg-white w-full p-2 outline-none rounded-tr-md rounded-br-md">
-=======
                         <label for="transport"
                             class=" bg-white p-2 rounded-tl-md rounded-bl-md text-black border-grey border-r-[1px] w-10">RP.</label>
                         <input name="transportation_cost"
                             value="{{ old('transportation_cost', $offer -> transportation_cost) }}" type="number"
                             id="transport" placeholder="Transport"
                             class=" text-black bg-white w-full p-2 outline-none rounded-tr-md rounded-br-md">
->>>>>>> 673133a (fix timeline plan)
                     </div>
                 </div>
             </div>
@@ -224,12 +204,7 @@
             <div class="w-full">
                 <label for="deskripsi" class="text-sm text-white">Deskripsi</label>
                 <div class="rounded-lg px-2 py-4 h-24 w-full bg-white mt-2">
-<<<<<<< HEAD
-                    <textarea name="cv_desc" id="deskripsi" type="text" class="text-black bg-transparent outline-none h-full w-full hide-scrollbar resize-none">@if(@$order -> cv_description) {{$order -> cv_description}} @endif</textarea>
-=======
-                    <textarea name="cv_desc" id="deskripsi" type="text"
-                        class="text-black bg-transparent outline-none h-full w-full hide-scrollbar resize-none"></textarea>
->>>>>>> 673133a (fix timeline plan)
+                    <textarea name="cv_desc" id="deskripsi" type="text" class="text-black bg-transparent outline-none h-full w-full hide-scrollbar resize-none">@if(@$order -> cv_description) @$order -> cv_description @endif</textarea>
                 </div>
             </div>
 
@@ -242,7 +217,7 @@
         <div class=" flex justify-between items-center pt-4 mb-5 md:mb-0">
             <div>
                 <div>
-                    <a href="{{ url('/client/order/plan/'. $order_id .'/training') }}"
+                    <a href="{{ url('/client/order/plan/'. $order -> id .'/training') }}"
                         class="bg-secondary text-white text-sm text-center py-1 px-2 md:px-14 rounded-md font-bold flex items-center hover:scale-95 duration-200">
                         <p class="hidden md:block">Back</p>
                         <i class="ri-arrow-left-line block md:hidden ml-1"></i>
@@ -263,14 +238,9 @@
         </form>
         <div>
             <div>
-<<<<<<< HEAD
-                <a href="{{ url('/client/order/plan/'.$order -> id .'/negosiasi') }}">
-                    <div class=" bg-secondary text-white text-sm text-center py-1 px-3 md:px-14 rounded-md font-bold hover:scale-95 duration-200">
-=======
-                <a href="{{ url('/client/order/plan/'.$order_id.'/negosiasi') }}">
+                <a href="{{ url('/client/order/plan/'.$order -> id.'/negosiasi') }}">
                     <div
                         class=" bg-secondary text-white text-sm text-center py-1 px-3 md:px-14 rounded-md font-bold hover:scale-95 duration-200">
->>>>>>> 673133a (fix timeline plan)
                         <p class="hidden md:inline">Continue</p>
                         <i class="ri-arrow-right-line block md:hidden"></i>
                     </div>
