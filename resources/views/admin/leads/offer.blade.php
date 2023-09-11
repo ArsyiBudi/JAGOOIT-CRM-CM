@@ -110,6 +110,11 @@
             <div id="formContainer" class="w-full">
                 <form id="form1" class="hidden" action="{{ url(request() -> path()) }}" method="post">
                     @csrf
+                    <select name="selectedEmail" id="email" class="mb-4 bg-transparent border m-1 btn p-2 outline-none border-spacing-1 rounded-md py-1 text-1xl hover:bg-gray-300 hover:text-darkSecondary text-white">
+                        <option value="form1" class="bg-grey hover:bg-gray-300 hover:text-darkSecondary">Select Email</option>
+                        <option value="form2" class="bg-grey hover:bg-gray-300 hover:text-darkSecondary">Appointment</option>
+                        <option value="form3" class="bg-grey hover:bg-gray-300 hover:text-darkSecondary">New Order</option>
+                    </select>
                     <div class="bg-white opacity-70 rounded-md w-full mb-4 p-2">
                         <textarea required name="subject" id="subjek" class="bg-transparent p-2 outline-none text-black w-full resize-none" placeholder="Subjek"></textarea>
                     </div>
