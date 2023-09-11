@@ -375,19 +375,16 @@ class C_Plan extends Controller
             'cv_file' => 'required',
             'cv_desc' => 'required',
         ]);
-        if (!$field) return response([
-            'error' => 'error'
-        ]);
+        if (!$field) return back()->with('error', 'Data gagal dikirim');
         $offer = M_Orders::find($order_id);
         $offer->cv_file = $field['cv_file'];
         $offer->cv_description = $field['cv_desc'];
         $status = $offer->update();
-        if (!$status) {
-            return response([
-                'error' => "data didn't updated"
-            ]);
+        if (!$status){
+            return back() -> with('error', "Data didn't updated");
+        }else{
+            return back() -> with('success', "Data has been send");
         }
-        return redirect()->back();
     }
 
     public function offer_save($order_id)
