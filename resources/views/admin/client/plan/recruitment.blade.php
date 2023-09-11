@@ -76,7 +76,9 @@
             @csrf
             <div class=" block md:flex justify-between">
                 <div class=" relative w-full md:w-auto">
-                    <input type="text" name="search" class=" bg-[#D9D9D9] outline-none rounded-md text-black py-1  px-8 w-full md:w-auto" placeholder="Search">
+                    <input type="text" name="search"
+                        class=" bg-[#D9D9D9] outline-none rounded-md text-black py-1  px-8 w-full md:w-auto"
+                        placeholder="Search">
                     <i class="ri-search-line absolute top-1 left-2 text-black"></i>
                 </div>
             </div>
@@ -111,7 +113,8 @@
                             <tr>
                                 <td>
                                     <label>
-                                        <input name="talents_id[]" value="{{ $talent -> id }}" type="checkbox" class="checkbox border-white border-2" />
+                                        <input name="talents_id[]" value="{{ $talent -> id }}" type="checkbox"
+                                            class="checkbox border-white border-2" />
                                     </label>
                                 </td>
                                 <td align="center">{{ $count }}</td>
@@ -139,20 +142,34 @@
                 </div>
         </div>
 
-
-        <div class="mt-2 flex justify-between items-center gap-1 md:gap-0">
+        <div class="mt-2 flex justify-between items-center pt-4 md:mb-0">
             <div>
-                <button type="submit" class=" bg-secondary text-white text-sm text-center py-1 px-3 md:px-14 rounded-md font-bold">
-                    <p class=" hidden md:block">Save</p>
-                    <i class="ri-save-3-line block md:hidden"></i>
-                </button>
-            </div>
-            <div>
-                <a href="{{ route('fetchTraining', ['order_id' => $order_id]) }}" class="bg-secondary text-white text-sm text-center py-1 px-2 md:px-14 rounded-md font-bold flex items-center">
-                    <p class="hidden md:block">Continue</p>
-                    <i class="ri-arrow-right-line block md:hidden ml-1"></i>
+                <a href="{{ url('/client/order/') }}">
+                    <div
+                        class="bg-secondary text-white text-sm text-center py-1 px-3 md:px-14 rounded-md font-bold hover:scale-95 duration-200">
+                        <p class=" hidden md:inline">Back</p>
+                        <i class="ri-arrow-left-line inline md:hidden"></i>
+                    </div>
                 </a>
             </div>
+            <div class="flex gap-4 max-sm:w-full max-sm:justify-between">
+                <div></div>
+                <div>
+                    <button type="submit" name="save"
+                        class=" w-full bg-secondary text-white text-sm text-center py-1 px-14 rounded-md font-bold hover:scale-95 duration-200">
+                        <p class=" hidden md:block">Save</p>
+                        <i class="ri-save-3-line block md:hidden"></i>
+                    </button>
+                </div>
+                <div>
+                    <a href="{{ route('fetchTraining', ['order_id' => $order_id]) }}"
+                        class="flex items-center bg-secondary text-white text-sm text-center py-1 px-3 md:px-14 rounded-md font-bold hover:scale-95 duration-200">
+                        <p class="hidden md:block">Continue</p>
+                        <i class="ri-arrow-right-line block md:hidden ml-1"></i>
+                    </a>
+                </div>
+            </div>
+
         </div>
         </form>
     </div>
