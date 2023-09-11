@@ -378,11 +378,7 @@ class C_Plan extends Controller
             'cv_desc' => 'required',
         ]);
         if (!$field)
-            return response([
-                'error' => 'error'
-            ]);
-        if (!$field)
-            return back()->with('error', 'Data gagal dikirim');
+            return back()->with('error', 'Please Fill are the field');
         $offer = M_Orders::find($order_id);
         $offer->cv_file = $field['cv_file'];
         $offer->cv_description = $field['cv_desc'];
