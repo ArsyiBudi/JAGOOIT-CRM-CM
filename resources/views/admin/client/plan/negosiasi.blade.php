@@ -61,7 +61,7 @@
             </li>
             <li class="step step-primary">
             </li>
-            <li class="step">
+            <li class="step step-primary">
             </li>
             <li class="step">
             </li>
