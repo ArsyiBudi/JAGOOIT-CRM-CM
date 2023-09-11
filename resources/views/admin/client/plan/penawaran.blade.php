@@ -22,7 +22,7 @@
 </div>
 <div class="hide-scrollbar overflow-x-hidden overflow-y-auto pt-0 h-[90vh] md:pr-5 px-5 md:px-0">
     <h1 class=" text-4xl">Penawaran</h1>
-    <p class=" text-[16px] font-medium pt-3">Silakan pilih kandidat</p>
+    <p class=" text-[16px] font-medium pt-3">Silakan buat surat penawaran</p>
 
     <div class=" mt-5  w-full overflow-auto md:overflow-hidden">
         <ul class=" mx-0 md:mx-auto steps steps-horizontal w-full ml-0 md:ml-14">
@@ -113,14 +113,14 @@
                     <label for="weekday" class="text-sm text-white">Weekday</label>
                     <div class=" mt-2 flex items-center gap-0">
                         <label for="weekday" class=" bg-white p-2 rounded-tl-md rounded-bl-md text-black border-grey border-r-[1px] w-10">RP.</label>
-                        <input name="weekday_cost" value="{{ old('weekday_cost', $offer -> weekday_cost) }}" type="number" id="weekday" placeholder="Weekday Overtime" class=" text-black bg-white w-full p-2 outline-none rounded-tr-md rounded-br-md ">
+                        <input name="weekday_cost" value="{{ old('weekday_cost', @$offer -> weekday_cost) }}" type="number" id="weekday" placeholder="Weekday Overtime" class=" text-black bg-white w-full p-2 outline-none rounded-tr-md rounded-br-md ">
                     </div>
                 </div>
                 <div class=" w-full md:w-1/2 mt-2 md:mt-0">
                     <label for="Weekend" class="text-sm text-white">Weekend</label>
                     <div class=" mt-2 flex items-center gap-0">
                         <label for="Weekend" class=" bg-white p-2 rounded-tl-md rounded-bl-md text-black border-grey border-r-[1px] w-10">RP.</label>
-                        <input name="weekend_cost" value="{{ old('weekend_cost', $offer -> weekend_cost) }}" type="number" id="Weekend" placeholder="Weekend Overtime" class=" text-black bg-white w-full p-2 outline-none rounded-tr-md rounded-br-md">
+                        <input name="weekend_cost" value="{{ old('weekend_cost', @$offer -> weekend_cost) }}" type="number" id="Weekend" placeholder="Weekend Overtime" class=" text-black bg-white w-full p-2 outline-none rounded-tr-md rounded-br-md">
                     </div>
                 </div>
             </div>
@@ -131,14 +131,14 @@
                     <label for="konsumsi" class="text-sm text-white">Konsumsi (perhari)</label>
                     <div class=" mt-2 flex items-center gap-0">
                         <label for="konsumsi" class=" bg-white p-2 rounded-tl-md rounded-bl-md text-black border-grey border-r-[1px] w-10">RP.</label>
-                        <input name="consumption_cost" value="{{ old('consumption_cost', $offer -> consumption_cost) }}" type="number" id="numberInput" placeholder="Konsumsi" class=" text-black bg-white w-full p-2 outline-none rounded-tr-md rounded-br-md">
+                        <input name="consumption_cost" value="{{ old('consumption_cost', @$offer -> consumption_cost) }}" type="number" id="numberInput" placeholder="Konsumsi" class=" text-black bg-white w-full p-2 outline-none rounded-tr-md rounded-br-md">
                     </div>
                 </div>
                 <div class=" w-full md:w-1/2 mt-2 md:mt-0">
                     <label for="transport" class="text-sm text-white">Transport Pulang-Pergi Standar JKT-BDG</label>
                     <div class=" mt-2 flex items-center gap-0">
                         <label for="transport" class=" bg-white p-2 rounded-tl-md rounded-bl-md text-black border-grey border-r-[1px] w-10">RP.</label>
-                        <input name="transportation_cost" value="{{ old('transportation_cost', $offer -> transportation_cost) }}" type="number" id="transport" placeholder="Transport" class=" text-black bg-white w-full p-2 outline-none rounded-tr-md rounded-br-md">
+                        <input name="transportation_cost" value="{{ old('transportation_cost', @$offer -> transportation_cost) }}" type="number" id="transport" placeholder="Transport" class=" text-black bg-white w-full p-2 outline-none rounded-tr-md rounded-br-md">
                     </div>
                 </div>
             </div>
@@ -174,7 +174,7 @@
             <div class="w-full">
                 <label for="deskripsi" class="text-sm text-white">Deskripsi</label>
                 <div class="rounded-lg px-2 py-4 h-24 w-full bg-white mt-2">
-                    <textarea name="cv_desc" id="deskripsi" type="text" class="text-black bg-transparent outline-none h-full w-full hide-scrollbar resize-none"></textarea>
+                    <textarea name="cv_desc" id="deskripsi" type="text" class="text-black bg-transparent outline-none h-full w-full hide-scrollbar resize-none">@if(@$order -> cv_description) {{$order -> cv_description}} @endif</textarea>
                 </div>
             </div>
 
@@ -186,7 +186,7 @@
         <div class=" flex justify-between items-center pt-4 mb-5 md:mb-0">
             <div>
                 <div>
-                    <a href="{{ url('/client/order/plan/'. $order_id .'/training') }}" class="bg-secondary text-white text-sm text-center py-1 px-2 md:px-14 rounded-md font-bold flex items-center hover:scale-95 duration-200">
+                    <a href="{{ url('/client/order/plan/'. $order -> id .'/training') }}" class="bg-secondary text-white text-sm text-center py-1 px-2 md:px-14 rounded-md font-bold flex items-center hover:scale-95 duration-200">
                         <p class="hidden md:block">Back</p>
                         <i class="ri-arrow-left-line block md:hidden ml-1"></i>
                     </a>
@@ -205,7 +205,7 @@
         </form>
         <div>
             <div>
-                <a href="{{ url('/client/order/plan/'.$order_id.'/negosiasi') }}">
+                <a href="{{ url('/client/order/plan/'.$order -> id .'/negosiasi') }}">
                     <div class=" bg-secondary text-white text-sm text-center py-1 px-3 md:px-14 rounded-md font-bold hover:scale-95 duration-200">
                         <p class="hidden md:inline">Continue</p>
                         <i class="ri-arrow-right-line block md:hidden"></i>
@@ -261,50 +261,6 @@
 
     function hideModal() {
         my_modal_5.close();
-    }
-
-    function handleFormSubmit() {
-        const dsc = document.getElementById('dsc');
-        const deskripsi = dsc.value;
-        const qty = document.getElementById('qty').value;
-        const lamaKontrak = document.getElementById('lamaKontrak').value;
-
-        if (deskripsi.trim() !== "") {
-
-
-            const detailContainer = document.querySelector('.detail-container'); // Add this class to your container
-
-            const detailElement = document.createElement('div');
-            detailElement.className = 'bg-white text-black text-opacity-50 text-sm text-center py-1 px-7 rounded-md font-bold flex items-center gap-3';
-
-            console.log(deskripsi);
-            detailElement.innerHTML = `
-                <p>${deskripsi}</p>
-                <span>
-                    <i class="text-lg cursor-pointer ri-delete-bin-2-line text-delete"></i>
-                </span>
-            `;
-
-            const deleteIcon = detailElement.querySelector('.ri-delete-bin-2-line');
-            deleteIcon.addEventListener('click', function() {
-                detailContainer.removeChild(detailElement);
-            });
-            detailContainer.appendChild(detailElement);
-
-        }
-
-
-
-        var detailData = {
-            qty: qty,
-            needed_job: deskripsi,
-            city_location: lamaKontrak
-        };
-
-        console.log(detailData);
-
-
-        deskripsi.value = "";
     }
 
     async function previewFile() {
