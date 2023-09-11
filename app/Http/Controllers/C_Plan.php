@@ -254,7 +254,7 @@ class C_Plan extends Controller
         $selectedDate->setTimestamp($selectedTimestamp);
 
         $update = M_Orders::find($order_id);
-        if(is_null($update -> offer_letter_id)){
+        if (is_null($update->offer_letter_id)) {
             $offer = M_Offer::create();
             $update->offer_letter_id = $offer->id;
         }
@@ -264,20 +264,23 @@ class C_Plan extends Controller
             $update->start_offer = $selectedDate;
         }
         $status = $update->update();
-        if ($status) return redirect('/client/order/plan/' . $order_id . '/penawaran/');
+        if ($status)
+            return redirect('/client/order/plan/' . $order_id . '/penawaran/');
     }
 
     public function addGrade(Request $request, $order_id, $order_details_id)
     {
         $order_detail = M_OrderDetails::find($order_details_id);
-        if (!$order_detail) return response(['error' => 'orang hitam']);
+        if (!$order_detail)
+            return response(['error' => 'orang hitam']);
         $order_detail->pre_score = $request->pre_score;
         $order_detail->post_score = $request->post_score;
         $order_detail->group_score = $request->group_score;
         $order_detail->final_score = $request->final_score;
         $status = $order_detail->update();
 
-        if (!$status) return response(['error' => "data didn't updated"]);
+        if (!$status)
+            return response(['error' => "data didn't updated"]);
         return redirect()->back();
     }
 
@@ -302,7 +305,8 @@ class C_Plan extends Controller
             'price' => $field['price']
         ]);
 
-        if (!$offer_details) return response(['error' => "Data didn't created"]);
+        if (!$offer_details)
+            return response(['error' => "Data didn't created"]);
         return redirect()->back();
     }
 
@@ -333,13 +337,15 @@ class C_Plan extends Controller
             'consumption_cost' => 'required',
             'transportation_cost' => 'required',
         ]);
-        if (!$input) return response(['error' => 'error'], 404);
+        if (!$input)
+            return response(['error' => 'error'], 404);
 
         $order = M_Orders::find($order_id);
         $offer = M_Offer::find($order->offer_letter_id);
-        if (!$offer) return response([
-            'error' => "No offer has this id: $order -> offer_letter_id"
-        ]);
+        if (!$offer)
+            return response([
+                'error' => "No offer has this id: $order -> offer_letter_id"
+            ]);
 
         $offer->letter_number = "JTI/{$selectedMonth}/SP/{$selectedYear}";
         $offer->offer_subject = $input['offer_subject'];
@@ -359,7 +365,8 @@ class C_Plan extends Controller
             ]);
         } else {
             $status = $this->generateWordOffer($order->offer_letter_id);
-            if ($status) return $status;
+            if ($status)
+                return $status;
         }
         return redirect()->back();
     }
@@ -370,15 +377,16 @@ class C_Plan extends Controller
             'cv_file' => 'required',
             'cv_desc' => 'required',
         ]);
-        if(!$field) return back() -> with('error', 'Please Fill are the field');
+        if (!$field)
+            return back()->with('error', 'Please Fill are the field');
         $offer = M_Orders::find($order_id);
         $offer->cv_file = $field['cv_file'];
         $offer->cv_description = $field['cv_desc'];
         $status = $offer->update();
-        if (!$status){
-            return back() -> with('error', "Data didn't updated");
-        }else{
-            return back() -> with('success', "Data has been send");
+        if (!$status) {
+            return back()->with('error', "Data didn't updated");
+        } else {
+            return back()->with('success', "Data has been send");
         }
     }
 
@@ -395,7 +403,8 @@ class C_Plan extends Controller
         $update->end_offer = $selectedDate;
         $update->start_appointment = $selectedDate;
         $status = $update->update();
-        if ($status) return redirect('/client/order/plan/' . $order_id . '/negosiasi');
+        if ($status)
+            return redirect('/client/order/plan/' . $order_id . '/negosiasi');
     }
 
     //?NEGOSIASI CONTROLLER CODE
@@ -412,7 +421,8 @@ class C_Plan extends Controller
             $update->start_probation = $selectedDate;
         }
         $status = $update->update();
-        if ($status) return redirect('/client/order/plan/' . $order_id . '/percobaan/');
+        if ($status)
+            return redirect('/client/order/plan/' . $order_id . '/percobaan/');
     }
 
     //?PERCOBAAN CONTROLLER CODE
@@ -427,7 +437,7 @@ class C_Plan extends Controller
             $popks = M_Popks::create();
             $update->popks_letter_id = $popks->id;
         }
-        if(!is_null($request -> talents_id)){
+        if (!is_null($request->talents_id)) {
             foreach ($request->talents_id as $talent_id) {
                 $updateTalent = M_OrderDetails::find($talent_id);
                 $updateActive = M_Talents::find($updateTalent->talent_id);
@@ -442,7 +452,8 @@ class C_Plan extends Controller
             $update->start_popks = $selectedDate;
         }
         $status = $update->update();
-        if ($status) return redirect('/client/order/plan/' . $order_id . '/popks/');
+        if ($status)
+            return redirect('/client/order/plan/' . $order_id . '/popks/');
     }
     public function deletePercobaan($order_id, $talent_id)
     {
@@ -489,9 +500,10 @@ class C_Plan extends Controller
             'client_director' => 'required',
         ]);
 
-        if (!$field) return response([
-            'error' => 'error'
-        ]);
+        if (!$field)
+            return response([
+                'error' => 'error'
+            ]);
 
         $order = M_Orders::find($order_id);
         $popks = M_Popks::find($order->popks_letter_id);
@@ -527,7 +539,8 @@ class C_Plan extends Controller
             ]);
         } else {
             $generate = $this->generateWordPopks($order_id, $order->popks_letter_id, $selectedYear);
-            if ($generate) return $generate;
+            if ($generate)
+                return $generate;
         }
         return redirect()->back();
     }
@@ -540,9 +553,10 @@ class C_Plan extends Controller
             'po_descr' => 'required',
         ]);
 
-        if (!$field) return response([
-            'error' => 'error'
-        ]);
+        if (!$field)
+            return response([
+                'error' => 'error'
+            ]);
 
         $popks = M_Orders::find($order_id);
         $popks->po_file = $field['po_file'];
@@ -568,6 +582,7 @@ class C_Plan extends Controller
             $update->end_popks = $selectedDate;
         }
         $status = $update->update();
-        if ($status) return redirect('/client/order');
+        if ($status)
+            return redirect('/client/order');
     }
 }
