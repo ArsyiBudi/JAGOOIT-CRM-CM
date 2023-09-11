@@ -103,7 +103,7 @@
                         @if($data -> talentData)
                             @foreach($data -> talentDataFetch as $row)
                             <tr class="text-center bg-grey font-medium">
-                                <td class="p-4">{{ $row -> id }}</td>
+                                <td class="p-4">{{ isset($i) ? ++$i : $i = 1 }}</td>
                                 <td class="p-4">{{ $row -> talentData -> name }}</td>
                                 <td class="p-4">{{ $row -> talentData -> pendidikanTalent -> description }}</td>
                                 <td class="p-4">{{ $row -> talentData -> keterampilanTalent -> description }}</td>

@@ -448,7 +448,7 @@ class C_Plan extends Controller
             }
         }
         if (is_null($update->end_probation) && is_null($update->start_popks)) {
-            $update->end_probation = $selectedDate;
+            $update->end_probition = $selectedDate;
             $update->start_popks = $selectedDate;
         }
         $status = $update->update();

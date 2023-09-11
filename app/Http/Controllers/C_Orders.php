@@ -73,13 +73,13 @@ class C_Orders extends Controller
         $search = session('order_search', '');
 
         $data = M_Orders::where(function ($query) use ($search) {
-            $query->where('due_date', 'like', "%$search%");
-            // ->orWhereHas('leadData', function($query) use ($search){
-            //     $query -> where('params_name', 'like', "%$search%");
-            // })
-            // ->orWhereHas('globalParams', function($query) use ($search){
-            //     $query -> where('params_name', 'like', "%$search%");
-            // });
+            $query->where('due_date', 'like', "%$search%")
+            ->orWhereHas('leadData', function($query) use ($search){
+                $query -> where('business_name', 'like', "%$search%");
+            })
+            ->orWhereHas('globalParams', function($query) use ($search){
+                $query -> where('params_name', 'like', "%$search%");
+            });
         })->where('order_status', '<', 8)
         ->paginate($entries);
 

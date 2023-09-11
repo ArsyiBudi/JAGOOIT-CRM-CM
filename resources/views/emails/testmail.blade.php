@@ -9,8 +9,8 @@
 </head>
 
 <body class="p-3 bg-white text-black">
-    <p class="mb-2">Yth, <br><strong>Bpk. aa<br>aaa</strong> <br>di tempat</p>
-    <p class="mb-2">Melalui email ini kami sampaikan proposal penawaran .</p>
+    <p class="mb-2">Yth, <br><strong>Bpk. {{ $mailData['lead_data'] -> pic_name }}<br>({{ $mailData['lead_data'] -> business_name }})</strong> <br>di tempat</p>
+    <p class="mb-2">Melalui email ini kami sampaikan proposal penawaran {{ $mailData['description'] }}.</p>
 
     <p>Besar harapan kami dapat bekerja sama dengan institusi bapak dan menjadi bagian dari solusi IT terima kasih.</p>
     <p>Salam,</p>

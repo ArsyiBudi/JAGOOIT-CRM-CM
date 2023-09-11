@@ -219,7 +219,7 @@
             <div class="w-full">
                 <label for="deskripsi" class="text-sm text-white">Deskripsi</label>
                 <div class="rounded-lg px-2 py-4 h-24 w-full bg-white mt-2">
-                    <textarea name="cv_desc" id="deskripsi" type="text" class="text-black bg-transparent outline-none h-full w-full hide-scrollbar resize-none">@if(@$order -> cv_description) @$order -> cv_description @endif</textarea>
+                    <textarea name="cv_desc" id="deskripsi" type="text" class="text-black bg-transparent outline-none h-full w-full hide-scrollbar resize-none">@if(@$order -> cv_description){{@$order -> cv_description}}@endif</textarea>
                 </div>
             </div>
 
