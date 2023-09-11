@@ -1,4 +1,3 @@
-
 <html>
 
 <head>
@@ -19,11 +18,11 @@
     <p>Account Manager</p><br>
 
     <div>
-        <img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AITFw-wM8rXCZg03biv6nWRsCe62EJRmo3GMinUqkr7jY0fY8TqgNof0Hgzr51Zz9nmeW40FRRvhdIThcIMBPvOHAH3tKxLO8Q=w1919-h983" alt="">
-        <h4 class="text-gray-600">PT. Jago Talenta Indonesia</h4>
-        <h4 class="text-gray-600">Komp. Buah Batu Regency Kav A1. No. 9</h4>
-        <h4 class="text-gray-600">Kel. Kujangsari, Kec. Bandung Kidul</h4>
-        <h4 class="text-gray-600">Kota Bandung, Jawa Barat</h4>
+        <img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AITFw-wM8rXCZg03biv6nWRsCe62EJRmo3GMinUqkr7jY0fY8TqgNof0Hgzr51Zz9nmeW40FRRvhdIThcIMBPvOHAH3tKxLO8Q=w1919-h983" alt="" width="152" height="20">
+        <h4 class="text-gray-600" style="color:grey; font-weight: 600;">PT. Jago Talenta Indonesia</h4>
+        <h4 class="text-gray-600" style="color:grey;">Komp. Buah Batu Regency Kav A1. No. 9</h4>
+        <h4 class="text-gray-600" style="color:grey;">Kel. Kujangsari, Kec. Bandung Kidul</h4>
+        <h4 class="text-gray-600" style="color:grey;">Kota Bandung, Jawa Barat</h4>
     </div>
 </body>
 

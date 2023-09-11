@@ -40,6 +40,7 @@ class C_Activity extends Controller
         ]);
         return redirect('/leads/'. $leads_id . '/detail')->with('success', 'Data berhasil ditambahkan.');
     }
+    
     public function note(Request $request, $leads_id){
         $field = $request->validate([
             'deskripsinote'=>'required'

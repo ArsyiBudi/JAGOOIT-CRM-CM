@@ -42,7 +42,9 @@ class M_Orders extends Model
         'end_popks',
         'tor_file',
         'cv_file',
+        'cv_description',
         'po_file',
+        'po_description'
     ];
 
     protected $guarded = [];
