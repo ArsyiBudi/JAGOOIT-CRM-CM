@@ -22,7 +22,7 @@
 </div>
 <div class="hide-scrollbar overflow-x-hidden overflow-y-auto pt-0 h-[90vh] md:pr-5 px-5 md:px-0">
     <h1 class=" text-4xl">Penawaran</h1>
-    <p class=" text-[16px] font-medium pt-3">Silakan pilih kandidat</p>
+    <p class=" text-[16px] font-medium pt-3">Silakan buat surat penawaran</p>
 
     <div class=" mt-5  w-full overflow-auto md:overflow-hidden">
         <ul class=" mx-0 md:mx-auto steps steps-horizontal w-full ml-0 md:ml-14">
