@@ -201,7 +201,6 @@
             </div>
             <div class="flex gap-4 max-sm:w-full max-sm:justify-between">
                 <div></div>
-                @if($order -> hasOneTalent)
                 <div>
                     <form action="{{ url(request() -> path()) }}" method="POST">
                         @csrf
@@ -214,7 +213,6 @@
                 </div>
 
                 <div>
-                    @if($order -> offer_letter_id)
                     <form method="get" action="{{ route('fetchOffer', ['order_id' => $order -> id]) }}">
                         <button>
                             <div
@@ -224,10 +222,6 @@
                             </div>
                         </button>
                     </form>
-                    @endif
-                    @else
-                    Please pick one talent
-                    @endif
                 </div>
             </div>
         </div>
