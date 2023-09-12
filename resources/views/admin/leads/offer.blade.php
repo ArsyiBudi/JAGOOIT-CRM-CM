@@ -68,7 +68,7 @@
                     </div>
                     <canvas id="pdf-preview" style="display: none;" class=" w-full rounded-md"></canvas>
                     <label for="file-tor" id="container-tor" class="flex justify-center items-center bg-white py-4 rounded-lg px-2 h-24 mt-2">
-                        <input required id="file-tor" type="file" name="tor_file" class="outline-none text-black rounded-lg px-2 py-4 h-24 hidden w-full bg-white" name="tor" onchange="previewFile()">
+                        <input required id="file-tor" type="file" name="tor_file" class="outline-none text-black rounded-lg px-2 py-4 h-24 hidden w-full bg-white" name="tor" onchange="previewFileTor()">
                         <span id="file-upload-label" class=" text-white font-semibold cursor-pointer font-quicksand">
                             <i class="ri-upload-2-fill text-3xl text-black"></i>
                         </span>
@@ -222,7 +222,68 @@
         }
     }
 </script>
+<script>
+async function previewFileTor() {
+    const fileInput = document.getElementById('file-tor');
+    const containerInput = document.getElementById('container-tor');
+    const fileNamePreview = document.getElementById('file-name-preview');
+    const canvas = document.getElementById('pdf-preview');
+    const fileUploadLabel = document.getElementById('file-upload-label');
+    const canvasLoading = document.getElementById('canvas-loading');
 
+
+    
+    if (fileInput.files && fileInput.files[0]) {
+        fileUploadLabel.textContent = 'Ganti File';
+        containerInput.style.width = 'auto'; 
+        containerInput.style.height = 'auto'; 
+        containerInput.style.backgroundColor = '#EC512E'
+    } else {
+        fileUploadLabel.innerHTML = '<i class="ri-upload-2-fill text-3xl text-black"></i>';
+    }
+    
+    if (fileInput.files && fileInput.files[0]) {
+        canvasLoading.style.display = 'block';
+        const file = fileInput.files[0];
+        const fileURL = URL.createObjectURL(file);
+
+        fileNamePreview.style.color = 'white'
+        fileNamePreview.textContent = file.name;
+        fileNamePreview.style.display = 'block';
+
+        if (file.type === 'application/pdf') {
+            
+            const loadingTask = pdfjsLib.getDocument(fileURL);
+            const pdf = await loadingTask.promise;
+
+            const pageNum = 1; 
+            const page = await pdf.getPage(pageNum);
+
+            const viewport = page.getViewport({ scale: 1 });
+            canvas.width = viewport.width;
+            canvas.height = 200;
+
+            const renderContext = {
+                canvasContext: canvas.getContext('2d'),
+                viewport
+            };
+
+            await page.render(renderContext).promise;
+            canvas.style.display = 'block';
+            canvasLoading.style.display = 'none';
+
+        } else {
+            canvas.style.display = 'none';
+            fileNamePreview.textContent = 'File harus berupa PDF!';
+            fileNamePreview.style.color = 'red'
+            canvasLoading.style.display = 'none';
+        }
+    } else {
+        fileNamePreview.style.display = 'none';
+        canvas.style.display = 'none';
+    }
+}
+</script>
 <script>
     document.addEventListener("DOMContentLoaded", function() {
         const formSelector = document.getElementById("formSelector");

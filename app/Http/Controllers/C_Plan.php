@@ -137,12 +137,12 @@ class C_Plan extends Controller
     //?BELOW ARE TO FETCH A DATA
     public function fetchRecruitment(Request $request, $order_id)
     {
+        $check = M_Orders::find($order_id);
+        if(!$check) return response(['error' => "No data from this id {$order_id}"]);
+
         $search = $request->input('search', '');
-
         session(['talent_search' => $search]);
-
         $search = session('talent_search', '');
-
         $talent = M_Talents::where(function ($query) use ($search) {
             $query->where('name', 'like', "%$search%")
                 ->orWhereHas('posisiTalent', function ($query) use ($search) {
@@ -165,6 +165,9 @@ class C_Plan extends Controller
 
     public function fetchTraining(Request $request, $order_id)
     {
+        $check = M_Orders::find($order_id);
+        if(!$check) return response(['error' => "No data from this id {$order_id}"]);
+
         $order = M_Orders::find($order_id);
         $searchQuery = $request->input('search', '');
         session(['talent_search' => $searchQuery]);
@@ -187,6 +190,9 @@ class C_Plan extends Controller
     }
     public function fetchOffer($order_id)
     {
+        $check = M_Orders::find($order_id);
+        if(!$check) return response(['error' => "No data from this id {$order_id}"]);
+
         $order = M_Orders::find($order_id);
         $offer = M_Offer::find($order->offer_letter_id);
         return view('admin.client.plan.penawaran', [
@@ -197,6 +203,9 @@ class C_Plan extends Controller
     }
     public function fetchNegosiasi($order_id)
     {
+        $check = M_Orders::find($order_id);
+        if(!$check) return response(['error' => "No data from this id {$order_id}"]);
+
         return view('admin.client.plan.negosiasi', [
             "title" => "Plan | Negosiasi",
             "order_id" => $order_id,
@@ -204,6 +213,9 @@ class C_Plan extends Controller
     }
     public function fetchPercobaan($order_id)
     {
+        $check = M_Orders::find($order_id);
+        if(!$check) return response(['error' => "No data from this id {$order_id}"]);
+
         $talent = M_OrderDetails::where('order_id', $order_id)->paginate(5);
         return view('admin.client.plan.percobaan', [
             "title" => "Plan | Percobaan",
@@ -214,6 +226,9 @@ class C_Plan extends Controller
 
     public function fetchPopks($order_id)
     {
+        $check = M_Orders::find($order_id);
+        if(!$check) return response(['error' => "No data from this id {$order_id}"]);
+
         $order = M_Orders::find($order_id);
         $popks = M_Popks::find($order->popks_letter_id);
         return view('admin.client.plan.popks', [
@@ -251,8 +266,22 @@ class C_Plan extends Controller
         return redirect('/client/order/plan/' . $order_id . '/training/');
     }
 
-
     //?TRAINING PLAN CODE
+    public function addGrade(Request $request, $order_id, $order_details_id)
+    {
+        $order_detail = M_OrderDetails::find($order_details_id);
+        if (!$order_detail)
+            return response(['error' => 'orang hitam']);
+        $order_detail->pre_score = $request->pre_score;
+        $order_detail->post_score = $request->post_score;
+        $order_detail->group_score = $request->group_score;
+        $order_detail->final_score = $request->final_score;
+        $status = $order_detail->update();
+
+        if (!$status)
+            return response(['error' => "data didn't updated"]);
+        return redirect()->back();
+    }
     public function saveTraining($order_id)
     {
         $selectedTimestamp = time();
@@ -272,22 +301,6 @@ class C_Plan extends Controller
         $status = $update->update();
         if ($status)
             return redirect('/client/order/plan/' . $order_id . '/penawaran/');
-    }
-
-    public function addGrade(Request $request, $order_id, $order_details_id)
-    {
-        $order_detail = M_OrderDetails::find($order_details_id);
-        if (!$order_detail)
-            return response(['error' => 'orang hitam']);
-        $order_detail->pre_score = $request->pre_score;
-        $order_detail->post_score = $request->post_score;
-        $order_detail->group_score = $request->group_score;
-        $order_detail->final_score = $request->final_score;
-        $status = $order_detail->update();
-
-        if (!$status)
-            return response(['error' => "data didn't updated"]);
-        return redirect()->back();
     }
 
     //?OFFER PLAN CODE
@@ -414,7 +427,6 @@ class C_Plan extends Controller
     }
 
     //?NEGOSIASI CONTROLLER CODE
-
     public function saveNegosiasi($order_id)
     {
         $currentTimestamp = time();
@@ -454,7 +466,7 @@ class C_Plan extends Controller
             }
         }
         if (is_null($update->end_probation) && is_null($update->start_popks)) {
-            $update->end_probition = $selectedDate;
+            $update->end_probation = $selectedDate;
             $update->start_popks = $selectedDate;
         }
         $status = $update->update();

@@ -61,9 +61,9 @@ Route::any('/', function () {
     return view('clients.landing');
 });
 
-// Route::fallback(function () { //!To Handle an unknown routes
-//     return redirect('/');
-// });
+Route::fallback(function () { //!To Handle an unknown routes
+    return back();
+});
 
 Route::view('/track', 'clients.track');
 Route::post('/track', [C_Orders::class, 'track']);

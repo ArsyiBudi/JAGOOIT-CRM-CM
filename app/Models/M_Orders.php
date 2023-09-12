@@ -37,7 +37,7 @@ class M_Orders extends Model
         'start_appointment',
         'end_appointment',
         'start_probation',
-        'end_probition',
+        'end_probation',
         'start_popks',
         'end_popks',
         'tor_file',
