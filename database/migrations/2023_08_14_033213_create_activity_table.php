@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('xs1')->nullable();
             $table->string('xs2')->nullable();
             $table->date('xd')->nullable();
-            $table->text('desc');
+            $table->text('desc') -> nullable();
             $table->timestamps();
         });
     }
