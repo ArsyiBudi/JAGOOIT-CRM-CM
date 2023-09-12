@@ -123,7 +123,7 @@
             {{ $lead -> business_name }} doesn't have an email
             @endif
             <div class="w-full mb-4">
-                <label for="file-brosur" class="text-sm text-white">File Surat Penawaran + CV (1 file, pdf)</label>
+                <label for="file-brosur" class="text-sm text-white">File Brosur</label>
 
                 <p id="file-name-preview" style="display: none;" class="pt-3"></p>
                 <div id="canvas-loading" class="my-3 w-full hidden">

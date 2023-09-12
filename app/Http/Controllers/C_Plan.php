@@ -55,7 +55,7 @@ class C_Plan extends Controller
         return response()->file($tempFilePath, $headers);
     }
 
-    public function generateWordPopks($order_id, $popks_letter_id, $years)
+    public function generateWordPopks($order_id, $popks_letter_id, $currentDate)
     {
         $order = M_Orders::find($order_id);
         $offer = M_Offer::find($order->offer_letter_id);
@@ -63,8 +63,17 @@ class C_Plan extends Controller
         $toDate = Carbon::parse($popks->end_date);
         $fromDate = Carbon::parse($popks->start_date);
         $months = $toDate->diffInMonths($fromDate);
+        $years = $currentDate->format('Y');
+        $date = $currentDate->format('d');
+
+        //?GENERATE CURRENT DATE
+        setlocale(LC_ALL, 'id_ID');
+        $dayName = strftime('%A', $currentDate->getTimestamp());
+        $monthName = strftime('%B', $currentDate->getTimestamp());
+
 
         $phpWord = new TemplateProcessor('draft_popks.docx');
+        $phpWord->setValue('create_date', "hari {$dayName}, tanggal {$date} bulan {$monthName} tahun {$years}");
         $phpWord->setValue('letter_numbers', $popks->letter_numbers);
         $phpWord->setValue('client_company', $popks->leadData->business_name);
         $phpWord->setValue('client_name', $popks->client_name);
@@ -535,7 +544,7 @@ class C_Plan extends Controller
                 'error' => "Data didn't updated"
             ]);
         } else {
-            $generate = $this->generateWordPopks($order_id, $order->popks_letter_id, $selectedYear);
+            $generate = $this->generateWordPopks($order_id, $order->popks_letter_id, $selectedDate);
             if ($generate)
                 return $generate;
         }
