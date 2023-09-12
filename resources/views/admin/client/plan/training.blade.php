@@ -192,7 +192,7 @@
             <div>
                 <div>
                     <a href="{{ url('/client/order/plan/'. $order -> id . '/recruitment') }}"
-                        class="bg-secondary text-white text-sm text-center py-1 px-2 md:px-14 rounded-md font-bold flex items-center hover:scale-95 duration-200">
+                        class="bg-grey text-white text-sm text-center py-1 px-2 md:px-14 rounded-md font-bold flex items-center hover:scale-95 duration-200">
                         <p class="hidden md:block">Back</p>
                         <i class="ri-arrow-left-line block md:hidden ml-1"></i>
                     </a>
@@ -216,7 +216,7 @@
                     <form method="get" action="{{ route('fetchOffer', ['order_id' => $order -> id]) }}">
                         <button>
                             <div
-                                class=" bg-secondary text-white text-sm text-center py-1 px-3 md:px-14 rounded-md font-bold hover:scale-95 duration-200">
+                                class="bg-grey  text-white text-sm text-center py-1 px-3 md:px-14 rounded-md font-bold hover:scale-95 duration-200">
                                 <p class="hidden md:inline">Continue</p>
                                 <i class="ri-arrow-right-line block md:hidden"></i>
                             </div>
