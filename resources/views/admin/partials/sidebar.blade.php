@@ -5,8 +5,8 @@
     </div>
 
     <div class="flex gap-4 items-center mb-9 ">
-        <img src="/bgRusdi.jpeg" alt="bgRusdi" class="rounded-full w-[54px] h-[54px]">
-        <div class="flex flex-col ">
+        
+        <div class="flex flex-col items-center">
             @if(session() -> has('user'))
             <h6 class="text-white font-bold text-[14px]">{{ session('user') -> xs1 }}</h6>
             <p class="text-white text-[10px]">{{ session('user')->userTypes->description }}</p>
