@@ -67,9 +67,9 @@ class C_Plan extends Controller
         $date = $currentDate->format('d');
 
         //?GENERATE CURRENT DATE
-        setlocale(LC_ALL, 'id_ID');
-        $dayName = strftime('%A', $currentDate->getTimestamp());
-        $monthName = strftime('%B', $currentDate->getTimestamp());
+        setlocale(LC_TIME, 'id_ID');
+        $dayName = Carbon::parse($currentDate)->isoFormat('dddd');
+        $monthName = Carbon::parse($currentDate)->isoFormat('MMMM');
 
 
         $phpWord = new TemplateProcessor('draft_popks.docx');
