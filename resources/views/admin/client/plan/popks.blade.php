@@ -163,7 +163,7 @@
             <div class="text-xl mt-7">Invoice Tagihan</div>
             <div class="flex flex-row flex-wrap gap-2">
                 Tanggal
-                <input type="date" class="w-10 text-black rounded-md p-1 outline-none" name="billing_due_date" value="{{ old('billing_due_date',@$field->billing_due_date)}}">
+                <input type="number" class="w-10 text-black rounded-md p-1 outline-none" name="billing_due_date" value="{{ old('billing_due_date',@$field->billing_due_date)}}">
                 Setiap Bulan dan Pembayaran Selambat-Lambatnya
                 <input type="number" class="text-black bg-white rounded-md p-1 outline-none" name="billing_days" value="{{ old('billing_days',@$field->billing_days)}}">
                 Hari
