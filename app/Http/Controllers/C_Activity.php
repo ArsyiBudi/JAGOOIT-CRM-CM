@@ -36,18 +36,18 @@ class C_Activity extends Controller
             'xd'=>$field['waktu'],
             'desc'=>$field['deskripsi'],
         ]);
+        if(!$activity) return response(['Error' => "Data didn't created"]);
 
         $lead = M_Leads::find($leads_id);
         $mailData = [
             'description' => $request->description,
             'lead_data' => $lead
         ];
-        $mailSubject = $request->subject;
+        $mailSubject = "Appoinment | JagooIT - {$lead -> business_name}";
         if (!$lead->hasOneEmail) return response(['error' => "No Email detected in {$lead->business_name}"]);
 
         $email = new TestMail($mailData, $mailSubject);
-
-        if ($request->hasFile('attachment')) {
+        if($request->hasFile('attachment')) {
             $file = $request->file('attachment');
             $email->attach($file->getRealPath(), [
                 'as' => $file->getClientOriginalName(),
@@ -59,7 +59,7 @@ class C_Activity extends Controller
         if(!$activity) return response([
             'error' => 'Error Occured',
         ]);
-        return redirect('/leads/'. $leads_id . '/detail')->with('success', 'Data berhasil ditambahkan.');
+        return back()->with('success', 'Data berhasil ditambahkan.');
     }
     
     public function note(Request $request, $leads_id){
