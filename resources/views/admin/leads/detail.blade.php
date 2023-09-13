@@ -34,6 +34,11 @@
                 </div>
                 <div class="pt-3">
                     <p>
+                        Email : <span class=" font-bold"> botak </span>
+                    </p>
+                </div>
+                <div class="pt-3">
+                    <p>
                        Aktivitas terakhir : <span class=" font-bold">
                             @if ($leads-> hasOneActivity)
                                 @if ($leads ->latestActivityParams)
