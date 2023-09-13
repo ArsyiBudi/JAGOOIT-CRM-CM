@@ -19,12 +19,12 @@ return new class extends Migration
             $table->integer('popks_letter_id')->nullable();
             $table->integer('order_status')->default(1);
             $table->string('desired_position');
-            $table->integer('needed_qty');
+            $table->bigInteger('needed_qty');
             $table->date('due_date');
             $table->text('description');
             $table->text('characteristic_desc');
             $table->text('skills_desc');
-            $table->integer('budget_estimation');
+            $table->double('budget_estimation');
             $table->timestamp('start_recruitment') -> nullable();
             $table->timestamp('end_recruitment') -> nullable();
             $table->timestamp('start_training')  -> nullable();

@@ -15,10 +15,10 @@ return new class extends Migration
             $table->integer('id', true);
             $table->integer('talent_id');
             $table->string('order_id');
-            $table->integer('pre_score') -> nullable();
-            $table->integer('post_score') ->nullable();
-            $table->integer('group_score') ->nullable();
-            $table->integer('final_score') ->nullable();
+            $table->double('pre_score') -> nullable();
+            $table->double('post_score') ->nullable();
+            $table->double('group_score') ->nullable();
+            $table->double('final_score') ->nullable();
             $table->boolean('recruitment_status') ->default(false);
             $table->timestamps();
         });

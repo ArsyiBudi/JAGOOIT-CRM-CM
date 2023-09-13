@@ -67,14 +67,14 @@
 
                 <div class="w-full  mb-4 ">
                     <label for="file-tor" class="text-sm text-white">File TOR ( PDF )</label>
-                    <p id="file-name-preview" style="display: none;" class=" pt-3"></p>
-                    <div id="canvas-loading" class=" my-3 w-full hidden">
+                    <p id="file-name-preview-tor" style="display: none;" class=" pt-3"></p>
+                    <div id="canvas-loading-tor" class=" my-3 w-full hidden">
                         <span class="loading loading-dots loading-md "></span>
                     </div>
-                    <canvas id="pdf-preview" style="display: none;" class=" w-full rounded-md"></canvas>
+                    <canvas id="pdf-preview-tor" style="display: none;" class=" w-full rounded-md"></canvas>
                     <label for="file-tor" id="container-tor" class="flex justify-center items-center bg-white py-4 rounded-lg px-2 h-24 mt-2">
                         <input required id="file-tor" type="file" name="tor_file" class="outline-none text-black rounded-lg px-2 py-4 h-24 hidden w-full bg-white" name="tor" onchange="previewFileTor()">
-                        <span id="file-upload-label" class=" text-white font-semibold cursor-pointer font-quicksand">
+                        <span id="file-upload-label-tor" class=" text-white font-semibold cursor-pointer font-quicksand">
                             <i class="ri-upload-2-fill text-3xl text-black"></i>
                         </span>
                     </label>
@@ -129,16 +129,16 @@
             <div class="w-full mb-4">
                 <label for="file-brosur" class="text-sm text-white">File Brosur</label>
 
-                <p id="file-name-preview" style="display: none;" class="pt-3"></p>
-                <div id="canvas-loading" class="my-3 w-full hidden">
+                <p id="file-name-preview-brosur" style="display: none;" class="pt-3"></p>
+                <div id="canvas-loading-brosur" class="my-3 w-full hidden">
                     <span class="loading loading-dots loading-md"></span>
                 </div>
 
-                <canvas id="pdf-preview" style="display: none;" class="w-full rounded-md"></canvas>
+                <canvas id="pdf-preview-brosur" style="display: none;" class="w-full rounded-md"></canvas>
 
                 <label for="file-brosur" id="container-brosur" class="flex justify-center items-center bg-white py-4 rounded-lg px-2 h-24 cursor-pointer mt-2">
                     <input required id="file-brosur" type="file" name="attachment" class="text-black rounded-lg px-2 py-4 h-[56px] w-[337px] hidden bg-white" onchange="previewFile()">
-                    <span id="file-upload-label" class="text-white font-semibold cursor-pointer font-quicksand">
+                    <span id="file-upload-label-brosur" class="text-white font-semibold cursor-pointer font-quicksand">
                         <i class="ri-upload-2-fill text-3xl text-black"></i>
                     </span>
                 </label>
@@ -166,10 +166,10 @@
     async function previewFile() {
         const fileInput = document.getElementById('file-brosur');
         const containerInput = document.getElementById('container-brosur');
-        const fileNamePreview = document.getElementById('file-name-preview');
-        const canvas = document.getElementById('pdf-preview');
-        const fileUploadLabel = document.getElementById('file-upload-label');
-        const canvasLoading = document.getElementById('canvas-loading');
+        const fileNamePreview = document.getElementById('file-name-preview-brosur');
+        const canvas = document.getElementById('pdf-preview-brosur');
+        const fileUploadLabel = document.getElementById('file-upload-label-brosur');
+        const canvasLoading = document.getElementById('canvas-loading-brosur');
 
 
 
@@ -230,10 +230,10 @@
 async function previewFileTor() {
     const fileInput = document.getElementById('file-tor');
     const containerInput = document.getElementById('container-tor');
-    const fileNamePreview = document.getElementById('file-name-preview');
-    const canvas = document.getElementById('pdf-preview');
-    const fileUploadLabel = document.getElementById('file-upload-label');
-    const canvasLoading = document.getElementById('canvas-loading');
+    const fileNamePreview = document.getElementById('file-name-preview-tor');
+    const canvas = document.getElementById('pdf-preview-tor');
+    const fileUploadLabel = document.getElementById('file-upload-label-tor');
+    const canvasLoading = document.getElementById('canvas-loading-tor');
 
 
     
