@@ -188,6 +188,6 @@ class C_Leads extends Controller
             ]);
         }
         Mail::to($request->email_name)->send($email);
-        return redirect()->back();
+        return redirect()->back()->with('success', 'Email berhasil terkirim');
     }
 }

@@ -52,6 +52,8 @@ class C_Plan extends Controller
             'Content-Type' => 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
             'Content-Disposition' => 'attachment; filename="Surat_Penawaran.docx"',
         ];
+        
+
         return response()->file($tempFilePath, $headers);
     }
 
@@ -384,9 +386,9 @@ class C_Plan extends Controller
             ]);
         } else {
             $status = $this->generateWordOffer($order->offer_letter_id);
-            if ($status)
+            if ($status )
                 return $status;
-        }
+            }
         return redirect()->back();
     }
 
