@@ -51,6 +51,7 @@
         -webkit-appearance: none;
         margin: 0;
     }
+
 </style>
 
 @section('container')
@@ -81,9 +82,7 @@
         <form action="{{ url(request() -> path()) }}" method="get">
             <div class=" block md:flex justify-between">
                 <div class=" relative w-full md:w-auto">
-                    <input type="text" name="search" value="{{ old('search', session('talent_search')) }}"
-                        class=" bg-[#D9D9D9] outline-none rounded-md text-black py-1  px-8 w-full md:w-auto"
-                        placeholder="Search">
+                    <input type="text" name="search" value="{{ old('search', session('talent_search')) }}" class=" bg-[#D9D9D9] outline-none rounded-md text-black py-1  px-8 w-full md:w-auto" placeholder="Search">
                     <i class="ri-search-line absolute top-1 left-2 text-black"></i>
                 </div>
             </div>
@@ -125,52 +124,31 @@
                                     @endphp
                                     <td align="center">{{ $data -> talentData -> name}}</td>
                                     <td align="center">
-                                        <div
-                                            class="w-[86px] h-[27px] rounded-md bg-white flex items-center justify-center">
-                                            <input id='pre-test' name='pre_score' type="number"
-                                                value="{{ old('pre_score', @$data -> pre_score) }}"
-                                                class='text-black w-full text-center outline-none bg-transparent'
-                                                placeholder='nilai'>
+                                        <div class="w-[86px] h-[27px] rounded-md bg-white flex items-center justify-center">
+                                            <input id='pre-test' name='pre_score' type="number" value="{{ old('pre_score', @$data -> pre_score) }}" class='text-black w-full text-center outline-none bg-transparent' placeholder='nilai'>
                                         </div>
                                     </td>
                                     <td align="center">
-                                        <div
-                                            class="w-[86px] h-[27px] rounded-md bg-white flex items-center justify-center">
-                                            <input id='post-test' name='post_score' type="number"
-                                                value="{{ old('pre_score', @$data -> post_score) }}"
-                                                class='text-black w-full text-center outline-none bg-transparent'
-                                                placeholder='nilai'>
+                                        <div class="w-[86px] h-[27px] rounded-md bg-white flex items-center justify-center">
+                                            <input id='post-test' name='post_score' type="number" value="{{ old('pre_score', @$data -> post_score) }}" class='text-black w-full text-center outline-none bg-transparent' placeholder='nilai'>
                                         </div>
                                     </td>
                                     <td align="center">
-                                        <div
-                                            class="w-[86px] h-[27px] rounded-md bg-white flex items-center justify-center">
-                                            <input id='nilai-kelompok' name='group_score' type="number"
-                                                value="{{ old('pre_score', @$data -> group_score) }}"
-                                                class='text-black w-full text-center outline-none bg-transparent'
-                                                placeholder='nilai'>
+                                        <div class="w-[86px] h-[27px] rounded-md bg-white flex items-center justify-center">
+                                            <input id='nilai-kelompok' name='group_score' type="number" value="{{ old('pre_score', @$data -> group_score) }}" class='text-black w-full text-center outline-none bg-transparent' placeholder='nilai'>
                                         </div>
                                     </td align="center">
                                     <td align="center">
-                                        <div
-                                            class="w-[86px] h-[27px] rounded-md bg-white flex items-center justify-center">
-                                            <input id='nilai-akhir' name='final_score' type="number"
-                                                value="{{ old('pre_score', @$data -> final_score) }}"
-                                                class='text-black w-full text-center outline-none bg-transparent'
-                                                placeholder='nilai'>
+                                        <div class="w-[86px] h-[27px] rounded-md bg-white flex items-center justify-center">
+                                            <input id='nilai-akhir' name='final_score' type="number" value="{{ old('pre_score', @$data -> final_score) }}" class='text-black w-full text-center outline-none bg-transparent' placeholder='nilai'>
                                         </div>
                                     </td>
                                     <td align="center">
-                                        <div
-                                            class="w-[86px] h-[27px] rounded-md bg-white flex items-center justify-center">
-                                            <input disabled id='rata-rata' name='average_score' type="number"
-                                                value="{{ old('average_score', ($data->pre_score + $data->post_score + $data->group_score + $data->final_score) / 4) }}"
-                                                class='text-black w-full text-center outline-none bg-transparent'
-                                                placeholder='0'>
+                                        <div class="w-[86px] h-[27px] rounded-md bg-white flex items-center justify-center">
+                                            <input disabled id='rata-rata' name='average_score' type="number" value="{{ old('average_score', ($data->pre_score + $data->post_score + $data->group_score + $data->final_score) / 4) }}" class='text-black w-full text-center outline-none bg-transparent' placeholder='0'>
                                         </div>
                                     </td>
-                                    <td align="center"><input type="submit"
-                                            class="bg-secondary text-white rounded-md w-[82px] h-[25px] cursor-pointer">
+                                    <td align="center"><input type="submit" class="bg-secondary text-white rounded-md w-[82px] h-[25px] cursor-pointer">
                                     </td>
                                 </form>
                             </tr>
@@ -204,8 +182,7 @@
                 <div>
                     <form action="{{ url(request() -> path()) }}" method="POST">
                         @csrf
-                        <button type="submit" name="save"
-                            class=" w-full bg-secondary text-white text-sm text-center py-1 px-14 rounded-md font-bold hover:scale-95 duration-200">
+                        <button type="submit" name="save" class=" w-full bg-secondary text-white text-sm text-center py-1 px-14 rounded-md font-bold hover:scale-95 duration-200">
                             <p class="hidden md:block">Save</p>
                             <i class="ri-save-line block md:hidden"></i>
                         </button>
