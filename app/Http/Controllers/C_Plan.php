@@ -441,14 +441,14 @@ class C_Plan extends Controller
                 ]);
             }
             Mail::to($request -> email_name)->send($email);
-            return redirect()->back();
+            return redirect()->back()->with('success', "Email berhasil terkirim");
         }
 
 
         if (!$status) {
-            return back()->with('error', "Data didn't updated");
+            return back()->with('error', "Email gagal terkirim");
         } else {
-            return back()->with('success', "Data has been send");
+            return back()->with('success', "Email berhasil terkirim");
         }
     }
 

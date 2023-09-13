@@ -53,6 +53,14 @@
 </style>
 
 @section('container')
+@if(session()->has('success'))
+<div class="alert alert-success absolute top-10 right-10 w-auto animate-slide-up text-white font-medium border-2 border-green-300 cursor-pointer" onclick="closeAlert()">
+    <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6 cursor-pointer" fill="none" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+    </svg>
+    <span>{{ session('success') }}</span>
+</div>
+@endif
 <div class="pt-20 pb-2 lg:pt-0">
 </div>
 <div class="overflow-y-auto  pt-0 h-[90vh] pb-10 w-full rounded-md overflow-x-hidden">
@@ -217,8 +225,8 @@
                         <span class="loading loading-dots loading-md "></span>
                     </div>
 
-                    <canvas id="pdf-preview" style="display: none;" class=" w-[355px] rounded-md my-3"></canvas>
-                    <label for="file-pks" class="flex justify-center items-center cursor-pointer bg-white py-2 rounded-lg h-[56px] w-[335px]" id="container-pks">
+                    <canvas id="pdf-preview" style="display: none;" class=" w-full rounded-md my-3"></canvas>
+                    <label for="file-pks" class="flex justify-center items-center cursor-pointer bg-white py-2 rounded-lg h-[56px] w-full" id="container-pks">
                         <input id="file-pks" type="file" class="text-black rounded-lg hidden bg-white p-1 outline-none" name="file-pks" onchange="previewFile()">
                         <span id="file-upload-label" class=" text-white font-semibold cursor-pointer font-quicksand">
                             <i class="ri-upload-2-fill text-3xl text-black"></i>
@@ -233,7 +241,7 @@
             </div>
 
             <div class="mt-4 flex justify-end">
-                <button type="submit" name="Send" class=" w-full  md:w-[188px] bg-secondary text-white text-sm text-center h-[37px] rounded-md hover:scale-95 duration-200">Send</button>
+                <button type="submit" name="Send" class=" w-full  md:w-[188px] bg-secondary text-white text-sm text-center h-[37px] rounded-md hover:scale-95 duration-200" onclick="my_modal_5.showModal()">Send</button>
             </div>
         </div>
     </form>
@@ -267,11 +275,43 @@
         </div>
     </div>
     </form>
+
+    
 </div>
+
+
+
+<dialog id="my_modal_5" class="modal  text-white">
+    
+    <div  class="modal-box bg-grey border-2 border-white w-11/12 max-w-xs flex justify-between items-center">
+        
+        <h1>Mohon Tunggu Sebentar</h1>
+
+        <div onclick="closeAlrt()">
+            <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6 cursor-pointer" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" onclick="closeAlrt()"/></svg>
+        </div>
+        
+    </div>
+</dialog>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.11.338/pdf.min.js"></script>
 
 <script>
+    const my_modal_5 = document.getElementById('my_modal_5');
+
+    function showModal() {
+        my_modal_5.showModal();
+    }
+
+    function closeAlert() {
+        const alertContainer = document.querySelector('.alert');
+        alertContainer.style.display = 'none';
+    }
+
+    function closeAlrt() {
+        my_modal_5.close();
+    }
+
     async function previewFile() {
         const fileInput = document.getElementById('file-pks');
         const containerInput = document.getElementById('container-pks');
