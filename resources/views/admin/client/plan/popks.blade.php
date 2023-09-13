@@ -204,7 +204,7 @@
         </div>
     </form>
 
-    <form action="{{ url(request()->path()) }}" method="POST">
+    <form action="{{ url(request()->path()) }}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('PATCH')
         <div class="overflow-auto bg-darkSecondary mt-5 justify-between flex flex-col text-lightGrey px-8 py-10 rounded-md space-y-3">
