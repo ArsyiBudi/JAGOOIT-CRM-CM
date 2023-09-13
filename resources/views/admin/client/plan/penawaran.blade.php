@@ -173,7 +173,7 @@
         @csrf
         @method('patch')
         <div class="bg-grey rounded shadow-lg mt-6 p-6">
-            <div class="w-full">
+            <div class="w-full flex items-center justify-end">
                 @if($order -> leadData -> hasOneEmail)
                 <select name="email_name" id="email" class="mb-4 bg-transparent border m-1 btn p-2 outline-none border-spacing-1 rounded-md py-1 text-1xl hover:bg-gray-300 hover:text-darkSecondary text-white">
                     <option value="" class="bg-grey hover:bg-gray-300 hover:text-darkSecondary">Select Email</option>

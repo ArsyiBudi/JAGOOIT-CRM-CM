@@ -215,8 +215,23 @@
     <form action="{{ url(request()->path()) }}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('PATCH')
-        <div class="overflow-auto bg-darkSecondary mt-5 justify-between flex flex-col text-lightGrey px-8 py-10 rounded-md space-y-3">
-            <div>File PKS (1 file, pdf)</div>
+        <div class="overflow-auto bg-grey mt-5 justify-between flex flex-col text-lightGrey px-8 py-10 rounded-md space-y-3">
+            <div class="flex items-center justify-between w-full">
+                <div>File PKS (1 file, pdf)</div>
+                <div class="">
+                    
+                    <select name="email_name" id="email" class="mb-4 bg-transparent border m-1 btn p-2 outline-none border-spacing-1 rounded-md py-1 text-1xl hover:bg-gray-300 hover:text-darkSecondary text-white">
+                        <option value="" class="bg-grey hover:bg-gray-300 hover:text-darkSecondary">Select Email</option>
+                         
+                        <option value="" class="bg-grey hover:bg-gray-300 hover:text-darkSecondary"></option>
+                        
+    
+                    </select>
+                    
+                    
+                    
+                </div>
+            </div>
 
             <div class="flex flex-row space-x-2">
                 <div class="flex-auto flex flex-col">
