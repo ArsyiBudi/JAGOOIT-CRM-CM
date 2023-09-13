@@ -93,7 +93,6 @@
 
 
         <div class="flex justify-end mt-6">
-            <button type="button" class="bg-secondary text-white rounded-md px-4 py-2 mr-2 hover:scale-95 duration-200" onclick="dropDownBack()">Cancel</button>
             <button type="submit" class="bg-secondary text-white rounded-md px-4 py-2 hover:scale-95 duration-200">Create</button>
         </div>
     </div>

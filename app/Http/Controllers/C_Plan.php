@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Mail\TestMail;
+use App\Models\M_Activity;
 use App\Models\M_Leads;
 use App\Models\M_Offer;
 use App\Models\M_Popks;
@@ -74,7 +75,6 @@ class C_Plan extends Controller
         setlocale(LC_TIME, 'id_ID');
         $dayName = Carbon::parse($currentDate)->isoFormat('dddd');
         $monthName = Carbon::parse($currentDate)->isoFormat('MMMM');
-
 
         $phpWord = new TemplateProcessor('draft_popks.docx');
         $phpWord->setValue('create_date', "hari {$dayName}, tanggal {$date} bulan {$monthName} tahun {$years}");
@@ -212,13 +212,23 @@ class C_Plan extends Controller
     }
     public function fetchNegosiasi($order_id)
     {
-        $check = M_Orders::find($order_id);
-        if(!$check) return response(['error' => "No data from this id {$order_id}"]);
+        $order = M_Orders::find($order_id);
+        if (is_null($order->appoinment_activity_id)){
+            $appoinment = M_Activity::create([
+                'activity_type_id' => 9,
+                'leads_id' => $order-> leads_id
+            ]);
+            $order-> appoinment_activity_id = $appoinment->id;
+            $order-> update();
+        }
+        $appointment = M_Activity::find($order->appoinment_activity_id);
 
         return view('admin.client.plan.negosiasi', [
             "title" => "Plan | Negosiasi",
             "order_id" => $order_id,
+            "negosiasi" => $appointment
         ]);
+
     }
     public function fetchPercobaan($order_id)
     {
@@ -461,6 +471,32 @@ class C_Plan extends Controller
     
 
     //?NEGOSIASI CONTROLLER CODE
+
+    public function submitNegosiasi(Request $request, $order_id)
+    {
+        $field = $request-> validate([
+            'judul' => 'required',
+            'lokasi' => 'required',
+            'waktu' => 'required',
+            'deskripsi' => 'required',
+        ]);
+        
+        $order = M_Orders::find($order_id);
+        $activity = M_Activity::find($order -> appoinment_activity_id);
+        if(!$activity) return response(['error'=>'No activity tracked ']);
+
+        $activity->xs1 = $field['judul'];
+        $activity->xs2 = $field['lokasi'];
+        $activity->xd = $field['waktu'];
+        $activity->desc = $field['deskripsi'];
+        $status = $activity->update();
+
+        if(!$status) return response(['error' => "Data didn't update"]);
+
+        return back()-> with('success','data updated');
+        
+    }
+
     public function saveNegosiasi($order_id)
     {
         $currentTimestamp = time();
@@ -485,7 +521,6 @@ class C_Plan extends Controller
         $selectedDate->setTimestamp($currentTimestamp);
         $update = M_Orders::find($order_id);
         $update->order_status = 5;
-
         if (!is_null($request->talents_id)) {
             foreach ($request->talents_id as $talent_id) {
                 $updateTalent = M_OrderDetails::find($talent_id);

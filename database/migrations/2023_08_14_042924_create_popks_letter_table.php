@@ -30,7 +30,7 @@ return new class extends Migration
             $table->text('notes') -> nullable();
             $table->double('consumption_cost') -> nullable();
             $table->double('transportation_cost') -> nullable();
-            $table->date('billing_due_date') -> nullable();
+            $table->integer('billing_due_date') -> nullable();
             $table->integer('billing_days') -> nullable();
             $table->string('authorized_by') -> nullable();
             $table->integer('account_number') -> nullable();

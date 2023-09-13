@@ -18,6 +18,7 @@ class M_Orders extends Model
     protected $fillable = [
         'id',
         'leads_id',
+        'appoinment_activity_id',
         'offer_letter_id',
         'popks_letter_id',
         'order_status',
@@ -51,28 +52,27 @@ class M_Orders extends Model
 
     public $incrementing = false;
 
-    public function leadData() : BelongsTo
+    public function leadData(): BelongsTo
     {
         return $this->belongsTo(M_Leads::class, 'leads_id', 'id');
     }
 
-    public function globalParams() : BelongsTo
+    public function globalParams(): BelongsTo
     {
         return $this->belongsTo(M_GlobalParams::class, 'order_status', 'id_params');
     }
 
-    public function hasOneTalent() : HasOne
+    public function hasOneTalent(): HasOne
     {
-        return $this -> hasOne(M_OrderDetails::class, 'order_id');
+        return $this->hasOne(M_OrderDetails::class, 'order_id');
     }
 
-    public function orderDetails() : HasMany
+    public function orderDetails(): HasMany
     {
         return $this->hasMany(M_OrderDetails::class, 'order_id');
-
     }
-    
-     public function talentData() : HasOne
+
+    public function talentData(): HasOne
     {
         return $this->hasOne(M_OrderDetails::class, 'order_id');
     }

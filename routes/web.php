@@ -155,6 +155,7 @@ Route::middleware('auth')->group(function () {
                 
                 //?NEGOSIASI
                 Route::get('/{order_id}/negosiasi', [C_Plan::class, 'fetchNegosiasi']) -> name('fetchNegosiasi');
+                Route::patch('/{order_id}/negosiasi', [C_Plan::class, 'submitNegosiasi']) -> name('submitNegosiasi');
                 Route::post('/{order_id}/negosiasi',[C_Plan::class, 'saveNegosiasi']) -> name('saveNegosiasi');
                 
                 //?PERCOBAAN

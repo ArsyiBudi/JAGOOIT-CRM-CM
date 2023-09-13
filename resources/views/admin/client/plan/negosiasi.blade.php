@@ -70,31 +70,33 @@
         </ul>
     </div>
     <div class=" mt-5">
-        <form action="">
+        <form action="{{ url(request()->path()) }}" method="post">
+            @csrf
+            @method('patch')
             <div class="flex flex-col bg-grey p-9 mt-6 rounded-lg gap-2 border-2 border-white  w-full"
                 id="createSection">
                 <div class="bg-white opacity-70 p-2 rounded-md w-full">
                     <textarea name="judul" id="judul"
                         class="text-black opacity-100 w-full p-2 bg-transparent outline-none resize-none"
-                        placeholder="Judul" required></textarea>
+                        placeholder="Judul" required>@if(@$negosiasi->xs1){{@$negosiasi->xs1}}@endif</textarea>
                     <!-- Menggunakan w-full untuk mengisi textarea secara penuh -->
                 </div>
                 <div class="flex flex-row max-sm:flex-wrap gap-2 w-full">
                     <div class="bg-white opacity-70 rounded-md flex-auto p-2">
                         <textarea name="lokasi" id="lokasi"
                             class="bg-transparent text-black p-2 w-full outline-none resize-none" placeholder="Lokasi"
-                            required></textarea>
+                            required>@if(@$negosiasi->xs2){{@$negosiasi->xs2}}@endif</textarea>
                     </div>
                     <div class="bg-white opacity-70 rounded-md flex-auto p-2">
-                        <textarea required name="waktu" id="waktu"
+                        <input required name="waktu" id="waktu" type="date" value="{{old('waktu',@$negosiasi->xd)}}"
                             class="bg-transparent text-black p-2 w-full outline-none resize-none"
-                            placeholder="Waktu"></textarea>
+                            placeholder="Waktu">
                     </div>
                 </div>
                 <div class="bg-white opacity-70 rounded-md w-full p-2">
                     <textarea required name="deskripsi" id="deskripsi"
                         class="bg-transparent outline-none p-2 text-black resize-none"
-                        placeholder="Deskripsi"></textarea>
+                        placeholder="Deskripsi">@if(@$negosiasi->desc){{@$negosiasi->desc}}@endif</textarea>
                     <!-- Menggunakan w-full untuk mengisi textarea secara penuh -->
                 </div>
                 <div class="w-[97px] mx-auto mt-2">
