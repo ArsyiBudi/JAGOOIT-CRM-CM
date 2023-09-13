@@ -19,19 +19,29 @@
 
 @section('container')
 
-    @if(session()->has('error'))
-        <div class="alert alert-error absolute top-10 right-10 w-auto animate-slide-up text-white font-medium border-2 border-red-500 cursor-pointer" onclick="closeAlert()">
-            <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6 cursor-pointer" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-            <span>{{ session('error') }}</span>
-        </div>
-    @endif
+@if(session()->has('error'))
+<div class="alert alert-error absolute top-10 right-10 w-auto animate-slide-up text-white font-medium border-2 border-red-500 cursor-pointer"
+    onclick="closeAlert()">
+    <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6 cursor-pointer" fill="none"
+        viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+    </svg>
+    <span>{{ session('error') }}</span>
+</div>
+@endif
 
-       @if(session()->has('success'))
-        <div class="alert alert-success absolute top-10 right-10 w-auto animate-slide-up text-white font-medium border-2 border-green-300 cursor-pointer" onclick="closeAlert()">
-            <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6 cursor-pointer" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-            <span>{{ session('success') }}</span>
-        </div>
-    @endif
+@if(session()->has('success'))
+<div class="alert alert-success absolute top-10 right-10 w-auto animate-slide-up text-white font-medium border-2 border-green-300 cursor-pointer"
+    onclick="closeAlert()">
+    <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6 cursor-pointer" fill="none"
+        viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+    </svg>
+    <span>{{ session('success') }}</span>
+</div>
+@endif
 
 <div class="pt-20 pb-2 lg:pt-0">
 </div>
@@ -40,20 +50,21 @@
     <p class=" text-[16px] font-medium pt-3">Silakan buat surat penawaran</p>
 
     <div class=" mt-5  w-full overflow-auto md:overflow-hidden">
-        <ul class=" mx-0 md:mx-auto steps steps-horizontal w-full ml-0 md:ml-14">
-            <li class="step step-primary">
-            </li>
-            <li class="step step-primary">
-            </li>
-            <li class="step step-primary">
-            </li>
-            <li class="step">
-            </li>
-            <li class="step">
-            </li>
-            <li class="step"></li>
-            <li></li>
-        </ul>
+        <div class=" mx-auto steps steps-horizontal w-full ml-0 md:ml-14">
+            <a class="step step-primary" href="{{ route('fetchRecruitment', ['order_id' => $order -> id]) }}">
+            </a>
+            <a class="step step-primary" href="{{ route('fetchTraining', ['order_id' => $order -> id]) }}">
+            </a>
+            <a class="step step-primary">
+            </a>
+            <a class="step" href="{{ route('fetchNegosiasi', ['order_id' => $order -> id]) }}">
+            </a>
+            <a class="step" href="{{ route('fetchPercobaan', ['order_id' => $order -> id]) }}">
+            </a>
+            <a class="step" href="{{ url('/client/order/plan/'.$order -> id.'/popks') }}">
+            </a>
+            <a></a>
+        </div>
     </div>
     <div class="bg-grey rounded shadow-lg mt-6 p-6  ">
         <div class="border-b pb-3 mb-6">
@@ -219,7 +230,8 @@
             <div class="w-full">
                 <label for="deskripsi" class="text-sm text-white">Deskripsi</label>
                 <div class="rounded-lg px-2 py-4 h-24 w-full bg-white mt-2">
-                    <textarea name="cv_desc" id="deskripsi" type="text" class="text-black bg-transparent outline-none h-full w-full hide-scrollbar resize-none">@if(@$order -> cv_description){{@$order -> cv_description}}@endif</textarea>
+                    <textarea name="cv_desc" id="deskripsi" type="text"
+                        class="text-black bg-transparent outline-none h-full w-full hide-scrollbar resize-none">@if(@$order -> cv_description){{@$order -> cv_description}}@endif</textarea>
                 </div>
             </div>
 

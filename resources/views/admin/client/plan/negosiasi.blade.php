@@ -54,20 +54,21 @@
     <p class=" text-[16px] font-medium pt-3">Silakan set appointment</p>
 
     <div class=" mt-5  w-full overflow-auto md:overflow-hidden">
-        <ul class=" mx-0 md:mx-auto steps steps-horizontal w-full ml-0 md:ml-14">
-            <li class="step step-primary">
-            </li>
-            <li class="step step-primary">
-            </li>
-            <li class="step step-primary">
-            </li>
-            <li class="step step-primary">
-            </li>
-            <li class="step">
-            </li>
-            <li class="step"></li>
-            <li></li>
-        </ul>
+        <div class=" mx-auto steps steps-horizontal w-full ml-0 md:ml-14">
+            <a class="step step-primary" href="{{ route('fetchRecruitment', ['order_id' => $order_id]) }}">
+            </a>
+            <a class="step step-primary" href="{{ route('fetchTraining', ['order_id' => $order_id]) }}">
+            </a>
+            <a class="step step-primary" href="{{ route('fetchOffer', ['order_id' => $order_id]) }}">
+            </a>
+            <a class="step step-primary">
+            </a>
+            <a class="step" href="{{ route('fetchPercobaan', ['order_id' => $order_id]) }}">
+            </a>
+            <a class="step" href="{{ url('/client/order/plan/'.$order_id.'/popks') }}">
+            </a>
+            <a></a>
+        </div>
     </div>
     <div class=" mt-5">
         <form action="">

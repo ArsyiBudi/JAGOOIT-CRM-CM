@@ -61,20 +61,21 @@
     <p class=" text-sm md:text-[16px] font-medium pt-3">Silakan nilai kandidat</p>
 
     <div class=" mt-5  w-full ">
-        <ul class=" mx-auto steps steps-horizontal w-full ml-0 md:ml-14">
-            <li class="step step-primary">
-            </li>
-            <li class="step step-primary">
-            </li>
-            <li class="step">
-            </li>
-            <li class="step">
-            </li>
-            <li class="step">
-            </li>
-            <li class="step"></li>
-            <li></li>
-        </ul>
+        <div class=" mx-auto steps steps-horizontal w-full ml-0 md:ml-14">
+            <a class="step step-primary" href="{{ route('fetchRecruitment', ['order_id' => $order -> id]) }}">
+            </a>
+            <a class="step step-primary">
+            </a>
+            <a class="step" href="{{ route('fetchOffer', ['order_id' => $order -> id]) }}">
+            </a>
+            <a class="step" href="{{ route('fetchNegosiasi', ['order_id' => $order -> id]) }}">
+            </a>
+            <a class="step" href="{{ route('fetchPercobaan', ['order_id' => $order -> id]) }}">
+            </a>
+            <a class="step" href="{{ url('/client/order/plan/'.$order -> id.'/popks') }}">
+            </a>
+            <a></a>
+        </div>
     </div>
 
     <div class=" mt-5">
