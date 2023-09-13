@@ -247,7 +247,7 @@
         </div>
 
         <div class="flex gap-4 max-sm:w-full max-sm:justify-between">
-            <div></div>
+            <div></div> 
             <div>
                 <form action="{{ url(request()->path()) }}" method="POST">
                     @csrf
