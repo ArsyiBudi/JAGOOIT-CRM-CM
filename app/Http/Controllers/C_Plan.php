@@ -485,10 +485,7 @@ class C_Plan extends Controller
         $selectedDate->setTimestamp($currentTimestamp);
         $update = M_Orders::find($order_id);
         $update->order_status = 5;
-        // if (is_null($update->popks_letter_id)) {
-        //     $popks = M_Popks::create();
-        //     $update->popks_letter_id = $popks->id;
-        // }
+
         if (!is_null($request->talents_id)) {
             foreach ($request->talents_id as $talent_id) {
                 $updateTalent = M_OrderDetails::find($talent_id);
@@ -609,18 +606,18 @@ class C_Plan extends Controller
             'error' => 'error'
             ]);
 
-        $popks = M_Orders::find($order_id);
-        $popks->po_file = $request->file('po_file');
-        $popks->po_description = $field['po_descr'];
-        $status = $popks->update();
+        $order = M_Orders::find($order_id);
+        $order->po_file = $request->file('po_file');
+        $order->po_description = $field['po_descr'];
+        $status = $order->update();
 
         if($status){
-            $lead = M_Leads::find($popks->leads_id);
+            $lead = M_Leads::find($order->leads_id);
             $mailData = [
                 'description' => $field['po_descr'],
                 'lead_data' => $lead
             ];
-            $mailSubject = $request->subject;
+            $mailSubject = "DRAFT POPKS JAGOO IT - {$lead -> business_name}";
             if (!$lead->hasOneEmail) return response(['error' => "No Email detected in {$lead->business_name}"]);
     
             $email = new TestMail($mailData, $mailSubject);
@@ -632,6 +629,7 @@ class C_Plan extends Controller
                     'mime' => $file->getMimeType(),
                 ]);
             }
+
             Mail::to($lead->hasOneEmail->email_name)->send($email);
             return redirect()->back();
         }
@@ -642,10 +640,6 @@ class C_Plan extends Controller
         } else {
             return back()->with('success', "Data has been send");
         }
-
-        // if ($status) {
-        //     return redirect('/client/order');
-        // }
     }
 
     public function popks_save($order_id)
