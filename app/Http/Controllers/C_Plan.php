@@ -222,7 +222,6 @@ class C_Plan extends Controller
             $order-> update();
         }
         $appointment = M_Activity::find($order->appoinment_activity_id);
-
         return view('admin.client.plan.negosiasi', [
             "title" => "Plan | Negosiasi",
             "order_id" => $order_id,
@@ -293,17 +292,15 @@ class C_Plan extends Controller
     public function addGrade(Request $request, $order_id, $order_details_id)
     {
         $order_detail = M_OrderDetails::find($order_details_id);
-        if (!$order_detail)
-            return response(['error' => 'orang hitam']);
+        if (!$order_detail) return response(['error' => "{$order_id} didn't this {$order_details_id} talent"]);
+
         $order_detail->pre_score = $request->pre_score;
         $order_detail->post_score = $request->post_score;
         $order_detail->group_score = $request->group_score;
         $order_detail->final_score = $request->final_score;
         $status = $order_detail->update();
-
-        if (!$status)
-            return response(['error' => "data didn't updated"]);
-        return redirect()->back()->with('success', "Nilai {$order_detail->talentData->name} berhasil diupdate");
+        if (!$status) return response(['error' => "Data didn't updated"]);
+        return back()->with('success', "Nilai {$order_detail->talentData->name} berhasil diupdate");
     }
     public function saveTraining($order_id)
     {
@@ -345,7 +342,7 @@ class C_Plan extends Controller
 
         if (!$offer_details)
             return response(['error' => "Data didn't created"]);
-        return redirect()->back();
+        return back();
     }
 
     public function deleteOfferDetails($order_id, $offer_job_detail_id)
