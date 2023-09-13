@@ -20,10 +20,10 @@ return new class extends Migration
             $table->date('date')->nullable();
             $table->string('context')->nullable();
             $table->integer('talent_total')->nullable();
-            $table->integer('weekday_cost')->nullable();
-            $table->integer('weekend_cost')->nullable();
-            $table->integer('consumption_cost')->nullable();
-            $table->integer('transportation_cost')->nullable();
+            $table->double('weekday_cost')->nullable();
+            $table->double('weekend_cost')->nullable();
+            $table->double('consumption_cost')->nullable();
+            $table->double('transportation_cost')->nullable();
             $table->timestamps();
         });
     }

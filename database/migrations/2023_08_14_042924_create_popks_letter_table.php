@@ -33,7 +33,7 @@ return new class extends Migration
             $table->integer('billing_due_date') -> nullable();
             $table->integer('billing_days') -> nullable();
             $table->string('authorized_by') -> nullable();
-            $table->integer('account_number') -> nullable();
+            $table->bigInteger('account_number') -> nullable();
             $table->string('bank_name') -> nullable();
             $table->string('account_manager_provider')->default("Sdr. Septian Nugraha Kudrat");
             $table->string('provider_finance_administrator')->default("Sdri. Retno Aliifah");

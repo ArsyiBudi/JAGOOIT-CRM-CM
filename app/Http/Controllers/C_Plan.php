@@ -171,10 +171,9 @@ class C_Plan extends Controller
 
     public function fetchTraining(Request $request, $order_id)
     {
-        $check = M_Orders::find($order_id);
-        if(!$check) return response(['error' => "No data from this id {$order_id}"]);
-
         $order = M_Orders::find($order_id);
+        if(!$order) return response(['error' => "No data from this id {$order_id}"]);
+
         $searchQuery = $request->input('search', '');
         session(['talent_search' => $searchQuery]);
         $searchQuery = session('talent_search', '');
@@ -196,10 +195,9 @@ class C_Plan extends Controller
     }
     public function fetchOffer($order_id)
     {
-        $check = M_Orders::find($order_id);
-        if(!$check) return response(['error' => "No data from this id {$order_id}"]);
-
         $order = M_Orders::find($order_id);
+        if(!$order) return response(['error' => "No data from this id {$order_id}"]);
+
         if (is_null($order->offer_letter_id)) {
             $offer = M_Offer::create();
             $order->offer_letter_id = $offer->id;
