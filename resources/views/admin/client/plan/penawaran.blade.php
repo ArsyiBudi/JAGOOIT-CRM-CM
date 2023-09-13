@@ -206,6 +206,19 @@
         @csrf
         @method('patch')
         <div class="bg-grey rounded shadow-lg mt-6 p-6">
+            <div class="w-full">
+
+
+                
+                <select name="email_name" id="email" class="mb-4 bg-transparent border m-1 btn p-2 outline-none border-spacing-1 rounded-md py-1 text-1xl hover:bg-gray-300 hover:text-darkSecondary text-white">
+                    <option value="" class="bg-grey hover:bg-gray-300 hover:text-darkSecondary">Select Email</option>
+                   
+                    <option value="Ngawi" class="bg-grey hover:bg-gray-300 hover:text-darkSecondary">Ngawi</option>
+                    
+                </select>   
+
+
+            </div>
             <div class="w-full  mb-4 ">
                 <label for="file-tor" class="text-sm text-white">File Surat Penawaran + CV (1 file, pdf)</label>
 

@@ -282,7 +282,7 @@ class C_Plan extends Controller
 
         if (!$status)
             return response(['error' => "data didn't updated"]);
-        return redirect()->back();
+        return redirect()->back()->with('success', "Nilai {$order_detail->talentData->name} berhasil diupdate");
     }
     public function saveTraining($order_id)
     {
