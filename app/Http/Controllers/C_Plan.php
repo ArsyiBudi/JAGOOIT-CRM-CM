@@ -2,15 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\TestMail;
+use App\Models\M_Activity;
+use App\Models\M_Leads;
 use App\Models\M_Offer;
-use App\Models\M_OfferLetterJobsDetails;
-use App\Models\M_OrderDetails;
-use App\Models\M_Orders;
 use App\Models\M_Popks;
+use App\Models\M_Orders;
 use App\Models\M_Talents;
-use Illuminate\Http\Request;
-use Illuminate\Support\Carbon;
 use Nette\Utils\DateTime;
+use Illuminate\Http\Request;
+use App\Models\M_OrderDetails;
+use Illuminate\Support\Carbon;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Mail;
+use App\Models\M_OfferLetterJobsDetails;
 use PhpOffice\PhpWord\TemplateProcessor;
 
 class C_Plan extends Controller
@@ -72,7 +77,6 @@ class C_Plan extends Controller
         setlocale(LC_TIME, 'id_ID');
         $dayName = Carbon::parse($currentDate)->isoFormat('dddd');
         $monthName = Carbon::parse($currentDate)->isoFormat('MMMM');
-
 
         $phpWord = new TemplateProcessor('draft_popks.docx');
         $phpWord->setValue('create_date', "hari {$dayName}, tanggal {$date} bulan {$monthName} tahun {$years}");
@@ -196,6 +200,11 @@ class C_Plan extends Controller
         if(!$check) return response(['error' => "No data from this id {$order_id}"]);
 
         $order = M_Orders::find($order_id);
+        if (is_null($order->offer_letter_id)) {
+            $offer = M_Offer::create();
+            $order->offer_letter_id = $offer->id;
+            $order->update();
+        }
         $offer = M_Offer::find($order->offer_letter_id);
         return view('admin.client.plan.penawaran', [
             "title" => "Plan | Penawaran",
@@ -205,13 +214,23 @@ class C_Plan extends Controller
     }
     public function fetchNegosiasi($order_id)
     {
-        $check = M_Orders::find($order_id);
-        if(!$check) return response(['error' => "No data from this id {$order_id}"]);
+        $order = M_Orders::find($order_id);
+        if (is_null($order->appoinment_activity_id)){
+            $appoinment = M_Activity::create([
+                'activity_type_id' => 9,
+                'leads_id' => $order-> leads_id
+            ]);
+            $order-> appoinment_activity_id = $appoinment->id;
+            $order-> update();
+        }
+        $appointment = M_Activity::find($order->appoinment_activity_id);
 
         return view('admin.client.plan.negosiasi', [
             "title" => "Plan | Negosiasi",
             "order_id" => $order_id,
+            "negosiasi" => $appointment
         ]);
+
     }
     public function fetchPercobaan($order_id)
     {
@@ -228,15 +247,19 @@ class C_Plan extends Controller
 
     public function fetchPopks($order_id)
     {
-        $check = M_Orders::find($order_id);
-        if(!$check) return response(['error' => "No data from this id {$order_id}"]);
-
         $order = M_Orders::find($order_id);
+        if(!$order) return response(['error' => "No data from this id {$order_id}"]);
+
+        if (is_null($order->popks_letter_id)) {
+            $popks = M_Popks::create();
+            $order->popks_letter_id = $popks->id;
+            $order->update();
+        }
         $popks = M_Popks::find($order->popks_letter_id);
         return view('admin.client.plan.popks', [
             "title" => "Plan | POPKS",
             "field" => $popks,
-            "order_id" => $order_id,
+            "order" => $order
         ]);
     }
 
@@ -291,10 +314,6 @@ class C_Plan extends Controller
         $selectedDate->setTimestamp($selectedTimestamp);
 
         $update = M_Orders::find($order_id);
-        if (is_null($update->offer_letter_id)) {
-            $offer = M_Offer::create();
-            $update->offer_letter_id = $offer->id;
-        }
         $update->order_status = 3;
         if (is_null($update->end_training) && is_null($update->start_offer)) {
             $update->end_training = $selectedDate;
@@ -395,15 +414,37 @@ class C_Plan extends Controller
     public function offer_send(Request $request, $order_id)
     {
         $field = $request->validate([
-            'cv_file' => 'required',
             'cv_desc' => 'required',
         ]);
         if (!$field)
             return back()->with('error', 'Please Fill are the field');
-        $offer = M_Orders::find($order_id);
-        $offer->cv_file = $field['cv_file'];
-        $offer->cv_description = $field['cv_desc'];
-        $status = $offer->update();
+        $order = M_Orders::find($order_id);
+        $order->cv_file = $request->file('cv_file');
+        $order->cv_description = $field['cv_desc'];
+        $status = $order->update();
+        
+        if($status){
+            $lead = M_Leads::find($order->leads_id);
+            $mailData = [
+                'description' => $field['cv_desc'],
+                'lead_data' => $lead
+            ];
+            $mailSubject = $request->subject;
+            if (!$lead->hasOneEmail) return response(['error' => "No Email detected in {$lead->business_name}"]);
+    
+            $email = new TestMail($mailData, $mailSubject);
+            if ($request->hasFile('cv_file')) {
+                $file = $request->file('cv_file');
+                $email->attach($file->getRealPath(), [
+                    'as' => $file->getClientOriginalName(),
+                    'mime' => $file->getMimeType(),
+                ]);
+            }
+            Mail::to($request -> email_name)->send($email);
+            return redirect()->back();
+        }
+
+
         if (!$status) {
             return back()->with('error', "Data didn't updated");
         } else {
@@ -427,8 +468,35 @@ class C_Plan extends Controller
         if ($status)
             return redirect('/client/order/plan/' . $order_id . '/negosiasi');
     }
+    
 
     //?NEGOSIASI CONTROLLER CODE
+
+    public function submitNegosiasi(Request $request, $order_id)
+    {
+        $field = $request-> validate([
+            'judul' => 'required',
+            'lokasi' => 'required',
+            'waktu' => 'required',
+            'deskripsi' => 'required',
+        ]);
+        
+        $order = M_Orders::find($order_id);
+        $activity = M_Activity::find($order -> appoinment_activity_id);
+        if(!$activity) return response(['error'=>'No activity tracked ']);
+
+        $activity->xs1 = $field['judul'];
+        $activity->xs2 = $field['lokasi'];
+        $activity->xd = $field['waktu'];
+        $activity->desc = $field['deskripsi'];
+        $status = $activity->update();
+
+        if(!$status) return response(['error' => "Data didn't update"]);
+
+        return back()-> with('success','data updated');
+        
+    }
+
     public function saveNegosiasi($order_id)
     {
         $currentTimestamp = time();
@@ -453,10 +521,6 @@ class C_Plan extends Controller
         $selectedDate->setTimestamp($currentTimestamp);
         $update = M_Orders::find($order_id);
         $update->order_status = 5;
-        if (is_null($update->popks_letter_id)) {
-            $popks = M_Popks::create();
-            $update->popks_letter_id = $popks->id;
-        }
         if (!is_null($request->talents_id)) {
             foreach ($request->talents_id as $talent_id) {
                 $updateTalent = M_OrderDetails::find($talent_id);
@@ -569,22 +633,47 @@ class C_Plan extends Controller
     public function popks_send(Request $request, $order_id)
     {
         $field = $request->validate([
-            'po_file' => 'required',
             'po_descr' => 'required',
         ]);
 
         if (!$field)
             return response([
-                'error' => 'error'
+            'error' => 'error'
             ]);
 
-        $popks = M_Orders::find($order_id);
-        $popks->po_file = $field['po_file'];
-        $popks->po_description = $field['po_descr'];
-        $status = $popks->update();
+        $order = M_Orders::find($order_id);
+        $order->po_file = $request->file('file-pks');
+        $order->po_description = $field['po_descr'];
+        $status = $order->update();
 
-        if ($status) {
-            return redirect('/client/order');
+        if($status){
+            $lead = M_Leads::find($order->leads_id);
+            $mailData = [
+                'description' => $field['po_descr'],
+                'lead_data' => $lead
+            ];
+            $mailSubject = "DRAFT POPKS JAGOO IT - {$lead -> business_name}";
+            if (!$lead->hasOneEmail) return response(['error' => "No Email detected in {$lead->business_name}"]);
+    
+            $email = new TestMail($mailData, $mailSubject);
+    
+            if ($request->hasFile('file-pks')) {
+                $file = $request->file('file-pks');
+                $email->attach($file->getRealPath(), [
+                    'as' => $file->getClientOriginalName(),
+                    'mime' => $file->getMimeType(),
+                ]);
+            }
+
+            Mail::to($lead->hasOneEmail->email_name)->send($email);
+            return redirect()->back();
+        }
+
+
+        if (!$status) {
+            return back()->with('error', "Data didn't updated");
+        } else {
+            return back()->with('success', "Data has been send");
         }
     }
 

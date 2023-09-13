@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\TestMail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\ActivityModel;
 use App\Models\M_Activity;
 use App\Models\M_Leads;
+use Illuminate\Support\Facades\Mail;
 
 class C_Activity extends Controller
 {
@@ -34,6 +36,25 @@ class C_Activity extends Controller
             'xd'=>$field['waktu'],
             'desc'=>$field['deskripsi'],
         ]);
+
+        $lead = M_Leads::find($leads_id);
+        $mailData = [
+            'description' => $request->description,
+            'lead_data' => $lead
+        ];
+        $mailSubject = $request->subject;
+        if (!$lead->hasOneEmail) return response(['error' => "No Email detected in {$lead->business_name}"]);
+
+        $email = new TestMail($mailData, $mailSubject);
+
+        if ($request->hasFile('attachment')) {
+            $file = $request->file('attachment');
+            $email->attach($file->getRealPath(), [
+                'as' => $file->getClientOriginalName(),
+                'mime' => $file->getMimeType(),
+            ]);
+        }
+        Mail::to($request->email_name)->send($email);
         
         if(!$activity) return response([
             'error' => 'Error Occured',
