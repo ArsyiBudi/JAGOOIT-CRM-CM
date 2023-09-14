@@ -107,39 +107,43 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @php
-                            $count = ($talents -> currentPage() - 1) * $talents ->perPage() + 1;
-                            @endphp
-                            @foreach ($talents as $talent)
-                            <tr>
-                                <td>
-                                    <label>
-                                        <input name="talents_id[]" value="{{ $talent -> id }}" type="checkbox"
-                                            class="checkbox border-white border-2" />
-                                    </label>
-                                </td>
-                                <td align="center">{{ $count }}</td>
+                            @if($talents -> isEmpty())
+                                <p class="text-white text-center py-4">No Data</p>
+                            @else
                                 @php
-                                $count++;
+                                $count = ($talents -> currentPage() - 1) * $talents ->perPage() + 1;
                                 @endphp
-                                <td align="center">{{ $talent -> name }}</td>
-                                <td align="center">{{ $talent -> pendidikanTalent -> description }}</td>
-                                <td align="center">{{ $talent -> keterampilanTalent -> description }}</td>
-                                <td align="center"> {{ $talent -> posisiTalent -> description }}</td>
-                                <td align="center">
-                                    <div class=" flex items-center gap-2">
-                                        <a href="/client/plan/create/recruitment">
-                                            <i class=" text-lg cursor-pointer ri-information-line"></i>
-                                        </a>
-                                    </div>
-                                </td>
-                            </tr>
-                            @endforeach
+                                @foreach ($talents as $talent)
+                                <tr>
+                                    <td>
+                                        <label>
+                                            <input name="talents_id[]" value="{{ $talent -> id }}" type="checkbox"
+                                                class="checkbox border-white border-2" />
+                                        </label>
+                                    </td>
+                                    <td align="center">{{ $count }}</td>
+                                    @php
+                                    $count++;
+                                    @endphp
+                                    <td align="center">{{ $talent -> name }}</td>
+                                    <td align="center">{{ $talent -> pendidikanTalent -> description }}</td>
+                                    <td align="center">{{ $talent -> keterampilanTalent -> description }}</td>
+                                    <td align="center"> {{ $talent -> posisiTalent -> description }}</td>
+                                    <td align="center">
+                                        <div class=" flex items-center gap-2">
+                                            <a href="/client/plan/create/recruitment">
+                                                <i class=" text-lg cursor-pointer ri-information-line"></i>
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
+                                @endforeach
+                            @endif
                         </tbody>
                     </table>
                 </div>
                 <div class="sticky bottom-0 pb-1 text-sm bg-darkSecondary flex items-center justify-center w-full">
-                    {{ $talents -> links('vendor.pagination.custom-pagination') }}
+                    {{ $talents -> links('vendor.pagination.custom-pagination-talent') }}
                 </div>
         </div>
 

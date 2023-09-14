@@ -100,8 +100,6 @@
     </div>
     <form action="{{ url(request()->path()) }}" method="post">
         @csrf
-
-
         <div class="overflow-auto bg-grey mt-5 justify-between flex flex-col text-white px-8 py-10 rounded-md gap-y-3">
 
             <div class="text-xl">JagooIT:</div>
@@ -229,24 +227,9 @@
     <form action="{{ url(request()->path()) }}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('PATCH')
-        <div class="overflow-auto bg-grey mt-5 justify-between flex flex-col text-lightGrey px-8 py-10 rounded-md space-y-3">
-            <div class="flex items-center justify-between w-full">
-                <div>File PKS (1 file, pdf)</div>
-                <div class="">
-                    
-                    <select name="email_name" id="email" class="mb-4 bg-transparent border m-1 btn p-2 outline-none border-spacing-1 rounded-md py-1 text-1xl hover:bg-gray-300 hover:text-darkSecondary text-white">
-                        <option value="" class="bg-grey hover:bg-gray-300 hover:text-darkSecondary">Select Email</option>
-                         
-                        <option value="" class="bg-grey hover:bg-gray-300 hover:text-darkSecondary"></option>
-                        
-    
-                    </select>
-                    
-                    
-                    
-                </div>
-            </div>
-
+        <div class="overflow-auto bg-darkSecondary mt-5 justify-between flex flex-col text-lightGrey px-8 py-10 rounded-md space-y-3">
+            @if($order -> leadData -> hasOneEmail)
+            <div>File PKS (1 file, pdf)</div>
             <div class="flex flex-row space-x-2">
                 <div class="flex-auto flex flex-col">
                     <p id="file-name-preview" style="display: none;" class=" pt-3"></p>
@@ -264,14 +247,27 @@
                 </div>
             </div>
 
+            
             <div class="flex-auto flex flex-col">
                 <label for="desk-popks">Deskripsi</label>
                 <textarea id="desk-popks" type="text" class="p-1 outline-none rounded-md h-[70px] text-black hide-scrollbar resize-none bg-white" name="po_descr">@if(@$order -> po_description){{ $order -> po_description }} @endif</textarea>
             </div>
-
+            
+            <div class="w-full">
+                <select name="email_name" id="email" class="mb-4 bg-transparent border m-1 btn p-2 outline-none border-spacing-1 rounded-md py-1 text-1xl hover:bg-gray-300 hover:text-darkSecondary text-white">
+                    <option value="" class="bg-grey hover:bg-gray-300 hover:text-darkSecondary">Select Email</option>
+                    @foreach($order -> leadData -> emails as $email) 
+                    <option value="{{ $email -> email_name }}" class="bg-grey hover:bg-gray-300 hover:text-darkSecondary">{{  $email -> email_name }}</option>
+                    @endforeach
+                </select>
+            </div>
+            
             <div class="mt-4 flex justify-end">
                 <button type="submit" name="Send" class=" w-full  md:w-[188px] bg-secondary text-white text-sm text-center h-[37px] rounded-md hover:scale-95 duration-200" onclick="my_modal_5.showModal()">Send</button>
             </div>
+            @else
+            {{ $order -> leadData -> business_name }} has no Email
+            @endif
         </div>
     </form>
 

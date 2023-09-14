@@ -57,16 +57,19 @@ class C_Leads extends Controller
 
     public function detail($leads_id)
     {
+        $detail_subject = "Leads";
         $leads_data = M_Leads::find($leads_id);
         if (!$leads_data) {
             return response([
-                'error' => "No leads has this id : {{ $leads_id }}"
+                'error' => "No leads has this id : $leads_id"
             ]);
         }
+        if ($leads_data->client_indicator == 1) $detail_subject = "Client";
 
         return view('admin.leads.detail', [
             "title" => "Leads | Detail",
-            'leads' => $leads_data
+            'leads' => $leads_data,
+            'detail_info' => $detail_subject
         ]);
     }
     public function delete($id)
@@ -174,7 +177,8 @@ class C_Leads extends Controller
         $lead = M_Leads::find($leads_id);
         $mailData = [
             'description' => $request->description,
-            'lead_data' => $lead
+            'lead_data' => $lead,
+            'information' => "Proposal Penawaran"
         ];
         $mailSubject = $request->subject;
         if (!$lead->hasOneEmail)
@@ -190,13 +194,52 @@ class C_Leads extends Controller
             ]);
         }
         Mail::to($request->email_name)->send($email);
-        return redirect()->back()->with('success', 'Email berhasil terkirim');
+        return redirect('leads/offer/' . $leads_id)->with('success', 'Email berhasil terkirim');
     }
 
-    public function edit(Request $request)
+    public function fetchEdit($leads_id)
     {
+        $lead = M_Leads::find($leads_id);
+        if (!$lead) return response(['error' => "No Leads has an id of $leads_id"]);
         return view('admin.leads.edit', [
-            "title" => "Leads | Detail",
+            "title" => "Leads | Edit",
+            "lead" => $lead
         ]);
+    }
+
+    public function addEmail(Request $request, $leads_id)
+    {
+        $field = $request->validate([
+            'email_name' => 'required'
+        ]);
+
+        $email = M_Emails::create([
+            'leads_id' => $leads_id,
+            'email_name' => $field['email_name']
+        ]);
+
+        if (!$email) return response(['error' => 'Email didnt updated']);
+
+        return back() -> with('success', "{ $email -> email_name} berhasil ditambahkan");
+    }
+
+    public function edit(Request $request, $leads_id)
+    {
+        $field = $request -> validate([
+            'business_name' => 'required',
+            'address' => 'required',
+            'pic_name' => 'required',
+            'pic_contact_number' => 'required',
+        ]);
+
+        $lead = M_Leads::find($leads_id);
+        $lead -> business_name = $field['business_name'];
+        $lead -> address = $field['address'];
+        $lead -> pic_name = $field['pic_name'];
+        $lead -> pic_contact_number = $field['pic_contact_number'];
+        $status = $lead -> update();
+
+        if(!$status) return response(['error' => "Lead's didnt updated"]);
+        return back() -> with('success', "{ $lead -> business_name} berhasil diedit");
     }
 }

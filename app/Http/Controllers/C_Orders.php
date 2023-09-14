@@ -164,7 +164,7 @@ class C_Orders extends Controller
         $update->client_indicator = 1;
         $status = $update->update();
         if ($status) {
-            return redirect('/client');
+            return redirect('/client/order');
         }
     }
 

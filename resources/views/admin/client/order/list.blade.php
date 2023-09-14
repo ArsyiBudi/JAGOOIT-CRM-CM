@@ -84,6 +84,9 @@
                     </tr>
                 </thead>
                 <tbody>
+                    @if($order -> isEmpty())
+                    <p class="text-white text-center py-4">No Data</p>
+                    @else
                     @php
                     $count = ($order->currentPage() - 1) * $order->perPage() + 1;
                     @endphp
@@ -121,6 +124,7 @@
                         </td>
                     </tr>
                     @endforeach
+                    @endif
                 </tbody>
             </table>
         </div>

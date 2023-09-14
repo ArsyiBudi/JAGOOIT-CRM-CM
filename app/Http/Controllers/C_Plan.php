@@ -231,12 +231,31 @@ class C_Plan extends Controller
         ]);
 
     }
-    public function fetchPercobaan($order_id)
+    public function fetchPercobaan(Request $request, $order_id)
     {
-        $check = M_Orders::find($order_id);
-        if(!$check) return response(['error' => "No data from this id {$order_id}"]);
+        $order = M_Orders::find($order_id);
+        if(!$order) return response(['error' => "No data from this id {$order_id}"]);
+        
+        $searchQuery = $request->input('search', '');
+        session(['talent_search' => $searchQuery]);
+        $searchQuery = session('talent_search', '');
+        $query = M_OrderDetails::where('order_id', $order->id);
 
-        $talent = M_OrderDetails::where('order_id', $order_id)->paginate(5);
+        if (!empty($searchQuery)) {
+            $query->where(function ($subquery) use ($searchQuery) {
+                $subquery->whereHas('talentData', function ($q) use ($searchQuery) {
+                    $q->where('name', 'LIKE', '%' . $searchQuery . '%');
+                })->orWhereHas('talentData.pendidikanTalent', function ($q) use ($searchQuery) {
+                    $q->where('description', 'LIKE', '%' . $searchQuery . '%');
+                })->orWhereHas('talentData.keterampilanTalent', function ($q) use ($searchQuery) {
+                    $q->where('description', 'LIKE', '%' . $searchQuery . '%');
+                })->orWhereHas('talentData.posisiTalent', function ($q) use ($searchQuery) {
+                    $q->where('description', 'LIKE', '%' . $searchQuery . '%');
+                });
+            });
+        }
+
+        $talent = $query->paginate(5);
         return view('admin.client.plan.percobaan', [
             "title" => "Plan | Percobaan",
             "order_id" => $order_id,
@@ -424,7 +443,8 @@ class C_Plan extends Controller
             $lead = M_Leads::find($order->leads_id);
             $mailData = [
                 'description' => $field['cv_desc'],
-                'lead_data' => $lead
+                'lead_data' => $lead,
+                'information' => "Proposal Penawaran dan CV Talenta"
             ];
             $mailSubject = $request->subject;
             if (!$lead->hasOneEmail) return response(['error' => "No Email detected in {$lead->business_name}"]);
@@ -647,7 +667,8 @@ class C_Plan extends Controller
             $lead = M_Leads::find($order->leads_id);
             $mailData = [
                 'description' => $field['po_descr'],
-                'lead_data' => $lead
+                'lead_data' => $lead,
+                'information' => "PKS Talenta Indonesia"
             ];
             $mailSubject = "DRAFT POPKS JAGOO IT - {$lead -> business_name}";
             if (!$lead->hasOneEmail) return response(['error' => "No Email detected in {$lead->business_name}"]);

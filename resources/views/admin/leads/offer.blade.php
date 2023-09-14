@@ -7,11 +7,13 @@
 </style>
 @section('container')
 {{-- <div id="formContainer"> --}}
-    @if(session()->has('success'))
-    <div class="alert alert-success absolute top-10 right-10 w-auto animate-slide-up text-white font-medium border-2 border-green-300 cursor-pointer" onclick="closeAlert()">
-        <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6 cursor-pointer" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-        <span>{{ session('success') }}</span>
-    </div>
+@if(session()->has('success'))
+<div class="alert alert-success absolute top-10 right-10 w-auto animate-slide-up text-white font-medium border-2 border-green-300 cursor-pointer" onclick="closeAlert()">
+    <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6 cursor-pointer" fill="none" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+    </svg>
+    <span>{{ session('success') }}</span>
+</div>
 @endif
 <form class=" hidden mt-24 md:mt-0 text-center lg:text-left" id="form3" action="{{ route('create_order') }}" method="post">
     @csrf
@@ -117,15 +119,12 @@
         <form id="form1" class="hidden" action="{{ url(request() -> path()) }}" method="post" enctype="multipart/form-data">
             @csrf
             @if($lead -> hasOneEmail)
-                <select name="email_name" id="email" class=" bg-transparent border mb-4 btn p-2 outline-none border-spacing-1 rounded-md py-1 text-1xl hover:bg-gray-300 hover:text-darkSecondary text-white" required>
-                    <option value="" class="bg-grey hover:bg-gray-300 hover:text-darkSecondary">Select Email</option>
-                    @foreach($lead->emails as $email)
-                    <option value="{{ $email -> email_name }}" class="bg-grey hover:bg-gray-300 hover:text-darkSecondary">{{ $email -> email_name }}</option>
-                    @endforeach
-                </select>
-                @else
-                {{ $lead -> business_name }} doesn't have an email
-                @endif
+            <select name="email_name" id="email" class="mb-4 bg-transparent border m-1 btn p-2 outline-none border-spacing-1 rounded-md py-1 text-1xl hover:bg-gray-300 hover:text-darkSecondary text-white" required>
+                <option value="" class="bg-grey hover:bg-gray-300 hover:text-darkSecondary">Select Email</option>
+                @foreach($lead->emails as $email)
+                <option value="{{ $email -> email_name }}" class="bg-grey hover:bg-gray-300 hover:text-darkSecondary">{{ $email -> email_name }}</option>
+                @endforeach
+            </select>
             <div class="w-full mb-4">
                 <label for="file-brosur" class="text-sm text-white">File Brosur</label>
 
@@ -149,10 +148,14 @@
             <div class="bg-white opacity-70 rounded-md w-full mb-2 p-2 h-[200px]">
                 <textarea required name="description" id="deskripsinote" class="bg-transparent p-2 outline-none text-black w-full h-full resize-none" placeholder="Deskripsi"></textarea>
             </div>
-                <div class="w-[97px] mt-5 mx-auto" onsubmit="my_modal_5.showModal()">
-                    <input type="submit" class="bg-secondary text-white rounded-md px-4  py-2 h-[37px] cursor-pointer hover:scale-95 duration-200">
-                </div>
-                
+            <div class="w-[97px] mt-5 mx-auto" onsubmit="my_modal_5.showModal()">
+                <input type="submit" class="bg-secondary text-white rounded-md px-4  py-2 h-[37px] cursor-pointer hover:scale-95 duration-200">
+            </div>
+            @else
+            {{ $lead -> business_name }} doesn't have an email
+            @endif
+
+
         </form>
         {{-- <form id="form3" class="hidden"></form> --}}
 
@@ -160,15 +163,15 @@
 </div>
 
 <dialog id="my_modal_5" class="modal  text-white">
-    
-    <div  class="modal-box bg-grey border-2 border-white w-11/12 max-w-xs flex justify-center items-center">
-        
+
+    <div class="modal-box bg-grey border-2 border-white w-11/12 max-w-xs flex justify-center items-center">
+
         <h1>Email sedang dikirim...</h1>
 
         {{-- <div onclick="closeAlrt()">
             <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6 cursor-pointer" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" onclick="closeAlrt()"/></svg>
         </div> --}}
-        
+
     </div>
 </dialog>
 
@@ -253,66 +256,68 @@
     }
 </script>
 <script>
-async function previewFileTor() {
-    const fileInput = document.getElementById('file-tor');
-    const containerInput = document.getElementById('container-tor');
-    const fileNamePreview = document.getElementById('file-name-preview-tor');
-    const canvas = document.getElementById('pdf-preview-tor');
-    const fileUploadLabel = document.getElementById('file-upload-label-tor');
-    const canvasLoading = document.getElementById('canvas-loading-tor');
+    async function previewFileTor() {
+        const fileInput = document.getElementById('file-tor');
+        const containerInput = document.getElementById('container-tor');
+        const fileNamePreview = document.getElementById('file-name-preview-tor');
+        const canvas = document.getElementById('pdf-preview-tor');
+        const fileUploadLabel = document.getElementById('file-upload-label-tor');
+        const canvasLoading = document.getElementById('canvas-loading-tor');
 
 
-    
-    if (fileInput.files && fileInput.files[0]) {
-        fileUploadLabel.textContent = 'Ganti File';
-        containerInput.style.width = 'auto'; 
-        containerInput.style.height = 'auto'; 
-        containerInput.style.backgroundColor = '#EC512E'
-    } else {
-        fileUploadLabel.innerHTML = '<i class="ri-upload-2-fill text-3xl text-black"></i>';
-    }
-    
-    if (fileInput.files && fileInput.files[0]) {
-        canvasLoading.style.display = 'block';
-        const file = fileInput.files[0];
-        const fileURL = URL.createObjectURL(file);
 
-        fileNamePreview.style.color = 'white'
-        fileNamePreview.textContent = file.name;
-        fileNamePreview.style.display = 'block';
-
-        if (file.type === 'application/pdf') {
-            
-            const loadingTask = pdfjsLib.getDocument(fileURL);
-            const pdf = await loadingTask.promise;
-
-            const pageNum = 1; 
-            const page = await pdf.getPage(pageNum);
-
-            const viewport = page.getViewport({ scale: 1 });
-            canvas.width = viewport.width;
-            canvas.height = 200;
-
-            const renderContext = {
-                canvasContext: canvas.getContext('2d'),
-                viewport
-            };
-
-            await page.render(renderContext).promise;
-            canvas.style.display = 'block';
-            canvasLoading.style.display = 'none';
-
+        if (fileInput.files && fileInput.files[0]) {
+            fileUploadLabel.textContent = 'Ganti File';
+            containerInput.style.width = 'auto';
+            containerInput.style.height = 'auto';
+            containerInput.style.backgroundColor = '#EC512E'
         } else {
-            canvas.style.display = 'none';
-            fileNamePreview.textContent = 'File harus berupa PDF!';
-            fileNamePreview.style.color = 'red'
-            canvasLoading.style.display = 'none';
+            fileUploadLabel.innerHTML = '<i class="ri-upload-2-fill text-3xl text-black"></i>';
         }
-    } else {
-        fileNamePreview.style.display = 'none';
-        canvas.style.display = 'none';
+
+        if (fileInput.files && fileInput.files[0]) {
+            canvasLoading.style.display = 'block';
+            const file = fileInput.files[0];
+            const fileURL = URL.createObjectURL(file);
+
+            fileNamePreview.style.color = 'white'
+            fileNamePreview.textContent = file.name;
+            fileNamePreview.style.display = 'block';
+
+            if (file.type === 'application/pdf') {
+
+                const loadingTask = pdfjsLib.getDocument(fileURL);
+                const pdf = await loadingTask.promise;
+
+                const pageNum = 1;
+                const page = await pdf.getPage(pageNum);
+
+                const viewport = page.getViewport({
+                    scale: 1
+                });
+                canvas.width = viewport.width;
+                canvas.height = 200;
+
+                const renderContext = {
+                    canvasContext: canvas.getContext('2d'),
+                    viewport
+                };
+
+                await page.render(renderContext).promise;
+                canvas.style.display = 'block';
+                canvasLoading.style.display = 'none';
+
+            } else {
+                canvas.style.display = 'none';
+                fileNamePreview.textContent = 'File harus berupa PDF!';
+                fileNamePreview.style.color = 'red'
+                canvasLoading.style.display = 'none';
+            }
+        } else {
+            fileNamePreview.style.display = 'none';
+            canvas.style.display = 'none';
+        }
     }
-}
 </script>
 <script>
     document.addEventListener("DOMContentLoaded", function() {
@@ -350,9 +355,10 @@ async function previewFileTor() {
         // Inisialisasi dengan menampilkan Formulir 1 secara default
         document.getElementById("form1").style.display = "block";
     });
+
     function closeAlert() {
-    const alertContainer = document.querySelector('.alert');
-    alertContainer.style.display = 'none';
-    }   
+        const alertContainer = document.querySelector('.alert');
+        alertContainer.style.display = 'none';
+    }
 </script>
 @endsection

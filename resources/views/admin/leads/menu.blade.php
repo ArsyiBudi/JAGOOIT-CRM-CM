@@ -90,6 +90,9 @@
                     </tr>
                 </thead>
                 <tbody>
+                    @if($leads -> isEmpty())
+                    <p class="text-white text-center py-4">No Data</p>
+                    @else
                     @php
                     $count = ($leads->currentPage() - 1) * $leads->perPage() + 1;
                     @endphp
@@ -130,6 +133,7 @@
                         </td>
                     </tr>
                     @endforeach
+                    @endif
                 </tbody>
             </table>
         </div>

@@ -169,12 +169,36 @@
 
 <script>
     function dropDown() {
-        document.querySelector('.submenu').classList.toggle('hidden');
-        document.querySelector('.panahBwh').classList.toggle('rotate-180');
+        let submenu = document.querySelector('.submenu');
+        let panahBwh = document.querySelector('.panahBwh');
+        let submenuMobile = document.querySelector('.submenuMobile');
+        let panahBwhMobile = document.querySelector('.panahBwhMobile');
 
-        document.querySelector('.submenuMobile').classList.toggle('hidden');
-        document.querySelector('.panahBwhMobile').classList.toggle('rotate-180');
+        if (submenu.classList.contains('hidden')) {
+            sessionStorage.setItem('dropdownOpen', 'true');
+        } else {
+            sessionStorage.removeItem('dropdownOpen');
+        }
+
+        submenu.classList.toggle('hidden');
+        panahBwh.classList.toggle('rotate-180');
+        submenuMobile.classList.toggle('hidden');
+        panahBwhMobile.classList.toggle('rotate-180');
     }
 
-    dropDown();
+    function initializeDropdownState() {
+        let submenu = document.querySelector('.submenu');
+        let panahBwh = document.querySelector('.panahBwh');
+        let submenuMobile = document.querySelector('.submenuMobile');
+        let panahBwhMobile = document.querySelector('.panahBwhMobile');
+
+        if (sessionStorage.getItem('dropdownOpen') === 'true') {
+            submenu.classList.remove('hidden');
+            panahBwh.classList.add('rotate-180');
+            submenuMobile.classList.remove('hidden');
+            panahBwhMobile.classList.add('rotate-180');
+        }
+    }
+
+    window.onload = initializeDropdownState;
 </script>

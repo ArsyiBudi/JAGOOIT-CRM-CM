@@ -13,7 +13,9 @@
 </div>
 <div class="overflow-auto pt-0 h-[90vh] w-full rounded-md hide-scrollbar">
     <div class="bg-darkSecondary flex flex-col px-8 py-10 h-[90vh]">
-        <form action="">
+        <form action="{{ url(request() -> path()) }}" method="post">
+            @csrf
+            @method('PATCH')
             <div class="flex flex-col text-lightGrey space-y-2">
                 <div class=" flex justify-between">
                     <div class="text-2xl">Edit Leads</div>
@@ -27,7 +29,7 @@
                         Nama Perusahaan :
                         </p>
                         <div>
-                            <input type="text" required class=" bg-transparent outline-none">
+                            <input name="business_name" type="text" required class=" bg-transparent outline-none" value="{{ old('business_name', @$lead -> business_name) }}">
                         </div>
                     </div>
                     <div class="pt-3 flex items-center gap-1 md:gap-2">
@@ -35,7 +37,7 @@
                         Alamat : 
                         </p>
                         <div>
-                            <input type="text" required class=" bg-transparent outline-none">
+                            <input name="address" type="text" required class=" bg-transparent outline-none" value="{{ old('business_name', @$lead -> address) }}">
                         </div>
                     </div>
                     <div class="pt-3 flex items-center gap-1 md:gap-2">
@@ -43,7 +45,7 @@
                         Nama PIC :
                         </p>
                         <div>
-                            <input type="text" required class=" bg-transparent outline-none">
+                            <input name="pic_name" type="text" required class=" bg-transparent outline-none" value="{{ old('business_name', @$lead -> pic_name) }}">
                         </div>
                     </div>
                     <div class="pt-3 flex items-center gap-1 md:gap-2">
@@ -51,7 +53,7 @@
                             No Telepon PIC :
                         </p>
                         <div>
-                            <input type="number" required class=" bg-transparent outline-none">
+                            <input name="pic_contact_number" type="number" required class=" bg-transparent outline-none" value="{{ old('business_name', @$lead -> pic_contact_number) }}">
                         </div>
                     </div>
                     <div class="pt-3 flex items-center justify-between">
@@ -84,16 +86,23 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr class=" odd:bg-grey">
-                            <td align="center" class=" p-4">1</td>
-                            <td align="center" class=" p-4">Cumsbadag@gmail.com</td>
-                        </tr>
+                        @if(@$lead -> hasOneEmail)
+                            @foreach($lead -> emails as $email)
+                                <tr class=" odd:bg-grey">
+                                    <td align="center" class=" p-4">{{ isset($i) ? ++$i : $i = 1 }}</td>
+                                    <td align="center" class=" p-4">{{ $email -> email_name }}</td>
+                                </tr>
+                            @endforeach
+                        @else
+                            {{ $lead -> business_name }} has No Email
+                        @endif
                     </tbody>
                 </table>
             </div>
-           <form action="" class=" my-3 w-full">
+           <form action="{{ url(request() -> path()) }}" method="post" class=" my-3 w-full">
+            @csrf
             <div class=" flex w-full " >
-                <input autofocus required type="email" class=" bg-grey outline-none w-full py-1 px-2" placeholder="Tambah Email">
+                <input autofocus required name="email_name" type="email" class=" bg-grey outline-none w-full py-1 px-2" placeholder="Tambah Email">
                 <div>
                     <button type="submit" class=" bg-grey py-2 px-3 text-sm underline ">Save</button>
                 </div>

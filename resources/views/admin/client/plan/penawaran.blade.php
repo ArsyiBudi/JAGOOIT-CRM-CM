@@ -173,18 +173,14 @@
         @csrf
         @method('patch')
         <div class="bg-grey rounded shadow-lg mt-6 p-6">
-            <div class="w-full flex items-center justify-start">
-                @if($order -> leadData -> hasOneEmail)
+            @if($order -> leadData -> hasOneEmail)
+            <div class="w-full">
                 <select name="email_name" id="email" class="mb-4 bg-transparent border m-1 btn p-2 outline-none border-spacing-1 rounded-md py-1 text-1xl hover:bg-gray-300 hover:text-darkSecondary text-white">
                     <option value="" class="bg-grey hover:bg-gray-300 hover:text-darkSecondary">Select Email</option>
                     @foreach($order -> leadData -> emails as $email) 
                     <option value="{{ $email -> email_name }}" class="bg-grey hover:bg-gray-300 hover:text-darkSecondary">{{  $email -> email_name }}</option>
                     @endforeach
-
                 </select>
-                @else
-                {{ $order -> leadData -> business_name }} has no Email
-                @endif
             </div>
             <div class="w-full  mb-4 ">
                 <label for="file-tor" class="text-sm text-white">File Surat Penawaran + CV (1 file, pdf)</label>
@@ -203,7 +199,7 @@
                     </span>
                 </label>
             </div>
-
+            
             <div class="w-full">
                 <label for="deskripsi" class="text-sm text-white">Deskripsi</label>
                 <div class="rounded-lg px-2 py-4 h-24 w-full bg-white mt-2">
@@ -214,8 +210,11 @@
             <div class="mt-4 flex justify-end">
                 <button type="submit" name="sendCV" class="bg-secondary text-white text-sm text-center w-full md:w-[188px] h-[37px] rounded-md hover:scale-95 duration-200">Send</button>
             </div>
+            @else
+            {{ $order -> leadData -> business_name }} has no Email
+            @endif
         </div>
-
+        
         <div class=" flex justify-between items-center pt-4 mb-5 md:mb-0">
             <div>
                 <div>
