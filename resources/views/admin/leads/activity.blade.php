@@ -57,7 +57,7 @@
         </div>
 
         <div id="formContainer" class="w-full">
-            <form id="form1" class="hidden" method="POST" action="{{ url(request()->path() . '/appointment') }}">
+            <form id="form1" class="hidden" method="POST" action="{{ url(request()->path() . '/appointment') }}" onsubmit="showModal()">
                 @csrf
                 @if($lead -> hasOneEmail)
                 <div class="w-full flex items-center justify-start">
@@ -84,7 +84,7 @@
                     <textarea required name="deskripsi" id="deskripsi" class="bg-transparent outline-none p-2 text-black resize-none h-full w-full" placeholder="Deskripsi"></textarea> <!-- Menggunakan w-full untuk mengisi textarea secara penuh -->
                 </div>
                 <div class="w-[97px] mx-auto">
-                    <input type="submit" class="bg-secondary  text-white rounded-md px-4 py-2 h-[37px] mt-11 hover:scale-95 duration-200" onsubmit="my_modal_5.showModal()">
+                    <input type="submit" class="bg-secondary  text-white rounded-md px-4 py-2 h-[37px] mt-11 hover:scale-95 duration-200" >
                 </div>
                 @else
                 {{ $lead -> business_name }} has no Email
@@ -127,11 +127,24 @@
                 <div class="w-[97px] mx-auto">
                     <input type="submit" class="bg-secondary text-white rounded-md px-4 mt-5 py-2 h-[37px] hover:scale-95 duration-200">
                 </div>
+            </form>
         </div>
-        </form>
     </div>
 </div>
-</div>
+
+<dialog id="my_modal_5" class="modal  text-white">
+
+    <div class="modal-box bg-grey border-2 border-white w-11/12 max-w-xs flex justify-center items-center">
+
+        <h1>Email sedang dikirim...</h1>
+
+        {{-- <div onclick="closeAlrt()">
+            <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6 cursor-pointer" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" onclick="closeAlrt()"/></svg>
+        </div> --}}
+
+    </div>
+</dialog>
+
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.11.338/pdf.min.js"></script>
 
