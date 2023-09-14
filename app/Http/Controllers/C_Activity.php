@@ -59,7 +59,7 @@ class C_Activity extends Controller
         if(!$activity) return response([
             'error' => 'Error Occured',
         ]);
-        return back()->with('success', 'Data berhasil ditambahkan.');
+        return back()->with('success', 'Appointment terkirim.');
     }
     
     public function note(Request $request, $leads_id){

@@ -1,6 +1,32 @@
 @extends('admin.layouts.main')
+<style>
+    .hide-scrollbar::-webkit-scrollbar {
+        width: 0;
+        /* Width of the scrollbar */
+        .animate-slide-up {
+    animation: slide-up 0.3s ease-in-out;
+}
+
+@keyframes slide-up {
+    0% {
+        transform: translateY(-10px);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+    }
+</style>
 
 @section('container')
+@if(session()->has('success'))
+<div class="alert alert-success absolute top-10 right-10 w-auto animate-slide-up text-white font-medium border-2 border-green-300 cursor-pointer" onclick="closeAlert()">
+    <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6 cursor-pointer" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+    <span>{{ session('success') }}</span>
+</div>
+@endif
 {{-- <div id="formContainer">
     <form id="form3" class="hidden">
         <div class="bg-white opacity-70 rounded-md w-full mb-4 p-2">
@@ -33,7 +59,7 @@
             <form id="form1" class="hidden" method="POST" action="{{ url(request()->path() . '/appointment') }}">
                 @csrf
                 <div class="w-full flex items-center justify-start">
-                    <select name="email_name" id="email" class="mb-4 bg-transparent border m-1 btn p-2 outline-none border-spacing-1 rounded-md py-1 text-1xl hover:bg-gray-300 hover:text-darkSecondary text-white">
+                    <select required name="email_name" id="email" class="mb-4 bg-transparent border m-1 btn p-2 outline-none border-spacing-1 rounded-md py-1 text-1xl hover:bg-gray-300 hover:text-darkSecondary text-white">
                         <option value="" class="bg-grey hover:bg-gray-300 hover:text-darkSecondary">Select Email</option>
                         <option value="" class="bg-grey hover:bg-gray-300 hover:text-darkSecondary"></option>    
                     </select>
@@ -54,7 +80,7 @@
                     <textarea required name="deskripsi" id="deskripsi" class="bg-transparent outline-none p-2 text-black resize-none h-full w-full" placeholder="Deskripsi"></textarea> <!-- Menggunakan w-full untuk mengisi textarea secara penuh -->
                 </div>
                 <div class="w-[97px] mx-auto">
-                    <input type="submit" class="bg-secondary  text-white rounded-md px-4 py-2 h-[37px] mt-11 hover:scale-95 duration-200">
+                    <input type="submit" class="bg-secondary  text-white rounded-md px-4 py-2 h-[37px] mt-11 hover:scale-95 duration-200" onsubmit="my_modal_5.showModal()">
                 </div>
             </form>
 
@@ -102,6 +128,18 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.11.338/pdf.min.js"></script>
 
 <script>
+const my_modal_5 = document.getElementById('my_modal_5');
+
+function showModal() {
+    my_modal_5.showModal();
+}
+
+
+
+function closeAlrt() {
+    my_modal_5.close();
+}
+
     document.addEventListener("DOMContentLoaded", function() {
         const formSelector = document.getElementById("formSelector");
         const formContainer = document.getElementById("formContainer");

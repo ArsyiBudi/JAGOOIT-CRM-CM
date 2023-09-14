@@ -270,7 +270,7 @@
             </div>
 
             <div class="mt-4 flex justify-end">
-                <button type="submit" name="Send" class=" w-full  md:w-[188px] bg-secondary text-white text-sm text-center h-[37px] rounded-md hover:scale-95 duration-200" onclick="my_modal_5.showModal()">Send</button>
+                <button type="submit" name="Send" class=" w-full  md:w-[188px] bg-secondary text-white text-sm text-center h-[37px] rounded-md hover:scale-95 duration-200" onsubmit="my_modal_5.showModal()">Send</button>
             </div>
         </div>
     </form>
