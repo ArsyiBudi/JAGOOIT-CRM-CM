@@ -167,6 +167,7 @@
             </div>
             @else
             {{ $lead -> business_name }} doesn't have an email
+            <a href="{{ url('leads/'. $lead -> id . '/edit') }}">Edit Leads</a>
             @endif
 
 

@@ -261,12 +261,13 @@
                     @endforeach
                 </select>
             </div>
-            
+
             <div class="mt-4 flex justify-end">
                 <button type="submit" name="Send" class=" w-full  md:w-[188px] bg-secondary text-white text-sm text-center h-[37px] rounded-md hover:scale-95 duration-200" onsubmit="my_modal_5.showModal()">Send</button>
             </div>
             @else
             {{ $order -> leadData -> business_name }} has no Email
+            <a href="{{ url('leads/'. $order -> leadData -> id . '/edit') }}">Edit Leads</a>
             @endif
         </div>
     </form>

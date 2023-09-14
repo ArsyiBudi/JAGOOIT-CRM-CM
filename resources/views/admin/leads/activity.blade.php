@@ -2,6 +2,7 @@
 <style>
     .hide-scrollbar::-webkit-scrollbar {
         width: 0;
+    }
         /* Width of the scrollbar */
         .animate-slide-up {
     animation: slide-up 0.3s ease-in-out;
@@ -17,7 +18,7 @@
         opacity: 1;
     }
 }
-    }
+    
 </style>
 
 @section('container')
@@ -58,10 +59,13 @@
         <div id="formContainer" class="w-full">
             <form id="form1" class="hidden" method="POST" action="{{ url(request()->path() . '/appointment') }}">
                 @csrf
+                @if($lead -> hasOneEmail)
                 <div class="w-full flex items-center justify-start">
                     <select required name="email_name" id="email" class="mb-4 bg-transparent border m-1 btn p-2 outline-none border-spacing-1 rounded-md py-1 text-1xl hover:bg-gray-300 hover:text-darkSecondary text-white">
                         <option value="" class="bg-grey hover:bg-gray-300 hover:text-darkSecondary">Select Email</option>
-                        <option value="" class="bg-grey hover:bg-gray-300 hover:text-darkSecondary"></option>    
+                        @foreach($lead -> emails as $email)
+                        <option value="" class="bg-grey hover:bg-gray-300 hover:text-darkSecondary">{{ $email -> email_name }}</option>
+                        @endforeach
                     </select>
                 </div>
                 <div class="bg-white opacity-70 mb-4 p-2 rounded-md w-full">
@@ -82,6 +86,10 @@
                 <div class="w-[97px] mx-auto">
                     <input type="submit" class="bg-secondary  text-white rounded-md px-4 py-2 h-[37px] mt-11 hover:scale-95 duration-200" onsubmit="my_modal_5.showModal()">
                 </div>
+                @else
+                {{ $lead -> business_name }} has no Email
+                <a href="{{ url('leads/'. $lead -> id . '/edit') }}">Edit Leads</a>
+                @endif
             </form>
 
             <form id="form2" class="hidden" method="POST" action="{{ url(request()->path() . '/note') }}">
