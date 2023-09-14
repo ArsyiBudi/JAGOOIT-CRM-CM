@@ -96,7 +96,7 @@
                 </div>
                 <div class="bg-white opacity-70 rounded-md w-full p-2">
                     <textarea required name="deskripsi" id="deskripsi"
-                        class="bg-transparent outline-none p-2 text-black resize-none"
+                        class="bg-transparent outline-none p-2 text-black resize-none w-full"
                         placeholder="Deskripsi">@if(@$negosiasi->desc){{@$negosiasi->desc}}@endif</textarea>
                     <!-- Menggunakan w-full untuk mengisi textarea secara penuh -->
                 </div>

@@ -106,9 +106,9 @@
 {{-- </div> --}}
 
 <h6 class="mt-24 md:mt-0 text-center lg:text-left font-normal mb-4 text-2xl" id="offerTitle">Create Offer</h6>
-<div class="bg-grey p-9 rounded-lg border-2 border-white  w-full h-[500px] overflow-y-scroll hide-scrollbar" id="createSection">
+<div class="bg-grey p-9 rounded-lg border-2 border-white  w-full h-[650px] overflow-y-scroll hide-scrollbar" id="createSection">
     <div class='dropdown'>
-        <select id="formSelector" class="mb-4 bg-transparent border m-1 btn p-2 outline-none border-spacing-1 rounded-md py-1 text-1xl hover:bg-gray-300 hover:text-darkSecondary text-white">
+        <select id="formSelector" class="mb-4 bg-transparent border  btn p-2 outline-none border-spacing-1 rounded-md py-1 text-1xl hover:bg-gray-300 hover:text-darkSecondary text-white">
             <option value="form1" class="bg-grey hover:bg-gray-300 hover:text-darkSecondary">Send Email</option>
             <option value="form3" class="bg-grey hover:bg-gray-300 hover:text-darkSecondary">New Order</option>
         </select>
@@ -117,15 +117,15 @@
         <form id="form1" class="hidden" action="{{ url(request() -> path()) }}" method="post" enctype="multipart/form-data">
             @csrf
             @if($lead -> hasOneEmail)
-            <select name="email_name" id="email" class="mb-4 bg-transparent border m-1 btn p-2 outline-none border-spacing-1 rounded-md py-1 text-1xl hover:bg-gray-300 hover:text-darkSecondary text-white">
-                <option value="" class="bg-grey hover:bg-gray-300 hover:text-darkSecondary">Select Email</option>
-                @foreach($lead->emails as $email)
-                <option value="{{ $email -> email_name }}" class="bg-grey hover:bg-gray-300 hover:text-darkSecondary">{{ $email -> email_name }}</option>
-                @endforeach
-            </select>
-            @else
-            {{ $lead -> business_name }} doesn't have an email
-            @endif
+                <select name="email_name" id="email" class=" bg-transparent border mb-4 btn p-2 outline-none border-spacing-1 rounded-md py-1 text-1xl hover:bg-gray-300 hover:text-darkSecondary text-white" required>
+                    <option value="" class="bg-grey hover:bg-gray-300 hover:text-darkSecondary">Select Email</option>
+                    @foreach($lead->emails as $email)
+                    <option value="{{ $email -> email_name }}" class="bg-grey hover:bg-gray-300 hover:text-darkSecondary">{{ $email -> email_name }}</option>
+                    @endforeach
+                </select>
+                @else
+                {{ $lead -> business_name }} doesn't have an email
+                @endif
             <div class="w-full mb-4">
                 <label for="file-brosur" class="text-sm text-white">File Brosur</label>
 
@@ -149,20 +149,46 @@
             <div class="bg-white opacity-70 rounded-md w-full mb-2 p-2 h-[200px]">
                 <textarea required name="description" id="deskripsinote" class="bg-transparent p-2 outline-none text-black w-full h-full resize-none" placeholder="Deskripsi"></textarea>
             </div>
-            <div class="w-[97px] mx-auto">
-                <input type="submit" class="bg-secondary text-white rounded-md px-4 mt-5 py-2 h-[37px] cursor-pointer hover:scale-95 duration-200">
-            </div>
+                <div class="w-[97px] mt-5 mx-auto" onsubmit="my_modal_5.showModal()">
+                    <input type="submit" class="bg-secondary text-white rounded-md px-4  py-2 h-[37px] cursor-pointer hover:scale-95 duration-200">
+                </div>
+                
         </form>
         {{-- <form id="form3" class="hidden"></form> --}}
 
     </div>
 </div>
 
+<dialog id="my_modal_5" class="modal  text-white">
+    
+    <div  class="modal-box bg-grey border-2 border-white w-11/12 max-w-xs flex justify-center items-center">
+        
+        <h1>Email sedang dikirim...</h1>
+
+        {{-- <div onclick="closeAlrt()">
+            <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6 cursor-pointer" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" onclick="closeAlrt()"/></svg>
+        </div> --}}
+        
+    </div>
+</dialog>
+
 {{-- library --}}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.11.338/pdf.min.js"></script>
 
 
 <script>
+    const my_modal_5 = document.getElementById('my_modal_5');
+
+    function showModal() {
+        my_modal_5.showModal();
+    }
+
+
+
+    function closeAlrt() {
+        my_modal_5.close();
+    }
+
     async function previewFile() {
         const fileInput = document.getElementById('file-brosur');
         const containerInput = document.getElementById('container-brosur');
