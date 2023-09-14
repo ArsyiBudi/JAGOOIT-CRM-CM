@@ -123,7 +123,7 @@
 {{-- </div> --}}
 
 <h6 class="mt-24 md:mt-0 text-center lg:text-left font-normal mb-4 text-2xl" id="offerTitle">Create Offer</h6>
-<div class="bg-grey p-9 rounded-lg border-2 border-white  w-full h-[650px] overflow-y-scroll hide-scrollbar" id="createSection">
+<div class="bg-grey p-9 rounded-lg border-2 border-white  w-full h-[590px] overflow-y-scroll hide-scrollbar" id="createSection">
     <div class='dropdown'>
         <select id="formSelector" class="mb-4 bg-transparent border  btn p-2 outline-none border-spacing-1 rounded-md py-1 text-1xl hover:bg-gray-300 hover:text-darkSecondary text-white">
             <option value="form1" class="bg-grey hover:bg-gray-300 hover:text-darkSecondary">Send Email</option>
