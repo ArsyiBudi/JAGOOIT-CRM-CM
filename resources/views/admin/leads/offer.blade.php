@@ -131,7 +131,7 @@
         </select>
     </div>
     <div id="formContainer" class="w-full">
-        <form id="form1" class="hidden" action="{{ url(request() -> path()) }}" method="post" enctype="multipart/form-data">
+        <form id="form1" class="hidden" action="{{ url(request() -> path()) }}" method="post" enctype="multipart/form-data" onsubmit="my_modal_5.showModal()">
             @csrf
             @if($lead -> hasOneEmail)
             <select name="email_name" id="email" class="mb-4 bg-transparent border m-1 btn p-2 outline-none border-spacing-1 rounded-md py-1 text-1xl hover:bg-gray-300 hover:text-darkSecondary text-white" required>
@@ -163,7 +163,7 @@
             <div class="bg-white opacity-70 rounded-md w-full mb-2 p-2 h-[200px]">
                 <textarea required name="description" id="deskripsinote" class="bg-transparent p-2 outline-none text-black w-full h-full resize-none" placeholder="Deskripsi"></textarea>
             </div>
-            <div class="w-[97px] mt-5 mx-auto" onsubmit="my_modal_5.showModal()">
+            <div class="w-[97px] mt-5 mx-auto" >
                 <input type="submit" class="bg-secondary text-white rounded-md px-4  py-2 h-[37px] cursor-pointer hover:scale-95 duration-200">
             </div>
             @else
@@ -196,17 +196,7 @@
 
 
 <script>
-    const my_modal_5 = document.getElementById('my_modal_5');
-
-    function showModal() {
-        my_modal_5.showModal();
-    }
-
-
-
-    function closeAlrt() {
-        my_modal_5.close();
-    }
+    
 
     async function previewFile() {
         const fileInput = document.getElementById('file-brosur');
@@ -371,6 +361,18 @@
         // Inisialisasi dengan menampilkan Formulir 1 secara default
         document.getElementById("form1").style.display = "block";
     });
+
+    const my_modal_5 = document.getElementById('my_modal_5');
+
+    function showModal() {
+        my_modal_5.showModal();
+    }
+
+
+
+    function closeAlrt() {
+        my_modal_5.close();
+    }
 
     function closeAlert() {
         const alertContainer = document.querySelector('.alert');

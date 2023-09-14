@@ -44,9 +44,36 @@
         filter: invert(1);
         /* This inverts the icon color */
     }
+
+    .hide-scrollbar::-webkit-scrollbar {
+        width: 0;
+    }
+        /* Width of the scrollbar */
+        .animate-slide-up {
+    animation: slide-up 0.3s ease-in-out;
+}
+
+@keyframes slide-up {
+    0% {
+        transform: translateY(-10px);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
 </style>
 
 @section('container')
+@if(session()->has('success'))
+<div class="alert alert-success absolute top-10 right-10 w-auto animate-slide-up text-white font-medium border-2 border-green-300 cursor-pointer" onclick="closeAlert()">
+    <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6 cursor-pointer" fill="none" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+    </svg>
+    <span>{{ session('success') }}</span>
+</div>
+@endif
 <div class="pt-20 pb-2 lg:pt-0">
 </div>
 <div class="overflow-y-auto overflow-x-hidden pt-0 pb-10 lg:pt-0 px-5 lg:px-10 h-[90vh]">
@@ -71,13 +98,13 @@
         </div>
     </div>
     <div class=" mt-5">
-        <form action="{{ url(request()->path()) }}" method="post">
+        <form action="{{ url(request()->path()) }}" method="post" onsubmit="showModal()">
             @csrf
             @method('patch')
             <div class="flex flex-col bg-grey p-9 mt-6 rounded-lg gap-2 border-2 border-white  w-full" id="createSection">
                 @if($order -> leadData -> hasOneEmail)
                 <div class="w-full">
-                    <select name="email_name" id="email" class="mb-4 bg-transparent border m-1 btn p-2 outline-none border-spacing-1 rounded-md py-1 text-1xl hover:bg-gray-300 hover:text-darkSecondary text-white">
+                    <select required name="email_name" id="email" class="mb-4 bg-transparent border m-1 btn p-2 outline-none border-spacing-1 rounded-md py-1 text-1xl hover:bg-gray-300 hover:text-darkSecondary text-white">
                         <option value="" class="bg-grey hover:bg-gray-300 hover:text-darkSecondary">Select Email</option>
                         @foreach($order -> leadData -> emails as $email) 
                         <option value="{{ $email -> email_name }}" class="bg-grey hover:bg-gray-300 hover:text-darkSecondary">{{  $email -> email_name }}</option>
@@ -153,4 +180,37 @@
         </div>
     </div>
 </div>
+
+<dialog id="my_modal_5" class="modal  text-white">
+
+    <div class="modal-box bg-grey border-2 border-white w-11/12 max-w-xs flex justify-center items-center">
+
+        <h1>Email sedang dikirim...</h1>
+
+        {{-- <div onclick="closeAlrt()">
+            <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6 cursor-pointer" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" onclick="closeAlrt()"/></svg>
+        </div> --}}
+
+    </div>
+</dialog>
+
+
+<script>
+    const my_modal_5 = document.getElementById('my_modal_5');
+
+    function showModal() {
+        my_modal_5.showModal();
+    }
+
+
+
+    function closeAlrt() {
+        my_modal_5.close();
+    }
+
+    function closeAlert() {
+        const alertContainer = document.querySelector('.alert');
+        alertContainer.style.display = 'none';
+    }
+</script>
 @endsection

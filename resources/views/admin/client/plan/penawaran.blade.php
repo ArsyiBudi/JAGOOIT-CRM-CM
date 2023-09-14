@@ -14,6 +14,20 @@
     input::-webkit-inner-spin-button {
         -webkit-appearance: none;
         margin: 0;
+    }   
+        .animate-slide-up {
+        animation: slide-up 0.3s ease-in-out;
+    }
+
+    @keyframes slide-up {
+        0% {
+            transform: translateY(-10px);
+            opacity: 0;
+        }
+        100% {
+            transform: translateY(0);
+            opacity: 1;
+        }
     }
 </style>
 
@@ -169,13 +183,13 @@
     </div>
     </form>
 
-    <form action="{{ url(request() -> path()) }}" method="POST" enctype="multipart/form-data">
+    <form action="{{ url(request() -> path()) }}" method="POST" enctype="multipart/form-data" onsubmit="showModal2()">
         @csrf
         @method('patch')
         <div class="bg-grey rounded shadow-lg mt-6 p-6">
             @if($order -> leadData -> hasOneEmail)
             <div class="w-full">
-                <select name="email_name" id="email" class="mb-4 bg-transparent border m-1 btn p-2 outline-none border-spacing-1 rounded-md py-1 text-1xl hover:bg-gray-300 hover:text-darkSecondary text-white">
+                <select required name="email_name" id="email" class="mb-4 bg-transparent border m-1 btn p-2 outline-none border-spacing-1 rounded-md py-1 text-1xl hover:bg-gray-300 hover:text-darkSecondary text-white">
                     <option value="" class="bg-grey hover:bg-gray-300 hover:text-darkSecondary">Select Email</option>
                     @foreach($order -> leadData -> emails as $email) 
                     <option value="{{ $email -> email_name }}" class="bg-grey hover:bg-gray-300 hover:text-darkSecondary">{{  $email -> email_name }}</option>
@@ -203,12 +217,12 @@
             <div class="w-full">
                 <label for="deskripsi" class="text-sm text-white">Deskripsi</label>
                 <div class="rounded-lg px-2 py-4 h-24 w-full bg-white mt-2">
-                    <textarea name="cv_desc" id="deskripsi" type="text" class="text-black bg-transparent outline-none h-full w-full hide-scrollbar resize-none">@if(@$order -> cv_description){{@$order -> cv_description}}@endif</textarea>
+                    <textarea required name="cv_desc" id="deskripsi" type="text" class="text-black bg-transparent outline-none h-full w-full hide-scrollbar resize-none">@if(@$order -> cv_description){{@$order -> cv_description}}@endif</textarea>
                 </div>
             </div>
 
             <div class="mt-4 flex justify-end">
-                <button type="submit" name="sendCV" class="bg-secondary text-white text-sm text-center w-full md:w-[188px] h-[37px] rounded-md hover:scale-95 duration-200">Send</button>
+                <button type="submit" name="sendCV" class="bg-secondary text-white text-sm text-center w-full md:w-[188px] h-[37px] rounded-md hover:scale-95 duration-200" >Send</button>
             </div>
             @else
             {{ $order -> leadData -> business_name }} has no Email
@@ -280,6 +294,18 @@
     </form>
 </dialog>
 
+<dialog id="my_modal_6" class="modal  text-white">
+
+    <div class="modal-box bg-grey border-2 border-white w-11/12 max-w-xs flex justify-center items-center">
+
+        <h1>Email sedang dikirim...</h1>
+
+        {{-- <div onclick="closeAlrt()">
+            <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6 cursor-pointer" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" onclick="closeAlrt()"/></svg>
+        </div> --}}
+
+    </div>
+</dialog>
 
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.11.338/pdf.min.js"></script>
@@ -293,6 +319,16 @@
 
     function hideModal() {
         my_modal_5.close();
+    }
+
+    const my_modal_6 = document.getElementById('my_modal_6');
+
+    function showModal2() {
+        my_modal_6.showModal();
+    }
+
+    function hideModal2() {
+        my_modal_6.close();
     }
 
     async function previewFile() {

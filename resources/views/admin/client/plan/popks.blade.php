@@ -224,11 +224,19 @@
         </div>
     </form>
 
-    <form action="{{ url(request()->path()) }}" method="POST" enctype="multipart/form-data">
+    <form action="{{ url(request()->path()) }}" method="POST" enctype="multipart/form-data" onsubmit="showModal()">
         @csrf
         @method('PATCH')
-        <div class="overflow-auto bg-darkSecondary mt-5 justify-between flex flex-col text-lightGrey px-8 py-10 rounded-md space-y-3">
+        <div class="overflow-auto bg-grey mt-5 justify-between flex flex-col text-lightGrey px-8 py-10 rounded-md space-y-3">
             @if($order -> leadData -> hasOneEmail)
+            <div class="w-full">
+                <select name="email_name" id="email" class="mb-4 bg-transparent border btn p-2 outline-none border-spacing-1 rounded-md py-1 text-1xl hover:bg-gray-300 hover:text-darkSecondary text-white">
+                    <option value="" class="bg-grey hover:bg-gray-300 hover:text-darkSecondary">Select Email</option>
+                    @foreach($order -> leadData -> emails as $email) 
+                    <option value="{{ $email -> email_name }}" class="bg-grey hover:bg-gray-300 hover:text-darkSecondary">{{  $email -> email_name }}</option>
+                    @endforeach
+                </select>
+            </div>
             <div>File PKS (1 file, pdf)</div>
             <div class="flex flex-row space-x-2">
                 <div class="flex-auto flex flex-col">
@@ -253,17 +261,10 @@
                 <textarea id="desk-popks" type="text" class="p-1 outline-none rounded-md h-[70px] text-black hide-scrollbar resize-none bg-white" name="po_descr">@if(@$order -> po_description){{ $order -> po_description }} @endif</textarea>
             </div>
             
-            <div class="w-full">
-                <select name="email_name" id="email" class="mb-4 bg-transparent border m-1 btn p-2 outline-none border-spacing-1 rounded-md py-1 text-1xl hover:bg-gray-300 hover:text-darkSecondary text-white">
-                    <option value="" class="bg-grey hover:bg-gray-300 hover:text-darkSecondary">Select Email</option>
-                    @foreach($order -> leadData -> emails as $email) 
-                    <option value="{{ $email -> email_name }}" class="bg-grey hover:bg-gray-300 hover:text-darkSecondary">{{  $email -> email_name }}</option>
-                    @endforeach
-                </select>
-            </div>
+            
 
             <div class="mt-4 flex justify-end">
-                <button type="submit" name="Send" class=" w-full  md:w-[188px] bg-secondary text-white text-sm text-center h-[37px] rounded-md hover:scale-95 duration-200" onsubmit="my_modal_5.showModal()">Send</button>
+                <button type="submit" name="Send" class=" w-full  md:w-[188px] bg-secondary text-white text-sm text-center h-[37px] rounded-md hover:scale-95 duration-200" >Send</button>
             </div>
             @else
             {{ $order -> leadData -> business_name }} has no Email
@@ -308,15 +309,15 @@
 
 
 <dialog id="my_modal_5" class="modal  text-white">
-    
-    <div  class="modal-box bg-grey border-2 border-white w-11/12 max-w-xs flex justify-between items-center">
-        
+
+    <div class="modal-box bg-grey border-2 border-white w-11/12 max-w-xs flex justify-center items-center">
+
         <h1>Email sedang dikirim...</h1>
 
-        <div onclick="closeAlrt()">
+        {{-- <div onclick="closeAlrt()">
             <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6 cursor-pointer" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" onclick="closeAlrt()"/></svg>
-        </div>
-        
+        </div> --}}
+
     </div>
 </dialog>
 
