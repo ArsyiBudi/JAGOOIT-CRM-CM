@@ -167,7 +167,7 @@ Route::middleware('auth')->group(function () {
                 Route::get('/{order_id}/percobaan/{talent_id}', [C_Plan::class, 'deletePercobaan'])->name('deletePercobaan');
 
                 //?PO & PKS
-                Route::get('/{order_id}/popks', [C_Plan::class, 'fetchPopks']);
+                Route::get('/{order_id}/popks', [C_Plan::class, 'fetchPopks']) -> name('fetchPopks');
                 Route::post('/{order_id}/popks', [C_Plan::class, 'popks_create'])->name('create_popks');
                 Route::patch('/{order_id}/popks', [C_Plan::class, 'popks_send'])->name('send_popks');
                 Route::put('/{order_id}/popks', [C_Plan::class, 'popks_save']);

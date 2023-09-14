@@ -55,17 +55,17 @@
 
     <div class=" mt-5  w-full overflow-auto md:overflow-hidden">
         <div class=" mx-auto steps steps-horizontal w-full ml-0 md:ml-14">
-            <a class="step step-primary" href="{{ route('fetchRecruitment', ['order_id' => $order_id]) }}">
+            <a class="step step-primary" href="{{ route('fetchRecruitment', ['order_id' => $order -> id]) }}">
             </a>
-            <a class="step step-primary" href="{{ route('fetchTraining', ['order_id' => $order_id]) }}">
+            <a class="step step-primary" href="{{ route('fetchTraining', ['order_id' => $order -> id]) }}">
             </a>
-            <a class="step step-primary" href="{{ route('fetchOffer', ['order_id' => $order_id]) }}">
+            <a class="step step-primary" href="{{ route('fetchOffer', ['order_id' => $order -> id]) }}">
             </a>
             <a class="step step-primary">
             </a>
-            <a class="step" href="{{ route('fetchPercobaan', ['order_id' => $order_id]) }}">
+            <a class="step" href="{{ route('fetchPercobaan', ['order_id' => $order -> id]) }}">
             </a>
-            <a class="step" href="{{ url('/client/order/plan/'.$order_id.'/popks') }}">
+            <a class="step" href="{{ route('fetchPopks', ['order_id' => $order -> id]) }}">
             </a>
             <a></a>
         </div>
@@ -74,13 +74,20 @@
         <form action="{{ url(request()->path()) }}" method="post">
             @csrf
             @method('patch')
-            <div class="flex flex-col bg-grey p-9 mt-6 rounded-lg gap-2 border-2 border-white  w-full"
-                id="createSection">
+            <div class="flex flex-col bg-grey p-9 mt-6 rounded-lg gap-2 border-2 border-white  w-full" id="createSection">
+                @if($order -> leadData -> hasOneEmail)
+                <div class="w-full">
+                    <select name="email_name" id="email" class="mb-4 bg-transparent border m-1 btn p-2 outline-none border-spacing-1 rounded-md py-1 text-1xl hover:bg-gray-300 hover:text-darkSecondary text-white">
+                        <option value="" class="bg-grey hover:bg-gray-300 hover:text-darkSecondary">Select Email</option>
+                        @foreach($order -> leadData -> emails as $email) 
+                        <option value="{{ $email -> email_name }}" class="bg-grey hover:bg-gray-300 hover:text-darkSecondary">{{  $email -> email_name }}</option>
+                        @endforeach
+                    </select>
+                </div>
                 <div class="bg-white opacity-70 p-2 rounded-md w-full">
                     <textarea name="judul" id="judul"
                         class="text-black opacity-100 w-full p-2 bg-transparent outline-none resize-none"
                         placeholder="Judul" required>@if(@$negosiasi->xs1){{@$negosiasi->xs1}}@endif</textarea>
-                    <!-- Menggunakan w-full untuk mengisi textarea secara penuh -->
                 </div>
                 <div class="flex flex-row max-sm:flex-wrap gap-2 w-full">
                     <div class="bg-white opacity-70 rounded-md flex-auto p-2">
@@ -98,17 +105,20 @@
                     <textarea required name="deskripsi" id="deskripsi"
                         class="bg-transparent outline-none p-2 text-black resize-none w-full"
                         placeholder="Deskripsi">@if(@$negosiasi->desc){{@$negosiasi->desc}}@endif</textarea>
-                    <!-- Menggunakan w-full untuk mengisi textarea secara penuh -->
                 </div>
                 <div class="w-[97px] mx-auto mt-2">
                     <input type="submit" class="bg-secondary  text-white rounded-md px-4 py-2 h-10 cursor-pointer">
                 </div>
+                @else
+                {{ $order -> leadData -> business_name }} has No Email
+                <a href="{{ url('leads/'. $order -> leadData -> id . '/edit') }}">Edit Leads</a>
+                @endif
             </div>
         </form>
 
         <div class="flex justify-between items-center pt-4 md:mb-0">
             <div>
-                <a href="{{ url('/client/order/plan/'.$order_id.'/penawaran') }}">
+                <a href="{{ url('/client/order/plan/'.$order -> id.'/penawaran') }}">
                     <div
                         class="bg-grey text-white text-sm text-center py-1 px-3 md:px-14 rounded-md font-bold hover:scale-95 duration-200">
                         <p class=" hidden md:inline">Back</p>
@@ -131,7 +141,7 @@
                 </div>
 
                 <div>
-                    <a href="{{ url('/client/order/plan/'.$order_id.'/percobaan') }}">
+                    <a href="{{ url('/client/order/plan/'.$order -> id .'/percobaan') }}">
                         <div
                             class=" bg-grey text-white text-sm text-center py-1 px-3 md:px-14 rounded-md font-bold hover:scale-95 duration-200">
                             <p class="hidden md:inline">continue</p>

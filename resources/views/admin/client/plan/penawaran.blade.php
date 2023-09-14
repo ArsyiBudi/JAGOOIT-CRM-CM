@@ -212,9 +212,7 @@
             </div>
             @else
             {{ $order -> leadData -> business_name }} has no Email
-            <div>
-                <a href="{{ url('leads/'. $order -> leadData -> id . '/edit') }}">Edit Leads</a>
-            </div>
+            <a href="{{ url('leads/'. $order -> leadData -> id . '/edit') }}">Edit Leads</a>
             @endif
         </div>
         

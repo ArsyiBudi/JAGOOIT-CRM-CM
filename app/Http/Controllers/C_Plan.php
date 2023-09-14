@@ -226,8 +226,8 @@ class C_Plan extends Controller
         $appointment = M_Activity::find($order->appoinment_activity_id);
         return view('admin.client.plan.negosiasi', [
             "title" => "Plan | Negosiasi",
-            "order_id" => $order_id,
-            "negosiasi" => $appointment
+            "order" => $order,
+        "negosiasi" => $appointment
         ]);
 
     }

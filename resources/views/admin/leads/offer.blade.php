@@ -2,6 +2,7 @@
 <style>
     .hide-scrollbar::-webkit-scrollbar {
         width: 0;
+    }
         /* Width of the scrollbar */
         .animate-slide-up {
     animation: slide-up 0.3s ease-in-out;
@@ -17,7 +18,7 @@
         opacity: 1;
     }
 }
-    }
+
 </style>
 @section('container')
 {{-- <div id="formContainer"> --}}
