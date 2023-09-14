@@ -118,6 +118,9 @@
                                 <a href="{{ url('/leads/'. $row -> id .'/detail') }}">
                                     <i class=" text-lg cursor-pointer ri-information-line"></i>
                                 </a>
+                                <a href="{{ url('/leads/'. $row -> id .'/edit') }}">
+                                    <i class="ri-edit-line"></i>
+                                </a>
                                 <form action="{{ route('admin.leads.delete', $row->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this lead?')" class=" block  mt-3">
                                     @csrf
                                     @method('DELETE')

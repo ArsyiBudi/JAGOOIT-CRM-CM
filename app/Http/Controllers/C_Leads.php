@@ -98,9 +98,10 @@ class C_Leads extends Controller
             'pic_contact_number' => $field['pic_contact_number']
         ]);
 
-        if (!$leads) return response([
-            'error' => 'Error occured'
-        ]);
+        if (!$leads)
+            return response([
+                'error' => 'Error occured'
+            ]);
 
         $emailAddresses = [];
         foreach ($request->all() as $fieldName => $fieldValue) {
@@ -176,7 +177,8 @@ class C_Leads extends Controller
             'lead_data' => $lead
         ];
         $mailSubject = $request->subject;
-        if (!$lead->hasOneEmail) return response(['error' => "No Email detected in {$lead->business_name}"]);
+        if (!$lead->hasOneEmail)
+            return response(['error' => "No Email detected in {$lead->business_name}"]);
 
         $email = new TestMail($mailData, $mailSubject);
 
@@ -189,5 +191,12 @@ class C_Leads extends Controller
         }
         Mail::to($request->email_name)->send($email);
         return redirect()->back()->with('success', 'Email berhasil terkirim');
+    }
+
+    public function edit(Request $request)
+    {
+        return view('admin.leads.edit', [
+            "title" => "Leads | Detail",
+        ]);
     }
 }
