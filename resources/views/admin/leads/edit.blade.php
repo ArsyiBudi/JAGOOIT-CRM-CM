@@ -1,64 +1,74 @@
 @extends('admin.layouts.main')
 
+<style>
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+</style>
+
 @section('container')
 <div class="pt-20 lg:pt-0">
 </div>
 <div class="overflow-auto pt-0 h-[90vh] w-full rounded-md hide-scrollbar">
-    <div class="bg-darkSecondary flex flex-col px-8 py-10">
-         <div class="flex flex-col text-lightGrey space-y-2">
-            <div class=" flex justify-between">
-                <div class="text-2xl">Edit Leads</div>
-                <div class=" font-bold hover:scale-95 duration-200">
-                    <button class=" bg-success bg-opacity-95  rounded-md py-1 px-5 ">Save</button>
-                </div>
-            </div>
-            <div class="divide-y divide-slate-50 gap-4 flex flex-col">
-                <div class="pt-3 flex items-center gap-2">
-                    <p>
-                       Nama Perusahaan :
-                    </p>
-                    <div>
-                        <input type="text" class=" bg-transparent outline-none">
+    <div class="bg-darkSecondary flex flex-col px-8 py-10 h-[90vh]">
+        <form action="">
+            <div class="flex flex-col text-lightGrey space-y-2">
+                <div class=" flex justify-between">
+                    <div class="text-2xl">Edit Leads</div>
+                    <div class=" font-bold hover:scale-95 duration-200">
+                        <button class=" bg-success bg-opacity-95  rounded-md py-1 px-5 " type="submit">Save</button>
                     </div>
                 </div>
-                 <div class="pt-3 flex items-center gap-2">
-                    <p>
-                       Alamat : 
-                    </p>
-                    <div>
-                        <input type="text" class=" bg-transparent outline-none">
-                    </div>
-                </div>
-                <div class="pt-3 flex items-center gap-2">
-                    <p>
-                       Nama PIC :
-                    </p>
-                    <div>
-                        <input type="text" class=" bg-transparent outline-none">
-                    </div>
-                </div>
-                <div class="pt-3 flex items-center gap-2">
-                    <p>
-                        No Telepon PIC :
-                    </p>
-                    <div>
-                        <input type="text" class=" bg-transparent outline-none">
-                    </div>
-                </div>
-                <div class="pt-3 flex items-center justify-between">
-                    <div class=" flex items-center gap-2">
-                        <p>
-                            Email :
+                <div class="divide-y divide-slate-50 gap-4 flex flex-col">
+                    <div class="pt-3 flex items-center gap-1 md:gap-2">
+                         <p class="text-xs md:text-[16px]">
+                        Nama Perusahaan :
                         </p>
-                        <button class=" font-bold underline" onclick="my_modal_3.showModal()">Lihat Email</button>  
-                    </div>  
-                    <div class="" onclick="my_modal_3.showModal()">
-                        <p class=" px-5 py-1 bg-success rounded-md font-bold text-2xl cursor-pointer hover:scale-95 duration-200">+</p>
+                        <div>
+                            <input type="text" required class=" bg-transparent outline-none">
+                        </div>
                     </div>
+                    <div class="pt-3 flex items-center gap-1 md:gap-2">
+                         <p class="text-sm md:text-[16px]">
+                        Alamat : 
+                        </p>
+                        <div>
+                            <input type="text" required class=" bg-transparent outline-none">
+                        </div>
+                    </div>
+                    <div class="pt-3 flex items-center gap-1 md:gap-2">
+                         <p class="text-sm md:text-[16px]">
+                        Nama PIC :
+                        </p>
+                        <div>
+                            <input type="text" required class=" bg-transparent outline-none">
+                        </div>
+                    </div>
+                    <div class="pt-3 flex items-center gap-1 md:gap-2">
+                        <p class="text-sm md:text-[16px]">
+                            No Telepon PIC :
+                        </p>
+                        <div>
+                            <input type="number" required class=" bg-transparent outline-none">
+                        </div>
+                    </div>
+                    <div class="pt-3 flex items-center justify-between">
+                        <div class=" flex items-center gap-1 md:gap-2">
+                              <p class="text-sm md:text-[16px]">
+                                Email :
+                            </p>
+                            <button class=" font-bold underline" onclick="my_modal_3.showModal()">Lihat Email</button>  
+                        </div>  
+                        <div class="" onclick="my_modal_3.showModal()">
+                            <p class=" px-5 py-1 bg-success rounded-md font-bold text-2xl cursor-pointer hover:scale-95 duration-200">+</p>
+                        </div>
+                    </div>
+                    <hr>
                 </div>
-                <hr>
             </div>
-        </div>
+        </form>
     </div>
     <dialog id="my_modal_3" class="modal">
         <div class="modal-box bg-primary">
