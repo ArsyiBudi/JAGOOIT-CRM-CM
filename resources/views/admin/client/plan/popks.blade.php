@@ -50,6 +50,20 @@
         filter: invert(1);
         /* This inverts the icon color */
     }
+    .animate-slide-up {
+    animation: slide-up 0.3s ease-in-out;
+}
+
+@keyframes slide-up {
+    0% {
+        transform: translateY(-10px);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
 </style>
 
 @section('container')
@@ -300,7 +314,7 @@
     
     <div  class="modal-box bg-grey border-2 border-white w-11/12 max-w-xs flex justify-between items-center">
         
-        <h1>Mohon Tunggu Sebentar</h1>
+        <h1>Email sedang dikirim...</h1>
 
         <div onclick="closeAlrt()">
             <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6 cursor-pointer" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" onclick="closeAlrt()"/></svg>

@@ -32,6 +32,12 @@
         <div id="formContainer" class="w-full">
             <form id="form1" class="hidden" method="POST" action="{{ url(request()->path() . '/appointment') }}">
                 @csrf
+                <div class="w-full flex items-center justify-start">
+                    <select name="email_name" id="email" class="mb-4 bg-transparent border m-1 btn p-2 outline-none border-spacing-1 rounded-md py-1 text-1xl hover:bg-gray-300 hover:text-darkSecondary text-white">
+                        <option value="" class="bg-grey hover:bg-gray-300 hover:text-darkSecondary">Select Email</option>
+                        <option value="" class="bg-grey hover:bg-gray-300 hover:text-darkSecondary"></option>    
+                    </select>
+                </div>
                 <div class="bg-white opacity-70 mb-4 p-2 rounded-md w-full">
                     <textarea required name="judul" id="judul" class="text-black opacity-100 w-full p-2 bg-transparent outline-none resize-none" placeholder="Judul"></textarea> <!-- Menggunakan w-full untuk mengisi textarea secara penuh -->
                 </div>

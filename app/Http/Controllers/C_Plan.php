@@ -663,7 +663,7 @@ class C_Plan extends Controller
             }
 
             Mail::to($lead->hasOneEmail->email_name)->send($email);
-            return redirect()->back()->with('success', '');
+            return redirect()->back()->with('success', 'Email berhasil terkirim');
         }
 
 
