@@ -95,7 +95,7 @@
                               <p class="text-sm md:text-[16px]">
                                 Email :
                             </p>
-                            <button class=" font-bold underline" onclick="my_modal_3.showModal()">Lihat Email</button>  
+                            <a class="cursor-pointer font-bold underline" onclick="my_modal_3.showModal()">Lihat Email</a>  
                         </div>  
                         <div class="" onclick="my_modal_3.showModal()">
                             <p class=" px-5 py-1 bg-success rounded-md font-bold text-2xl cursor-pointer hover:scale-95 duration-200">+</p>
@@ -147,6 +147,12 @@
 </div>  
 
 <script>
+const my_modal_3 = document.getElementById('my_modal_3');
+
+function showModal() {
+    my_modal_3.showModal();
+}
+
     function closeAlert() {
         const alertContainer = document.querySelector('.alert');
         alertContainer.style.display = 'none';

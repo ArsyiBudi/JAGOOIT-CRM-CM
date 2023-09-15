@@ -48,7 +48,7 @@
     <div class="w-full bg-darkSecondary px-8 flex flex-col">
         <div class="pt-10 bg-darkSecondary">
             <div class="border-b border-white w-full pb-3 mb-3">
-                <h3 class="text-white font-semibold text-3xl">Data Clients</h3>
+                <h3 class="text-white font-semibold text-3xl" >Data Clients</h3>
             </div>
 
             <form action="{{ route('fetch_client') }}" method="get" class=" block md:flex items-start my-4 justify-between mb-8 w-full">
@@ -121,11 +121,9 @@
                                     <a href="{{ url('/client/detail/'. $row -> id ) }}">
                                         <i class="text-lg cursor-pointer ri-information-line"></i>
                                     </a>
-                                    <form action="{{ route('delete_client', ['client_id' => $row -> id]) }}" method="post" class=" block  mt-3" onsubmit="return confirm('Are you sure you want to delete this lead?')">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class=" text-lg cursor-pointer ri-delete-bin-2-line text-delete"></button>
-                                    </form>
+                                    <div  class=" block " >
+                                        <button type="button" onclick="deleteLead({{ $row -> id }})" class=" text-lg cursor-pointer ri-delete-bin-2-line text-delete"></button>
+                                    </div>
                                 </div>
                             </td>
                         </tr>
@@ -140,20 +138,82 @@
     </div>
 </div>
 
+
+<dialog id="my_modal_3" class="modal  text-white">
+
+    <div class="modal-box bg-grey border-2 border-white w-11/12 max-w-sm flex justify-center items-center flex-col">
+
+        <h1>Are you sure you want to delete this client?</h1>
+
+        <div class="flex items-center justify-between w-full mt-4">
+            <button type="submit" class="text-white bg-red-500 font-medium  py-2 px-3 text-sm  rounded-md" id="cancel" onclick="my_modal_3.close()">Cancel</button>
+           
+            <!-- Hidden form for deletion -->
+            <form id="deleteForm" method="POST" style="display: none;">
+                @csrf
+                @method('DELETE')
+                <input type="hidden" id="deleteClientId" name="client_id" value="">
+            </form>
+
+            <button type="button" class="text-white font-medium bg-green-500   py-2 px-3 text-sm  rounded-md" id="yes" onclick="confirmDelete()">Yes</button>
+        
+        </div>
+
+    </div>
+</dialog>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 <script>
+    const my_modal_3 = document.getElementById('my_modal_3');
+    function showModal() {
+        my_modal_3.showModal();
+    }
+    // function deleteLead(id) {
+    //     my_modal_3.showModal();
+
+
+    //     // if (confirm('Are you sure you want to delete this client?')) {
+    //     //     $.ajax({
+    //     //         url: `/client/${id}`,
+    //     //         type: 'DELETE',
+    //     //         success: function(response) {
+    //     //             location.reload();
+    //     //         },
+    //     //         error: function(error) {
+    //     //             console.log(error);
+    //     //         }
+    //     //     });
+    //     // }
+
+    //     document.getElementById('yes').addEventListener('click', function() {
+    //         $.ajax({
+    //             url: `/client/${id}`,
+    //             type: 'DELETE',
+    //             headers: {
+    //                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    //             },
+    //             success: function(response) {
+    //                 location.reload();
+    //             },
+    //             error: function(error) {
+    //                 console.log(error);
+    //             }
+    //         });
+    //         my_modal_3.close();
+    //     });
+    // }
     function deleteLead(id) {
-        if (confirm('Are you sure you want to delete this client?')) {
-            $.ajax({
-                url: `/client/${id}`,
-                type: 'DELETE',
-                success: function(response) {
-                    location.reload();
-                },
-                error: function(error) {
-                    console.log(error);
-                }
-            });
-        }
+        // Set the client_id value in the hidden form
+        document.getElementById('deleteClientId').value = id;
+        showModal();
+    }
+
+    function confirmDelete() {
+        // Submit the hidden form
+        const form = document.getElementById('deleteForm');
+        form.action = `/client/${document.getElementById('deleteClientId').value}`;
+        form.submit();
     }
 </script>
 
