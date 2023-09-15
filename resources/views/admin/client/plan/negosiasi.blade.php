@@ -137,8 +137,10 @@
                     <input type="submit" class="bg-secondary  text-white rounded-md px-4 py-2 h-10 cursor-pointer">
                 </div>
                 @else
-                {{ $order -> leadData -> business_name }} has No Email
-                <a href="{{ url('leads/'. $order -> leadData -> id . '/edit') }}">Edit Leads</a>
+                <div class="grid justify-center justify-items-center gap-2">
+                    {{ $order -> leadData -> business_name }} has no Email
+                    <a href="{{ url('leads/'. $order -> leadData -> id . '/edit') }}" class="bg-secondary text-white text-sm py-1 px-2 md:px-14 rounded-md font-bold flex items-center hover:scale-95 duration-200">Edit Leads</a>
+                </div>
                 @endif
             </div>
         </form>

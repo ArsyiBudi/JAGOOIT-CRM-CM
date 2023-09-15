@@ -267,8 +267,10 @@
                 <button type="submit" name="Send" class=" w-full  md:w-[188px] bg-secondary text-white text-sm text-center h-[37px] rounded-md hover:scale-95 duration-200" >Send</button>
             </div>
             @else
-            {{ $order -> leadData -> business_name }} has no Email
-            <a href="{{ url('leads/'. $order -> leadData -> id . '/edit') }}">Edit Leads</a>
+            <div class="grid justify-center justify-items-center gap-2">
+                {{ $order -> leadData -> business_name }} has no Email
+                <a href="{{ url('leads/'. $order -> leadData -> id . '/edit') }}" class="bg-secondary text-white text-sm py-1 px-2 md:px-14 rounded-md font-bold flex items-center hover:scale-95 duration-200">Edit Leads</a>
+            </div>
             @endif
         </div>
     </form>
