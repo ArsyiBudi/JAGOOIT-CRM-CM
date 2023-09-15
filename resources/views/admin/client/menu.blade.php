@@ -145,7 +145,7 @@
 
         <h1>Are you sure you want to delete this client?</h1>
 
-        <div class="flex items-center justify-between w-full mt-4">
+        <div class="flex items-center justify-end gap-4 w-full mt-4">
             <button type="submit" class="text-white bg-red-500 font-medium  py-2 px-3 text-sm  rounded-md" id="cancel" onclick="my_modal_3.close()">Cancel</button>
            
             <!-- Hidden form for deletion -->
@@ -169,14 +169,53 @@
     function showModal() {
         my_modal_3.showModal();
     }
+
+    //? Tadi nyobaan pake ajax ntah kunaon nteu bisa, jadi pas di click yes. nges jalan sampe ke close ngan si formna nteu ka kirim. kata GPT mah error gegara pake middleware atau apalah jadi ya nges weh hiraukan
+
+    // function deleteLead(id) {
+    //     my_modal_3.showModal();
+
+
+    //     // if (confirm('Are you sure you want to delete this client?')) {
+    //     //     $.ajax({
+    //     //         url: `/client/${id}`,
+    //     //         type: 'DELETE',
+    //     //         success: function(response) {
+    //     //             location.reload();
+    //     //         },
+    //     //         error: function(error) {
+    //     //             console.log(error);
+    //     //         }
+    //     //     });
+    //     // }
+
+    //     document.getElementById('yes').addEventListener('click', function() {
+    //         $.ajax({
+    //             url: `/client/${id}`,
+    //             type: 'DELETE',
+    //             headers: {
+    //                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    //             },
+    //             success: function(response) {
+    //                 location.reload();
+    //             },
+    //             error: function(error) {
+    //                 console.log(error);
+    //             }
+    //         });
+    //         my_modal_3.close();
+    //     });
+    // }
+
+    //nu ieu pake GPT, jadina di onclick si buttonna dikirim si id dari client nu rek dihapus
     function deleteLead(id) {
-        // Set the client_id value in the hidden form
+        //diset si id nu dikirim ke input nu hidden di nu dialog
         document.getElementById('deleteClientId').value = id;
         showModal();
     }
 
     function confirmDelete() {
-        // Submit the hidden form
+        //terus di tombol yes aya onclick ka function ieu. mun di pencet bakal dicari formna terus dibere action keur dikirim ke client/{client_id}
         const form = document.getElementById('deleteForm');
         form.action = `/client/${document.getElementById('deleteClientId').value}`;
         form.submit();

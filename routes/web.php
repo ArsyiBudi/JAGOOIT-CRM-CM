@@ -81,7 +81,7 @@ Route::get('/logout', [C_Auth::class, 'logout'])->name('logout');
 Route::middleware('auth')->group(function () {
     Route::prefix('leads')->group(function () {
         Route::get('/', [C_Leads::class, 'fetch'])->name('fetch_leads');
-        Route::delete('/leads/{id}', [C_Leads::class, 'delete'])->name('admin.leads.delete');
+        Route::delete('/{id}', [C_Leads::class, 'delete'])->name('admin.leads.delete');
         Route::get('/{id}/detail', [C_Leads::class, 'detail'])->name('detail_leads');
         Route::get('/{id}/edit', [C_Leads::class, 'fetchEdit'])->name('open_edit_leads');
         Route::patch('/{id}/edit', [C_Leads::class, 'edit'])->name('edit_leads');
