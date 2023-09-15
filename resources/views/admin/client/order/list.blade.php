@@ -117,11 +117,9 @@
                                 <a href="{{ route('detail_order', ['order_id' => $row -> id]) }}">
                                     <i class="ri-information-line text-2xl" title="Detail"></i>
                                 </a>
-                                <form action="{{ route('delete_order', ['order_id' => $row -> id]) }}" onsubmit="return confirm('Are you sure you want to delete order with this id : {{$row -> id}} ?')" method="post" class=" block  mt-3">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="ri-delete-bin-2-line text-2xl text-delete cursor-pointer" title="Delete"></button>
-                                </form>
+                                <div  class=" block " >
+                                    <button type="button" onclick="deleteLead({{ $row -> id }})" class=" text-lg cursor-pointer ri-delete-bin-2-line text-delete"></button>
+                                </div>
                             </div>
                         </td>
                     </tr>
@@ -140,4 +138,87 @@
         </div>
     </div>
 
-    @endsection
+    <dialog id="my_modal_3" class="modal  text-white">
+
+        <div class="modal-box bg-grey border-2 border-white w-11/12 max-w-sm flex justify-center items-center flex-col">
+    
+            <h1>Are you sure you want to delete this order?</h1>
+    
+            <div class="flex items-center justify-end gap-4 w-full mt-4">
+                <button type="submit" class="text-white bg-red-500 font-medium  py-2 px-3 text-sm  rounded-md" id="cancel" onclick="my_modal_3.close()">Cancel</button>
+               
+                <!-- Hidden form for deletion -->
+                <form id="deleteForm" method="POST" style="display: none;">
+                    @csrf
+                    @method('DELETE')
+                    <input type="hidden" id="deleteClientId" name="client_id" value="">
+                </form>
+    
+                <button type="button" class="text-white font-medium bg-green-500   py-2 px-3 text-sm  rounded-md" id="yes" onclick="confirmDelete()">Yes</button>
+            
+            </div>
+    
+        </div>
+    </dialog>
+
+    <dialog id="my_modal_3" class="modal  text-white">
+
+        <div class="modal-box bg-grey border-2 border-white w-11/12 max-w-sm flex justify-center items-center flex-col">
+    
+            <h1>Are you sure you want to complete this order?</h1>
+    
+            <div class="flex items-center justify-end gap-4 w-full mt-4">
+                <button type="submit" class="text-white bg-red-500 font-medium  py-2 px-3 text-sm  rounded-md" id="cancel" onclick="my_modal_3.close()">Cancel</button>
+               
+                <!-- Hidden form for deletion -->
+                <form id="deleteForm" method="POST" style="display: none;">
+                    @csrf
+                    @method('DELETE')
+                    <input type="hidden" id="deleteClientId" name="client_id" value="">
+                </form>
+    
+                <button type="button" class="text-white font-medium bg-green-500   py-2 px-3 text-sm  rounded-md" id="yes" onclick="confirmDelete()">Yes</button>
+            
+            </div>
+    
+        </div>
+    </dialog>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script>
+        // function deleteLead(id) {
+        //     if (confirm('Are you sure you want to delete this lead?')) {
+        //         $.ajax({
+        //             url: `/leads/${id}`,
+        //             type: 'DELETE',
+        //             success: function(response) {
+        //                 location.reload();
+        //             },
+        //             error: function(error) {
+        //                 console.log(error);
+        //             }
+        //         });
+        //     }
+        // }
+    
+        const my_modal_3 = document.getElementById('my_modal_3');
+        function showModal() {
+            my_modal_3.showModal();
+        }
+    
+        function deleteLead(id) {
+            //diset si id nu dikirim ke input nu hidden di nu dialog
+            document.getElementById('deleteClientId').value = id;
+            showModal();
+        }
+    
+        function confirmDelete() {
+            //terus di tombol yes aya onclick ka function ieu. mun di pencet bakal dicari formna terus dibere action keur dikirim ke client/{client_id}
+            const form = document.getElementById('deleteForm');
+            form.action = `/${document.getElementById('deleteClientId').value}`;
+            form.submit();
+        }
+    </script>
+
+@endsection
