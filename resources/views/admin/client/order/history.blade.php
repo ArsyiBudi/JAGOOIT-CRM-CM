@@ -83,7 +83,11 @@
                     </thead>
                     <tbody>
                         @if($orders -> isEmpty())
-                        <p class="text-white text-center py-4">No Data</p>
+                        <tr class=" odd:bg-grey">
+                            <td align="center" class="col-span-5">
+                                <p class="text-white text-center py-4">No Data</p>
+                            </td>
+                        </tr>
                         @else
                         @php
                         $count = ($orders->currentPage() - 1) * $orders->perPage() + 1;
@@ -104,11 +108,10 @@
                             </td>
                             <td align="center" class=" p-4">
                                 <div class=" flex items-center gap-2 justify-center">
-                                    <i class="ri-checkbox-circle-line text-lg cursor-pointer" title="Complete Manual"></i>
                                     <a href="{{  url('/client/order/detail/'. $order -> id) }}">
                                         <i class=" text-lg cursor-pointer ri-information-line" title="Detail"></i>
                                     </a>
-                                    <form action="{{ route('delete_order', ['order_id' => $order -> id]) }}" method="post" class=" block  mt-3">
+                                    <form action="{{ route('delete_order', ['order_id' => $order -> id]) }}" method="post" onsubmit="return confirm('Are you sure you want to delete order with this id : {{$order -> id}} ?')" class=" block  mt-3">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class=" text-lg cursor-pointer ri-delete-bin-2-line text-delete" title="Delete"></button>

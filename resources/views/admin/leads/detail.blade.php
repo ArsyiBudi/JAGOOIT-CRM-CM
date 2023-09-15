@@ -40,7 +40,7 @@
                         @if($leads->hasOneEmail)
                             @foreach($leads->emails as $email)
                                 @php
-                                $emailString .= $email -> email_name . ', ';
+                                $emailString .= " " . $email -> email_name . ',';
                                 @endphp
                             @endforeach
                             @php

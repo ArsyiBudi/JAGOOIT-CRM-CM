@@ -64,7 +64,7 @@
                     <select required name="email_name" id="email" class="mb-4 bg-transparent border m-1 btn p-2 outline-none border-spacing-1 rounded-md py-1 text-1xl hover:bg-gray-300 hover:text-darkSecondary text-white">
                         <option value="" class="bg-grey hover:bg-gray-300 hover:text-darkSecondary">Select Email</option>
                         @foreach($lead -> emails as $email)
-                        <option value="" class="bg-grey hover:bg-gray-300 hover:text-darkSecondary">{{ $email -> email_name }}</option>
+                        <option value="{{ $email -> email_name }}" class="bg-grey hover:bg-gray-300 hover:text-darkSecondary">{{ $email -> email_name }}</option>
                         @endforeach
                     </select>
                 </div>

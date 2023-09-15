@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\AppoinmentMail;
 use App\Mail\TestMail;
 use App\Models\M_Activity;
 use App\Models\M_Leads;
@@ -507,10 +508,27 @@ class C_Plan extends Controller
         $activity->xd = $field['waktu'];
         $activity->desc = $field['deskripsi'];
         $status = $activity->update();
-
         if(!$status) return response(['error' => "Data didn't update"]);
 
-        return back()-> with('success','data updated');
+        $mailData = [
+            'appoinment' => $activity,
+            'lead_data' => $order -> leadData, 
+            'information' => ":Konfirmasi Janji Temu JagooIT "
+        ];
+        $mailSubject = "Appoinment | JagooIT - {$order -> leadData -> business_name}";
+        if (!$order -> leadData ->hasOneEmail) return response(['error' => "No Email detected in {$order -> leadData ->business_name}"]);
+
+        $email = new AppoinmentMail($mailData, $mailSubject);
+        if($request->hasFile('attachment')) {
+            $file = $request->file('attachment');
+            $email->attach($file->getRealPath(), [
+                'as' => $file->getClientOriginalName(),
+                'mime' => $file->getMimeType(),
+            ]);
+        }
+        Mail::to($request->email_name)->send($email);
+
+        return back()-> with('success','Email berhasil terkirim');
         
     }
 

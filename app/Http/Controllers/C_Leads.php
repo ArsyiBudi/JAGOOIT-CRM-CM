@@ -220,7 +220,7 @@ class C_Leads extends Controller
 
         if (!$email) return response(['error' => 'Email didnt updated']);
 
-        return back() -> with('success', "{ $email -> email_name} berhasil ditambahkan");
+        return back() -> with('success', "{$email -> email_name} berhasil ditambahkan");
     }
 
     public function edit(Request $request, $leads_id)
@@ -240,6 +240,6 @@ class C_Leads extends Controller
         $status = $lead -> update();
 
         if(!$status) return response(['error' => "Lead's didnt updated"]);
-        return back() -> with('success', "{ $lead -> business_name} berhasil diedit");
+        return back() -> with('success', "{$lead -> business_name} berhasil diedit");
     }
 }

@@ -80,7 +80,7 @@ class C_Orders extends Controller
             ->orWhereHas('globalParams', function($query) use ($search){
                 $query -> where('params_name', 'like', "%$search%");
             });
-        })->where('order_status', '<', 8)
+        })->where('order_status', '<', 8)-> latest()
         ->paginate($entries);
 
         return view('admin.client.order.list', [
@@ -102,14 +102,10 @@ class C_Orders extends Controller
 
         $data = M_Orders::where(function ($query) use ($search) {
             $query->where('due_date', 'like', "%$search")
-                ->orWhereHas('globalParams', function ($query) use ($search) {
-                    $query->where('params_name', 'like', "%$search%");
-                })
                 ->orWhereHas('leadData', function ($query) use ($search) {
                     $query->where('business_name', 'like', "%$search%");
                 });
-        })->where('order_status', '=', 8)
-            ->paginate($entries);
+        })->where('order_status', '=', 8)->latest()->paginate($entries);
 
         return view('admin.client.order.history', [
             "title" => "Client | Order History",

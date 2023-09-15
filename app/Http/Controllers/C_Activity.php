@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\AppoinmentMail;
 use App\Mail\TestMail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -40,13 +41,14 @@ class C_Activity extends Controller
 
         $lead = M_Leads::find($leads_id);
         $mailData = [
-            'description' => $request->description,
-            'lead_data' => $lead
+            'appoinment' => $activity,
+            'lead_data' => $lead, 
+            'information' => ":Konfirmasi Janji Temu JagooIT "
         ];
         $mailSubject = "Appoinment | JagooIT - {$lead -> business_name}";
         if (!$lead->hasOneEmail) return response(['error' => "No Email detected in {$lead->business_name}"]);
 
-        $email = new TestMail($mailData, $mailSubject);
+        $email = new AppoinmentMail($mailData, $mailSubject);
         if($request->hasFile('attachment')) {
             $file = $request->file('attachment');
             $email->attach($file->getRealPath(), [
@@ -56,9 +58,6 @@ class C_Activity extends Controller
         }
         Mail::to($request->email_name)->send($email);
         
-        if(!$activity) return response([
-            'error' => 'Error Occured',
-        ]);
         return back()->with('success', 'Appointment terkirim.');
     }
     
