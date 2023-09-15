@@ -104,7 +104,7 @@
                         </td>
                         <td align="center" class=" p-4">
                             <div class=" flex justify-center items-center gap-2">
-                                <form action="{{ route('finish_order', ['order_id' => $row -> id]) }}" method="post" class=" block  mt-3">
+                                <form action="{{ route('finish_order', ['order_id' => $row -> id]) }}" onsubmit="return confirm('Are you sure you want to finish order with this id : {{$row -> id}} ?')" method="post" class=" block  mt-3">
                                     @csrf
                                     @method('patch')
                                     <button type="submit" class="ri-checkbox-circle-line text-2xl cursor-pointer" title="Complete Manual"></button>
@@ -115,7 +115,7 @@
                                 <a href="{{ route('detail_order', ['order_id' => $row -> id]) }}">
                                     <i class="ri-information-line text-2xl" title="Detail"></i>
                                 </a>
-                                <form action="{{ route('delete_order', ['order_id' => $row -> id]) }}" method="post" class=" block  mt-3">
+                                <form action="{{ route('delete_order', ['order_id' => $row -> id]) }}" onsubmit="return confirm('Are you sure you want to delete order with this id : {{$row -> id}} ?')" method="post" class=" block  mt-3">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="ri-delete-bin-2-line text-2xl text-delete cursor-pointer" title="Delete"></button>
@@ -137,4 +137,5 @@
 
         </div>
     </div>
+
     @endsection
