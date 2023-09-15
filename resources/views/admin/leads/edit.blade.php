@@ -6,24 +6,39 @@
         -webkit-appearance: none;
         margin: 0;
     }
+
+    .animate-slide-up {
+    animation: slide-up 0.3s ease-in-out;
+}
+
+@keyframes slide-up {
+    0% {
+        transform: translateY(-10px);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
 </style>
 
 
 @if(session()->has('error'))
-<div class="alert alert-error absolute top-10 right-10 w-auto animate-slide-up text-white font-medium border-2 border-red-500 cursor-pointer" onclick="closeAlert()">
+<div class="alert alert-error absolute md:top-10 md:right-10 z-50 w-auto animate-slide-up text-white font-medium border-2 border-red-500 cursor-pointer" onclick="closeAlert()">
+    <span>{{ session('error') }}</span>
     <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6 cursor-pointer" fill="none" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
     </svg>
-    <span>{{ session('error') }}</span>
 </div>
 @endif
 
 @if(session()->has('success'))
-<div class="alert alert-success absolute top-10 right-10 w-auto animate-slide-up text-white font-medium border-2 border-green-300 cursor-pointer" onclick="closeAlert()">
+<div class="alert alert-success absolute lg:top-10 lg:right-10 w-auto z-50 animate-slide-up text-white font-medium border-2 border-green-300 cursor-pointer flex items-center" onclick="closeAlert()">
+    <span>{{ session('success') }}</span>
     <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6 cursor-pointer" fill="none" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
     </svg>
-    <span>{{ session('success') }}</span>
 </div>
 @endif
 
@@ -56,7 +71,7 @@
                         Alamat : 
                         </p>
                         <div>
-                            <input name="address" type="text" required class=" bg-transparent outline-none" value="{{ old('business_name', @$lead -> address) }}">
+                            <input name="address" type="text" required class=" bg-transparent outline-none md:w-[600px] w-[250px]" value="{{ old('business_name', @$lead -> address) }}">
                         </div>
                     </div>
                     <div class="pt-3 flex items-center gap-1 md:gap-2">
@@ -130,4 +145,11 @@
         </div>
     </dialog>
 </div>  
+
+<script>
+    function closeAlert() {
+        const alertContainer = document.querySelector('.alert');
+        alertContainer.style.display = 'none';
+    }
+</script>
 @endsection
