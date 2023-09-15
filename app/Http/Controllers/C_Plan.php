@@ -447,7 +447,7 @@ class C_Plan extends Controller
                 'lead_data' => $lead,
                 'information' => "Proposal Penawaran dan CV Talenta"
             ];
-            $mailSubject = $request->subject;
+            $mailSubject = "Penawaran Order {$order -> id} | JagooIT - {$lead -> business_name}";
             if (!$lead->hasOneEmail) return response(['error' => "No Email detected in {$lead->business_name}"]);
     
             $email = new TestMail($mailData, $mailSubject);
@@ -489,7 +489,6 @@ class C_Plan extends Controller
     
 
     //?NEGOSIASI CONTROLLER CODE
-
     public function submitNegosiasi(Request $request, $order_id)
     {
         $field = $request-> validate([
@@ -515,7 +514,7 @@ class C_Plan extends Controller
             'lead_data' => $order -> leadData, 
             'information' => ":Konfirmasi Janji Temu JagooIT "
         ];
-        $mailSubject = "Appoinment | JagooIT - {$order -> leadData -> business_name}";
+        $mailSubject = "Pertemuan Negosiasi | JagooIT - {$order -> leadData -> business_name}";
         if (!$order -> leadData ->hasOneEmail) return response(['error' => "No Email detected in {$order -> leadData ->business_name}"]);
 
         $email = new AppoinmentMail($mailData, $mailSubject);
@@ -688,7 +687,7 @@ class C_Plan extends Controller
                 'lead_data' => $lead,
                 'information' => "PKS Talenta Indonesia"
             ];
-            $mailSubject = "DRAFT POPKS JAGOO IT - {$lead -> business_name}";
+            $mailSubject = "Draft POPKS JagooIT - {$lead -> business_name}";
             if (!$lead->hasOneEmail) return response(['error' => "No Email detected in {$lead->business_name}"]);
     
             $email = new TestMail($mailData, $mailSubject);
