@@ -85,7 +85,9 @@
                 </thead>
                 <tbody>
                     @if($order -> isEmpty())
-                    <p class="text-white text-center py-4">No Data</p>
+                    <tr>
+                        <td colspan="8" class="text-white text-center py-4">No Data.</td>
+                    </tr>
                     @else
                     @php
                     $count = ($order->currentPage() - 1) * $order->perPage() + 1;

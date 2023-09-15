@@ -66,6 +66,11 @@ return new class extends Migration
         Schema::table('talent_details', function($table) {
             $table->foreign('id_talent_details')->references('id')->on('talent_detail_types');
         });
+
+        //Constraint for popks
+        Schema::table('popks_letter', function($table){
+            $table -> foreign('leads_id')->references('id')->on('leads');
+        });
     }
 
     /**

@@ -91,7 +91,9 @@
                 </thead>
                 <tbody>
                     @if($leads -> isEmpty())
-                    <p class="text-white text-center py-4">No Data</p>
+                    <tr>
+                        <td colspan="8" class="text-white text-center py-4">No Data.</td>
+                    </tr>
                     @else
                     @php
                     $count = ($leads->currentPage() - 1) * $leads->perPage() + 1;

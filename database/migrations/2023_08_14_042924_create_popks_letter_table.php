@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('popks_letter', function (Blueprint $table) {
             $table->integer('id', true);
             $table->string('letter_numbers') -> nullable();
-            $table->integer('leads_id') -> nullable();
+            $table->integer('leads_id');
             $table->string('employee_name') -> nullable();
             $table->string('employee_position') -> nullable();
             $table->string('employee_address') -> nullable();

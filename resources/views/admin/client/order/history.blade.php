@@ -51,19 +51,20 @@
                 <h3 class="text-white font-semibold text-3xl">History Order</h3>
             </div>
 
-            <form class=" block md:flex items-start my-4 justify-between mb-3 w-full">
+            <form action="{{ url(request() -> path()) }}" method="get" class=" block md:flex items-start my-4 justify-between mb-3 w-full">
                 <div class=" md:block flex items-center justify-between">
                     <div class="flex gap-3 items-center justify-start">
                         <p class="text-white text-xs md:text-sm">Show</p>
                         <div class="flex items-center bg-grey rounded-md md:rounded-lg justify-center py-0 md:py-1 w-[40px] md:w-[60px] px-1">
-                            <input type="number" class=" text-white w-full text-center bg-transparent outline-none" placeholder="5">
+                            <input name="per_page" type="number" class=" text-white w-full text-center bg-transparent outline-none" placeholder="5">
                         </div>
                         <p class="text-white text-xs md:text-sm">entries</p>
                     </div>
+                    <button type="submit"></button>
                 </div>
                 <div class=" flex items-center gap-5 mt-5 md:mt-0">
                     <p class=" hidden md:block">Search</p>
-                    <input type="text" class=" outline-none bg-white rounded-md w-full md:w-80 py-1 px-2 text-black font-semibold placeholder-gray-400 placeholder-opacity-100 md:placeholder-opacity-0" placeholder="search">
+                    <input type="text" name="search" class=" outline-none bg-white rounded-md w-full md:w-80 py-1 px-2 text-black font-semibold placeholder-gray-400 placeholder-opacity-100 md:placeholder-opacity-0" placeholder="search">
                 </div>
             </form>
 
@@ -83,10 +84,8 @@
                     </thead>
                     <tbody>
                         @if($orders -> isEmpty())
-                        <tr class=" odd:bg-grey">
-                            <td align="center" class="col-span-5">
-                                <p class="text-white text-center py-4">No Data</p>
-                            </td>
+                        <tr>
+                            <td colspan="8" class="text-white text-center py-4">No Data.</td>
                         </tr>
                         @else
                         @php

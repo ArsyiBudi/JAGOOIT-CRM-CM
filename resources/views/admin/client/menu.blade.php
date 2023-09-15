@@ -169,40 +169,6 @@
     function showModal() {
         my_modal_3.showModal();
     }
-    // function deleteLead(id) {
-    //     my_modal_3.showModal();
-
-
-    //     // if (confirm('Are you sure you want to delete this client?')) {
-    //     //     $.ajax({
-    //     //         url: `/client/${id}`,
-    //     //         type: 'DELETE',
-    //     //         success: function(response) {
-    //     //             location.reload();
-    //     //         },
-    //     //         error: function(error) {
-    //     //             console.log(error);
-    //     //         }
-    //     //     });
-    //     // }
-
-    //     document.getElementById('yes').addEventListener('click', function() {
-    //         $.ajax({
-    //             url: `/client/${id}`,
-    //             type: 'DELETE',
-    //             headers: {
-    //                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-    //             },
-    //             success: function(response) {
-    //                 location.reload();
-    //             },
-    //             error: function(error) {
-    //                 console.log(error);
-    //             }
-    //         });
-    //         my_modal_3.close();
-    //     });
-    // }
     function deleteLead(id) {
         // Set the client_id value in the hidden form
         document.getElementById('deleteClientId').value = id;

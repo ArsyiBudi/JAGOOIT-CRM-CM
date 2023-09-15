@@ -75,7 +75,7 @@
             @csrf
             <div class=" block md:flex justify-between">
                 <div class=" relative w-full md:w-auto">
-                    <input type="text" name="search" class=" bg-[#D9D9D9] outline-none rounded-md text-black py-1  px-8 w-full md:w-auto">
+                    <input type="text" name="search" placeholder="Search" value="{{ old('search', session('leads_search')) }}" class=" bg-[#D9D9D9] outline-none rounded-md text-black py-1  px-8 w-full md:w-auto">
                     <i class="ri-search-line absolute top-1 left-2 text-black"></i>
                 </div>
             </div>
@@ -103,42 +103,41 @@
                         </thead>
                         <tbody>
                             @if ($talents->isEmpty())
-                                <p class="text-white text-center py-4">No Data</p>
+                            <tr>
+                                <td colspan="8" class="text-white text-center py-4">No Data.</td>
+                            </tr>
                             @else
+                            @php
+                            $count = ($talents->currentPage() - 1) * $talents->perPage() + 1;
+                            @endphp
+                            @foreach($talents as $talent)
+                            <tr>
+                                <td>
+                                    <label>
+                                        <input name="talents_id[]" value="{{ $talent -> id }}" type="checkbox" class="checkbox border-white border-2" @checked($talent->recruitment_status==1)
+                                        @if($talent->recruitment_status==1)
+                                        disabled
+                                        @endif/>
+                                    </label>
+                                </td>
+                                <td align="center">{{ $count }}</td>
                                 @php
-                                $count = ($talents->currentPage() - 1) * $talents->perPage() + 1;
+                                $count++;
                                 @endphp
-                                @foreach($talents as $talent)
-                                <tr>
-                                    <td>
-                                        <label>
-                                            <input name="talents_id[]" value="{{ $talent -> id }}" type="checkbox"
-                                                class="checkbox border-white border-2"
-                                                @checked($talent->recruitment_status==1)
-                                            @if($talent->recruitment_status==1)
-                                            disabled
-                                            @endif/>
-                                        </label>
-                                    </td>
-                                    <td align="center">{{ $count }}</td>
-                                    @php
-                                    $count++;
-                                    @endphp
-                                    <td align="center">{{ $talent->talentData->name }}</td>
-                                    <td align="center">{{ $talent->talentData->pendidikanTalent->description }}</td>
-                                    <td align="center">{{ $talent->talentData->keterampilanTalent->description }}</td>
-                                    <td align="center">{{ $talent->talentData->posisiTalent->description }}</td>
-                                    <td align="center">
-                                        <div class=" flex items-center gap-2">
-                                            <a href="/client/plan/create/recruitment">
-                                                <i class=" text-lg cursor-pointer ri-information-line"></i>
-                                            </a>
-                                            <a href="{{ url(request()->path().'/'.$talent->id) }}"><i
-                                                    class=" text-lg cursor-pointer ri-delete-bin-2-line text-delete"></i></a>
-                                        </div>
-                                    </td>
-                                </tr>
-                                @endforeach
+                                <td align="center">{{ $talent->talentData->name }}</td>
+                                <td align="center">{{ $talent->talentData->pendidikanTalent->description }}</td>
+                                <td align="center">{{ $talent->talentData->keterampilanTalent->description }}</td>
+                                <td align="center">{{ $talent->talentData->posisiTalent->description }}</td>
+                                <td align="center">
+                                    <div class=" flex items-center gap-2">
+                                        <a href="/client/plan/create/recruitment">
+                                            <i class=" text-lg cursor-pointer ri-information-line"></i>
+                                        </a>
+                                        <a href="{{ url(request()->path().'/'.$talent->id) }}"><i class=" text-lg cursor-pointer ri-delete-bin-2-line text-delete"></i></a>
+                                    </div>
+                                </td>
+                            </tr>
+                            @endforeach
                             @endif
                         </tbody>
                     </table>
@@ -150,8 +149,7 @@
             <div class="mt-2 flex justify-between items-center gap-1 md:gap-0">
                 <div>
                     <div>
-                        <a href="{{ url('/client/order/plan/'.$order_id.'/negosiasi') }}"
-                            class="bg-grey text-white text-sm text-center py-1 px-2 md:px-14 rounded-md font-bold flex items-center hover:scale-95 duration-200">
+                        <a href="{{ url('/client/order/plan/'.$order_id.'/negosiasi') }}" class="bg-grey text-white text-sm text-center py-1 px-2 md:px-14 rounded-md font-bold flex items-center hover:scale-95 duration-200">
                             <p class="hidden md:block">Back</p>
                             <i class="ri-arrow-left-line block md:hidden ml-1"></i>
                         </a>
@@ -161,8 +159,7 @@
                 <div class="flex gap-4 max-sm:w-full max-sm:justify-between">
                     <div></div>
                     <div>
-                        <button type="submit" name="savePercobaan"
-                            class=" w-full bg-secondary text-white text-sm text-center py-1 px-14 rounded-md font-bold hover:scale-95 duration-200">
+                        <button type="submit" name="savePercobaan" class=" w-full bg-secondary text-white text-sm text-center py-1 px-14 rounded-md font-bold hover:scale-95 duration-200">
                             <p class="hidden md:block">Save</p>
                             <i class="ri-save-line block md:hidden"></i>
                         </button>
@@ -172,8 +169,7 @@
 
     <div>
         <a href="{{ url('/client/order/plan/'.$order_id.'/popks') }}">
-            <div
-                class=" bg-grey text-white text-sm text-center py-1 px-3 md:px-14 rounded-md font-bold hover:scale-95 duration-200">
+            <div class=" bg-grey text-white text-sm text-center py-1 px-3 md:px-14 rounded-md font-bold hover:scale-95 duration-200">
                 <p class="hidden md:inline">Continue</p>
                 <i class="ri-arrow-right-line block md:hidden"></i>
             </div>

@@ -6,6 +6,7 @@ use App\Mail\TestMail;
 use App\Models\M_Emails;
 use App\Models\M_Leads;
 use App\Models\M_Orders;
+use App\Models\M_Talents;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
@@ -45,7 +46,7 @@ class C_Leads extends Controller
             $query->where('business_name', 'like', "%$search%")
                 ->orWhere('address', 'like', "%$search%")
                 ->orWhere('pic_name', 'like', "%$search%");
-        })->latest();
+        })->where('client_indicator', 0) ->latest();
 
         $data = $query->paginate($entries);
 
@@ -78,8 +79,30 @@ class C_Leads extends Controller
         if (!$lead) {
             return response()->json(['error' => 'Lead not found'], 404);
         }
-
-        $lead->emails()->delete();
+        if($lead -> hasOneActivity){
+            foreach($lead -> ActivityData as $activity)
+            $activity -> delete();
+        }
+        if($lead -> hasOneEmail){
+            foreach($lead -> emails as $email){
+                $email -> delete();
+            }
+        }
+        if($lead -> hasOneOrder){
+            foreach($lead -> orders as $order){
+                foreach($order -> orderDetails as $order_detail){
+                    $talent = M_Talents::find($order_detail);
+                    $talent -> is_active = 0;
+                    $order_detail -> delete();
+                }
+                $order->delete();
+            }
+        }
+        if($lead -> hasOnePopks){
+            foreach($lead -> popks as $popks){
+                $popks -> delete();
+            }
+        }
         $lead->delete();
         return redirect('/leads');
     }

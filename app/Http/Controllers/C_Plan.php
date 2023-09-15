@@ -270,7 +270,9 @@ class C_Plan extends Controller
         if(!$order) return response(['error' => "No data from this id {$order_id}"]);
 
         if (is_null($order->popks_letter_id)) {
-            $popks = M_Popks::create();
+            $popks = M_Popks::create([
+                'leads_id' => $order -> leadData -> id
+            ]);
             $order->popks_letter_id = $popks->id;
             $order->update();
         }

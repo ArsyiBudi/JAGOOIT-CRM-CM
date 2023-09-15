@@ -30,6 +30,16 @@ class M_Leads extends Model
         return $this->belongsTo(M_GlobalParams::class, 'lead_status', 'id_params');
     }
 
+    public function hasOneOrder() : HasOne
+    {
+        return $this -> hasOne(M_Orders::class, 'leads_id');
+    }
+    
+    public function orders() : HasMany
+    {
+        return $this -> hasMany(M_Orders::class, 'leads_id');
+    }
+
     public function hasOneEmail() : HasOne
     {
         return $this -> hasOne(M_Emails::class, 'leads_id');
@@ -65,5 +75,15 @@ class M_Leads extends Model
     public function hasNote() : HasOne
     {
         return $this -> hasOne(M_Activity::class, 'leads_id')->where('activity_type_id', 10)->latest();
+    }
+
+    public function hasOnePopks() : HasOne
+    {
+        return $this -> hasOne(M_Popks::class, 'leads_id');
+    }
+
+    public function popks() : HasMany
+    {
+        return $this -> hasMany(M_Popks::class, 'leads_id');
     }
 }

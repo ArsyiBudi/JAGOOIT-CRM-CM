@@ -77,9 +77,7 @@
             @csrf
             <div class=" block md:flex justify-between">
                 <div class=" relative w-full md:w-auto">
-                    <input type="text" name="search"
-                        class=" bg-[#D9D9D9] outline-none rounded-md text-black py-1  px-8 w-full md:w-auto"
-                        placeholder="Search">
+                    <input type="text" name="search" class=" bg-[#D9D9D9] outline-none rounded-md text-black py-1  px-8 w-full md:w-auto" placeholder="Search">
                     <i class="ri-search-line absolute top-1 left-2 text-black"></i>
                 </div>
             </div>
@@ -108,36 +106,37 @@
                         </thead>
                         <tbody>
                             @if($talents -> isEmpty())
-                                <p class="text-white text-center py-4">No Data</p>
+                            <tr>
+                                <td colspan="8" class="text-white text-center py-4">No Data.</td>
+                            </tr>
                             @else
+                            @php
+                            $count = ($talents -> currentPage() - 1) * $talents ->perPage() + 1;
+                            @endphp
+                            @foreach ($talents as $talent)
+                            <tr>
+                                <td>
+                                    <label>
+                                        <input name="talents_id[]" value="{{ $talent -> id }}" type="checkbox" class="checkbox border-white border-2" />
+                                    </label>
+                                </td>
+                                <td align="center">{{ $count }}</td>
                                 @php
-                                $count = ($talents -> currentPage() - 1) * $talents ->perPage() + 1;
+                                $count++;
                                 @endphp
-                                @foreach ($talents as $talent)
-                                <tr>
-                                    <td>
-                                        <label>
-                                            <input name="talents_id[]" value="{{ $talent -> id }}" type="checkbox"
-                                                class="checkbox border-white border-2" />
-                                        </label>
-                                    </td>
-                                    <td align="center">{{ $count }}</td>
-                                    @php
-                                    $count++;
-                                    @endphp
-                                    <td align="center">{{ $talent -> name }}</td>
-                                    <td align="center">{{ $talent -> pendidikanTalent -> description }}</td>
-                                    <td align="center">{{ $talent -> keterampilanTalent -> description }}</td>
-                                    <td align="center"> {{ $talent -> posisiTalent -> description }}</td>
-                                    <td align="center">
-                                        <div class=" flex items-center gap-2">
-                                            <a href="/client/plan/create/recruitment">
-                                                <i class=" text-lg cursor-pointer ri-information-line"></i>
-                                            </a>
-                                        </div>
-                                    </td>
-                                </tr>
-                                @endforeach
+                                <td align="center">{{ $talent -> name }}</td>
+                                <td align="center">{{ $talent -> pendidikanTalent -> description }}</td>
+                                <td align="center">{{ $talent -> keterampilanTalent -> description }}</td>
+                                <td align="center"> {{ $talent -> posisiTalent -> description }}</td>
+                                <td align="center">
+                                    <div class=" flex items-center gap-2">
+                                        <a href="/client/plan/create/recruitment">
+                                            <i class=" text-lg cursor-pointer ri-information-line"></i>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                            @endforeach
                             @endif
                         </tbody>
                     </table>
@@ -150,8 +149,7 @@
         <div class="mt-2 flex justify-between items-center pt-4 md:mb-0">
             <div>
                 <a href="{{ url('/client/order/') }}">
-                    <div
-                        class="bg-grey text-white text-sm text-center py-1 px-3 md:px-14 rounded-md font-bold hover:scale-95 duration-200">
+                    <div class="bg-grey text-white text-sm text-center py-1 px-3 md:px-14 rounded-md font-bold hover:scale-95 duration-200">
                         <p class=" hidden md:inline">Back</p>
                         <i class="ri-arrow-left-line inline md:hidden"></i>
                     </div>
@@ -160,15 +158,13 @@
             <div class="flex gap-4 max-sm:w-full max-sm:justify-between">
                 <div></div>
                 <div>
-                    <button type="submit" name="save"
-                        class=" w-full bg-secondary text-white text-sm text-center py-1 px-14 rounded-md font-bold hover:scale-95 duration-200">
+                    <button type="submit" name="save" class=" w-full bg-secondary text-white text-sm text-center py-1 px-14 rounded-md font-bold hover:scale-95 duration-200">
                         <p class=" hidden md:block">Save</p>
                         <i class="ri-save-3-line block md:hidden"></i>
                     </button>
                 </div>
                 <div>
-                    <a href="{{ route('fetchTraining', ['order_id' => $order_id]) }}"
-                        class="flex items-center bg-grey text-white text-sm text-center py-1 px-3 md:px-14 rounded-md font-bold hover:scale-95 duration-200">
+                    <a href="{{ route('fetchTraining', ['order_id' => $order_id]) }}" class="flex items-center bg-grey text-white text-sm text-center py-1 px-3 md:px-14 rounded-md font-bold hover:scale-95 duration-200">
                         <p class="hidden md:block">Continue</p>
                         <i class="ri-arrow-right-line block md:hidden ml-1"></i>
                     </a>
