@@ -133,7 +133,7 @@
                                         <a href="/client/plan/create/recruitment">
                                             <i class=" text-lg cursor-pointer ri-information-line"></i>
                                         </a>
-                                        <a href="{{ url(request()->path().'/'.$talent->id) }}"><i class=" text-lg cursor-pointer ri-delete-bin-2-line text-delete"></i></a>
+                                        <i onclick="deleteOrderDetail({{ $talent->id }}, '{{ $talent -> talentData -> name }}')" class=" text-lg cursor-pointer ri-delete-bin-2-line text-delete"></i>
                                     </div>
                                 </td>
                             </tr>
@@ -176,7 +176,52 @@
         </a>
     </div>
 </div>
+
+<!-- MAS INI DIV BUAT PAAN DAH? -->
 </div>
 </div>
 </div>
+
+<dialog id="my_modal_3" class="modal  text-white">
+
+    <div class="modal-box bg-grey border-2 border-white w-11/12 max-w-sm flex justify-center items-center flex-col">
+
+        <h1>Kamu akan mendelete <span id="talent_name"></span> dari order dengan ID : <span>{{ $order_id }}</span>. Apakah kamu yakin ingin menghapus?</h1>
+
+        <div class="flex items-center justify-end gap-4 w-full mt-4">
+            <button type="submit" class="text-white bg-red-500 font-medium  py-2 px-3 text-sm  rounded-md" id="cancel" onclick="my_modal_3.close()">Cancel</button>
+           
+            <form id="deleteForm" method="POST" style="display: none;">
+                @csrf
+                @method('DELETE')
+                <input type="hidden" id="deleteOrderDetailsId" name="client_id" value="">
+            </form>
+
+            <button type="button" class="text-white font-medium bg-green-500   py-2 px-3 text-sm  rounded-md" id="yes" onclick="confirmDelete()">Yes</button>
+        
+        </div>
+
+    </div>
+</dialog>
+
+<script>
+
+    const my_modal_3 = document.getElementById('my_modal_3');
+    function showModal() {
+        my_modal_3.showModal();
+    }
+
+    function deleteOrderDetail(order_details_id, talent_name) {
+        document.getElementById('deleteOrderDetailsId').value = order_details_id;
+        document.getElementById('talent_name').textContent = talent_name;
+        showModal();
+    }
+
+    function confirmDelete() {
+        const form = document.getElementById('deleteForm');
+        form.action = `/client/order/plan/{{ $order_id }}/percobaan/${document.getElementById('deleteOrderDetailsId').value}`;
+        form.submit();
+    }
+</script>
+
 @endsection

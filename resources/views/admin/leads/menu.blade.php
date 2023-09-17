@@ -170,20 +170,6 @@
 
 
 <script>
-    // function deleteLead(id) {
-    //     if (confirm('Are you sure you want to delete this lead?')) {
-    //         $.ajax({
-    //             url: `/leads/${id}`,
-    //             type: 'DELETE',
-    //             success: function(response) {
-    //                 location.reload();
-    //             },
-    //             error: function(error) {
-    //                 console.log(error);
-    //             }
-    //         });
-    //     }
-    // }
 
     const my_modal_3 = document.getElementById('my_modal_3');
     function showModal() {

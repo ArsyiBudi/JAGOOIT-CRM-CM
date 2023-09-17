@@ -106,19 +106,17 @@
                         </td>
                         <td align="center" class=" p-4">
                             <div class=" flex justify-center items-center gap-2">
-                                <form action="{{ route('finish_order', ['order_id' => $row -> id]) }}" onsubmit="return confirm('Are you sure you want to finish order with this id : {{$row -> id}} ?')" method="post" class=" block  mt-3">
-                                    @csrf
-                                    @method('patch')
-                                    <button type="submit" class="ri-checkbox-circle-line text-2xl cursor-pointer" title="Complete Manual"></button>
-                                </form>
+                                <div class=" block">
+                                    <button onclick="finishOrder('{{ $row -> id }}')" type="button" class="ri-checkbox-circle-line text-2xl cursor-pointer" title="Complete Manual"></button>
+                                </div>
                                 <a href="{{ route('handle_plan', ['order_id' => $row -> id]) }}">
                                     <i class="ri-calendar-todo-fill text-2xl" title="Plan"></i>
                                 </a>
                                 <a href="{{ route('detail_order', ['order_id' => $row -> id]) }}">
                                     <i class="ri-information-line text-2xl" title="Detail"></i>
                                 </a>
-                                <div  class=" block " >
-                                    <button type="button" onclick="deleteLead({{ $row -> id }})" class=" text-lg cursor-pointer ri-delete-bin-2-line text-delete"></button>
+                                <div class="block">
+                                    <button type="button" onclick="deleteOrder('{{ $row -> id }}')" class=" text-lg cursor-pointer ri-delete-bin-2-line text-delete"></button>
                                 </div>
                             </div>
                         </td>
@@ -141,84 +139,85 @@
     <dialog id="my_modal_3" class="modal  text-white">
 
         <div class="modal-box bg-grey border-2 border-white w-11/12 max-w-sm flex justify-center items-center flex-col">
-    
-            <h1>Are you sure you want to delete this order?</h1>
-    
+
+            <h1>Are you sure you want to delete this order with an ID : <span id="order_id"></span> ?</h1>
+
             <div class="flex items-center justify-end gap-4 w-full mt-4">
                 <button type="submit" class="text-white bg-red-500 font-medium  py-2 px-3 text-sm  rounded-md" id="cancel" onclick="my_modal_3.close()">Cancel</button>
-               
-                <!-- Hidden form for deletion -->
+
                 <form id="deleteForm" method="POST" style="display: none;">
                     @csrf
                     @method('DELETE')
-                    <input type="hidden" id="deleteClientId" name="client_id" value="">
+                    <input type="hidden" id="deleteOrderId" name="order_id" value="">
                 </form>
-    
+
                 <button type="button" class="text-white font-medium bg-green-500   py-2 px-3 text-sm  rounded-md" id="yes" onclick="confirmDelete()">Yes</button>
-            
+
             </div>
-    
+
         </div>
     </dialog>
 
-    <dialog id="my_modal_3" class="modal  text-white">
+    <dialog id="complete_modal" class="modal  text-white">
 
         <div class="modal-box bg-grey border-2 border-white w-11/12 max-w-sm flex justify-center items-center flex-col">
-    
-            <h1>Are you sure you want to complete this order?</h1>
-    
+
+            <h1>Are you sure you want to complete this order with an ID : <span id="order_id_finish"></span> ?</h1>
+
             <div class="flex items-center justify-end gap-4 w-full mt-4">
-                <button type="submit" class="text-white bg-red-500 font-medium  py-2 px-3 text-sm  rounded-md" id="cancel" onclick="my_modal_3.close()">Cancel</button>
-               
-                <!-- Hidden form for deletion -->
-                <form id="deleteForm" method="POST" style="display: none;">
+                <button type="submit" class="text-white bg-red-500 font-medium  py-2 px-3 text-sm  rounded-md" id="cancel" onclick="confirmation_modal.close()">Cancel</button>
+
+                <form id="confirmationForm" method="POST" style="display: none;">
                     @csrf
-                    @method('DELETE')
-                    <input type="hidden" id="deleteClientId" name="client_id" value="">
+                    @method('patch')
+                    <input type="hidden" id="finishOrderId" name="order_id" value="">
                 </form>
-    
-                <button type="button" class="text-white font-medium bg-green-500   py-2 px-3 text-sm  rounded-md" id="yes" onclick="confirmDelete()">Yes</button>
-            
+
+                <button type="button" class="text-white font-medium bg-green-500   py-2 px-3 text-sm  rounded-md" id="yes" onclick="confirmFinish()">Yes</button>
+
             </div>
-    
+
         </div>
     </dialog>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <script>
-        // function deleteLead(id) {
-        //     if (confirm('Are you sure you want to delete this lead?')) {
-        //         $.ajax({
-        //             url: `/leads/${id}`,
-        //             type: 'DELETE',
-        //             success: function(response) {
-        //                 location.reload();
-        //             },
-        //             error: function(error) {
-        //                 console.log(error);
-        //             }
-        //         });
-        //     }
-        // }
-    
+        const confirmation_modal = document.getElementById('complete_modal');
         const my_modal_3 = document.getElementById('my_modal_3');
+
         function showModal() {
             my_modal_3.showModal();
         }
-    
-        function deleteLead(id) {
-            //diset si id nu dikirim ke input nu hidden di nu dialog
-            document.getElementById('deleteClientId').value = id;
+
+        function deleteOrder(id) {
+            document.getElementById('deleteOrderId').value = id;
+            document.getElementById('order_id').textContent = id;
             showModal();
         }
-    
+
         function confirmDelete() {
-            //terus di tombol yes aya onclick ka function ieu. mun di pencet bakal dicari formna terus dibere action keur dikirim ke client/{client_id}
             const form = document.getElementById('deleteForm');
-            form.action = `/${document.getElementById('deleteClientId').value}`;
+            form.action = `/client/order/${document.getElementById('deleteOrderId').value}`;
+            form.submit();
+        }
+
+        //?For finishing order
+        function showConfrimationModal() {
+            confirmation_modal.showModal();
+        }
+
+        function finishOrder(order_id) {
+            document.getElementById('finishOrderId').value = order_id;
+            document.getElementById('order_id_finish').textContent = order_id;
+            showConfrimationModal();
+        }
+
+        function confirmFinish(){
+            const form = document.getElementById('confirmationForm');
+            form.action = `/client/order/${document.getElementById('finishOrderId').value}`;
             form.submit();
         }
     </script>
 
-@endsection
+    @endsection

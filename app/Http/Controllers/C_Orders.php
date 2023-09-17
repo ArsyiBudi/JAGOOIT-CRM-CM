@@ -71,6 +71,7 @@ class C_Orders extends Controller
 
         $entries = session('order_per_page', 5);
         $search = session('order_search', '');
+        $client_indicator = 1;
 
         $data = M_Orders::where(function ($query) use ($search) {
             $query->where('due_date', 'like', "%$search%")
@@ -80,7 +81,9 @@ class C_Orders extends Controller
             ->orWhereHas('globalParams', function($query) use ($search){
                 $query -> where('params_name', 'like', "%$search%");
             });
-        })->where('order_status', '<', 8)-> latest()
+        })->whereHas('leadData', function($query) use ($client_indicator){
+            $query -> where('client_indicator', '=', "$client_indicator");
+        }) ->where('order_status', '<', 8) -> latest()
         ->paginate($entries);
 
         return view('admin.client.order.list', [
@@ -99,13 +102,17 @@ class C_Orders extends Controller
 
         $entries = session('order_per_page', 5);
         $search = session('order_search', '');
-
+        $client_indicator = 1;
+        
         $data = M_Orders::where(function ($query) use ($search) {
             $query->where('due_date', 'like', "%$search")
                 ->orWhereHas('leadData', function ($query) use ($search) {
                     $query->where('business_name', 'like', "%$search%");
                 });
-        })->where('order_status', '=', 8)->latest()->paginate($entries);
+        }) ->whereHas('leadData', function($query) use ($client_indicator){
+            $query -> where('client_indicator', '=', "$client_indicator");
+        }) 
+        ->where('order_status', '=', 8)->latest()->paginate($entries);
 
         return view('admin.client.order.history', [
             "title" => "Client | Order History",

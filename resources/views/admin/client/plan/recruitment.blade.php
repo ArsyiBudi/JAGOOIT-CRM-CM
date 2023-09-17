@@ -176,15 +176,4 @@
     </div>
 </div>
 
-<script>
-    let selectedTalents = [];
-
-    function selectTalent(id) {
-        if (selectedTalents.includes(id)) {
-            selectedTalents = selectedTalents.filter(item => item !== id);
-        } else {
-            selectedTalents.push(id);
-        }
-    }
-</script>
 @endsection

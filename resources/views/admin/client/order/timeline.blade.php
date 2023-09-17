@@ -8,7 +8,6 @@
     <title>Detail | Timeline</title>
     <link href="https://cdn.jsdelivr.net/npm/remixicon@2.2.0/fonts/remixicon.css" rel="stylesheet">
     @vite('resources/css/app.css')
-
     <style>
         .hide-scrollbar::-webkit-scrollbar {
             width: 0.4em;
@@ -56,6 +55,11 @@
 </head>
 
 <body class="bg-primary font-quicksand text-white min-h-screen hide-scrollbar">
+@php
+    use Carbon\Carbon;
+    Carbon::setLocale('id'); // 'id' is the locale code for Indonesian
+@endphp
+
     <div class="pt-6">
         <div class="pt-6">
             <h1 class="text-center text-3xl font-bold pt">Detail Timeline</h1>
@@ -86,11 +90,13 @@
                             <div class=" relative w-full">
                                 <h1 class=" text-left pb-2 text-lg">Recruitment</h1>
                                 <p class=" absolute text-xs  text-left date-text">Start Date :
-                                    @if($order -> start_recruitment)
-                                    {{ $order -> start_recruitment }}
-                                    @else
-                                    -
-                                    @endif
+                                    @php
+                                        if ($order->start_recruitment) {
+                                            echo Carbon::parse($order->start_recruitment)->translatedFormat('l, j F Y H:i');
+                                        } else {
+                                            echo '-';
+                                        }
+                                    @endphp
                                 </p>
                                 <p class="absolute top-12 text-xs py-4 text-left date-text">End Date :
                                     @if($order -> end_recruitment)

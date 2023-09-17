@@ -5,7 +5,7 @@
     </div>
 
     <div class="flex gap-4 items-center mb-9 ">
-        
+
         <div class="flex flex-col items-center">
             @if(session() -> has('user'))
             <h6 class="text-white font-bold text-[14px]">{{ session('user') -> xs1 }}</h6>
@@ -34,7 +34,7 @@
             <i class="ri-arrow-up-s-line cursor-pointer text-sm panahBwh " onclick="dropDown()"></i>
         </div>
         <div class="submenu -mt-5 mr-2">
-            <div class="items-center flex gap-2 py-2  {{ request()->is('client/order') ? 'text-secondary fill-secondary' : 'text-white fill-white' }}  w-full">
+            <div class="items-center flex gap-2 py-2  {{ set_child_order_active() }}  w-full">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="32" height="32" class="">
                     <path d="M19.1643 12.0001L12.9572 5.79297L11.543 7.20718L16.3359 12.0001L11.543 16.793L12.9572 18.2072L19.1643 12.0001ZM13.5144 12.0001L7.30728 5.79297L5.89307 7.20718L10.686 12.0001L5.89307 16.793L7.30728 18.2072L13.5144 12.0001Z"></path>
                 </svg>
@@ -55,14 +55,14 @@
     </div>
 
     <div class="border-t border-white flex items-center w-full absolute bottom-0 py-4">
-        <form action="/logout" method="POST" >
-                @csrf
-                <button type="submit">
-                    <div class="items-center flex gap-2 py-2 text-white px-8  w-full">
-                        <i class="ri-logout-box-r-line text-3xl"></i>
-                        <p>Logout</p>
-                    </div>
-                </button>
+        <form action="/logout" method="POST">
+            @csrf
+            <button type="submit">
+                <div class="items-center flex gap-2 py-2 text-white px-8  w-full">
+                    <i class="ri-logout-box-r-line text-3xl"></i>
+                    <p>Logout</p>
+                </div>
+            </button>
         </form>
     </div>
 </div>
@@ -102,10 +102,10 @@
 
             <div class="flex justify-center gap-4 items-start mt-9 w-full">
                 <div class="flex flex-col justify-center items-center ">
-                @if(session() -> has('user'))
+                    @if(session() -> has('user'))
                     <h6 class="text-white font-bold text-[14px]">{{ session('user') -> xs1 }}</h6>
                     <p class="text-white text-[10px]">{{ session('user')->userTypes->description }}</p>
-                @endif
+                    @endif
                 </div>
             </div>
 
@@ -138,11 +138,11 @@
 
 
                     </div>
-                    <div class="items-center flex gap-2 py-2  {{ request()->is('client/history') ? 'text-secondary fill-secondary' : 'text-white fill-white' }}  w-full">
+                    <div class="items-center flex gap-2 py-2  {{ request()->is('client/order/history') ? 'text-secondary fill-secondary' : 'text-white fill-white' }}  w-full">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="32" height="32">
                             <path d="M12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12H4C4 16.4183 7.58172 20 12 20C16.4183 20 20 16.4183 20 12C20 7.58172 16.4183 4 12 4C9.25022 4 6.82447 5.38734 5.38451 7.50024L8 7.5V9.5H2V3.5H4L3.99989 5.99918C5.82434 3.57075 8.72873 2 12 2ZM13 7L12.9998 11.585L16.2426 14.8284L14.8284 16.2426L10.9998 12.413L11 7H13Z" fill="rgba(255,255,255,1)"></path>
                         </svg>
-                        <a href="/client/history">History</a>
+                        <a href="/client/order/history">History</a>
 
 
                     </div>
@@ -152,7 +152,7 @@
 
             <div class="border-t border-white flex items-center w-full absolute bottom-0 py-4">
                 <form action="/logout" method="POST">
-                    <button type="submit"  class="items-center flex gap-2 py-2 text-white px-8  w-full">
+                    <button type="submit" class="items-center flex gap-2 py-2 text-white px-8  w-full">
                         <i class="ri-logout-box-r-line text-3xl"></i>
                         <a href="#">Logout</a>
                     </button>

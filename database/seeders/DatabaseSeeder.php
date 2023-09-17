@@ -22,7 +22,8 @@ class DatabaseSeeder extends Seeder
         TalentDetailsSeeder::class,
         UserTypeSeeder::class,
         UserSeeder::class,
-        LeadSeeder::class
+        LeadSeeder::class,
+        OrderSeeder::class
     ]);
     }
 }

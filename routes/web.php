@@ -11,6 +11,7 @@ use App\Http\Controllers\PenawaranWordController;
 use App\Http\Controllers\TalentController;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Str;
 
 //? TESTING
 Route::get('/send-email/{email}', [C_Mail::class, 'index']);
@@ -38,22 +39,18 @@ function set_active($routes)
     return '';
 }
 
-function set_child_active($routes)
+// Add this code to your JavaScript
+function set_child_order_active()
 {
-    $currentPath = $_SERVER['REQUEST_URI'];
-
-    if (is_array($routes)) {
-        foreach ($routes as $route) {
-            if (strpos($currentPath, $route) === 0) {
-                return 'text-secondary fill-secondary';
-            }
-        }
-    } else {
-        if ($currentPath == $routes) {
-            return 'text-secondary fill-secondary';
-        }
+    $currentPath = request()->path();
+    if ($currentPath === 'client/order/history') {
+        return 'text-white fill-white';
     }
-    return 'text-white fill-white';
+
+    if (Str::contains($currentPath, 'client/order')) {
+        return 'text-secondary fill-secondary';
+    }
+    return 'text-white fill-white';
 }
 
 //? Client
@@ -164,10 +161,10 @@ Route::middleware('auth')->group(function () {
                 //?PERCOBAAN
                 Route::get('/{order_id}/percobaan', [C_Plan::class, 'fetchPercobaan'])->name('fetchPercobaan');
                 Route::post('/{order_id}/percobaan', [C_Plan::class, 'savePercobaan'])->name('savePercobaan');
-                Route::get('/{order_id}/percobaan/{talent_id}', [C_Plan::class, 'deletePercobaan'])->name('deletePercobaan');
+                Route::delete('/{order_id}/percobaan/{talent_id}', [C_Plan::class, 'deletePercobaan'])->name('deletePercobaan');
 
                 //?PO & PKS
-                Route::get('/{order_id}/popks', [C_Plan::class, 'fetchPopks']) -> name('fetchPopks');
+                Route::get('/{order_id}/popks', [C_Plan::class, 'fetchPopks'])->name('fetchPopks');
                 Route::post('/{order_id}/popks', [C_Plan::class, 'popks_create'])->name('create_popks');
                 Route::patch('/{order_id}/popks', [C_Plan::class, 'popks_send'])->name('send_popks');
                 Route::put('/{order_id}/popks', [C_Plan::class, 'popks_save']);

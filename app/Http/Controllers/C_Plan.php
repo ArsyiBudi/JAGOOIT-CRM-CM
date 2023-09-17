@@ -293,7 +293,6 @@ class C_Plan extends Controller
         $selectedDate->setTimestamp($selectedTimestamp);
         $updateOrder = M_Orders::find($order_id);
         $updateOrder->order_status = 2;
-
         foreach ($request->talents_id as $talent_id) {
             M_OrderDetails::create([
                 'talent_id' => $talent_id,
