@@ -679,6 +679,10 @@ class C_Plan extends Controller
             ]);
 
         $order = M_Orders::find($order_id);
+        
+        //?Handling error, when offer_letter_id is not generated.
+        if(is_null($order -> offer_letter_id)) return response(['error' => 'No offer letter, please go to plan number 3 to generate offer letter']);
+
         $order->po_file = $request->file('file-pks');
         $order->po_description = $field['po_descr'];
         $status = $order->update();
