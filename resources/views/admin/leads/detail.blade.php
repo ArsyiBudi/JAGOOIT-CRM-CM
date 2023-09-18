@@ -113,7 +113,7 @@
      <dialog id="my_modal_3" class="modal">
         <div class="modal-box bg-primary">
             <form method="dialog" class=" flex items-center justify-end">
-                <button class="">✕</button>
+                <button class=" outline-none">✕</button>
             </form>
              <div class=" hide-scrollbar w-full mt-5 max-h-96 overflow-auto">
                 <table class=" w-full text-xs md:text-sm font-bold ">
