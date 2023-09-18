@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Mail\AppoinmentMail;
 use App\Mail\TestMail;
+use App\Models\M_GlobalParams;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\ActivityModel;
@@ -28,9 +29,9 @@ class C_Activity extends Controller
             'waktu'=>'required',
             'deskripsi'=>'required',
         ]);
-        
+        $id_params = new M_GlobalParams;
         $activity = M_Activity::create([
-            'activity_type_id'=>'9',
+            'activity_type_id'=> $id_params -> appoinmentParam(),
             'leads_id'=>$leads_id,
             'xs1'=>$field['judul'],
             'xs2'=>$field['lokasi'],
@@ -65,9 +66,9 @@ class C_Activity extends Controller
         $field = $request->validate([
             'deskripsinote'=>'required'
         ]);
-        
+        $id_params = new M_GlobalParams;
         $activity = M_Activity::create([
-            'activity_type_id'=>'10',
+            'activity_type_id'=> $id_params -> notesParam(),
             'leads_id'=> $leads_id,
             'desc'=>$field['deskripsinote'],
         ]);
@@ -75,7 +76,7 @@ class C_Activity extends Controller
         if(!$activity) return response([
             'error' => 'Error Occured'
         ]);
-        return redirect('/leads/'. $leads_id . '/detail')->with('success', 'Data berhasil ditambahkan.');
+        return back()->with('success', 'Notes terkirim.');    
     }
     public function report(Request $request, $leads_id){
         $field = $request->validate([
@@ -83,9 +84,9 @@ class C_Activity extends Controller
             'file' => 'required|file',
             'deskripsireport' => 'required',
         ]);
-
+        $id_params = new M_GlobalParams;
         $activity = M_Activity::create([
-            'activity_type_id' => '11',
+            'activity_type_id' => $id_params -> reportParam(),
             'leads_id' => $leads_id,
             'xs1' => $field['judulreport'],
             'xs2' => $field['file'],
@@ -97,7 +98,6 @@ class C_Activity extends Controller
                 'error' => 'Error Occurred during activity creation',
             ]);
         }
-
-        return redirect('/leads/'. $leads_id . '/detail')->with('success', 'Data berhasil ditambahkan.');
+        return back()->with('success', 'Report terkirim.');
     }
 }
