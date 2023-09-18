@@ -20,11 +20,10 @@ class C_Auth extends Controller
         ]);
 
         if (Auth::guard('web')->attempt($credentials)) {
-            $user = Auth::guard('web')->user(); // Get the authenticated user
+            $user = Auth::guard('web')->user();
 
-            // Implement your user type check logic here
             if ($user->user_type_id == 3) {
-                Auth::guard('web')->logout(); // Log out the user
+                Auth::guard('web')->logout();
                 return back()->with('message', 'Akses Ditolak');
             }
 

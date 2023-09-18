@@ -111,7 +111,7 @@
         @csrf
         <div class="overflow-auto bg-grey mt-5 justify-between flex flex-col text-white px-8 py-10 rounded-md gap-y-3">
             <div class="border-b pb-3 mb-6">
-                <h2 class="text-2xl md:text-4xl text-white">Form Generate Surat Penawaran</h2>
+                <h2 class="text-2xl md:text-4xl text-white">Form Generate POPKS</h2>
             </div>
 
             <div class="text-xl">JagooIT:</div>
@@ -120,19 +120,19 @@
                     <label class="text-sm">
                         Nama
                     </label>
-                    <input class="mt-1 rounded-md text-black bg-white p-2 outline-none" type="text" name="employee_name" value="{{ old('employee_name',@$field->employee_name)}}" id="" placeholder="Nama Karyawan">
+                    <input required class="mt-1 rounded-md text-black bg-white p-2 outline-none" type="text" name="employee_name" value="{{ old('employee_name',@$field->employee_name)}}" id="" placeholder="Nama Karyawan">
                 </div>
                 <div class="flex-auto flex flex-col ">
                     <label class="text-sm">
                         Jabatan
                     </label>
-                    <input class="mt-1 rounded-md text-black bg-white p-2 outline-none" type="text" name="employee_position" value="{{ old('employee_position',@$field->employee_position)}}" id="" placeholder="Jabatan Karyawan">
+                    <input required class="mt-1 rounded-md text-black bg-white p-2 outline-none" type="text" name="employee_position" value="{{ old('employee_position',@$field->employee_position)}}" id="" placeholder="Jabatan Karyawan">
                 </div>
                 <div class="flex-auto flex flex-col">
                     <label class="text-sm">
                         Alamat
                     </label>
-                    <input class="mt-1 rounded-md bg-white text-black p-2 outline-none" type="text" name="employee_address" value="{{ old('employee_address',@$field->employee_address)}}" id="" placeholder="Alamat Karyawan">
+                    <input required class="mt-1 rounded-md bg-white text-black p-2 outline-none" type="text" name="employee_address" value="{{ old('employee_address',@$field->employee_address)}}" id="" placeholder="Alamat Karyawan">
                 </div>
             </div>
 
@@ -142,28 +142,28 @@
                     <label for="" class="text-sm">
                         Nama
                     </label>
-                    <input class="rounded-md text-black bg-white p-2 mt-1 outline-none" type="text" name="client_name" value="{{ old('client_name',@$field->client_name)}}" id="" placeholder="Nama Client">
+                    <input required class="rounded-md text-black bg-white p-2 mt-1 outline-none" type="text" name="client_name" value="{{ old('client_name',@$field->client_name)}}" id="" placeholder="Nama Client">
                 </div>
                 <div class="flex-auto flex flex-col">
                     <label for="" class="text-sm">
                         Jabatan
                     </label>
-                    <input class="rounded-md bg-white text-black p-2 mt-1 outline-none" type="text" name="client_position" value="{{ old('client_position',@$field->client_position)}}" id="" placeholder="Jabatan Client">
+                    <input required class="rounded-md bg-white text-black p-2 mt-1 outline-none" type="text" name="client_position" value="{{ old('client_position',@$field->client_position)}}" id="" placeholder="Jabatan Client">
                 </div>
                 <div class="flex-auto flex flex-col">
                     <label for="" class="text-sm">
                         Alamat
                     </label>
-                    <input class="rounded-md bg-white text-black p-2 mt-1 outline-none" type="text" name="client_address" value="{{ old('client_address',@$field->client_address)}}" id="" placeholder="Alamat Client">
+                    <input required class="rounded-md bg-white text-black p-2 mt-1 outline-none" type="text" name="client_address" value="{{ old('client_address',@$field->client_address)}}" id="" placeholder="Alamat Client">
                 </div>
             </div>
 
             <div class="text-xl mt-4">Jangka Waktu Kontrak:</div>
             <div class="flex flex-row flex-wrap gap-2 items-center">
                 <div>Dari</div>
-                <input class="rounded-md flex-auto text-black bg-white p-2 outline-none" type="date" name="start_date" value="{{ old('start_date',@$field->start_date)}}" id="">
+                <input required class="rounded-md flex-auto text-black bg-white p-2 outline-none" type="date" name="start_date" value="{{ old('start_date',@$field->start_date)}}" id="">
                 <div>Sampai</div>
-                <input class="rounded-md flex-auto text-black bg-white  p-2 outline-none" type="date" name="end_date" value="{{ old('end_date',@$field->end_date)}}" id="">
+                <input required class="rounded-md flex-auto text-black bg-white  p-2 outline-none" type="date" name="end_date" value="{{ old('end_date',@$field->end_date)}}" id="">
             </div>
 
             <div class="text-xl mt-4">Biaya Kontrak</div>
@@ -172,7 +172,7 @@
                     <label for="" class="text-sm">
                         Termasuk Biaya
                     </label>
-                    <input type="text" class="rounded-md text-black bg-white p-2 mt-1 outline-none" name="included_fees" value="{{ old('included_fees',@$field->included_fees)}}" id="" placeholder="BPJS, Pajak Penghasilan (PPh), dll...">
+                    <input required type="text" class="rounded-md text-black bg-white p-2 mt-1 outline-none" name="included_fees" value="{{ old('included_fees',@$field->included_fees)}}" id="" placeholder="BPJS, Pajak Penghasilan (PPh), dll...">
                 </div>
                 <div class="flex-auto flex flex-col">
                     <label for="" class="text-sm">
@@ -180,7 +180,7 @@
                     </label>
                     <div class=" mt-1 flex items-center gap-0">
                         <label class=" bg-white p-2 rounded-tl-md rounded-bl-md text-black border-grey border-r-[1px] w-10">RP.</label>
-                        <input name="nominal_fees" type="number"  placeholder="xxx.xxx.xxx" class=" text-black bg-white w-full p-2 outline-none rounded-tr-md rounded-br-md " value="{{ old('nominal_fees',@$field->nominal_fees)}}">
+                        <input required name="nominal_fees" type="number"  placeholder="xxx.xxx.xxx" class=" text-black bg-white w-full p-2 outline-none rounded-tr-md rounded-br-md " value="{{ old('nominal_fees',@$field->nominal_fees)}}">
                     </div>
                     
                 </div>
@@ -192,18 +192,18 @@
                     <label class="text-sm">Weekday</label>
                     <div class="  flex items-center gap-0">
                         <label for="weekday" class=" bg-white p-2 rounded-tl-md rounded-bl-md text-black border-grey border-r-[1px] w-10">RP.</label>
-                        <input name="weekday_cost" value="{{ old('weekday_cost',@$field->weekday_cost)}}" type="number" id="weekday" placeholder="Weekday Overtime" class=" text-black bg-white w-full p-2 outline-none rounded-tr-md rounded-br-md ">
+                        <input required name="weekday_cost" value="{{ old('weekday_cost',@$field->weekday_cost)}}" type="number" id="weekday" placeholder="Weekday Overtime" class=" text-black bg-white w-full p-2 outline-none rounded-tr-md rounded-br-md ">
                     </div>
                     <label class="text-sm">Weekend</label>
                     <div class="  flex items-center gap-0">
                         <label for="Weekend" class=" bg-white p-2 rounded-tl-md rounded-bl-md text-black border-grey border-r-[1px] w-10">RP.</label>
-                        <input name="weekend_cost" value="{{ old('weekend_cost',@$field->weekend_cost)}}" type="number" id="Weekend" placeholder="Weekend Overtime" class=" text-black bg-white w-full p-2 outline-none rounded-tr-md rounded-br-md">
+                        <input required name="weekend_cost" value="{{ old('weekend_cost',@$field->weekend_cost)}}" type="number" id="Weekend" placeholder="Weekend Overtime" class=" text-black bg-white w-full p-2 outline-none rounded-tr-md rounded-br-md">
                     </div>
                     
                 </div>
                 <div class="flex-auto flex flex-col">
                     <label for="catatan-popks" class="text-sm">Catatan</label>
-                    <textarea id="catatan-popks" type="text" placeholder="Notes" class=" text-black bg-white p-2 rounded-md h-full hide-scrollbar resize-none" name="notes">@if(@$field -> notes){{ @$field -> notes }}@endif</textarea>
+                    <textarea required id="catatan-popks" type="text" placeholder="Notes" class=" text-black bg-white p-2 rounded-md h-full hide-scrollbar resize-none" name="notes">@if(@$field -> notes){{ @$field -> notes }}@endif</textarea>
                 </div>
             </div>
 
@@ -213,14 +213,14 @@
                     <label for="konsumsi" class="text-sm text-white">Konsumsi (perhari)</label>
                     <div class=" mt-2 flex items-center gap-0">
                         <label for="konsumsi" class=" bg-white p-2 rounded-tl-md rounded-bl-md text-black border-grey border-r-[1px] w-10">RP.</label>
-                        <input name="consumption_cost" value="{{ old('consumption_cost',@$field->consumption_cost)}}" type="number" id="numberInput" placeholder="Konsumsi" class=" text-black bg-white w-full p-2 outline-none rounded-tr-md rounded-br-md">
+                        <input required name="consumption_cost" value="{{ old('consumption_cost',@$field->consumption_cost)}}" type="number" id="numberInput" placeholder="Konsumsi" class=" text-black bg-white w-full p-2 outline-none rounded-tr-md rounded-br-md">
                     </div>
                 </div>
                 <div class=" w-full md:w-1/2 mt-2 md:mt-0">
                     <label for="transport" class="text-sm text-white">Transport Pulang-Pergi Standar JKT-BDG</label>
                     <div class=" mt-2 flex items-center gap-0">
                         <label for="transport" class=" bg-white p-2 rounded-tl-md rounded-bl-md text-black border-grey border-r-[1px] w-10">RP.</label>
-                        <input name="transportation_cost" value="{{ old('transportation_cost',@$field->transportation_cost)}}" type="number" id="transport" placeholder="Transport" class=" text-black bg-white w-full p-2 outline-none rounded-tr-md rounded-br-md">
+                        <input required name="transportation_cost" value="{{ old('transportation_cost',@$field->transportation_cost)}}" type="number" id="transport" placeholder="Transport" class=" text-black bg-white w-full p-2 outline-none rounded-tr-md rounded-br-md">
                     </div>
                 </div>
             </div>
@@ -232,11 +232,11 @@
                 <label for="" class="text-sm">
                     Tanggal
                 </label>
-                <input type="number" class="w-10 text-black bg-white rounded-md p-2 outline-none" name="billing_due_date" value="{{ old('billing_due_date',@$field->billing_due_date)}}">
+                <input required type="number" placeholder="00" class="w-10 text-black bg-white rounded-md p-2 outline-none" name="billing_due_date" value="{{ old('billing_due_date',@$field->billing_due_date)}}">
                 <label for="" class="text-sm">
                     Setiap Bulan dan Pembayaran Selambat-Lambatnya
                 </label>
-                <input type="number" class="text-black bg-white rounded-md p-2 outline-none" name="billing_days" value="{{ old('billing_days',@$field->billing_days)}}">
+                <input required type="number" placeholder="00" class="text-black bg-white rounded-md p-2 outline-none" name="billing_days" value="{{ old('billing_days',@$field->billing_days)}}">
                 Hari
             </div>
 
@@ -246,20 +246,20 @@
                     <label for="" class="text-sm">
                         Atas Nama
                     </label>
-                    <input type="text" class="rounded-md text-black bg-white p-2 outline-none" name="authorized_by" value="{{ old('authorized_by',@$field->authorized_by)}}" placeholder="A/N">
+                    <input required type="text" class="rounded-md text-black bg-white p-2 outline-none" name="authorized_by" value="{{ old('authorized_by',@$field->authorized_by)}}" placeholder="A/N">
                 </div>
                 <div class="flex-auto flex flex-col">
                     <label for="" class="text-sm">
                         Nama Bank
                     </label>
-                    <input type="text" class="rounded-md text-black bg-white p-2 outline-none" name="bank_name" value="{{ old('bank_name',@$field->bank_name)}}" placeholder="Nama Bank">
+                    <input required type="text" class="rounded-md text-black bg-white p-2 outline-none" name="bank_name" value="{{ old('bank_name',@$field->bank_name)}}" placeholder="Nama Bank">
                 </div>
             </div>
             <div class="flex-auto flex flex-col">
                 <label for="" class="text-sm">
                     No. Rekening
                 </label>
-                <input type="text" class="rounded-md text-black bg-white p-2 outline-none" name="account_number" value="{{ old('account_number',@$field->account_number)}}" placeholder="No. Rekening">
+                <input required type="text" class="rounded-md text-black bg-white p-2 outline-none" name="account_number" value="{{ old('account_number',@$field->account_number)}}" placeholder="No. Rekening">
             </div>
 
             <div class="text-xl mt-4">Mengetahui</div>
@@ -268,13 +268,13 @@
                     <label for="" class="text-sm">
                         Direktur JagooIT
                     </label>
-                    <input type="text" class="rounded-md text-black bg-white p-2 outline-none" name="jagoit_director" value="{{ old('jagoit_director',@$field->jagoit_director)}}" placeholder="Direktur JagooIT">
+                    <input required type="text" class="rounded-md text-black bg-white p-2 outline-none" name="jagoit_director" value="{{ old('jagoit_director',@$field->jagoit_director)}}" placeholder="Direktur JagooIT">
                 </div>
                 <div class="flex-auto flex flex-col">
                     <label for="" class="text-sm">
                         Direktur Client
                     </label>
-                    <input type="text" class="rounded-md text-black bg-white p-2 outline-none" name="client_director" value="{{ old('client_director',@$field->client_director)}}" placeholder="Direktur Client">
+                    <input required type="text" class="rounded-md text-black bg-white p-2 outline-none" name="client_director" value="{{ old('client_director',@$field->client_director)}}" placeholder="Direktur Client">
                 </div>
             </div>
 
@@ -308,7 +308,7 @@
 
                     <canvas id="pdf-preview" style="display: none;" class=" w-full rounded-md my-3"></canvas>
                     <label for="file-pks" class="flex justify-center items-center cursor-pointer bg-white py-2 rounded-lg h-[56px] w-full" id="container-pks">
-                        <input id="file-pks" type="file" class="text-black rounded-lg hidden bg-white p-1 outline-none" name="file-pks" onchange="previewFile()">
+                        <input required id="file-pks" type="file" class="text-black rounded-lg hidden bg-white p-1 outline-none" name="file-pks" onchange="previewFile()">
                         <span id="file-upload-label" class=" text-white font-semibold cursor-pointer font-quicksand">
                             <i class="ri-upload-2-fill text-3xl text-black"></i>
                         </span>
@@ -319,7 +319,7 @@
             
             <div class="flex-auto flex flex-col">
                 <label for="desk-popks">Deskripsi</label>
-                <textarea id="desk-popks" type="text" class="p-1 outline-none rounded-md h-[70px] text-black hide-scrollbar resize-none bg-white" name="po_descr">@if(@$order -> po_description){{ $order -> po_description }} @endif</textarea>
+                <textarea required id="desk-popks" type="text" class="p-1 outline-none rounded-md h-[70px] text-black hide-scrollbar resize-none bg-white" name="po_descr">@if(@$order -> po_description){{ $order -> po_description }} @endif</textarea>
             </div>
             
             

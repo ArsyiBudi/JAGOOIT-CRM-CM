@@ -66,14 +66,6 @@
 </style>
 
 @section('container')
-@if(session()->has('success'))
-<div class="alert alert-success absolute top-10 right-10 w-auto animate-slide-up text-white font-medium border-2 border-green-300 cursor-pointer" onclick="closeAlert()">
-    <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6 cursor-pointer" fill="none" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
-    </svg>
-    <span>{{ session('success') }}</span>
-</div>
-@endif
 <div class="pt-20 pb-2 lg:pt-0">
 </div>
 <div class="overflow-y-auto overflow-x-hidden pt-0 pb-10 lg:pt-0 px-5 lg:px-10 h-[90vh]">

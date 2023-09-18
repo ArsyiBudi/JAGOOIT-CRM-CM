@@ -30,13 +30,10 @@ class C_Orders extends Controller
         $field = $request->validate([
             'order_id' => 'required'
         ]);
+        $order_id = $field['order_id'];
 
         $order_data = M_Orders::find($field['order_id']);
-        if (!$order_data) {
-            return response([
-                'message' => "No order has an id of {$field['order_id']}"
-            ], 401);
-        };
+        if (!$order_data) return back() -> with('error', "Tidak ada order dengan ID : $order_id");
         return view('clients.track', [
             "title" => "Order | Track",
             "order" => $order_data
@@ -47,11 +44,7 @@ class C_Orders extends Controller
     {
         $order_data = M_Orders::find($order_id);
         $lead_data = M_Leads::find($order_data->leads_id);
-        if (!$order_data) {
-            return response([
-                'message' => "No order has an id of $order_id"
-            ], 401);
-        };
+        if (!$order_data) return back() -> with('error', "Tidak ada order dengan ID : $order_id");
         return view('admin.client.order.timeline', [
             "title" => "Client | Order Timeline",
             "order" => $order_data,
@@ -158,16 +151,12 @@ class C_Orders extends Controller
             'tor_file' => $field['tor_file'],
         ]);
 
-        if (!$order) {
-            return response([
-                'error' => 'error'
-            ]);
-        }
+        if (!$order) return back() -> with('error', "Order tidak berhasil dibuat");
         $update = M_Leads::find($field['business_id']);
         $update->client_indicator = 1;
         $status = $update->update();
         if ($status) {
-            return redirect('/client/order');
+            return redirect('/client/order')->with('success', "Order berhasil dibuat");
         }
     }
 

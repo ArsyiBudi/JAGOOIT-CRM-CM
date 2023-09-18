@@ -8,39 +8,21 @@
     }
 
     .animate-slide-up {
-    animation: slide-up 0.3s ease-in-out;
-}
+        animation: slide-up 0.3s ease-in-out;
+    }
 
-@keyframes slide-up {
-    0% {
-        transform: translateY(-10px);
-        opacity: 0;
+    @keyframes slide-up {
+        0% {
+            transform: translateY(-10px);
+            opacity: 0;
+        }
+
+        100% {
+            transform: translateY(0);
+            opacity: 1;
+        }
     }
-    100% {
-        transform: translateY(0);
-        opacity: 1;
-    }
-}
 </style>
-
-
-@if(session()->has('error'))
-<div class="alert alert-error absolute md:top-10 md:right-10 z-50 w-auto animate-slide-up text-white font-medium border-2 border-red-500 cursor-pointer" onclick="closeAlert()">
-    <span>{{ session('error') }}</span>
-    <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6 cursor-pointer" fill="none" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
-    </svg>
-</div>
-@endif
-
-@if(session()->has('success'))
-<div class="alert alert-success absolute lg:top-10 lg:right-10 w-auto z-50 animate-slide-up text-white font-medium border-2 border-green-300 cursor-pointer flex items-center" onclick="closeAlert()">
-    <span>{{ session('success') }}</span>
-    <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6 cursor-pointer" fill="none" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
-    </svg>
-</div>
-@endif
 
 @section('container')
 <div class="pt-20 lg:pt-0">
@@ -52,31 +34,31 @@
             @method('PATCH')
             <div class="flex flex-col text-lightGrey space-y-2">
                 <div class=" flex justify-between">
-                    <div class="text-2xl">Edit Leads</div>
+                    <div class="text-2xl">Edit {{ $subject }}</div>
                     <div class=" font-bold hover:scale-95 duration-200">
                         <button class=" bg-success bg-opacity-95  rounded-md py-1 px-5 " type="submit">Save</button>
                     </div>
                 </div>
                 <div class="divide-y divide-slate-50 gap-4 flex flex-col">
                     <div class="pt-3 flex items-center gap-1 md:gap-2">
-                         <p class="text-xs md:text-[16px]">
-                        Nama Perusahaan :
+                        <p class="text-xs md:text-[16px]">
+                            Nama Perusahaan :
                         </p>
                         <div>
                             <input name="business_name" type="text" required class=" bg-transparent outline-none" value="{{ old('business_name', @$lead -> business_name) }}">
                         </div>
                     </div>
                     <div class="pt-3 flex items-center gap-1 md:gap-2">
-                         <p class="text-sm md:text-[16px]">
-                        Alamat : 
+                        <p class="text-sm md:text-[16px]">
+                            Alamat :
                         </p>
                         <div>
                             <input name="address" type="text" required class=" bg-transparent outline-none md:w-[600px] w-[250px]" value="{{ old('business_name', @$lead -> address) }}">
                         </div>
                     </div>
                     <div class="pt-3 flex items-center gap-1 md:gap-2">
-                         <p class="text-sm md:text-[16px]">
-                        Nama PIC :
+                        <p class="text-sm md:text-[16px]">
+                            Nama PIC :
                         </p>
                         <div>
                             <input name="pic_name" type="text" required class=" bg-transparent outline-none" value="{{ old('business_name', @$lead -> pic_name) }}">
@@ -87,17 +69,17 @@
                             No Telepon PIC :
                         </p>
                         <div>
-                            <input name="pic_contact_number" type="number" required class=" bg-transparent outline-none" value="{{ old('business_name', @$lead -> pic_contact_number) }}">
+                            <input name="pic_contact_number" required class=" bg-transparent outline-none" value="{{ old('business_name', @$lead -> pic_contact_number) }}">
                         </div>
                     </div>
                     <div class="pt-3 flex items-center justify-between">
                         <div class=" flex items-center gap-1 md:gap-2">
-                              <p class="text-sm md:text-[16px]">
+                            <p class="text-sm md:text-[16px]">
                                 Email :
                             </p>
-                            <a class="cursor-pointer font-bold underline" onclick="my_modal_3.showModal()">Lihat Email</a>  
-                        </div>  
-                        <div class="" onclick="my_modal_3.showModal()">
+                            <a class="cursor-pointer font-bold underline" onclick="showEmail()">Lihat Email</a>
+                        </div>
+                        <div class="" onclick="showModal()">
                             <p class=" px-5 py-1 bg-success rounded-md font-bold text-2xl cursor-pointer hover:scale-95 duration-200">+</p>
                         </div>
                     </div>
@@ -111,7 +93,7 @@
             <form method="dialog" class=" flex items-center justify-end">
                 <button class="">✕</button>
             </form>
-             <div class=" hide-scrollbar w-full mt-5 max-h-96 overflow-auto">
+            <div class=" hide-scrollbar w-full mt-5 max-h-96 overflow-auto">
                 <table class=" w-full text-xs md:text-sm font-bold ">
                     <thead class="bg-darkSecondary sticky top-0">
                         <tr>
@@ -121,41 +103,45 @@
                     </thead>
                     <tbody>
                         @if(@$lead -> hasOneEmail)
-                            @foreach($lead -> emails as $email)
-                                <tr class=" odd:bg-grey">
-                                    <td align="center" class=" p-4">{{ isset($i) ? ++$i : $i = 1 }}</td>
-                                    <td align="center" class=" p-4">{{ $email -> email_name }}</td>
-                                </tr>
-                            @endforeach
+                        @foreach($lead -> emails as $email)
+                        <tr class=" odd:bg-grey">
+                            <td align="center" class=" p-4">{{ isset($i) ? ++$i : $i = 1 }}</td>
+                            <td align="center" class=" p-4">{{ $email -> email_name }}</td>
+                        </tr>
+                        @endforeach
                         @else
-                            {{ $lead -> business_name }} has No Email
+                        <tr>
+                            <td colspan="6" align="center" class="py-10">{{ $lead -> business_name }} has no email</td>
+                        </tr>
                         @endif
                     </tbody>
                 </table>
             </div>
-           <form action="{{ url(request() -> path()) }}" method="post" class=" my-3 w-full">
-            @csrf
-            <div class=" flex w-full " >
-                <input autofocus required name="email_name" type="email" class=" bg-grey outline-none w-full py-1 px-2" placeholder="Tambah Email">
-                <div>
-                    <button type="submit" class=" bg-grey py-2 px-3 text-sm underline ">Save</button>
+            <form id="form_email" action="{{ url(request() -> path()) }}" method="post" class=" my-3 w-full">
+                @csrf
+                <div class=" flex w-full ">
+                    <input autofocus required name="email_name" type="email" class=" bg-grey outline-none w-full py-1 px-2" placeholder="Tambah Email">
+                    <div>
+                        <button type="submit" class=" bg-grey py-2 px-3 text-sm">Save</button>
+                    </div>
                 </div>
-            </div>
-           </form>
+            </form>
         </div>
     </dialog>
-</div>  
+</div>
 
 <script>
-const my_modal_3 = document.getElementById('my_modal_3');
+    const my_modal_3 = document.getElementById('my_modal_3');
+    const form_email = document.getElementById('form_email');
 
-function showModal() {
-    my_modal_3.showModal();
-}
+    function showEmail() {
+        showModal();
+        form_email.style.display = "none"
+    }
 
-    function closeAlert() {
-        const alertContainer = document.querySelector('.alert');
-        alertContainer.style.display = 'none';
+    function showModal() {
+        my_modal_3.showModal();
+        form_email.style.display = "block";
     }
 </script>
 @endsection

@@ -34,7 +34,7 @@
                 </div>
                 <div class="pt-3 flex items-center gap-2">
                     <p>Email: </p>
-                     <a class="cursor-pointer font-bold underline" onclick="my_modal_3.showModal()">Lihat Email</a>  
+                    <a class="cursor-pointer font-bold underline" onclick="my_modal_3.showModal()">Lihat Email</a>
                 </div>
                 <div class="pt-3">
                     <p>
@@ -110,12 +110,12 @@
             </table>
         </div>
     </div>
-     <dialog id="my_modal_3" class="modal">
+    <dialog id="my_modal_3" class="modal">
         <div class="modal-box bg-primary">
             <form method="dialog" class=" flex items-center justify-end">
                 <button class=" outline-none">✕</button>
             </form>
-             <div class=" hide-scrollbar w-full mt-5 max-h-96 overflow-auto">
+            <div class=" hide-scrollbar w-full mt-5 max-h-96 overflow-auto">
                 <table class=" w-full text-xs md:text-sm font-bold ">
                     <thead class="bg-darkSecondary sticky top-0">
                         <tr>
@@ -125,14 +125,16 @@
                     </thead>
                     <tbody>
                         @if(@$leads -> hasOneEmail)
-                            @foreach($leads -> emails as $email)
-                                <tr class=" odd:bg-grey">
-                                    <td align="center" class=" p-4">{{ isset($i) ? ++$i : $i = 1 }}</td>
-                                    <td align="center" class=" p-4">{{ $email -> email_name }}</td>
-                                </tr>
-                            @endforeach
+                        @foreach($leads -> emails as $email)
+                        <tr class=" odd:bg-grey">
+                            <td align="center" class=" p-4">{{ isset($i) ? ++$i : $i = 1 }}</td>
+                            <td align="center" class=" p-4">{{ $email -> email_name }}</td>
+                        </tr>
+                        @endforeach
                         @else
-                            {{ $leads -> business_name }} has No Email
+                        <tr>
+                            <td colspan="6" align="center" class="py-10">{{ $leads -> business_name }} has no email</td>
+                        </tr>
                         @endif
                     </tbody>
                 </table>

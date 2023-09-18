@@ -73,7 +73,7 @@
             </form>
 
             <div class=" border-b border-white w-full rounded-lg mt-4"></div>
-        </div>
+    </div>
 
         <div class=" hide-scrollbar w-full mt-5 max-h-96 overflow-auto pr-2">
             <table class=" w-full text-xs md:text-sm font-bold ">
@@ -127,7 +127,7 @@
                                     <i class="ri-edit-line"></i>
                                 </a>
                                 <div class=" block ">
-                                    <button type="button" onclick="deleteLead({{ $row -> id }}, '{{$row -> business_name}}')" class=" text-lg cursor-pointer ri-delete-bin-2-line text-delete"></button>
+                                    <button type="button" onclick="deleteLead('{{ $row -> id }}', '{{$row -> business_name}}')" class=" text-lg cursor-pointer ri-delete-bin-2-line text-delete"></button>
                                 </div>
                             </div>
                         </td>

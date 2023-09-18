@@ -35,7 +35,9 @@
           @csrf
             <h1 class=" text-center text-lg font-bold">Masukan Order ID</h1>
             <input type="text" name="order_id" id="" class=" my-5 w-full rounded-xl p-2 outline-none text-black bg-white font-semibold">
-            <p class=" text-white bg-delete p-1 rounded-md text-center text-xs font-bold">Tidak ada order dengan ID : id nya... </p>
+            @if(session()->has('error'))
+            <p class=" text-white bg-delete p-1 rounded-md text-center text-xs font-bold">{{ session('error') }}</p>
+            @endif
             <div class=" mt-5 hover:scale-95 duration-200">
                 <button type="submit" class=" bg-secondary py-1 px-8 rounded-lg font-bold block mx-auto">Cek </button>
             </div>      

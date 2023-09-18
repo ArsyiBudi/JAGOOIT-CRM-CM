@@ -44,7 +44,7 @@ class C_Activity extends Controller
         $mailData = [
             'appoinment' => $activity,
             'lead_data' => $lead, 
-            'information' => ":Konfirmasi Janji Temu JagooIT "
+            'information' => "Konfirmasi Janji Temu JagooIT "
         ];
         $mailSubject = "Appoinment | JagooIT - {$lead -> business_name}";
         if (!$lead->hasOneEmail) return response(['error' => "No Email detected in {$lead->business_name}"]);
@@ -76,7 +76,7 @@ class C_Activity extends Controller
         if(!$activity) return response([
             'error' => 'Error Occured'
         ]);
-        return back()->with('success', 'Notes terkirim.');    
+        return back()->with('success', 'Notes tersimpan.');    
     }
     public function report(Request $request, $leads_id){
         $field = $request->validate([

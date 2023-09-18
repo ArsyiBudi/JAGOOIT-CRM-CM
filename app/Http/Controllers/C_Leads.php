@@ -103,8 +103,9 @@ class C_Leads extends Controller
                 $popks -> delete();
             }
         }
+        $lead_name = $lead -> business_name;
         $lead->delete();
-        return redirect('/leads');
+        return back() ->with('success', "$lead_name berhasil dihapus");
     }
     public function create(Request $request)
     {
@@ -135,7 +136,7 @@ class C_Leads extends Controller
                 $emailAddresses[] = $fieldValue;
             }
         }
-        // Save to leads_email table
+
         foreach ($emailAddresses as $email) {
             M_Emails::create([
                 'leads_id' => $leads->id,
@@ -143,7 +144,7 @@ class C_Leads extends Controller
             ]);
         }
 
-        return redirect('/leads');
+        return redirect('/leads')-> with('success', $leads -> business_name . " berhasil ditambahkan");
     }
 
     //? BELOW USED FOR CLIENT
@@ -179,8 +180,7 @@ class C_Leads extends Controller
         $client = M_Leads::find($client_id);
         $client->client_indicator = 0;
         $client->save();
-
-        return redirect('/client');
+        return back() -> with('success', $client -> business_name." dihapus dari client");
     }
 
 
@@ -205,7 +205,7 @@ class C_Leads extends Controller
         ];
         $mailSubject = $request->subject;
         if (!$lead->hasOneEmail)
-            return response(['error' => "No Email detected in {$lead->business_name}"]);
+            return back() -> with('error', "{$lead -> business_name} tidak memiliki email");
 
         $email = new TestMail($mailData, $mailSubject);
 
@@ -220,12 +220,17 @@ class C_Leads extends Controller
         return redirect('leads/offer/' . $leads_id)->with('success', 'Email berhasil terkirim');
     }
 
+    //?This code are for edit
+
     public function fetchEdit($leads_id)
     {
+        $detail_subject = "Leads";
         $lead = M_Leads::find($leads_id);
-        if (!$lead) return response(['error' => "No Leads has an id of $leads_id"]);
+        if ($lead->client_indicator == 1) $detail_subject = "Client";
+        if (!$lead) return back() -> with('error', "Tidak ada lead dengan id : $leads_id");
         return view('admin.leads.edit', [
             "title" => "Leads | Edit",
+            "subject" => $detail_subject,
             "lead" => $lead
         ]);
     }
@@ -235,14 +240,12 @@ class C_Leads extends Controller
         $field = $request->validate([
             'email_name' => 'required'
         ]);
-
         $email = M_Emails::create([
             'leads_id' => $leads_id,
             'email_name' => $field['email_name']
         ]);
 
-        if (!$email) return response(['error' => 'Email didnt updated']);
-
+        if (!$email) return back() -> with('error', "Email tidak berhasil ditambahkan, coba lagi");
         return back() -> with('success', "{$email -> email_name} berhasil ditambahkan");
     }
 
@@ -262,7 +265,7 @@ class C_Leads extends Controller
         $lead -> pic_contact_number = $field['pic_contact_number'];
         $status = $lead -> update();
 
-        if(!$status) return response(['error' => "Lead's didnt updated"]);
+        if(!$status) return back() -> with('error', '{$lead -> business_name} tidak berhasil diedit');
         return back() -> with('success', "{$lead -> business_name} berhasil diedit");
     }
 }

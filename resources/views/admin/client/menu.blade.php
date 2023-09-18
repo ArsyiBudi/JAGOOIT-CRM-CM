@@ -121,8 +121,11 @@
                                 <a href="{{ url('/client/detail/'. $row -> id ) }}">
                                     <i class="text-lg cursor-pointer ri-information-line"></i>
                                 </a>
+                                <a href="{{ url('/leads/'. $row -> id .'/edit') }}">
+                                    <i class="ri-edit-line"></i>
+                                </a>
                                 <div class=" block ">
-                                    <button type="button" onclick="deleteLead({{ $row -> id }}, '{{ $row -> business_name }}')" class=" text-lg cursor-pointer ri-delete-bin-2-line text-delete"></button>
+                                    <button type="button" onclick="deleteLead('{{ $row -> id }}', '{{ $row -> business_name }}')" class=" text-lg cursor-pointer ri-delete-bin-2-line text-delete"></button>
                                 </div>
                             </div>
                         </td>
