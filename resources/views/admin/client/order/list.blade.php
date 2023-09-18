@@ -44,7 +44,7 @@
 @section('container')
 <div class="pt-20 pb-2 lg:pt-0">
 </div>
-<div class=" overflow-auto bg-darkSecondary pt-28 lg:pt-0 h-[90vh] rounded-md">
+<div class=" overflow-auto bg-darkSecondary pt-0 h-screen rounded-md">
     <div class="w-full bg-darkSecondary py-10 px-8 flex  flex-col ">
 
         <div class="border-b border-white w-full pb-3 mb-3">
@@ -71,16 +71,16 @@
             </div>
         </form>
 
-        <div class=" hide-scrollbar w-full h-72 overflow-auto pr-2">
-            <table class=" w-full text-xs md:text-sm font-bold ">
-                <thead>
+        <div class=" hide-scrollbar w-full h-72 overflow-auto pr-2 relative">
+            <table class=" w-full text-xs md:text-sm font-bold relative">
+                <thead class=" sticky top-0 bg-primary">
                     <tr>
-                        <td align="center" class="pb-4">No</td>
-                        <td align="center" class="pb-4 pl-2">Order ID</td>
-                        <td align="center" class="pb-4 pl-2">Nama Perusahaan</td>
-                        <td align="center" class="pb-4 pl-2">Due Date</td>
-                        <td align="center" class="pb-4 pl-1">Status</td>
-                        <td align="center" class="pb-4 pl-5">Aksi</td>
+                        <td align="center" class="py-3">No</td>
+                        <td align="center" class="py-3 pl-2">Order ID</td>
+                        <td align="center" class="py-3 pl-2">Nama Perusahaan</td>
+                        <td align="center" class="py-3 pl-2">Due Date</td>
+                        <td align="center" class="py-3 pl-1">Status</td>
+                        <td align="center" class="py-3 pl-5">Aksi</td>
                     </tr>
                 </thead>
                 <tbody>
@@ -129,7 +129,7 @@
 
         <div class="flex items-center justify-center w-full">
 
-            <div class="sticky bottom-0 pb-10 bg-darksecondary flex justify-center items-center gap-3">
+            <div class="sticky bottom-0 pb-5 bg-darksecondary flex justify-center items-center gap-3">
                 {{ $order -> links('vendor.pagination.custom-pagination-order') }}
             </div>
 
@@ -140,7 +140,7 @@
 
         <div class="modal-box bg-grey border-2 border-white w-11/12 max-w-sm flex justify-center items-center flex-col">
 
-            <h1>Are you sure you want to delete this order with an ID : <span id="order_id"></span> ?</h1>
+            <h1>Kamu akan menghapus data order dengan Order ID : <span id="order_id"></span> ?</h1>
 
             <div class="flex items-center justify-end gap-4 w-full mt-4">
                 <button type="submit" class="text-white bg-red-500 font-medium  py-2 px-3 text-sm  rounded-md" id="cancel" onclick="my_modal_3.close()">Cancel</button>
@@ -162,7 +162,7 @@
 
         <div class="modal-box bg-grey border-2 border-white w-11/12 max-w-sm flex justify-center items-center flex-col">
 
-            <h1>Are you sure you want to complete this order with an ID : <span id="order_id_finish"></span> ?</h1>
+            <h1>Kamu akan menyelesaikan order dengan Order ID : <span id="order_id_finish"></span> ?</h1>
 
             <div class="flex items-center justify-end gap-4 w-full mt-4">
                 <button type="submit" class="text-white bg-red-500 font-medium  py-2 px-3 text-sm  rounded-md" id="cancel" onclick="confirmation_modal.close()">Cancel</button>

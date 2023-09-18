@@ -119,7 +119,9 @@
                     </tr>
                     @endforeach
                     @else
-                    No Activity Recorded
+                    <tr>
+                        <td colspan="6" align="center" class="py-10">No Activity Recorded</td>
+                    </tr>
                     @endif
 
                 </tbody>

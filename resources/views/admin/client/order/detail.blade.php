@@ -88,7 +88,7 @@
                 </div>
             </div>
     
-            <div class="w-full mt-10 h-72 overflow-auto hide-scrollbar">
+            <div class="w-full mt-10 h-auto overflow-auto hide-scrollbar">
                 <table class="text-lightGrey  w-full h-full ">
                     <thead class="border-white">
                         <tr class="">
@@ -99,7 +99,7 @@
                             <th class="p-4 font-bold">Posisi</th>
                         </tr>
                     </thead>
-                    <tbody class="">
+                    <tbody>
                         @if($data -> talentData)
                             @foreach($data -> talentDataFetch as $row)
                             <tr class="text-center bg-grey font-medium">
@@ -111,7 +111,9 @@
                             </tr>
                             @endforeach
                         @else
-                            No Talent Data
+                        <tr>
+                            <td colspan="6" align="center" class="py-10">No Activity Recorded</td>
+                        </tr>
                         @endif
                     </tbody>
                 </table>
