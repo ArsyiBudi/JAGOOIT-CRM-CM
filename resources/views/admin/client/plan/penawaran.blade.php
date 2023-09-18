@@ -10,6 +10,45 @@
         /* This inverts the icon color */
     }
 
+    .hide-scrollbar::-webkit-scrollbar {
+        width: 0.4em;
+        /* Width of the scrollbar */
+    }
+
+    .hide-scrollbar::-webkit-scrollbar-thumb {
+        background-color: #555555;
+        /* Color of the scrollbar thumb */
+        border-radius: 8px;
+        /* Rounded corners for the scrollbar thumb */
+    }
+
+    .hide-scrollbar::-webkit-scrollbar-thumb:hover {
+        background-color: #777777;
+        /* Color of the scrollbar thumb on hover */
+    }
+
+    .hide-scrollbar::-webkit-scrollbar-track {
+        background-color: #555555;
+        /* Color of the scrollbar track */
+    }
+
+    .hide-scrollbar::-webkit-scrollbar-track:hover {
+        background-color: #666666;
+        /* Color of the scrollbar track on hover */
+    }
+
+    /* Customize the appearance of the scrollbar wheel */
+    .hide-scrollbar {
+        scrollbar-width: thin;
+        scrollbar-color: #555555 #333333;
+    }
+
+    /* Customize the appearance of the scrollbar thumb icon */
+    .hide-scrollbar::-webkit-scrollbar-thumb:vertical {
+        background-color: #fff;
+        /* Color of the scrollbar thumb icon */
+    }
+
     input::-webkit-outer-spin-button,
     input::-webkit-inner-spin-button {
         -webkit-appearance: none;
