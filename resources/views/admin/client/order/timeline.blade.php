@@ -99,11 +99,13 @@
                                     @endphp
                                 </p>
                                 <p class="absolute top-12 text-xs py-4 text-left date-text ">End Date :
-                                    @if($order -> end_recruitment)
-                                    {{ $order -> end_recruitment }}
-                                    @else
-                                    -
-                                    @endif
+                                       @php
+                                        if ($order->end_recruitment) {
+                                            echo Carbon::parse($order->end_recruitment)->translatedFormat('j F Y ');
+                                        } else {
+                                            echo '-';
+                                        }
+                                    @endphp
                                 </p>
                             </div>
                         </li>
@@ -118,11 +120,13 @@
                             <div class=" relative w-full">
                                 <h1 class=" text-left text-lg pb-2">Training</h1>
                                 <p class=" absolute text-xs  text-left date-text">Start Date :
-                                    @if($order -> start_training)
-                                    {{ $order -> start_training }}
-                                    @else
-                                    -
-                                    @endif
+                                     @php
+                                        if ($order->start_training) {
+                                            echo Carbon::parse($order->start_training)->translatedFormat('j F Y ');
+                                        } else {
+                                            echo '-';
+                                        }
+                                    @endphp
                                 </p>
                                 <p class="absolute top-12 text-xs py-4 text-left date-text">End Date :
                                     @if($order -> end_training)
