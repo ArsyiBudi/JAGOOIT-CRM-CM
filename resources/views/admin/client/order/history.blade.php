@@ -110,11 +110,9 @@
                                     <a href="{{  url('/client/order/detail/'. $order -> id) }}">
                                         <i class=" text-lg cursor-pointer ri-information-line" title="Detail"></i>
                                     </a>
-                                    <form action="{{ route('delete_order', ['order_id' => $order -> id]) }}" method="post" onsubmit="return confirm('Are you sure you want to delete order with this id : {{$order -> id}} ?')" class=" block  mt-3">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class=" text-lg cursor-pointer ri-delete-bin-2-line text-delete" title="Delete"></button>
-                                    </form>
+                                    <div class=" block">
+                                        <button type="submit" onclick="deleteOrder('{{ $order -> id }}')" class=" text-lg cursor-pointer ri-delete-bin-2-line text-delete" title="Delete"></button>
+                                    </div>
                                 </div>
                             </td>
                         </tr>
@@ -129,4 +127,46 @@
             </div>
         </div>
     </div>
+
+    <dialog id="my_modal_3" class="modal  text-white">
+
+        <div class="modal-box bg-grey border-2 border-white w-11/12 max-w-sm flex justify-center items-center flex-col">
+
+            <h1>Kamu akan menghapus data order dengan Order ID : <span id="order_id"></span> ?</h1>
+
+            <div class="flex items-center justify-end gap-4 w-full mt-4">
+                <button type="submit" class="text-white bg-red-500 font-medium  py-2 px-3 text-sm  rounded-md" id="cancel" onclick="my_modal_3.close()">Cancel</button>
+
+                <form id="deleteForm" method="POST" style="display: none;">
+                    @csrf
+                    @method('DELETE')
+                    <input type="hidden" id="deleteOrderId" name="order_id" value="">
+                </form>
+
+                <button type="button" class="text-white font-medium bg-green-500   py-2 px-3 text-sm  rounded-md" id="yes" onclick="confirmDelete()">Yes</button>
+
+            </div>
+
+        </div>
+    </dialog>
+
+    <script>
+        const my_modal_3 = document.getElementById('my_modal_3');
+
+        function showModal() {
+            my_modal_3.showModal();
+        }
+
+        function deleteOrder(id) {
+            document.getElementById('deleteOrderId').value = id;
+            document.getElementById('order_id').textContent = id;
+            showModal();
+        }
+
+        function confirmDelete() {
+            const form = document.getElementById('deleteForm');
+            form.action = `/client/order/${document.getElementById('deleteOrderId').value}`;
+            form.submit();
+        }
+    </script>
     @endsection

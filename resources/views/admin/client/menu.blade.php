@@ -48,7 +48,7 @@
     <div class="w-full bg-darkSecondary px-8 flex flex-col">
         <div class="pt-10 bg-darkSecondary">
             <div class="border-b border-white w-full pb-3 mb-3">
-                <h3 class="text-white font-semibold text-3xl" >Data Clients</h3>
+                <h3 class="text-white font-semibold text-3xl">Data Clients</h3>
             </div>
 
             <form action="{{ route('fetch_client') }}" method="get" class=" block md:flex items-start my-4 justify-between mb-8 w-full">
@@ -89,45 +89,45 @@
                 </thead>
                 <tbody>
                     @if($client -> isEmpty())
-                        <tr>
-                            <td colspan="8" class="text-white text-center py-4">No Data.</td>
-                        </tr>
+                    <tr>
+                        <td colspan="8" class="text-white text-center py-4">No Data.</td>
+                    </tr>
                     @else
+                    @php
+                    $count = ($client->currentPage() - 1) * $client->perPage() + 1;
+                    @endphp
+                    @foreach($client as $row)
+                    <tr class=" odd:bg-grey">
+                        <td align="center" class=" p-4">{{ $count }}</td>
                         @php
-                        $count = ($client->currentPage() - 1) * $client->perPage() + 1;
+                        $count++;
                         @endphp
-                        @foreach($client as $row)
-                        <tr class=" odd:bg-grey">
-                            <td align="center" class=" p-4">{{ $count }}</td>
-                            @php
-                            $count++;
-                            @endphp
-                            <td align="center" class=" p-4">{{ $row->business_name }}</td>
-                            <td align="center" class=" p-4">{{ $row->address }}</td>
-                            <td align="center" class=" p-4">{{ $row->pic_name }}</td>
-                            <td align="center" class=" p-4">{{ $row->pic_contact_number }}</td>
-                            <td align="center" class=" p-4">
-                                @if ($row-> hasOneActivity)
-                                @if ($row->latestActivityParams)
-                                {{ $row->latestActivityParams->params_name }}
-                                @endif
-                                @else
-                                -
-                                @endif
-                            </td>
-                            <td align="center" class=" p-4">{{ $row->statusParam->params_name }}</td>
-                            <td align="center" class=" p-4">
-                                <div class=" flex items-center gap-2">
-                                    <a href="{{ url('/client/detail/'. $row -> id ) }}">
-                                        <i class="text-lg cursor-pointer ri-information-line"></i>
-                                    </a>
-                                    <div  class=" block " >
-                                        <button type="button" onclick="deleteLead({{ $row -> id }})" class=" text-lg cursor-pointer ri-delete-bin-2-line text-delete"></button>
-                                    </div>
+                        <td align="center" class=" p-4">{{ $row->business_name }}</td>
+                        <td align="center" class=" p-4">{{ $row->address }}</td>
+                        <td align="center" class=" p-4">{{ $row->pic_name }}</td>
+                        <td align="center" class=" p-4">{{ $row->pic_contact_number }}</td>
+                        <td align="center" class=" p-4">
+                            @if ($row-> hasOneActivity)
+                            @if ($row->latestActivityParams)
+                            {{ $row->latestActivityParams->params_name }}
+                            @endif
+                            @else
+                            -
+                            @endif
+                        </td>
+                        <td align="center" class=" p-4">{{ $row->statusParam->params_name }}</td>
+                        <td align="center" class=" p-4">
+                            <div class=" flex items-center gap-2">
+                                <a href="{{ url('/client/detail/'. $row -> id ) }}">
+                                    <i class="text-lg cursor-pointer ri-information-line"></i>
+                                </a>
+                                <div class=" block ">
+                                    <button type="button" onclick="deleteLead({{ $row -> id }}, '{{ $row -> business_name }}')" class=" text-lg cursor-pointer ri-delete-bin-2-line text-delete"></button>
                                 </div>
-                            </td>
-                        </tr>
-                        @endforeach
+                            </div>
+                        </td>
+                    </tr>
+                    @endforeach
                     @endif
                 </tbody>
             </table>
@@ -145,11 +145,11 @@
 
     <div class="modal-box bg-grey border-2 border-white w-11/12 max-w-sm flex justify-center items-center flex-col">
 
-        <h1>Are you sure you want to delete this client?</h1>
+        <h1>Kamu akan menghapus client dengan nama : <span id="business_name"></span> ?</h1>
 
         <div class="flex items-center justify-end gap-4 w-full mt-4">
             <button type="submit" class="text-white bg-red-500 font-medium  py-2 px-3 text-sm  rounded-md" id="cancel" onclick="my_modal_3.close()">Cancel</button>
-           
+
             <!-- Hidden form for deletion -->
             <form id="deleteForm" method="POST" style="display: none;">
                 @csrf
@@ -158,7 +158,7 @@
             </form>
 
             <button type="button" class="text-white font-medium bg-green-500   py-2 px-3 text-sm  rounded-md" id="yes" onclick="confirmDelete()">Yes</button>
-        
+
         </div>
 
     </div>
@@ -168,13 +168,14 @@
 
 <script>
     const my_modal_3 = document.getElementById('my_modal_3');
+
     function showModal() {
         my_modal_3.showModal();
     }
 
-    function deleteLead(id) {
-        //diset si id nu dikirim ke input nu hidden di nu dialog
+    function deleteLead(id, business_name) {
         document.getElementById('deleteClientId').value = id;
+        document.getElementById('business_name').textContent = business_name;
         showModal();
     }
 

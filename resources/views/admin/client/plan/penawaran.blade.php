@@ -295,7 +295,7 @@
             <button type="submit" class="btn bg-secondary text-white border-none hover:bg-secondary/50 hover:text-white/80">Save</button>
         </div>
     </form>
-</dialog>]
+</dialog>
 
 <dialog id="my_modal_6" class="modal  text-white">
 

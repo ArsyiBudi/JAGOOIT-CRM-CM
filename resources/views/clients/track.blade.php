@@ -52,13 +52,16 @@
             max-width: 100%;
             /* Optional: Restrict the width of the element */
         }
-
     </style>
 
 </head>
 
 <body class=" bg-primary font-quicksand text-white min-h-screen hide-scrollbar">
     @include('admin.partials.navbar')
+    @php
+    use Carbon\Carbon;
+    Carbon::setLocale('id'); // 'id' is the locale code for Indonesian
+    @endphp
     <div class=" pt-28">
         <h1 class=" text-center text-3xl font-bold">Tracking Your Order</h1>
         <p class=" text-center pt-3">{{ $order -> id }}</p>
@@ -89,25 +92,29 @@
                     data-content="✓"
                     class="step step-primary"
                     @elseif($order -> order_status == 1)
-                    class="step step-primary"
+                    class="step step-primary "
                     @else
-                    class="step"
+                    class="step "
                     @endif >
-                    <div class=" relative w-full">
-                        <h1 class=" text-left pb-2 text-lg">Recruitment</h1>
+                    <div class=" relative w-full ">
+                        <h1 class=" text-left pb-2 text-lg w-full ">Recruitment</h1>
                         <p class=" absolute text-xs  text-left date-text">Start Date :
-                            @if($order -> start_recruitment)
-                            {{ $order -> start_recruitment }}
-                            @else
-                            -
-                            @endif
+                            @php
+                            if ($order->start_recruitment) {
+                            echo Carbon::parse($order->start_recruitment)->translatedFormat('j F Y ');
+                            } else {
+                            echo '-';
+                            }
+                            @endphp
                         </p>
-                        <p class="absolute top-12 text-xs py-4 text-left date-text">End Date :
-                            @if($order -> end_recruitment)
-                            {{ $order -> end_recruitment }}
-                            @else
-                            -
-                            @endif
+                        <p class="absolute top-12 text-xs py-4 text-left date-text ">End Date :
+                            @php
+                            if ($order->end_recruitment) {
+                            echo Carbon::parse($order->end_recruitment)->translatedFormat('j F Y ');
+                            } else {
+                            echo '-';
+                            }
+                            @endphp
                         </p>
                     </div>
                 </li>
@@ -122,18 +129,22 @@
                     <div class=" relative w-full">
                         <h1 class=" text-left text-lg pb-2">Training</h1>
                         <p class=" absolute text-xs  text-left date-text">Start Date :
-                            @if($order -> start_training)
-                            {{ $order -> start_training }}
-                            @else
-                            -
-                            @endif
+                            @php
+                            if ($order->start_training) {
+                            echo Carbon::parse($order->start_training)->translatedFormat('j F Y ');
+                            } else {
+                            echo '-';
+                            }
+                            @endphp
                         </p>
                         <p class="absolute top-12 text-xs py-4 text-left date-text">End Date :
-                            @if($order -> end_training)
-                            {{ $order -> end_training }}
-                            @else
-                            -
-                            @endif
+                            @php
+                            if ($order->end_training) {
+                            echo Carbon::parse($order->end_training)->translatedFormat('j F Y ');
+                            } else {
+                            echo '-';
+                            }
+                            @endphp
                         </p>
                     </div>
                 </li>
@@ -148,18 +159,22 @@
                     <div class=" relative w-full">
                         <h1 class=" text-left text-lg pb-2">Penawaran</h1>
                         <p class=" absolute text-xs  text-left date-text">Start Date :
-                            @if($order -> start_offer)
-                            {{ $order -> start_offer }}
-                            @else
-                            -
-                            @endif
+                            @php
+                            if ($order->start_offer) {
+                            echo Carbon::parse($order->start_offer)->translatedFormat('j F Y ');
+                            } else {
+                            echo '-';
+                            }
+                            @endphp
                         </p>
                         <p class="absolute top-12 text-xs py-4 text-left date-text">End Date :
-                            @if($order -> end_offer)
-                            {{ $order -> end_offer }}
-                            @else
-                            -
-                            @endif
+                            @php
+                            if ($order->end_offer) {
+                            echo Carbon::parse($order->end_offer)->translatedFormat('j F Y ');
+                            } else {
+                            echo '-';
+                            }
+                            @endphp
                         </p>
                     </div>
                 </li>
@@ -174,18 +189,22 @@
                     <div class=" relative w-full">
                         <h1 class=" text-left text-lg pb-2">Appoinment Negosiasi</h1>
                         <p class=" absolute text-xs  text-left date-text">Start Date :
-                            @if($order -> start_appointment)
-                            {{ $order -> start_appointment }}
-                            @else
-                            -
-                            @endif
+                            @php
+                            if ($order->start_appointment) {
+                            echo Carbon::parse($order->start_appointment)->translatedFormat('j F Y ');
+                            } else {
+                            echo '-';
+                            }
+                            @endphp
                         </p>
                         <p class="absolute top-12 text-xs py-4 text-left date-text">End Date :
-                            @if($order -> end_appointment)
-                            {{ $order -> end_appointment }}
-                            @else
-                            -
-                            @endif
+                            @php
+                            if ($order->end_appointment) {
+                            echo Carbon::parse($order->end_appointment)->translatedFormat('j F Y ');
+                            } else {
+                            echo '-';
+                            }
+                            @endphp
                         </p>
                     </div>
                 </li>
@@ -200,18 +219,22 @@
                     <div class=" relative w-full">
                         <h1 class=" text-left text-lg pb-2">User Interview</h1>
                         <p class=" absolute text-xs  text-left date-text">Start Date :
-                            @if($order -> start_probation)
-                            {{ $order -> start_probation }}
-                            @else
-                            -
-                            @endif
+                            @php
+                            if ($order->start_probation) {
+                            echo Carbon::parse($order->start_probation)->translatedFormat('j F Y ');
+                            } else {
+                            echo '-';
+                            }
+                            @endphp
                         </p>
                         <p class="absolute top-12 text-xs py-4 text-left date-text">End Date :
-                            @if($order -> end_probation)
-                            {{ $order -> end_probation }}
-                            @else
-                            -
-                            @endif
+                            @php
+                            if ($order->end_probation) {
+                            echo Carbon::parse($order->end_probation)->translatedFormat('j F Y ');
+                            } else {
+                            echo '-';
+                            }
+                            @endphp
                         </p>
                     </div>
                 </li>
@@ -226,18 +249,22 @@
                     <div class=" relative w-full">
                         <h1 class=" text-left text-lg pb-2">PO & PKS</h1>
                         <p class=" absolute text-xs  text-left date-text">Start Date :
-                            @if($order -> start_popks)
-                            {{ $order -> start_popks }}
-                            @else
-                            -
-                            @endif
+                            @php
+                            if ($order->start_popks) {
+                            echo Carbon::parse($order->start_popks)->translatedFormat('j F Y ');
+                            } else {
+                            echo '-';
+                            }
+                            @endphp
                         </p>
                         <p class="absolute top-12 text-xs py-4 text-left date-text">End Date :
-                            @if($order -> end_popks)
-                            {{ $order -> end_popks }}
-                            @else
-                            -
-                            @endif
+                            @php
+                            if ($order->end_popks) {
+                            echo Carbon::parse($order->end_popks)->translatedFormat('j F Y ');
+                            } else {
+                            echo '-';
+                            }
+                            @endphp
                         </p>
                     </div>
                 </li>
