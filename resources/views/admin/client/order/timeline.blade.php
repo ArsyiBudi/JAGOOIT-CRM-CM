@@ -80,25 +80,25 @@
                 <div class="">
                     <ul class="steps steps-vertical w-full ">
                         <li @if($order -> order_status > 1)
-                            data-content="✓"
-                            class="step step-primary"
+                                data-content="✓"
+                                class="step step-primary"
                             @elseif($order -> order_status == 1)
-                            class="step step-primary"
+                                class="step step-primary "
                             @else
-                            class="step"
+                                class="step "
                             @endif >
-                            <div class=" relative w-full">
-                                <h1 class=" text-left pb-2 text-lg">Recruitment</h1>
+                            <div class=" relative w-full ">
+                                <h1 class=" text-left pb-2 text-lg w-full ">Recruitment</h1>
                                 <p class=" absolute text-xs  text-left date-text">Start Date :
                                     @php
                                         if ($order->start_recruitment) {
-                                            echo Carbon::parse($order->start_recruitment)->translatedFormat('l, j F Y H:i');
+                                            echo Carbon::parse($order->start_recruitment)->translatedFormat('j F Y ');
                                         } else {
                                             echo '-';
                                         }
                                     @endphp
                                 </p>
-                                <p class="absolute top-12 text-xs py-4 text-left date-text">End Date :
+                                <p class="absolute top-12 text-xs py-4 text-left date-text ">End Date :
                                     @if($order -> end_recruitment)
                                     {{ $order -> end_recruitment }}
                                     @else
