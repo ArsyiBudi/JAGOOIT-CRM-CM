@@ -195,16 +195,9 @@
     function showModal() {
         my_modal_5.showModal();
     }
-
-
-
+    
     function closeAlrt() {
         my_modal_5.close();
-    }
-
-    function closeAlert() {
-        const alertContainer = document.querySelector('.alert');
-        alertContainer.style.display = 'none';
     }
 </script>
 @endsection

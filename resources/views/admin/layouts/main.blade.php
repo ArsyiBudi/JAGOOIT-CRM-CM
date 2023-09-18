@@ -83,12 +83,12 @@
 
 <script>
     function closeSuccessAlert() {
-        var alert = document.getElementById('success-alert');
-        alert.style.display = 'none';
+        var alertSuccess = document.getElementById('success-alert');
+        alertSuccess.style.display = 'none';
     }
     function closeErrorAlert(){
-        var alert = document.getElementById('error-alert');
-        alert.style.display = 'none';
+        var alertError = document.getElementById('error-alert');
+        alertError.style.display = 'none';
     }
 
     setTimeout(function() {

@@ -334,6 +334,7 @@
 
 <script>
     const my_modal_5 = document.getElementById('my_modal_5');
+    const my_modal_6 = document.getElementById('my_modal_6');
 
     function showModal() {
         my_modal_5.showModal();
@@ -342,8 +343,6 @@
     function hideModal() {
         my_modal_5.close();
     }
-
-    const my_modal_6 = document.getElementById('my_modal_6');
 
     function showModal2() {
         my_modal_6.showModal();
@@ -360,8 +359,6 @@
         const canvas = document.getElementById('pdf-preview');
         const fileUploadLabel = document.getElementById('file-upload-label');
         const canvasLoading = document.getElementById('canvas-loading');
-
-
 
         if (fileInput.files && fileInput.files[0]) {
             fileUploadLabel.textContent = 'Ganti File';

@@ -28,7 +28,7 @@ class C_Plan extends Controller
         //?BELOW ARE USED TO CHECK IF THE END AND START IS FIX
         public function checkEndStart($order_id, $timeline)
         {
-            $track = ['recruitment', 'training', 'offer', 'appoinment', 'probation', 'popks'];
+            $track = ['recruitment', 'training', 'offer', 'appointment', 'probation', 'popks'];
             $strWhere = 'start_' . $track[$timeline - 1];
             $check_timeline = M_Orders::find($order_id);
             if (is_null($check_timeline->$strWhere)) return "";
@@ -477,7 +477,7 @@ class C_Plan extends Controller
                 'information' => "Proposal Penawaran dan CV Talenta"
             ];
             $mailSubject = "Penawaran Order {$order->id} | JagooIT - {$lead->business_name}";
-            if (!$lead->hasOneEmail) return response(['error' => "No Email detected in {$lead->business_name}"]);
+            if (!$lead->hasOneEmail) return back() -> with('error', "{$lead -> business_name} tidak memiliki email");
 
             $email = new TestMail($mailData, $mailSubject);
             if ($request->hasFile('cv_file')) {
@@ -487,15 +487,9 @@ class C_Plan extends Controller
                     'mime' => $file->getMimeType(),
                 ]);
             }
-            Mail::to($request->email_name)->send($email);
+            $send_email = Mail::to($request->email_name)->send($email);
+            if(!$send_email) return back() -> with('error', "Terjadi error, mohon coba kembali");
             return redirect()->back()->with('success', "Email berhasil terkirim");
-        }
-
-
-        if (!$status) {
-            return back()->with('error', "Email gagal terkirim");
-        } else {
-            return back()->with('success', "Email berhasil terkirim");
         }
     }
 
@@ -619,7 +613,7 @@ class C_Plan extends Controller
         $updateActive->is_active = 0;
         $updateActive->save();
         $delete->delete();
-        return redirect()->back();
+        return redirect()->back()->with('success', "{$updateActive -> name} berhasil dihapus dari order dengan ID : $order_id");
     }
 
     //?POPKS CONTROLLER CODE

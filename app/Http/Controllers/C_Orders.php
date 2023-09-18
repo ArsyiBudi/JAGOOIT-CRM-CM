@@ -7,6 +7,7 @@ use App\Models\M_Leads;
 use App\Models\M_Orders;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Nette\Utils\DateTime;
 use Ramsey\Uuid\Uuid;
 
 class C_Orders extends Controller
@@ -182,8 +183,24 @@ class C_Orders extends Controller
 
     public function finish_order($order_id)
     {
+        $selectedTimestamp = time();
+        $selectedDate = new DateTime();
+        $selectedDate->setTimestamp($selectedTimestamp);
+
         $update = M_Orders::find($order_id);
         $update -> order_status = 8;
+        
+        //?Array to use
+        $track = ['recruitment', 'training', 'offer', 'appointment', 'probation', 'popks'];
+        $end_start = ['start', 'end'];
+
+        $strTimeline = "";
+        foreach(range(0,5) as $timeline_number){
+            foreach (range(0, 1) as $start_end){
+                $strTimeline = "{$end_start[$start_end]}_{$track[$timeline_number]}";
+                if(is_null($update -> $strTimeline)) $update -> $strTimeline = $selectedDate;
+            }
+        }
         $update -> update();
         return redirect() -> back();
     }

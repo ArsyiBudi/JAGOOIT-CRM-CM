@@ -133,7 +133,7 @@
                                         <a href="/client/plan/create/recruitment">
                                             <i class=" text-lg cursor-pointer ri-information-line"></i>
                                         </a>
-                                        <i onclick="deleteOrderDetail({{ $talent->id }}, '{{ $talent -> talentData -> name }}')" class=" text-lg cursor-pointer ri-delete-bin-2-line text-delete"></i>
+                                        <i onclick="deleteOrderDetail('{{ $talent->id }}', '{{ $talent -> talentData -> name }}')" class=" text-lg cursor-pointer ri-delete-bin-2-line text-delete"></i>
                                     </div>
                                 </td>
                             </tr>
