@@ -230,7 +230,7 @@
         <div class="overflow-auto bg-grey mt-5 justify-between flex flex-col text-lightGrey px-8 py-10 rounded-md space-y-3">
             @if($order -> leadData -> hasOneEmail)
             <div class="w-full">
-                <select name="email_name" id="email" class="mb-4 bg-transparent border btn p-2 outline-none border-spacing-1 rounded-md py-1 text-1xl hover:bg-gray-300 hover:text-darkSecondary text-white">
+                <select required name="email_name" id="email" class="mb-4 bg-transparent border btn p-2 outline-none border-spacing-1 rounded-md py-1 text-1xl hover:bg-gray-300 hover:text-darkSecondary text-white">
                     <option value="" class="bg-grey hover:bg-gray-300 hover:text-darkSecondary">Select Email</option>
                     @foreach($order -> leadData -> emails as $email) 
                     <option value="{{ $email -> email_name }}" class="bg-grey hover:bg-gray-300 hover:text-darkSecondary">{{  $email -> email_name }}</option>
