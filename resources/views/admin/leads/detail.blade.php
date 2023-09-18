@@ -32,27 +32,9 @@
                         No Telepon PIC : <span class=" font-bold"> {{ $leads -> pic_contact_number }} </span>
                     </p>
                 </div>
-                <div class="pt-3">
-                    <p>
-                        @php
-                            $emailString = ''; 
-                        @endphp
-                        @if($leads->hasOneEmail)
-                            @foreach($leads->emails as $email)
-                                @php
-                                $emailString .= " " . $email -> email_name . ',';
-                                @endphp
-                            @endforeach
-                            @php
-                                $emailString = rtrim($emailString, ','); // Remove trailing comma
-                            @endphp
-                            @else
-                                @php
-                                $emailString = "No Email";
-                                @endphp
-                        @endif
-                        Email : <span class=" font-bold"> {{ $emailString }} </span>
-                    </p>
+                <div class="pt-3 flex items-center gap-2">
+                    <p>Email: </p>
+                     <a class="cursor-pointer font-bold underline" onclick="my_modal_3.showModal()">Lihat Email</a>  
                 </div>
                 <div class="pt-3">
                     <p>
@@ -128,5 +110,34 @@
             </table>
         </div>
     </div>
+     <dialog id="my_modal_3" class="modal">
+        <div class="modal-box bg-primary">
+            <form method="dialog" class=" flex items-center justify-end">
+                <button class="">✕</button>
+            </form>
+             <div class=" hide-scrollbar w-full mt-5 max-h-96 overflow-auto">
+                <table class=" w-full text-xs md:text-sm font-bold ">
+                    <thead class="bg-darkSecondary sticky top-0">
+                        <tr>
+                            <td class=" p-2" align="center">No</td>
+                            <td class=" p-2" align="center">Email</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if(@$leads -> hasOneEmail)
+                            @foreach($leads -> emails as $email)
+                                <tr class=" odd:bg-grey">
+                                    <td align="center" class=" p-4">{{ isset($i) ? ++$i : $i = 1 }}</td>
+                                    <td align="center" class=" p-4">{{ $email -> email_name }}</td>
+                                </tr>
+                            @endforeach
+                        @else
+                            {{ $leads -> business_name }} has No Email
+                        @endif
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </dialog>
 </div>
 @endsection
