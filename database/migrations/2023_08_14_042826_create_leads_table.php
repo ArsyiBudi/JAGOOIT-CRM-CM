@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('pic_name');
             $table->string('pic_contact_number');
             $table->boolean('client_indicator')->default(false);
-            $table->integer('lead_status')->default(11);
+            $table->integer('lead_status')->default(12);
             $table->timestamps();
         });
     }
