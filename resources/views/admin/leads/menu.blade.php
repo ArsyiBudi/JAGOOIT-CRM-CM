@@ -120,13 +120,13 @@
                         <td align="center" class=" p-4">{{ $row->statusParam->params_name }}</td>
                         <td align="center" class=" p-4">
                             <div class=" flex items-center gap-2">
-                                <a href="{{ url('/leads/'. $row -> id .'/detail') }}">
+                                <a href="{{ url('/leads/'. $row -> id .'/detail') }}" title="detail">
                                     <i class=" text-lg cursor-pointer ri-information-line"></i>
                                 </a>
-                                <a href="{{ url('/leads/'. $row -> id .'/edit') }}">
+                                <a href="{{ url('/leads/'. $row -> id .'/edit') }}" title="edit">
                                     <i class="ri-edit-line"></i>
                                 </a>
-                                <div class=" block ">
+                                <div class=" block " title="delete">
                                     <button type="button" onclick="deleteLead('{{ $row -> id }}', '{{$row -> business_name}}')" class=" text-lg cursor-pointer ri-delete-bin-2-line text-delete"></button>
                                 </div>
                             </div>

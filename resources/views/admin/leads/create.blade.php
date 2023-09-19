@@ -1,37 +1,37 @@
 @extends('admin.layouts.main')
 
 <style>
-.hide-scrollbar::-webkit-scrollbar {
-    width: 0.4em; /* Width of the scrollbar */
-}
+    .hide-scrollbar::-webkit-scrollbar {
+        width: 0.4em; /* Width of the scrollbar */
+    }
 
-.hide-scrollbar::-webkit-scrollbar-thumb {
-    background-color: #555555; /* Color of the scrollbar thumb */
-    border-radius: 8px; /* Rounded corners for the scrollbar thumb */
-}
+    .hide-scrollbar::-webkit-scrollbar-thumb {
+        background-color: #555555; /* Color of the scrollbar thumb */
+        border-radius: 8px; /* Rounded corners for the scrollbar thumb */
+    }
 
-.hide-scrollbar::-webkit-scrollbar-thumb:hover {
-    background-color: #777777; /* Color of the scrollbar thumb on hover */
-}
+    .hide-scrollbar::-webkit-scrollbar-thumb:hover {
+        background-color: #777777; /* Color of the scrollbar thumb on hover */
+    }
 
-.hide-scrollbar::-webkit-scrollbar-track {
-    background-color: #555555; /* Color of the scrollbar track */
-}
+    .hide-scrollbar::-webkit-scrollbar-track {
+        background-color: #555555; /* Color of the scrollbar track */
+    }
 
-.hide-scrollbar::-webkit-scrollbar-track:hover {
-    background-color: #666666; /* Color of the scrollbar track on hover */
-}
+    .hide-scrollbar::-webkit-scrollbar-track:hover {
+        background-color: #666666; /* Color of the scrollbar track on hover */
+    }
 
-/* Customize the appearance of the scrollbar wheel */
-.hide-scrollbar {
-    scrollbar-width: thin;
-    scrollbar-color: #555555 #333333;
-}
+    /* Customize the appearance of the scrollbar wheel */
+    .hide-scrollbar {
+        scrollbar-width: thin;
+        scrollbar-color: #555555 #333333;
+    }
 
-/* Customize the appearance of the scrollbar thumb icon */
-.hide-scrollbar::-webkit-scrollbar-thumb:vertical {
-    background-color: #fff; /* Color of the scrollbar thumb icon */
-}
+    /* Customize the appearance of the scrollbar thumb icon */
+    .hide-scrollbar::-webkit-scrollbar-thumb:vertical {
+        background-color: #fff; /* Color of the scrollbar thumb icon */
+    }
 
 </style>
 
@@ -71,7 +71,7 @@
 
                         <div class=" mt-3 md:mt-0">
                             <h4 class="mb-1 text-sm md:text-[16px]">Bidang</h4>
-                            <input required placeholder="Bidang" type="text" name="business_sector" class="bg-white text-black rounded-lg w-full md:w-80 lg:w-96  py-6 px-3 outline-none">
+                            <input required placeholder="Bidang" type="text" name="business_sector" class="bg-white text-black rounded-lg w-full  lg:w-96  py-6 px-3 outline-none">
                         </div>
                     </div>
 
@@ -83,7 +83,7 @@
 
                         <div class=" mt-3 md:mt-0">
                             <h4 class="mb-1 text-sm md:text-[16px]">Nomor Kontak PIC</h4>
-                            <input required placeholder="089xxxxxxxxx" type="text" name="pic_contact_number" class="bg-white text-black rounded-lg mt-1 w-full md:w-80 lg:w-96  py-3 px-3 outline-none">
+                            <input required placeholder="089xxxxxxxxx" type="text" name="pic_contact_number" class="bg-white text-black rounded-lg mt-1 w-full  lg:w-96  py-3 px-3 outline-none">
                         </div>
                     </div>
                 </div>
@@ -115,8 +115,8 @@
                 inputField.name = `input_${data.id}`;
                 inputField.placeholder = `Email ${data.id}`;
                 inputField.id = `${data.id}`
-                inputField.className = 'text-black bg-white rounded-lg mt-2 w-full md:w-96 py-3 px-3 outline-none';
-                
+                inputField.className = 'text-black bg-white rounded-lg mt-2 w-full lg:w-96 py-3 px-3 outline-none';
+                inputField.required = true;
                 inputContainer.appendChild(inputField);
             });
         }
