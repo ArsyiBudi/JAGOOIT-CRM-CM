@@ -148,7 +148,7 @@
 
     <div class="modal-box bg-grey border-2 border-white w-11/12 max-w-sm flex justify-center items-center flex-col">
 
-        <h1>Kamu akan menghapus client dengan nama : <span id="business_name"></span> ?</h1>
+        <h1>Kamu akan menghapus client dengan nama perusahaan : <span id="business_name"></span> ?</h1>
 
         <div class="flex items-center justify-end gap-4 w-full mt-4">
             <button type="submit" class="text-white bg-red-500 font-medium  py-2 px-3 text-sm  rounded-md" id="cancel" onclick="my_modal_3.close()">Cancel</button>

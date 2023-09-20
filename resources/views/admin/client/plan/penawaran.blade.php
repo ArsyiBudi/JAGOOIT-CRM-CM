@@ -126,35 +126,35 @@
             @csrf
             <div class="mb-4">
                 <label for="perihal" class="text-sm text-white">Perihal</label>
-                <input required value="{{ old('offer_subject', @$offer->offer_subject) }}" name="offer_subject" id="perihal" type="text" class="mt-1 text-black rounded-md px-2 py-2 w-full bg-white" placeholder="Perihal">
+                <input required value="{{ old('offer_subject', @$offer->offer_subject) }}" name="offer_subject" id="perihal" type="text" class="mt-1 text-black rounded-md px-2 py-2 w-full bg-white outline-none" placeholder="Perihal">
             </div>
 
             <div class=" block md:flex items-center gap-4">
                 <div class="w-full md:w-1/2 mb-4">
                     <label for="kepada" class="text-sm text-white">Kepada</label>
-                    <input required value="{{ old('recipient_name', @$offer->recipient_name) }}" name="recipient_name" id="kepada" type="text" class=" mt-1 text-black rounded-md px-2 py-2  w-full bg-white" placeholder="Kepada">
+                    <input required value="{{ old('recipient_name', @$offer->recipient_name) }}" name="recipient_name" id="kepada" type="text" class=" mt-1 text-black rounded-md px-2 py-2  w-full bg-white outline-none" placeholder="Kepada">
                 </div>
 
                 <div class="w-full md:w-1/4 mb-4">
                     <label for="tempat" class="text-sm text-white">Tempat</label>
-                    <input required value="{{ old('location', @$offer->location) }}" name="location" id="tempat" type="text" class=" mt-1 text-black rounded-md px-2 py-2  w-full bg-white" placeholder="Bandung">
+                    <input required value="{{ old('location', @$offer->location) }}" name="location" id="tempat" type="text" class=" mt-1 text-black rounded-md px-2 py-2  w-full bg-white outline-none" placeholder="Bandung">
                 </div>
 
                 <div class="w-full md:w-1/4 mb-4">
                     <label for="tanggal" class="text-sm text-white">Tanggal</label>
-                    <input required value="{{ old('date', @$offer->date) }}" name="date" id="tanggal" type="date" class=" mt-1 text-black rounded-md px-2 py-2  w-full bg-white">
+                    <input required value="{{ old('date', @$offer->date) }}" name="date" id="tanggal" type="date" class=" mt-1 text-black rounded-md px-2 py-2  w-full bg-white outline-none">
                 </div>
             </div>
 
             <div class=" block md:flex items-center gap-4">
                 <div class=" w-full md:w-3/4">
                     <label for="ditawarkan" class="text-sm text-white">Hal yang Ditawarkan</label>
-                    <input required value="{{ old('context', @$offer->context) }}" name="context" id="ditawarkan" type="text" class=" mt-1 text-black rounded-md px-2 py-2  w-full bg-white" placeholder="Hal yang Ditawarkan">
+                    <input required value="{{ old('context', @$offer->context) }}" name="context" id="ditawarkan" type="text" class=" mt-1 text-black rounded-md px-2 py-2  w-full bg-white outline-none" placeholder="Hal yang Ditawarkan">
                 </div>
 
                 <div class=" w-full md:w-1/4 mt-2 md:mt-0">
                     <label for="jumlah" class="text-sm text-white">Jumlah Talent</label>
-                    <input required value="{{ old('talent_total', @$offer->talent_total) }}" name="talent_total" id="jumlah" type="number" class=" mt-1 text-black rounded-md px-2 py-2  w-full bg-white" placeholder="Jumlah">
+                    <input required value="{{ old('talent_total', @$offer->talent_total) }}" name="talent_total" id="jumlah" type="number" class=" mt-1 text-black rounded-md px-2 py-2  w-full bg-white outline-none" placeholder="Jumlah">
                 </div>
             </div>
 
@@ -303,7 +303,7 @@
             <tbody>
                 <tr class=" bg-[#202020]/50">
                     <td class=" p-5 mt-2" align="center"><input required type="text" name="city_location" id="domisili" placeholder="Kota" class="bg-white outline-none rounded-md text-black p-2 placeholder:text-[#202020]/50"></td>
-                    <td class=" p-5" align="center"><input required id="dsc" name="needed_job" type="text" class="bg-white outline-none rounded-md text-black p-2 placeholder:text-[#202020]/50" placeholder="Outsourcing IT Support"></td>
+                    <td class=" p-5" align="center"><input required id="dsc" name="needed_job" type="text" class="bg-white outline-none rounded-md text-black p-2 placeholder:text-[#202020]/50" placeholder="IT Support"></td>
                     <td class=" p-5" align="center"><input required id="qty" name="quantity" type="number" class="bg-white outline-none rounded-md text-black p-2 placeholder:text-[#202020]/50" placeholder="12"></td>
                     <td class=" p-5" align="center"><input required id="lamaKontrak" name="contract_duration" type="number" class="bg-white outline-none rounded-md text-black p-2 placeholder:text-[#202020]/50" placeholder="11 Bulan"></td>
                     <td class=" p-5" align="center"><input required id="price" name="price" type="number" class="bg-white outline-none rounded-md text-black p-2 placeholder:text-[#202020]/50" placeholder="xxxxxxx"></td>

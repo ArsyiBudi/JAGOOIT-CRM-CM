@@ -111,7 +111,7 @@
                         <td align="center" class=" p-4">
                             <div class=" flex justify-center items-center gap-2">
                                 <div class=" block">
-                                    <button onclick="finishOrder('{{ $row -> id }}')" type="button" class="ri-checkbox-circle-line text-2xl cursor-pointer" title="Complete Manual"></button>
+                                    <button onclick="finishOrder('{{ $row -> id }}')" type="button" class="ri-checkbox-circle-line text-2xl cursor-pointer text-green-600" title="Complete Manual"></button>
                                 </div>
                                 <a href="{{ route('handle_plan', ['order_id' => $row -> id]) }}">
                                     <i class="ri-calendar-todo-fill text-2xl" title="Plan"></i>

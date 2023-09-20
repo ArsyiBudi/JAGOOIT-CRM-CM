@@ -26,35 +26,38 @@ class C_Plan extends Controller
 
     //?BELOW ARE USED FOR HANDLING ERROR { IT'S NOT AN ERROR IT'S A FEATURE}
 
-        //?BELOW ARE USED TO CHECK IF THE END AND START IS FIX
-        public function checkEndStart($order_id, $timeline)
-        {
-            $track = ['recruitment', 'training', 'offer', 'appointment', 'probation', 'popks'];
-            $strWhere = 'start_' . $track[$timeline - 1];
-            $check_timeline = M_Orders::find($order_id);
-            if (is_null($check_timeline->$strWhere)) return "";
-            return "ok";
-        }
+    //?BELOW ARE USED TO CHECK IF THE END AND START IS FIX
+    public function checkEndStart($order_id, $timeline)
+    {
+        $track = ['recruitment', 'training', 'offer', 'appointment', 'probation', 'popks'];
+        $strWhere = 'start_' . $track[$timeline - 1];
+        $check_timeline = M_Orders::find($order_id);
+        if (is_null($check_timeline->$strWhere))
+            return "";
+        return "ok";
+    }
 
-        //?BELOW ARE USED FOR HANDLING PLAN ROUTES
-        public function handlePlanRoute($order_id)
-        {
-            $selectedTimestamp = time();
-            $selectedDate = new DateTime();
-            $selectedDate->setTimestamp($selectedTimestamp);
+    //?BELOW ARE USED FOR HANDLING PLAN ROUTES
+    public function handlePlanRoute($order_id)
+    {
+        $selectedTimestamp = time();
+        $selectedDate = new DateTime();
+        $selectedDate->setTimestamp($selectedTimestamp);
 
-            $order = M_Orders::find($order_id);
-            if (is_null($order->start_recruitment)) {
-                $order->start_recruitment = $selectedDate;
-                $order->save();
-            }
-            $routes = ['', 'recruitment', 'training', 'penawaran', 'negosiasi', 'percobaan', 'popks', 'popks', ''];
-            return redirect("/client/order/plan/$order_id/{$routes[$order->order_status]}");
+        $order = M_Orders::find($order_id);
+        if (is_null($order->start_recruitment)) {
+            $order->start_recruitment = $selectedDate;
+            $order->save();
         }
+        $routes = ['', 'recruitment', 'training', 'penawaran', 'negosiasi', 'percobaan', 'popks', 'popks', ''];
+        return redirect("/client/order/plan/$order_id/{$routes[$order->order_status]}");
+    }
 
     //?BELOW ARE USED FOR GENERATING WORD FILE
     public function generateWordOffer($offer_letter_id)
     {
+
+
         $offer = M_Offer::find($offer_letter_id);
         $phpWord = new TemplateProcessor('template.docx');
         $phpWord->setValue('no_surat', $offer->letter_number);
@@ -70,14 +73,18 @@ class C_Plan extends Controller
         $phpWord->setValue('transPP', $offer->transportation_cost);
         $replc = [];
         foreach ($offer->offerJobDetails as $detail) {
+            $formatTotal = $detail->price * $detail->contract_duration;
+
             $replc[] = [
                 'quantity' => $detail->quantity,
                 'needed_job' => $detail->needed_job,
                 'city_location' => $detail->city_location,
                 'contract_duration' => $detail->contract_duration,
-                'price' => $detail->price,
-                'price_total' => ($detail->price * $detail->contract_duration) * $detail->quantity
+                'price' => number_format($detail->price, 0, ',', '.'),
+                //number format buat format ke rupiah
+                'price_total' => number_format($formatTotal * $detail->quantity, 0, ',', '.')
             ];
+
         }
 
         $phpWord->cloneBlock('table_block_placeholder', 0, true, false, $replc);
@@ -93,7 +100,6 @@ class C_Plan extends Controller
 
         return response()->file($tempFilePath, $headers);
     }
-
     public function generateWordPopks($order_id, $popks_letter_id, $currentDate)
     {
         $order = M_Orders::find($order_id);
@@ -159,7 +165,8 @@ class C_Plan extends Controller
     public function fetchRecruitment(Request $request, $order_id)
     {
         $check = M_Orders::find($order_id);
-        if (!$check) return back() -> with('error', "Tidak ada order dengan ID : $order_id");
+        if (!$check)
+            return back()->with('error', "Tidak ada order dengan ID : $order_id");
 
         $search = $request->input('search', '');
         session(['talent_search' => $search]);
@@ -186,7 +193,8 @@ class C_Plan extends Controller
     public function fetchTraining(Request $request, $order_id)
     {
         $check = M_Orders::find($order_id);
-        if (!$check) return back() -> with('error', "Tidak ada order dengan ID : $order_id");
+        if (!$check)
+            return back()->with('error', "Tidak ada order dengan ID : $order_id");
 
         $order = M_Orders::find($order_id);
         $searchQuery = $request->input('search', '');
@@ -211,7 +219,8 @@ class C_Plan extends Controller
     public function fetchOffer($order_id)
     {
         $check = M_Orders::find($order_id);
-        if (!$check) return back() -> with('error', "Tidak ada order dengan ID : $order_id");
+        if (!$check)
+            return back()->with('error', "Tidak ada order dengan ID : $order_id");
 
         $order = M_Orders::find($order_id);
         if (is_null($order->offer_letter_id)) {
@@ -229,8 +238,9 @@ class C_Plan extends Controller
     public function fetchNegosiasi($order_id)
     {
         $check = M_Orders::find($order_id);
-        if (!$check) return back() -> with('error', "Tidak ada order dengan ID : $order_id");
-        
+        if (!$check)
+            return back()->with('error', "Tidak ada order dengan ID : $order_id");
+
         $order = M_Orders::find($order_id);
         if (is_null($order->appoinment_activity_id)) {
             $appoinment = M_Activity::create([
@@ -250,7 +260,8 @@ class C_Plan extends Controller
     public function fetchPercobaan(Request $request, $order_id)
     {
         $order = M_Orders::find($order_id);
-        if (!$order) return back() -> with('error', "Tidak ada order dengan ID : $order_id");
+        if (!$order)
+            return back()->with('error', "Tidak ada order dengan ID : $order_id");
 
         $searchQuery = $request->input('search', '');
         session(['talent_search' => $searchQuery]);
@@ -282,7 +293,8 @@ class C_Plan extends Controller
     public function fetchPopks($order_id)
     {
         $order = M_Orders::find($order_id);
-        if (!$order) return back() -> with('error', "Tidak ada order dengan ID : $order_id");
+        if (!$order)
+            return back()->with('error', "Tidak ada order dengan ID : $order_id");
 
         if (is_null($order->popks_letter_id)) {
             $popks = M_Popks::create([
@@ -329,7 +341,8 @@ class C_Plan extends Controller
                 $updateOrder->start_training = $selectedDate;
             }
             $updateOrder->save();
-            if($talentsCount != 0) return redirect('/client/order/plan/' . $order_id . '/training/')->with('success', "Berhasil menambahkan $talentsCount talent");
+            if ($talentsCount != 0)
+                return redirect('/client/order/plan/' . $order_id . '/training/')->with('success', "Berhasil menambahkan $talentsCount talent");
             return redirect('/client/order/plan/' . $order_id . '/training/')->with('success', "Berhasil menyelesaikan Recruitment");
 
         } else {
@@ -341,14 +354,16 @@ class C_Plan extends Controller
     public function addGrade(Request $request, $order_id, $order_details_id)
     {
         $order_detail = M_OrderDetails::find($order_details_id);
-        if (!$order_detail) return back() -> with('error', "$order_id");
+        if (!$order_detail)
+            return back()->with('error', "$order_id");
 
         $order_detail->pre_score = $request->pre_score;
         $order_detail->post_score = $request->post_score;
         $order_detail->group_score = $request->group_score;
         $order_detail->final_score = $request->final_score;
         $status = $order_detail->update();
-        if (!$status) return response(['error' => "Data didn't updated"]);
+        if (!$status)
+            return response(['error' => "Data didn't updated"]);
         return back()->with('success', "Nilai {$order_detail->talentData->name} berhasil diupdate");
     }
     public function saveTraining($order_id)
@@ -365,7 +380,8 @@ class C_Plan extends Controller
                 $update->start_offer = $selectedDate;
             }
             $status = $update->update();
-            if ($status) return redirect('/client/order/plan/' . $order_id . '/penawaran/')->with('success', "Berhasil menyelesaikan Training");
+            if ($status)
+                return redirect('/client/order/plan/' . $order_id . '/penawaran/')->with('success', "Berhasil menyelesaikan Training");
         } else {
             return back()->with('error', "Timeline anda belum selesai, mohon selesaikan terlebih dahulu");
         }
@@ -478,7 +494,8 @@ class C_Plan extends Controller
                 'information' => "Proposal Penawaran dan CV Talenta"
             ];
             $mailSubject = "Penawaran Order {$order->id} | JagooIT - {$lead->business_name}";
-            if (!$lead->hasOneEmail) return back() -> with('error', "{$lead -> business_name} tidak memiliki email");
+            if (!$lead->hasOneEmail)
+                return back()->with('error', "{$lead->business_name} tidak memiliki email");
 
             $email = new TestMail($mailData, $mailSubject);
             if ($request->hasFile('cv_file')) {
@@ -488,10 +505,10 @@ class C_Plan extends Controller
                     'mime' => $file->getMimeType(),
                 ]);
             }
-            try{
+            try {
                 Mail::to($request->email_name)->send($email);
-            }catch(Throwable $e){
-                return back() -> with('error', "Terjadi error saat mengirim email, mohon coba kembali");
+            } catch (Throwable $e) {
+                return back()->with('error', "Terjadi error saat mengirim email, mohon coba kembali");
             }
             return redirect()->back()->with('success', "Email berhasil terkirim");
         }
@@ -511,7 +528,8 @@ class C_Plan extends Controller
             $update->end_offer = $selectedDate;
             $update->start_appointment = $selectedDate;
             $status = $update->update();
-            if ($status) return redirect('/client/order/plan/' . $order_id . '/negosiasi');
+            if ($status)
+                return redirect('/client/order/plan/' . $order_id . '/negosiasi');
         } else {
             return back()->with('error', "Timeline anda belum selesai, mohon selesaikan terlebih dahulu");
         }
@@ -530,14 +548,16 @@ class C_Plan extends Controller
 
         $order = M_Orders::find($order_id);
         $activity = M_Activity::find($order->appoinment_activity_id);
-        if (!$activity) return response(['error' => 'No activity tracked ']);
+        if (!$activity)
+            return response(['error' => 'No activity tracked ']);
 
         $activity->xs1 = $field['judul'];
         $activity->xs2 = $field['lokasi'];
         $activity->xd = $field['waktu'];
         $activity->desc = $field['deskripsi'];
         $status = $activity->update();
-        if (!$status) return response(['error' => "Data didn't update"]);
+        if (!$status)
+            return response(['error' => "Data didn't update"]);
 
         $mailData = [
             'appoinment' => $activity,
@@ -545,7 +565,8 @@ class C_Plan extends Controller
             'information' => "Konfirmasi Janji Temu JagooIT "
         ];
         $mailSubject = "Pertemuan Negosiasi | JagooIT - {$order->leadData->business_name}";
-        if (!$order->leadData->hasOneEmail) return response(['error' => "No Email detected in {$order->leadData->business_name}"]);
+        if (!$order->leadData->hasOneEmail)
+            return response(['error' => "No Email detected in {$order->leadData->business_name}"]);
 
         $email = new AppoinmentMail($mailData, $mailSubject);
         if ($request->hasFile('attachment')) {
@@ -555,10 +576,10 @@ class C_Plan extends Controller
                 'mime' => $file->getMimeType(),
             ]);
         }
-        try{
+        try {
             Mail::to($request->email_name)->send($email);
-        }catch(Throwable $e){
-            return back() -> with('error', "Terjadi error saat mengirim email, mohon coba kembali");
+        } catch (Throwable $e) {
+            return back()->with('error', "Terjadi error saat mengirim email, mohon coba kembali");
         }
 
         return back()->with('success', 'Email berhasil terkirim');
@@ -578,7 +599,7 @@ class C_Plan extends Controller
             }
             $status = $update->update();
             if ($status)
-                return redirect('/client/order/plan/' . $order_id . '/percobaan/') -> with('success');
+                return redirect('/client/order/plan/' . $order_id . '/percobaan/')->with('success');
         } else {
             return back()->with('error', "Timeline anda belum selesai, mohon selesaikan terlebih dahulu");
         }
@@ -621,7 +642,7 @@ class C_Plan extends Controller
         $updateActive->is_active = 0;
         $updateActive->save();
         $delete->delete();
-        return redirect()->back()->with('success', "{$updateActive -> name} berhasil dihapus dari order dengan ID : $order_id");
+        return redirect()->back()->with('success', "{$updateActive->name} berhasil dihapus dari order dengan ID : $order_id");
     }
 
     //?POPKS CONTROLLER CODE
@@ -710,12 +731,14 @@ class C_Plan extends Controller
             'po_descr' => 'required',
         ]);
 
-        if (!$field) return back() -> with('error', "Mohon isi field yang ada"); 
+        if (!$field)
+            return back()->with('error', "Mohon isi field yang ada");
 
         $order = M_Orders::find($order_id);
 
         //?Handling error, when offer_letter_id is not generated.
-        if (is_null($order->offer_letter_id)) return response(['error' => 'No offer letter, please go to plan number 3 to generate offer letter']);
+        if (is_null($order->offer_letter_id))
+            return response(['error' => 'No offer letter, please go to plan number 3 to generate offer letter']);
 
         $order->po_file = $request->file('file-pks');
         $order->po_description = $field['po_descr'];
@@ -729,7 +752,8 @@ class C_Plan extends Controller
                 'information' => "PKS Talenta Indonesia"
             ];
             $mailSubject = "Draft POPKS JagooIT - {$lead->business_name}";
-            if (!$lead->hasOneEmail) return back() -> with('error', "No Email detected in {$lead->business_name}");
+            if (!$lead->hasOneEmail)
+                return back()->with('error', "No Email detected in {$lead->business_name}");
 
             $email = new TestMail($mailData, $mailSubject);
 
@@ -740,10 +764,10 @@ class C_Plan extends Controller
                     'mime' => $file->getMimeType(),
                 ]);
             }
-            try{
+            try {
                 Mail::to($request->email_name)->send($email);
-            }catch(Throwable $e){
-                return back() -> with('error', "Terjadi error saat mengirim email, mohon coba kembali");
+            } catch (Throwable $e) {
+                return back()->with('error', "Terjadi error saat mengirim email, mohon coba kembali");
             }
             return redirect()->back()->with('success', 'Email berhasil terkirim');
         }
