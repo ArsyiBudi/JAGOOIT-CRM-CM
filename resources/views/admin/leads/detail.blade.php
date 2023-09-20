@@ -127,7 +127,7 @@
                         @if(@$leads -> hasOneEmail)
                         @foreach($leads -> emails as $email)
                         <tr class=" odd:bg-grey">
-                            <td align="center" class=" p-4">{{ isset($i) ? ++$i : $i = 1 }}</td>
+                            <td align="center" class=" p-4">{{ isset($num) ? ++$num : $num = 1 }}</td>
                             <td align="center" class=" p-4">{{ $email -> email_name }}</td>
                         </tr>
                         @endforeach

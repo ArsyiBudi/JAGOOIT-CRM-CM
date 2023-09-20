@@ -83,6 +83,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/{id}/edit', [C_Leads::class, 'fetchEdit'])->name('open_edit_leads');
         Route::patch('/{id}/edit', [C_Leads::class, 'edit'])->name('edit_leads');
         Route::post('/{id}/edit', [C_Leads::class, 'addEmail'])->name('add_email');
+        Route::delete('/{id}/edit/{email_id}', [C_Leads::class, 'deleteEmail'])->name('delete_email');
         Route::prefix('create')->group(function () {
             Route::get('/', function () {
                 return view('admin.leads.create', [

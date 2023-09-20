@@ -19,6 +19,7 @@ use Illuminate\Support\Facades\Mail;
 use App\Models\M_OfferLetterJobsDetails;
 use PhpOffice\PhpWord\TemplateProcessor;
 use Spatie\Backtrace\Backtrace;
+use Throwable;
 
 class C_Plan extends Controller
 {
@@ -487,8 +488,11 @@ class C_Plan extends Controller
                     'mime' => $file->getMimeType(),
                 ]);
             }
-            $send_email = Mail::to($request->email_name)->send($email);
-            if(!$send_email) return back() -> with('error', "Terjadi error, mohon coba kembali");
+            try{
+                Mail::to($request->email_name)->send($email);
+            }catch(Throwable $e){
+                return back() -> with('error', "Terjadi error saat mengirim email, mohon coba kembali");
+            }
             return redirect()->back()->with('success', "Email berhasil terkirim");
         }
     }
@@ -551,7 +555,11 @@ class C_Plan extends Controller
                 'mime' => $file->getMimeType(),
             ]);
         }
-        Mail::to($request->email_name)->send($email);
+        try{
+            Mail::to($request->email_name)->send($email);
+        }catch(Throwable $e){
+            return back() -> with('error', "Terjadi error saat mengirim email, mohon coba kembali");
+        }
 
         return back()->with('success', 'Email berhasil terkirim');
     }
@@ -702,10 +710,7 @@ class C_Plan extends Controller
             'po_descr' => 'required',
         ]);
 
-        if (!$field)
-            return response([
-                'error' => 'error'
-            ]);
+        if (!$field) return back() -> with('error', "Mohon isi field yang ada"); 
 
         $order = M_Orders::find($order_id);
 
@@ -724,7 +729,7 @@ class C_Plan extends Controller
                 'information' => "PKS Talenta Indonesia"
             ];
             $mailSubject = "Draft POPKS JagooIT - {$lead->business_name}";
-            if (!$lead->hasOneEmail) return response(['error' => "No Email detected in {$lead->business_name}"]);
+            if (!$lead->hasOneEmail) return back() -> with('error', "No Email detected in {$lead->business_name}");
 
             $email = new TestMail($mailData, $mailSubject);
 
@@ -735,16 +740,12 @@ class C_Plan extends Controller
                     'mime' => $file->getMimeType(),
                 ]);
             }
-
-            Mail::to($lead->hasOneEmail->email_name)->send($email);
+            try{
+                Mail::to($request->email_name)->send($email);
+            }catch(Throwable $e){
+                return back() -> with('error', "Terjadi error saat mengirim email, mohon coba kembali");
+            }
             return redirect()->back()->with('success', 'Email berhasil terkirim');
-        }
-
-
-        if (!$status) {
-            return back()->with('error', "Data didn't updated");
-        } else {
-            return back()->with('success', "Data has been send");
         }
     }
 

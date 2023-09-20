@@ -67,7 +67,7 @@
                 </div>
                 <div class=" flex items-center gap-5 mt-5 md:mt-0">
                     <p class=" hidden md:block">Search</p>
-                    <input type="text" name="search" value="{{ old('per_page', session('client_search')) }}" class=" outline-none bg-white rounded-md w-full md:w-80 py-1 px-2 text-black font-semibold placeholder-gray-400 placeholder-opacity-100 md:placeholder-opacity-0" placeholder="search" value="{{ old('search') }}">
+                    <input type="text" name="search" value="{{ old('search', session('client_search')) }}" class=" outline-none bg-white rounded-md w-full md:w-80 py-1 px-2 text-black font-semibold placeholder-gray-400 placeholder-opacity-100 md:placeholder-opacity-0" placeholder="search">
                 </div>
             </form>
             <div class=" border-b border-white w-full rounded-lg my-4"></div>

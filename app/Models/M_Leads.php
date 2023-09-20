@@ -11,7 +11,6 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 class M_Leads extends Model
 {
     use HasFactory;
-
     protected $table  = 'leads';
 
     protected $primaryKey = 'id';
@@ -72,11 +71,24 @@ class M_Leads extends Model
         return $this -> hasMany(M_Activity::class, 'leads_id')->latest();
     }
 
-    public function hasNote() : HasOne
+    public function hasAppoinment() : HasOne
     {
-        return $this -> hasOne(M_Activity::class, 'leads_id')->where('activity_type_id', 10)->latest();
+        $param = new M_GlobalParams;
+        return $this -> hasOne(M_Activity::class, 'leads_id')->where('activity_type_id', $param -> appoinmentParam())->latest();
     }
 
+    public function hasNote() : HasOne
+    {
+        $param = new M_GlobalParams;
+        return $this -> hasOne(M_Activity::class, 'leads_id')->where('activity_type_id', $param -> notesParam())->latest();
+    }
+
+    public function hasReport() : HasOne
+    {
+        $param = new M_GlobalParams;
+        return $this -> hasOne(M_Activity::class, 'leads_id')->where('activity_type_id', $param -> reportParam())->latest();
+    }
+ 
     public function hasOnePopks() : HasOne
     {
         return $this -> hasOne(M_Popks::class, 'leads_id');

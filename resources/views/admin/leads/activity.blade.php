@@ -3,25 +3,39 @@
     .hide-scrollbar::-webkit-scrollbar {
         width: 0;
     }
-        /* Width of the scrollbar */
-        .animate-slide-up {
-    animation: slide-up 0.3s ease-in-out;
-}
 
-@keyframes slide-up {
-    0% {
-        transform: translateY(-10px);
-        opacity: 0;
+    /* Width of the scrollbar */
+    .animate-slide-up {
+        animation: slide-up 0.3s ease-in-out;
     }
-    100% {
-        transform: translateY(0);
-        opacity: 1;
+
+    @keyframes slide-up {
+        0% {
+            transform: translateY(-10px);
+            opacity: 0;
+        }
+
+        100% {
+            transform: translateY(0);
+            opacity: 1;
+        }
     }
-}
-    
 </style>
 
+
 @section('container')
+
+@if(count($errors) > 0)
+<div id="attention-alert" class="alert alert-error absolute md:top-10 md:right-10 z-50 w-auto animate-slide-up text-white font-medium border-2 border-red-500 cursor-pointer">
+    <strong>Perhatian</strong><br>
+    <ul>
+        @foreach ($errors -> all() as $error)
+        <li>{{ $error }}</li>
+        @endforeach
+    </ul>
+</div>
+@endif
+
 {{-- <div id="formContainer">
     <form id="form3" class="hidden">
         <div class="bg-white opacity-70 rounded-md w-full mb-4 p-2">
@@ -63,22 +77,22 @@
                     </select>
                 </div>
                 <div class="bg-white opacity-70 mb-4 p-2 rounded-md w-full">
-                    <textarea required name="judul" id="judul" class="text-black opacity-100 w-full p-2 bg-transparent outline-none resize-none" placeholder="Judul"></textarea> <!-- Menggunakan w-full untuk mengisi textarea secara penuh -->
+                    <textarea required name="judul" id="judul" class="text-black opacity-100 w-full p-2 bg-transparent outline-none resize-none" placeholder="Judul">@if($lead -> hasAppoinment){{@$lead -> hasAppoinment -> xs1}}@endif</textarea> <!-- Menggunakan w-full untuk mengisi textarea secara penuh -->
                 </div>
                 <div class="flex gap-2 mb-4 w-full">
                     <div class="bg-white opacity-70 rounded-md mr-2 w-1/2 p-2">
-                        <textarea required name="lokasi" id="lokasi" class="bg-transparent text-black p-2 w-full outline-none resize-none" placeholder="Lokasi"></textarea>
+                        <textarea required name="lokasi" id="lokasi" class="bg-transparent text-black p-2 w-full outline-none resize-none" placeholder="Lokasi">@if($lead -> hasAppoinment){{@$lead -> hasAppoinment -> xs2}}@endif</textarea>
                     </div>
                     <div class="bg-white opacity-70 rounded-md  w-1/2 p-2">
-                        <input required type="date" type="text" name="waktu" id="waktu" class="bg-transparent text-black p-2 w-full outline-none resize-none" placeholder="Waktu">
+                        <input type="date" required type="text" name="waktu" id="waktu" class="bg-transparent text-black p-2 w-full outline-none resize-none" placeholder="Waktu" value="{{ old('waktu', @$lead -> hasAppoinment -> xd) }}">
                     </div>
 
                 </div>
                 <div class="bg-white opacity-70 rounded-md w-full p-2 h-[100px]">
-                    <textarea required name="deskripsi" id="deskripsi" class="bg-transparent outline-none p-2 text-black resize-none h-full w-full" placeholder="Deskripsi"></textarea> <!-- Menggunakan w-full untuk mengisi textarea secara penuh -->
+                    <textarea name="deskripsi" required id="deskripsi" class="bg-transparent outline-none p-2 text-black resize-none h-full w-full" placeholder="Deskripsi">@if($lead -> hasAppoinment){{@$lead -> hasAppoinment -> desc}}@endif</textarea> <!-- Menggunakan w-full untuk mengisi textarea secara penuh -->
                 </div>
                 <div class="w-[97px] mx-auto">
-                    <input type="submit" class="bg-secondary  text-white rounded-md px-4 py-2 h-[37px] mt-11 hover:scale-95 duration-200" >
+                    <input type="submit" class="bg-secondary  text-white rounded-md px-4 py-2 h-[37px] mt-11 hover:scale-95 duration-200">
                 </div>
                 @else
                 <div class="grid justify-center content-center justify-items-center gap-2">
@@ -101,7 +115,7 @@
             <form id="form3" class="hidden" method="POST" action="{{ url(request()->path() . '/report') }}" enctype="multipart/form-data">
                 @csrf
                 <div class="bg-white opacity-70 rounded-md w-full mb-4 p-2">
-                    <textarea required name="judulreport" id="judulreport" class="bg-transparent outline-none w-full p-2 resize-none text-black" placeholder="Judul"></textarea>
+                    <textarea required name="judulreport" id="judulreport" class="bg-transparent outline-none w-full p-2 resize-none text-black" placeholder="Judul">@if($lead -> hasReport){{ @$lead -> hasReport -> xs1 }}@endif</textarea>
                 </div>
                 <div class="bg-white opacity-70 rounded-md w-full mb-4 p-4">
                     <label for="file" class="text-grey w-full block">File</label>
@@ -118,7 +132,7 @@
                     </label>
                 </div>
                 <div class="bg-white opacity-70 rounded-md w-full mb-4 p-2 h-[100px]">
-                    <textarea required name="deskripsireport" id="deskripsireport" class="bg-transparent outline-none p-2  rounded w-full h-full resize-none text-black" placeholder="Deskripsi"></textarea>
+                    <textarea required name="deskripsireport" id="deskripsireport" class="bg-transparent outline-none p-2  rounded w-full h-full resize-none text-black" placeholder="Deskripsi">@if($lead -> hasReport){{@$lead -> hasReport -> desc}}@endif</textarea>
                 </div>
                 <div class="w-[97px] mx-auto">
                     <input type="submit" class="bg-secondary text-white rounded-md px-4 mt-5 py-2 h-[37px] hover:scale-95 duration-200">
@@ -145,17 +159,15 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.11.338/pdf.min.js"></script>
 
 <script>
-const my_modal_5 = document.getElementById('my_modal_5');
+    const my_modal_5 = document.getElementById('my_modal_5');
 
-function showModal() {
-    my_modal_5.showModal();
-}
+    function showModal() {
+        my_modal_5.showModal();
+    }
 
-
-
-function closeAlrt() {
-    my_modal_5.close();
-}
+    function closeAlrt() {
+        my_modal_5.close();
+    }
 
     document.addEventListener("DOMContentLoaded", function() {
         const formSelector = document.getElementById("formSelector");
@@ -186,8 +198,6 @@ function closeAlrt() {
         const canvas = document.getElementById('pdf-preview');
         const fileUploadLabel = document.getElementById('file-upload-label');
         const canvasLoading = document.getElementById('canvas-loading');
-
-
 
         if (fileInput.files && fileInput.files[0]) {
             fileUploadLabel.textContent = 'Ganti File';
@@ -242,9 +252,13 @@ function closeAlrt() {
         }
     }
 
-    function closeAlert() {
-        const alertContainer = document.querySelector('.alert');
-        alertContainer.style.display = 'none';
+    function showPerhatian() {
+        var perhatian = document.getElementById('attention-alert');
+        perhatian.style.display = 'none';
     }
+
+    setTimeout(function(){
+        showPerhatian();
+    }, 3000);
 </script>
 @endsection

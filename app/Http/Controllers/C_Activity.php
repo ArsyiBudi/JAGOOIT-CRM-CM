@@ -11,6 +11,7 @@ use App\Models\ActivityModel;
 use App\Models\M_Activity;
 use App\Models\M_Leads;
 use Illuminate\Support\Facades\Mail;
+use Throwable;
 
 class C_Activity extends Controller
 {
@@ -23,7 +24,7 @@ class C_Activity extends Controller
         ]);
     }
     public function appointment(Request $request, $leads_id){
-        $field = $request->validate([
+        $field = $request -> validate([
             'judul'=>'required',
             'lokasi'=>'required',
             'waktu'=>'required',
@@ -57,7 +58,12 @@ class C_Activity extends Controller
                 'mime' => $file->getMimeType(),
             ]);
         }
-        Mail::to($request->email_name)->send($email);
+        try{
+            Mail::to($request->email_name)->send($email);
+        }catch(Throwable $e){
+            $activity -> delete();
+            return back() -> with('error', "Terjadi error saat mengirim email, mohon coba lagi");
+        }
         
         return back()->with('success', 'Appointment terkirim.');
     }

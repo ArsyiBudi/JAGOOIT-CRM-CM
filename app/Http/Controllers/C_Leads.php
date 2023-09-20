@@ -46,7 +46,7 @@ class C_Leads extends Controller
             $query->where('business_name', 'like', "%$search%")
                 ->orWhere('address', 'like', "%$search%")
                 ->orWhere('pic_name', 'like', "%$search%");
-        })->where('client_indicator', 0) ->latest();
+        })->where('client_indicator', 0)->latest();
 
         $data = $query->paginate($entries);
 
@@ -79,33 +79,33 @@ class C_Leads extends Controller
         if (!$lead) {
             return response()->json(['error' => 'Lead not found'], 404);
         }
-        if($lead -> hasOneActivity){
-            foreach($lead -> ActivityData as $activity)
-            $activity -> delete();
+        if ($lead->hasOneActivity) {
+            foreach ($lead->ActivityData as $activity)
+                $activity->delete();
         }
-        if($lead -> hasOneEmail){
-            foreach($lead -> emails as $email){
-                $email -> delete();
+        if ($lead->hasOneEmail) {
+            foreach ($lead->emails as $email) {
+                $email->delete();
             }
         }
-        if($lead -> hasOneOrder){
-            foreach($lead -> orders as $order){
-                foreach($order -> orderDetails as $order_detail){
+        if ($lead->hasOneOrder) {
+            foreach ($lead->orders as $order) {
+                foreach ($order->orderDetails as $order_detail) {
                     $talent = M_Talents::find($order_detail);
-                    $talent -> is_active = 0;
-                    $order_detail -> delete();
+                    $talent->is_active = 0;
+                    $order_detail->delete();
                 }
                 $order->delete();
             }
         }
-        if($lead -> hasOnePopks){
-            foreach($lead -> popks as $popks){
-                $popks -> delete();
+        if ($lead->hasOnePopks) {
+            foreach ($lead->popks as $popks) {
+                $popks->delete();
             }
         }
-        $lead_name = $lead -> business_name;
+        $lead_name = $lead->business_name;
         $lead->delete();
-        return back() ->with('success', "$lead_name berhasil dihapus");
+        return back()->with('success', "$lead_name berhasil dihapus");
     }
     public function create(Request $request)
     {
@@ -144,7 +144,7 @@ class C_Leads extends Controller
             ]);
         }
 
-        return redirect('/leads')-> with('success', $leads -> business_name . " berhasil ditambahkan");
+        return redirect('/leads')->with('success', $leads->business_name . " berhasil ditambahkan");
     }
 
     //? BELOW USED FOR CLIENT
@@ -180,7 +180,7 @@ class C_Leads extends Controller
         $client = M_Leads::find($client_id);
         $client->client_indicator = 0;
         $client->save();
-        return back() -> with('success', $client -> business_name." dihapus dari client");
+        return back()->with('success', $client->business_name . " dihapus dari client");
     }
 
 
@@ -205,7 +205,7 @@ class C_Leads extends Controller
         ];
         $mailSubject = $request->subject;
         if (!$lead->hasOneEmail)
-            return back() -> with('error', "{$lead -> business_name} tidak memiliki email");
+            return back()->with('error', "{$lead->business_name} tidak memiliki email");
 
         $email = new TestMail($mailData, $mailSubject);
 
@@ -227,7 +227,7 @@ class C_Leads extends Controller
         $detail_subject = "Leads";
         $lead = M_Leads::find($leads_id);
         if ($lead->client_indicator == 1) $detail_subject = "Client";
-        if (!$lead) return back() -> with('error', "Tidak ada lead dengan id : $leads_id");
+        if (!$lead) return back()->with('error', "Tidak ada lead dengan id : $leads_id");
         return view('admin.leads.edit', [
             "title" => "Leads | Edit",
             "subject" => $detail_subject,
@@ -235,23 +235,44 @@ class C_Leads extends Controller
         ]);
     }
 
+    public function deleteEmail($leads_id, $email_id)
+    {
+        $emailLeadsCheck = M_Emails::where('leads_id', $leads_id)
+            -> where('id', $email_id)->first();
+        if(!$emailLeadsCheck) return back() -> with('error', "Lead ini tidak memiliki email dengan ID : $email_id");
+
+        $status = M_Emails::find($email_id) -> delete();
+        if(!$status) return back() -> with('error', "Email tidak berhasil dihapus");
+        return back() -> with('success', "Email berhasil dihapus");
+    }
+
     public function addEmail(Request $request, $leads_id)
     {
         $field = $request->validate([
-            'email_name' => 'required'
-        ]);
-        $email = M_Emails::create([
-            'leads_id' => $leads_id,
-            'email_name' => $field['email_name']
+            'email_name' => 'required|email|ends_with:gmail.com'
         ]);
 
-        if (!$email) return back() -> with('error', "Email tidak berhasil ditambahkan, coba lagi");
-        return back() -> with('success', "{$email -> email_name} berhasil ditambahkan");
+        $email_name = $field['email_name'];
+
+        $emailExist = M_Emails::where('leads_id', $leads_id)
+            ->where('email_name', $email_name)
+            ->first();
+
+        if ($emailExist) {
+            return back()->with('error', "$email_name Already Taken");
+        }
+
+        M_Emails::create([
+            'leads_id' => $leads_id,
+            'email_name' => $email_name
+        ]);
+
+        return back()->with('success', "$email_name berhasil ditambahkan");
     }
 
     public function edit(Request $request, $leads_id)
     {
-        $field = $request -> validate([
+        $field = $request->validate([
             'business_name' => 'required',
             'address' => 'required',
             'pic_name' => 'required',
@@ -259,13 +280,13 @@ class C_Leads extends Controller
         ]);
 
         $lead = M_Leads::find($leads_id);
-        $lead -> business_name = $field['business_name'];
-        $lead -> address = $field['address'];
-        $lead -> pic_name = $field['pic_name'];
-        $lead -> pic_contact_number = $field['pic_contact_number'];
-        $status = $lead -> update();
+        $lead->business_name = $field['business_name'];
+        $lead->address = $field['address'];
+        $lead->pic_name = $field['pic_name'];
+        $lead->pic_contact_number = $field['pic_contact_number'];
+        $status = $lead->update();
 
-        if(!$status) return back() -> with('error', '{$lead -> business_name} tidak berhasil diedit');
-        return back() -> with('success', "{$lead -> business_name} berhasil diedit");
+        if (!$status) return back()->with('error', '{$lead -> business_name} tidak berhasil diedit');
+        return back()->with('success', "{$lead->business_name} berhasil diedit");
     }
 }

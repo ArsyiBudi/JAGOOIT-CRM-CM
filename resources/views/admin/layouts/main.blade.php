@@ -87,13 +87,16 @@
         var alertSuccess = document.getElementById('success-alert');
         alertSuccess.style.display = 'none';
     }
-    function closeErrorAlert(){
+
+    function closeErrorAlert() {
         var alertError = document.getElementById('error-alert');
         alertError.style.display = 'none';
     }
 
     setTimeout(function() {
         closeSuccessAlert();
+    }, 3000);
+    setTimeout(function() {
         closeErrorAlert();
     }, 3000);
 </script>

@@ -109,7 +109,11 @@
                             <td align="center" class=" p-4">{{ isset($i) ? ++$i : $i = 1 }}</td>
                             <td align="center" class=" p-4">{{ $email -> email_name }}</td>
                             <td align="center" class="p-4">
-                                <button type="button" onclick="" class=" text-lg cursor-pointer ri-delete-bin-2-line text-delete"></button>
+                                <form action="{{ url(request() -> path() . '/' . $email -> id) }}" method="post">
+                                    @csrf
+                                    @method('Delete')
+                                    <button type="submit" class=" text-lg cursor-pointer ri-delete-bin-2-line text-delete"></button>
+                                </form>
                             </td>
                         </tr>
                         @endforeach
