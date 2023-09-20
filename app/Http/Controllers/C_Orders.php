@@ -69,6 +69,7 @@ class C_Orders extends Controller
 
         $data = M_Orders::where(function ($query) use ($search) {
             $query->where('due_date', 'like', "%$search%")
+            ->orWhere('id', 'like', "%$search%")
             ->orWhereHas('leadData', function($query) use ($search){
                 $query -> where('business_name', 'like', "%$search%");
             })
@@ -100,6 +101,7 @@ class C_Orders extends Controller
         
         $data = M_Orders::where(function ($query) use ($search) {
             $query->where('due_date', 'like', "%$search")
+            ->orWhere('id', 'like', "%$search%")
                 ->orWhereHas('leadData', function ($query) use ($search) {
                     $query->where('business_name', 'like', "%$search%");
                 });
