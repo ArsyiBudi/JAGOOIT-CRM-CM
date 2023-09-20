@@ -55,12 +55,18 @@
                         <div class=" mt-3 md:mt-0">
                             <h4  class=" text-sm md:text-[16px]">Email</h4>
                             <div class=" flex items-start  gap-5">
-                                <div id="inputContainer"></div>
-                                <div class=" bg-secondary py-2 px-4 rounded-md hover:scale-95 duration-200 cursor-pointer mt-2" id="addInputBtn">
-                                    <i class="ri-add-line"></i>
+                                <div id="inputContainer" class="">
+                                    <div class="">
+                                        <input type="text" class="text-black bg-white rounded-lg mt-2 w-full lg:w-96 py-3 px-3 outline-none" placeholder="Email 1" name="input_1" id="1" required>
+                                    </div>
                                 </div>
-                                <div class="bg-secondary py-2 px-4 rounded-md hover:scale-95 duration-200 cursor-pointer mt-2 hidden" id="deleteInputBtn">
-                                    <i class="ri-delete-bin-2-line"></i>
+                                <div>
+                                    <div class=" bg-secondary py-2 px-4 rounded-md hover:scale-95 duration-200 cursor-pointer mt-2" id="addInputBtn">
+                                        <i class="ri-add-line"></i>
+                                    </div>
+                                    <div class="bg-secondary py-2 px-4 rounded-md hover:scale-95 duration-200 cursor-pointer mt-2 hidden" id="deleteInputBtn">
+                                        <i class="ri-delete-bin-2-line"></i>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -102,29 +108,26 @@
     </div>
 
     <script>
-        let inputData = [ 
-            {
-                id: 1,
-            }, 
-        ];
+        const deleteButton = document.getElementById('deleteInputBtn');
 
         function generateInputFields() {
             const inputContainer = document.getElementById('inputContainer');
-            inputContainer.innerHTML = '';
+            const manyChild = inputContainer.children.length
 
-            inputData.forEach(data => {
-                const inputField = document.createElement('input');
-                inputField.type = 'text';
-                inputField.name = `input_${data.id}`;
-                inputField.placeholder = `Email ${data.id}`;
-                inputField.id = `${data.id}`
-                inputField.className = 'text-black bg-white rounded-lg mt-2 w-full lg:w-96 py-3 px-3 outline-none';
-                inputField.required = true;
-                inputContainer.appendChild(inputField);
-            });
+            const newDiv = document.createElement('div')
+            const inputField = document.createElement('input');
+            inputField.type = 'text';
+            inputField.name = `input_${manyChild + 1}`;
+            inputField.placeholder = `Email ${manyChild + 1}`;
+            inputField.id = `${manyChild + 1}`
+            inputField.className = 'text-black bg-white rounded-lg mt-2 w-full lg:w-96 py-3 px-3 outline-none';
+            inputField.required = true;
+
+            newDiv.appendChild(inputField)
+            inputContainer.appendChild(newDiv);
 
             const deleteButton = document.getElementById('deleteInputBtn');
-            if (inputData.length > 1) {
+            if ( inputContainer.children.length > 1) {
                 deleteButton.classList.remove('hidden');
             } else {
                 deleteButton.classList.add('hidden');
@@ -132,24 +135,20 @@
         }
 
         function addNewInput() {
-            const newId = inputData.length + 1;
-            inputData.push({ id: newId });
             generateInputFields();
         }
 
         function deleteLastInput() {
-            if (inputData.length > 1) {
-                inputData.pop();
-                generateInputFields();
+            const    inputCon = document.getElementById('inputContainer');
+            inputCon.removeChild(inputCon.lastChild);
+            
+            if ( inputCon.children.length == 1) {
+                deleteButton.classList.add('hidden');
             }
         }
 
         document.getElementById('addInputBtn').addEventListener('click', addNewInput);
         document.getElementById('deleteInputBtn').addEventListener('click', deleteLastInput);
-
-
-        // Call the function to generate input fields initially
-        generateInputFields();
     </script>
 
 @endsection
