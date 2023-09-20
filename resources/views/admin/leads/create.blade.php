@@ -59,6 +59,9 @@
                                 <div class=" bg-secondary py-2 px-4 rounded-md hover:scale-95 duration-200 cursor-pointer mt-2" id="addInputBtn">
                                     <i class="ri-add-line"></i>
                                 </div>
+                                <div class="bg-secondary py-2 px-4 rounded-md hover:scale-95 duration-200 cursor-pointer mt-2 hidden" id="deleteInputBtn">
+                                    <i class="ri-delete-bin-2-line"></i>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -119,6 +122,13 @@
                 inputField.required = true;
                 inputContainer.appendChild(inputField);
             });
+
+            const deleteButton = document.getElementById('deleteInputBtn');
+            if (inputData.length > 1) {
+                deleteButton.classList.remove('hidden');
+            } else {
+                deleteButton.classList.add('hidden');
+            }
         }
 
         function addNewInput() {
@@ -127,7 +137,16 @@
             generateInputFields();
         }
 
+        function deleteLastInput() {
+            if (inputData.length > 1) {
+                inputData.pop();
+                generateInputFields();
+            }
+        }
+
         document.getElementById('addInputBtn').addEventListener('click', addNewInput);
+        document.getElementById('deleteInputBtn').addEventListener('click', deleteLastInput);
+
 
         // Call the function to generate input fields initially
         generateInputFields();

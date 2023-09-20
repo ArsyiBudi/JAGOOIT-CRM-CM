@@ -99,6 +99,7 @@
                         <tr>
                             <td class=" p-2" align="center">No</td>
                             <td class=" p-2" align="center">Email</td>
+                            <td class="p-2" align="center">Action</td>
                         </tr>
                     </thead>
                     <tbody>
@@ -107,6 +108,9 @@
                         <tr class=" odd:bg-grey">
                             <td align="center" class=" p-4">{{ isset($i) ? ++$i : $i = 1 }}</td>
                             <td align="center" class=" p-4">{{ $email -> email_name }}</td>
+                            <td align="center" class="p-4">
+                                <button type="button" onclick="" class=" text-lg cursor-pointer ri-delete-bin-2-line text-delete"></button>
+                            </td>
                         </tr>
                         @endforeach
                         @else
