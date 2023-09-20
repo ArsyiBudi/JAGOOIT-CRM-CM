@@ -104,6 +104,8 @@ class C_Plan extends Controller
     {
         $order = M_Orders::find($order_id);
         $offer = M_Offer::find($order->offer_letter_id);
+        if(!$offer) return back() -> with('error', "Mohon buat penawaran terlebih dahulu");
+
         $popks = M_Popks::find($popks_letter_id);
         $toDate = Carbon::parse($popks->end_date);
         $fromDate = Carbon::parse($popks->start_date);
@@ -130,12 +132,12 @@ class C_Plan extends Controller
         $phpWord->setValue('start_date', $popks->start_date);
         $phpWord->setValue('end_date', $popks->end_date);
         $phpWord->setValue('included_fees', $popks->included_fees);
-        $phpWord->setValue('nominal_fees', $popks->nominal_fees);
-        $phpWord->setValue('weekday_cost', $popks->weekday_cost);
-        $phpWord->setValue('weekend_cost', $popks->weekend_cost);
+        $phpWord->setValue('nominal_fees', number_format($popks->nominal_fees, 0, ',', '.'));
+        $phpWord->setValue('weekday_cost', number_format($popks->weekday_cost, 0, ',', '.'));
+        $phpWord->setValue('weekend_cost', number_format($popks->weekend_cost, 0, ',', '.'));
         $phpWord->setValue('notes', $popks->notes);
-        $phpWord->setValue('consumption_cost', $popks->consumption_cost);
-        $phpWord->setValue('transportation_cost', $popks->transportation_cost);
+        $phpWord->setValue('consumption_cost', number_format($popks->consumption_cost, 0, ',', '.'));
+        $phpWord->setValue('transportation_cost', number_format($popks->transportation_cost, 0, ',', '.'));
         $phpWord->setValue('billing_due_date', $popks->billing_due_date);
         $phpWord->setValue('billing_days', $popks->billing_days);
         $phpWord->setValue('authorized_by', $popks->authorized_by);
@@ -145,6 +147,7 @@ class C_Plan extends Controller
         $phpWord->setValue('client_director', $popks->client_director);
         $phpWord->setValue('selectedYear', $years);
         $replc = '';
+        if(!$offer -> offerJob) return back() -> with('error', "Mohon isi pekerjaan yang akan ditawarkan pada penawaran");
         foreach ($offer->offerJobDetails as $detail) {
             $replc .= $detail->quantity . ' orang ' . $detail->needed_job . ', ';
         }

@@ -25,6 +25,7 @@
 </style>
 
 @section('container')
+
 <div class="pt-20 lg:pt-0">
 </div>
 <div class="overflow-auto pt-0 h-[90vh] w-full rounded-md hide-scrollbar">
@@ -128,7 +129,7 @@
             <form id="form_email" action="{{ url(request() -> path()) }}" method="post" class=" my-3 w-full">
                 @csrf
                 <div class=" flex w-full ">
-                    <input autofocus required name="email_name" type="email" class=" bg-grey outline-none w-full py-1 px-2" placeholder="Tambah Email">
+                    <input autofocus required type="email" name="email_name" class=" bg-grey outline-none w-full py-1 px-2" placeholder="Tambah Email">
                     <div>
                         <button type="submit" class=" bg-grey py-2 px-3 text-sm border-l-2 border-white">Save</button>
                     </div>

@@ -94,7 +94,7 @@
         @csrf
         <div class="overflow-auto bg-grey mt-5 justify-between flex flex-col text-white px-8 py-10 rounded-md gap-y-3">
             <div class="border-b pb-3 mb-6">
-                <h2 class="text-2xl md:text-4xl text-white">Form Generate POPKS</h2>
+                <h2 class="text-2xl md:text-4xl text-white">Form Generate PO & PKS</h2>
             </div>
 
             <div class="text-xl">JagooIT:</div>

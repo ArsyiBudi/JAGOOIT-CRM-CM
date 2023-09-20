@@ -248,9 +248,13 @@ class C_Leads extends Controller
 
     public function addEmail(Request $request, $leads_id)
     {
-        $field = $request->validate([
+        $rule = [
             'email_name' => 'required|email|ends_with:gmail.com'
-        ]);
+        ];
+
+        $this -> validate($request, $rule);
+
+        $field = $request -> all();
 
         $email_name = $field['email_name'];
 

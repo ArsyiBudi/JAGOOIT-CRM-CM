@@ -24,18 +24,6 @@
 
 
 @section('container')
-
-@if(count($errors) > 0)
-<div id="attention-alert" class="alert alert-error absolute md:top-10 md:right-10 z-50 w-auto animate-slide-up text-white font-medium border-2 border-red-500 cursor-pointer">
-    <strong>Perhatian</strong><br>
-    <ul>
-        @foreach ($errors -> all() as $error)
-        <li>{{ $error }}</li>
-        @endforeach
-    </ul>
-</div>
-@endif
-
 {{-- <div id="formContainer">
     <form id="form3" class="hidden">
         <div class="bg-white opacity-70 rounded-md w-full mb-4 p-2">
@@ -252,13 +240,5 @@
         }
     }
 
-    function showPerhatian() {
-        var perhatian = document.getElementById('attention-alert');
-        perhatian.style.display = 'none';
-    }
-
-    setTimeout(function(){
-        showPerhatian();
-    }, 3000);
 </script>
 @endsection
