@@ -112,7 +112,7 @@
                             @endforeach
                         @else
                         <tr>
-                            <td colspan="6" align="center" class="py-10">No Activity Recorded</td>
+                            <td colspan="6" align="center" class="py-10">No Talent Recorded</td>
                         </tr>
                         @endif
                     </tbody>

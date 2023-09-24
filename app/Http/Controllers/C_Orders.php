@@ -180,7 +180,7 @@ class C_Orders extends Controller
             $orderDetail->delete();
         }
         $delete -> delete();
-        return redirect() -> back();
+        return redirect() -> back()->with('success', "$order_id berhasil dihapus");
     }
 
     public function finish_order($order_id)
@@ -204,6 +204,6 @@ class C_Orders extends Controller
             }
         }
         $update -> update();
-        return redirect() -> back();
+        return redirect() -> back()->with('success', "$order_id dimasukan kedalam history");
     }
 }

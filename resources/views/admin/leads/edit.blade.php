@@ -70,7 +70,7 @@
                             No Telepon PIC :
                         </p>
                         <div>
-                            <input name="pic_contact_number" required class=" bg-transparent outline-none" value="{{ old('business_name', @$lead -> pic_contact_number) }}">
+                            <input type="number" name="pic_contact_number" required class=" bg-transparent outline-none" value="{{ old('business_name', @$lead -> pic_contact_number) }}">
                         </div>
                     </div>
                     <div class="pt-3 flex items-center justify-between">

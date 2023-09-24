@@ -166,7 +166,7 @@ class C_Leads extends Controller
                 ->orWhereHas('latestActivityParams', function ($query) use ($search) {
                     $query->where('params_name', 'like', "%$search%");
                 });
-        })->where('client_indicator', '=', '1')
+        })->where('client_indicator', '=', '1')->latest()
             ->paginate($entries);
 
         return view('admin.client/menu', [

@@ -524,15 +524,13 @@ class C_Plan extends Controller
             $selectedDate = new DateTime();
             $selectedDate->setTimestamp($currentTimestamp);
 
-            $offer = M_Offer::create();
             $update = M_Orders::find($order_id);
-            $update->offer_letter_id = $offer->id;
             $update->order_status = 3;
             $update->end_offer = $selectedDate;
             $update->start_appointment = $selectedDate;
             $status = $update->update();
             if ($status)
-                return redirect('/client/order/plan/' . $order_id . '/negosiasi');
+                return redirect('/client/order/plan/' . $order_id . '/negosiasi')->with('success', "Berhasil menyelesaikan Penawaran");
         } else {
             return back()->with('error', "Timeline anda belum selesai, mohon selesaikan terlebih dahulu");
         }
@@ -602,7 +600,7 @@ class C_Plan extends Controller
             }
             $status = $update->update();
             if ($status)
-                return redirect('/client/order/plan/' . $order_id . '/percobaan/')->with('success');
+                return redirect('/client/order/plan/' . $order_id . '/percobaan/')->with('success', "Berhasil menyelesaikan Appoinment Negosiasi");
         } else {
             return back()->with('error', "Timeline anda belum selesai, mohon selesaikan terlebih dahulu");
         }
@@ -617,6 +615,7 @@ class C_Plan extends Controller
             $selectedDate->setTimestamp($currentTimestamp);
             $update = M_Orders::find($order_id);
             $update->order_status = 5;
+            $jumlahRekrutBaru = 0;
             if (!is_null($request->talents_id)) {
                 foreach ($request->talents_id as $talent_id) {
                     $updateTalent = M_OrderDetails::find($talent_id);
@@ -625,15 +624,18 @@ class C_Plan extends Controller
                     $updateTalent->recruitment_status = 1;
                     $updateActive->save();
                     $updateTalent->save();
+                    $jumlahRekrutBaru++;
                 }
             }
+
+
             if (is_null($update->end_probation) && is_null($update->start_popks)) {
                 $update->end_probation = $selectedDate;
                 $update->start_popks = $selectedDate;
             }
             $status = $update->update();
             if ($status)
-                return redirect('/client/order/plan/' . $order_id . '/popks/');
+                return redirect('/client/order/plan/' . $order_id . '/popks/')->with('success', "Berhasil menyelesaikan Masa Percobaan dan merekrut $jumlahRekrutBaru orang");
         } else {
             return back()->with('error', "Timeline anda belum selesai, mohon selesaikan terlebih dahulu");
         }
@@ -782,9 +784,7 @@ class C_Plan extends Controller
             $currentTimestamp = time();
             $selectedDate = new DateTime();
             $selectedDate->setTimestamp($currentTimestamp);
-            $offer = M_Offer::create();
             $update = M_Orders::find($order_id);
-            $update->offer_letter_id = $offer->id;
             $update->order_status = 7;
 
             if (is_null($update->end_popks)) {
@@ -792,7 +792,7 @@ class C_Plan extends Controller
             }
             $status = $update->update();
             if ($status)
-                return redirect('/client/order');
+                return redirect('/client/order')->with('success', "Berhasil menyelesaikan plan order $order_id");
         } else {
             return back()->with('error', "Timeline anda belum selesai, mohon selesaikan terlebih dahulu");
         }

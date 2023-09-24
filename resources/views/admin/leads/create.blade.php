@@ -57,7 +57,7 @@
                             <div class=" flex items-start  gap-5">
                                 <div id="inputContainer" class="">
                                     <div class="">
-                                        <input type="text" class="text-black bg-white rounded-lg mt-2 w-full lg:w-96 py-3 px-3 outline-none" placeholder="Email 1" name="input_1" id="1" required>
+                                        <input type="email" class="text-black bg-white rounded-lg mt-2 w-full lg:w-96 py-3 px-3 outline-none" placeholder="Email 1" name="input_1" id="1" required>
                                     </div>
                                 </div>
                                 <div>
@@ -92,7 +92,7 @@
 
                         <div class=" mt-3 md:mt-0">
                             <h4 class="mb-1 text-sm md:text-[16px]">Nomor Kontak PIC</h4>
-                            <input required placeholder="089xxxxxxxxx" type="text" name="pic_contact_number" class="bg-white text-black rounded-lg mt-1 w-full  lg:w-96  py-3 px-3 outline-none">
+                            <input required placeholder="089xxxxxxxxx" type="number" name="pic_contact_number" class="bg-white text-black rounded-lg mt-1 w-full  lg:w-96  py-3 px-3 outline-none">
                         </div>
                     </div>
                 </div>
@@ -116,7 +116,7 @@
 
             const newDiv = document.createElement('div')
             const inputField = document.createElement('input');
-            inputField.type = 'text';
+            inputField.type = 'email';
             inputField.name = `input_${manyChild + 1}`;
             inputField.placeholder = `Email ${manyChild + 1}`;
             inputField.id = `${manyChild + 1}`
