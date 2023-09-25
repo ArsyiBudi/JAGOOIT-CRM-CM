@@ -25,33 +25,31 @@ class C_Plan extends Controller
 {
 
     //?BELOW ARE USED FOR HANDLING ERROR { IT'S NOT AN ERROR IT'S A FEATURE}
-
-    //?BELOW ARE USED TO CHECK IF THE END AND START IS FIX
-    public function checkEndStart($order_id, $timeline)
-    {
-        $track = ['recruitment', 'training', 'offer', 'appointment', 'probation', 'popks'];
-        $strWhere = 'start_' . $track[$timeline - 1];
-        $check_timeline = M_Orders::find($order_id);
-        if (is_null($check_timeline->$strWhere))
-            return "";
-        return "ok";
-    }
-
-    //?BELOW ARE USED FOR HANDLING PLAN ROUTES
-    public function handlePlanRoute($order_id)
-    {
-        $selectedTimestamp = time();
-        $selectedDate = new DateTime();
-        $selectedDate->setTimestamp($selectedTimestamp);
-
-        $order = M_Orders::find($order_id);
-        if (is_null($order->start_recruitment)) {
-            $order->start_recruitment = $selectedDate;
-            $order->save();
+        //?BELOW ARE USED TO CHECK IF THE END AND START IS FIX
+        public function checkEndStart($order_id, $timeline)
+        {
+            $track = ['recruitment', 'training', 'offer', 'appointment', 'probation', 'popks'];
+            $strWhere = 'start_' . $track[$timeline - 1];
+            $check_timeline = M_Orders::find($order_id);
+            if (is_null($check_timeline->$strWhere)) return "Timeline anda berada di {$check_timeline -> globalParams -> params_name}, mohon perbaiki terlebih dahulu";
+            return true;
         }
-        $routes = ['', 'recruitment', 'training', 'penawaran', 'negosiasi', 'percobaan', 'popks', 'popks', ''];
-        return redirect("/client/order/plan/$order_id/{$routes[$order->order_status]}");
-    }
+
+        //?BELOW ARE USED FOR HANDLING PLAN ROUTES
+        public function handlePlanRoute($order_id)
+        {
+            $selectedTimestamp = time();
+            $selectedDate = new DateTime();
+            $selectedDate->setTimestamp($selectedTimestamp);
+
+            $order = M_Orders::find($order_id);
+            if (is_null($order->start_recruitment)) {
+                $order->start_recruitment = $selectedDate;
+                $order->save();
+            }
+            $routes = ['', 'recruitment', 'training', 'penawaran', 'negosiasi', 'percobaan', 'popks', 'popks', ''];
+            return redirect("/client/order/plan/$order_id/{$routes[$order->order_status]}");
+        }
 
     //?BELOW ARE USED FOR GENERATING WORD FILE
     public function generateWordOffer($offer_letter_id)
@@ -318,7 +316,8 @@ class C_Plan extends Controller
     //?RECRUITMENT PLAN CODE
     public function saveRecruitment(Request $request, $order_id)
     {
-        if ($this->checkEndStart($order_id, 1) == 'ok') {
+        $check_timeline = $this -> checkEndStart($order_id,  1);
+        if ($check_timeline === true) {
             $selectedTimestamp = time();
             $selectedDate = new DateTime();
             $selectedDate->setTimestamp($selectedTimestamp);
@@ -349,7 +348,7 @@ class C_Plan extends Controller
             return redirect('/client/order/plan/' . $order_id . '/training/')->with('success', "Berhasil menyelesaikan Recruitment");
 
         } else {
-            return back()->with('error', "Timeline anda belum selesai, mohon selesaikan terlebih dahulu");
+            return back() -> with('error', $check_timeline);
         }
     }
 
@@ -371,7 +370,8 @@ class C_Plan extends Controller
     }
     public function saveTraining($order_id)
     {
-        if ($this->checkEndStart($order_id, 2) == "ok") {
+        $check_timeline = $this -> checkEndStart($order_id,  2);
+        if ($check_timeline === true) {
             $selectedTimestamp = time();
             $selectedDate = new DateTime();
             $selectedDate->setTimestamp($selectedTimestamp);
@@ -386,7 +386,7 @@ class C_Plan extends Controller
             if ($status)
                 return redirect('/client/order/plan/' . $order_id . '/penawaran/')->with('success', "Berhasil menyelesaikan Training");
         } else {
-            return back()->with('error', "Timeline anda belum selesai, mohon selesaikan terlebih dahulu");
+            return back() -> with('error', $check_timeline);
         }
     }
 
@@ -519,7 +519,8 @@ class C_Plan extends Controller
 
     public function offer_save($order_id)
     {
-        if ($this->checkEndStart($order_id, 3) == "ok") {
+        $check_timeline = $this -> checkEndStart($order_id,  3);
+        if ($check_timeline === true) {
             $currentTimestamp = time();
             $selectedDate = new DateTime();
             $selectedDate->setTimestamp($currentTimestamp);
@@ -532,7 +533,7 @@ class C_Plan extends Controller
             if ($status)
                 return redirect('/client/order/plan/' . $order_id . '/negosiasi')->with('success', "Berhasil menyelesaikan Penawaran");
         } else {
-            return back()->with('error', "Timeline anda belum selesai, mohon selesaikan terlebih dahulu");
+            return back()->with('error', $check_timeline);
         }
     }
 
@@ -588,7 +589,8 @@ class C_Plan extends Controller
 
     public function saveNegosiasi($order_id)
     {
-        if ($this->checkEndStart($order_id, 4) == "ok") {
+        $check_timeline = $this -> checkEndStart($order_id,  4);
+        if ($check_timeline === true) {
             $currentTimestamp = time();
             $selectedDate = new DateTime();
             $selectedDate->setTimestamp($currentTimestamp);
@@ -602,14 +604,15 @@ class C_Plan extends Controller
             if ($status)
                 return redirect('/client/order/plan/' . $order_id . '/percobaan/')->with('success', "Berhasil menyelesaikan Appoinment Negosiasi");
         } else {
-            return back()->with('error', "Timeline anda belum selesai, mohon selesaikan terlebih dahulu");
+            return back()->with('error', $check_timeline);
         }
     }
 
     //?PERCOBAAN CONTROLLER CODE
     public function savePercobaan(Request $request, $order_id)
     {
-        if ($this->checkEndStart($order_id, 5) == "ok") {
+        $check_timeline = $this -> checkEndStart($order_id,  5);
+        if ($check_timeline === true) {
             $currentTimestamp = time();
             $selectedDate = new DateTime();
             $selectedDate->setTimestamp($currentTimestamp);
@@ -637,7 +640,7 @@ class C_Plan extends Controller
             if ($status)
                 return redirect('/client/order/plan/' . $order_id . '/popks/')->with('success', "Berhasil menyelesaikan Masa Percobaan dan merekrut $jumlahRekrutBaru orang");
         } else {
-            return back()->with('error', "Timeline anda belum selesai, mohon selesaikan terlebih dahulu");
+            return back()->with('error', $check_timeline);
         }
     }
     public function deletePercobaan($order_id, $talent_id)
@@ -780,7 +783,8 @@ class C_Plan extends Controller
 
     public function popks_save($order_id)
     {
-        if ($this->checkEndStart($order_id, 6) == "ok") {
+        $check_timeline = $this -> checkEndStart($order_id,  6);
+        if ($check_timeline === true) {
             $currentTimestamp = time();
             $selectedDate = new DateTime();
             $selectedDate->setTimestamp($currentTimestamp);
@@ -794,7 +798,7 @@ class C_Plan extends Controller
             if ($status)
                 return redirect('/client/order')->with('success', "Berhasil menyelesaikan plan order $order_id");
         } else {
-            return back()->with('error', "Timeline anda belum selesai, mohon selesaikan terlebih dahulu");
+            return back()->with('error', $check_timeline);
         }
     }
 }
