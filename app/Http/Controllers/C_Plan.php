@@ -52,17 +52,17 @@ class C_Plan extends Controller
         }
 
     //?BELOW ARE USED FOR GENERATING WORD FILE
-    public function generateWordOffer($offer_letter_id)
+    public function generateWordOffer($order_id, $offer_letter_id)
     {
-
-
         $offer = M_Offer::find($offer_letter_id);
+        $order = M_Orders::find($order_id);
         $phpWord = new TemplateProcessor('template.docx');
         $phpWord->setValue('no_surat', $offer->letter_number);
         $phpWord->setValue('perihal', $offer->offer_subject);
         $phpWord->setValue('kepada', $offer->recipient_name);
         $phpWord->setValue('tempat', $offer->location);
         $phpWord->setValue('tanggal', $offer->date);
+        $phpWord->setValue('nama_perusahaan', $order -> leadData -> business_name);
         $phpWord->setValue('ditawarkan', $offer->context);
         $phpWord->setValue('jumlahTalent', $offer->talent_total);
         $phpWord->setValue('weekday', $offer->weekday_cost);
@@ -470,7 +470,7 @@ class C_Plan extends Controller
                 'error' => "Data didn't updated"
             ]);
         } else {
-            $status = $this->generateWordOffer($order->offer_letter_id);
+            $status = $this->generateWordOffer($order_id, $order->offer_letter_id);
             if ($status)
                 return $status;
         }

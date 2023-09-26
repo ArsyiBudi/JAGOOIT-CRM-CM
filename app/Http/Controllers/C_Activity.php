@@ -65,7 +65,7 @@ class C_Activity extends Controller
             return back() -> with('error', "Terjadi error saat mengirim email, mohon coba lagi");
         }
         
-        return back()->with('success', 'Appointment terkirim.');
+        return redirect("/leads/$leads_id/detail")->with('success', 'Appointment terkirim.');
     }
     
     public function note(Request $request, $leads_id){
@@ -82,7 +82,7 @@ class C_Activity extends Controller
         if(!$activity) return response([
             'error' => 'Error Occured'
         ]);
-        return back()->with('success', 'Notes tersimpan.');    
+        return redirect("/leads/$leads_id/detail")->with('success', 'Notes tersimpan.');    
     }
     public function report(Request $request, $leads_id){
         $field = $request->validate([
@@ -104,6 +104,6 @@ class C_Activity extends Controller
                 'error' => 'Error Occurred during activity creation',
             ]);
         }
-        return back()->with('success', 'Report terkirim.');
+        return redirect("/leads/$leads_id/detail")->with('success', 'Report terkirim.');
     }
 }

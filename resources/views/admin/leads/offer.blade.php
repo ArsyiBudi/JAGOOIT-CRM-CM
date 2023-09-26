@@ -22,7 +22,7 @@
 </style>
 
 @section('container')
-{{-- <div id="formContainer"> --}}
+
 <form class=" hidden mt-24 md:mt-0 text-center lg:text-left" id="form3" action="{{ route('create_order') }}" method="post">
     @csrf
     <h1 class="text-3xl font-semibold text-white">Create Order</h1>
@@ -113,10 +113,9 @@
     </div>
 </form>
 
-{{-- </div> --}}
 
-<h6 class="mt-24 md:mt-0 text-center lg:text-left font-normal mb-4 text-2xl" id="offerTitle">Create Offer</h6>
-<div class="bg-grey p-9 rounded-lg border-2 border-white  w-full h-[calc(85vh-85px)] mb-10 overflow-y-scroll hide-scrollbar" id="createSection">
+<h6 class="mt-24 lg:mt-0 text-center lg:text-left font-normal mb-4 text-2xl px-2 lg:px-0" id="offerTitle">Create Offer</h6>
+<div class=" bg-primary rounded-md p-8 w-full h-[80vh] pb-10 overflow-y-scroll hide-scrollbar" id="createSection">
     <div class='dropdown'>
         <select id="formSelector" class="mb-4 bg-transparent border  btn p-2 outline-none border-spacing-1 rounded-md py-1 text-1xl hover:bg-gray-300 hover:text-darkSecondary text-white">
             <option value="form1" class="bg-grey hover:bg-gray-300 hover:text-darkSecondary">Send Email</option>
@@ -124,7 +123,7 @@
         </select>
     </div>
     <div id="formContainer" class="w-full">
-        <form id="form1" class="hidden" action="{{ url(request() -> path()) }}" method="post" enctype="multipart/form-data" onsubmit="my_modal_5.showModal()">
+        <form id="form1" class="hidden" action="{{ url(request() -> path()) }}" method="post" enctype="multipart/form-data" onsubmit="showModal()">
             @csrf
             @if($lead -> hasOneEmail)
             <select name="email_name" id="email" class="mb-4 bg-transparent border m-1 btn p-2 outline-none border-spacing-1 rounded-md py-1 text-1xl hover:bg-gray-300 hover:text-darkSecondary text-white" required>
@@ -168,7 +167,6 @@
 
 
         </form>
-        {{-- <form id="form3" class="hidden"></form> --}}
 
     </div>
 </div>
@@ -176,13 +174,7 @@
 <dialog id="my_modal_5" class="modal  text-white">
 
     <div class="modal-box bg-grey border-2 border-white w-11/12 max-w-xs flex justify-center items-center">
-
         <h1>Email sedang dikirim...</h1>
-
-        {{-- <div onclick="closeAlrt()">
-            <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6 cursor-pointer" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" onclick="closeAlrt()"/></svg>
-        </div> --}}
-
     </div>
 </dialog>
 
@@ -257,6 +249,10 @@
     }
 </script>
 <script>
+    const currentURL = window.location.href;
+    const urlParts = currentURL.split('/');
+    const lastSegment = urlParts[urlParts.length - 1];
+
     async function previewFileTor() {
         const fileInput = document.getElementById('file-tor');
         const containerInput = document.getElementById('container-tor');
@@ -264,6 +260,7 @@
         const canvas = document.getElementById('pdf-preview-tor');
         const fileUploadLabel = document.getElementById('file-upload-label-tor');
         const canvasLoading = document.getElementById('canvas-loading-tor');
+        
 
 
 
@@ -319,8 +316,7 @@
             canvas.style.display = 'none';
         }
     }
-</script>
-<script>
+
     document.addEventListener("DOMContentLoaded", function() {
         const formSelector = document.getElementById("formSelector");
         const formContainer = document.getElementById("formContainer");
@@ -361,6 +357,9 @@
 
     function showModal() {
         my_modal_5.showModal();
+        setTimeout(() => {
+            window.location.href = '/leads/'+lastSegment+'/detail';
+        }, 1000);
     }
 
 

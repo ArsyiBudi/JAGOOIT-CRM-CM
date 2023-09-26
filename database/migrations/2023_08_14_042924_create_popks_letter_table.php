@@ -32,9 +32,9 @@ return new class extends Migration
             $table->double('transportation_cost') -> nullable();
             $table->integer('billing_due_date') -> nullable();
             $table->integer('billing_days') -> nullable();
-            $table->string('authorized_by') -> nullable();
-            $table->bigInteger('account_number') -> nullable();
-            $table->string('bank_name') -> nullable();
+            $table->string('authorized_by') -> default("PT JAGO TALENTA INDONESIA");
+            $table->string('account_number') -> default("130-002310546-6");
+            $table->string('bank_name') -> default("Bank Mandiri, Cabang Braga Bandung");
             $table->string('account_manager_provider')->default("Sdr. Septian Nugraha Kudrat");
             $table->string('provider_finance_administrator')->default("Sdri. Retno Aliifah");
             $table->string('jagoit_director') -> nullable();
