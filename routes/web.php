@@ -120,6 +120,7 @@ Route::middleware('auth')->group(function () {
             Route::prefix('detail')->group(function () {
                 Route::get('/{order_id}', [C_Orders::class, 'detail'])->name('detail_order');
                 Route::get('/{order_id}/timeline', [C_Orders::class, 'timeline']);
+                Route::get('/{order_id}/downloadTOR', [C_Orders::class, 'downloadPDF'])->name('detail_order.downloadPDF');
             });
 
             //?CREATE ORDER
