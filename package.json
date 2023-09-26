@@ -2,6 +2,7 @@
     "private": true,
     "type": "module",
     "scripts": {
+        "cypress:open": "cypress open",
         "dev": "vite",
         "build": "vite build"
     },
