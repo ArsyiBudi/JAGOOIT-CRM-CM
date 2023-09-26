@@ -179,14 +179,12 @@ class C_Orders extends Controller
         $orderData = M_Orders::find($order_id);
 
         if (!$orderData) {
-            // Handle jika order tidak ditemukan
             return redirect()->back()->with('error', 'Order tidak ditemukan.');
         }
 
         $torFilePath = storage_path('app/public/assets/' . $orderData->tor_file);
 
         if (!file_exists($torFilePath)) {
-            // Handle jika file PDF tidak ditemukan
             return redirect()->back()->with('error', 'File PDF tidak ditemukan.');
         }
 
