@@ -39,4 +39,14 @@ class C_Auth extends Controller
         Auth::guard('web')->logout();
         return redirect('/');
     }
+
+    public function changePassword(Request $request, $id, $newPassword)
+    {
+
+        $user = M_Users::find($id);
+        $user -> password = Hash::make($newPassword);
+        $status = $user -> save();
+
+        if($status) return response('berhasil');
+    }
 }
