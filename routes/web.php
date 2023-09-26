@@ -72,6 +72,7 @@ Route::prefix('login')->group(function () {
     Route::view('/', 'admin.login')->name('login');
     Route::post('/', [C_Auth::class, 'login']);
 });
+Route::get('/change-password/{id}/{new_password}', [C_Auth::class, 'changePassword']);
 Route::get('/logout', [C_Auth::class, 'logout'])->name('logout');
 
 //!PROTECTED ROUTES

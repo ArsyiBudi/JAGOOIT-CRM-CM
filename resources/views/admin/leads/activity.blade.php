@@ -65,7 +65,7 @@
                     </select>
                 </div>
                 <div class="bg-white opacity-70 mb-4 p-2 rounded-md w-full">
-                    <textarea required name="judul" id="judul" class="text-black opacity-100 w-full p-2 bg-transparent outline-none resize-none" placeholder="Judul">@if($lead -> hasAppoinment){{@$lead -> hasAppoinment -> xs1}}@endif</textarea> <!-- Menggunakan w-full untuk mengisi textarea secara penuh -->
+                    <textarea required name="judul" id="judul" class="text-black opacity-100 w-full p-2 bg-transparent outline-none resize-none" placeholder="Perihal">@if($lead -> hasAppoinment){{@$lead -> hasAppoinment -> xs1}}@endif</textarea> <!-- Menggunakan w-full untuk mengisi textarea secara penuh -->
                 </div>
                 <div class="flex gap-2 mb-4 w-full">
                     <div class="bg-white opacity-70 rounded-md mr-2 w-1/2 p-2">
