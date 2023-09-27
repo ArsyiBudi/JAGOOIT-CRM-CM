@@ -63,7 +63,7 @@ class C_Plan extends Controller
         $phpWord->setValue('kepada', $offer->recipient_name);
         $phpWord->setValue('tempat', $offer->location);
         $phpWord->setValue('tanggal', $offer->date);
-        $phpWord->setValue('nama_perusahaan', $order->leadData->business_name);
+        $phpWord->setValue('perusahaan_client', $order->leadData->business_name);
         $phpWord->setValue('ditawarkan', $offer->context);
         $phpWord->setValue('jumlahTalent', $offer->talent_total);
         $phpWord->setValue('weekday', number_format($offer->weekday_cost, 0, ',', '.'));
