@@ -1,45 +1,5 @@
 @extends('admin.layouts.main')
-
 <style>
-    .hide-scrollbar::-webkit-scrollbar {
-        width: 0em;
-        /* Width of the scrollbar */
-    }
-
-    .hide-scrollbar::-webkit-scrollbar-thumb {
-        background-color: #555555;
-        /* Color of the scrollbar thumb */
-        border-radius: 8px;
-        /* Rounded corners for the scrollbar thumb */
-    }
-
-    .hide-scrollbar::-webkit-scrollbar-thumb:hover {
-        background-color: #777777;
-        /* Color of the scrollbar thumb on hover */
-    }
-
-    .hide-scrollbar::-webkit-scrollbar-track {
-        background-color: #555555;
-        /* Color of the scrollbar track */
-    }
-
-    .hide-scrollbar::-webkit-scrollbar-track:hover {
-        background-color: #666666;
-        /* Color of the scrollbar track on hover */
-    }
-
-    /* Customize the appearance of the scrollbar wheel */
-    .hide-scrollbar {
-        scrollbar-width: thin;
-        scrollbar-color: #555555 #333333;
-    }
-
-    /* Customize the appearance of the scrollbar thumb icon */
-    .hide-scrollbar::-webkit-scrollbar-thumb:vertical {
-        background-color: #fff;
-        /* Color of the scrollbar thumb icon */
-    }
-
     .custom-date-input::-webkit-calendar-picker-indicator {
         filter: invert(1);
         /* This inverts the icon color */
@@ -72,7 +32,7 @@
 
 <div class="pt-20 pb-2 lg:pt-0">
 </div>
-<div class=" overflow-y-auto overflow-x-hidden pt-0 pb-10 lg:pt-0 px-5 md:px-10 h-[90vh]">
+<div class=" overflow-y-auto overflow-x-hidden pt-0 pb-10 lg:pt-0 px-5 md:px-10 h-[90vh] hide-scrollbar">
     <h1 class=" text-4xl">Training</h1>
     <p class=" text-sm md:text-[16px] font-medium pt-3">Silakan nilai kandidat</p>
 
@@ -113,7 +73,7 @@
                             <th align="center">No</th>
                             <th align="center">Nama Talent</th>
                             <th align="center">Pre-Test</th>
-                            <th align="center">Pre-Test</th>
+                            <th align="center">Post-Test</th>
                             <th align="center">Kelompok</th>
                             <th align="center">Akhir</th>
                             <th align="center">Rata-Rata</th>
@@ -162,8 +122,8 @@
                                         </div>
                                     </td>
                                     <td align="center">
-                                        <div class="w-[86px] h-[27px] rounded-md bg-white flex items-center justify-center">
-                                            <input disabled id='rata-rata' name='average_score' type="number" value="{{ old('average_score', ($data->pre_score + $data->post_score + $data->group_score + $data->final_score) / 4) }}" class='text-black w-full text-center outline-none bg-transparent' placeholder='0'>
+                                        <div class="w-[86px] h-[27px] rounded-md bg-darkSeconday flex items-center justify-center">
+                                            <input disabled id='rata-rata' name='average_score' type="number" value="{{ old('average_score', ($data->pre_score + $data->post_score + $data->group_score + $data->final_score) / 4) }}" class='py-0 my-0 text-white w-full text-center outline-none bg-transparent [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none' placeholder='0'>
                                         </div>
                                     </td>
                                     <td align="center"><input type="submit" class="bg-secondary text-white rounded-md w-[82px] h-[25px] cursor-pointer">

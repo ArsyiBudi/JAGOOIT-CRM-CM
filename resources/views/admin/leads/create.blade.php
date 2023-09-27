@@ -1,41 +1,4 @@
 @extends('admin.layouts.main')
-
-<style>
-    .hide-scrollbar::-webkit-scrollbar {
-        width: 0.4em; /* Width of the scrollbar */
-    }
-
-    .hide-scrollbar::-webkit-scrollbar-thumb {
-        background-color: #555555; /* Color of the scrollbar thumb */
-        border-radius: 8px; /* Rounded corners for the scrollbar thumb */
-    }
-
-    .hide-scrollbar::-webkit-scrollbar-thumb:hover {
-        background-color: #777777; /* Color of the scrollbar thumb on hover */
-    }
-
-    .hide-scrollbar::-webkit-scrollbar-track {
-        background-color: #555555; /* Color of the scrollbar track */
-    }
-
-    .hide-scrollbar::-webkit-scrollbar-track:hover {
-        background-color: #666666; /* Color of the scrollbar track on hover */
-    }
-
-    /* Customize the appearance of the scrollbar wheel */
-    .hide-scrollbar {
-        scrollbar-width: thin;
-        scrollbar-color: #555555 #333333;
-    }
-
-    /* Customize the appearance of the scrollbar thumb icon */
-    .hide-scrollbar::-webkit-scrollbar-thumb:vertical {
-        background-color: #fff; /* Color of the scrollbar thumb icon */
-    }
-
-</style>
-
-
 @section('container')
     <div class="hide-scrollbar overflow-auto pt-28 lg:pt-0 h-screen w-full">
         <form class="w-full bg-darkSecondary py-10 px-8 rounded-md" action="{{ route('create_leads') }}" method="post">

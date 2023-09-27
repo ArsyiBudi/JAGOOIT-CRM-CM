@@ -1,10 +1,6 @@
 @extends('admin.layouts.main')
 <style>
-    .hide-scrollbar::-webkit-scrollbar {
-        width: 0;
-    }
-        /* Width of the scrollbar */
-        .animate-slide-up {
+    .animate-slide-up {
     animation: slide-up 0.3s ease-in-out;
 }
 
