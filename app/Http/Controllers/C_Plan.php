@@ -686,14 +686,19 @@ class C_Plan extends Controller
             'jagoit_director' => 'required',
             'client_director' => 'required',
         ]);
-
+        
         if (!$field)
-            return response([
-                'error' => 'error'
-            ]);
-
+        return response([
+            'error' => 'error'
+        ]);
+        
         $order = M_Orders::find($order_id);
         $popks = M_Popks::find($order->popks_letter_id);
+
+        //?Handling error, when offer_letter_id is not generated.
+        if (is_null($order->offer_letter_id))
+            return back() ->  with('error', 'No offer letter, please go to plan number 3 to generate offer letter');
+        
         $popks->letter_numbers = "{$popks->id}/JTI/PKS.{$selectedMonth}/{$selectedYear}";
         $popks->leads_id = $order->leads_id;
         $popks->employee_name = $field['employee_name'];
@@ -744,9 +749,6 @@ class C_Plan extends Controller
 
         $order = M_Orders::find($order_id);
 
-        //?Handling error, when offer_letter_id is not generated.
-        if (is_null($order->offer_letter_id))
-            return response(['error' => 'No offer letter, please go to plan number 3 to generate offer letter']);
 
         $order->po_file = $request->file('file-pks');
         $order->po_description = $field['po_descr'];
@@ -759,7 +761,7 @@ class C_Plan extends Controller
                 'lead_data' => $lead,
                 'information' => "PKS Talenta Indonesia"
             ];
-            $mailSubject = "Draft POPKS JagooIT - {$lead->business_name}";
+            $mailSubject = "Draft PKS | JagooIT - {$lead->business_name}";
             if (!$lead->hasOneEmail)
                 return back()->with('error', "No Email detected in {$lead->business_name}");
 
