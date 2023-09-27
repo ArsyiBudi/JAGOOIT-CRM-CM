@@ -42,11 +42,14 @@
 </style>
 
 @section('container')
-<div class="pt-20 pb-2 lg:pt-0">
-</div>
-<div class="overflow-auto bg-darkSecondary lg:pt-0 h-screen rounded-md">
-    <div class="w-full bg-darkSecondary px-8 flex flex-col">
-        <div class="pt-10 bg-darkSecondary">
+
+<div class="pt-20 pb-2 lg:pt-0"></div>
+
+<div class=" overflow-auto bg-darkSecondary pt-0 h-screen rounded-md hide-scrollbar">
+    <div class="w-full bg-darkSecondary py-10 px-8 flex  flex-col ">
+
+
+        <div class=" bg-darkSecondary">
             <div class="border-b border-white w-full pb-3 mb-3">
                 <h3 class="text-white font-semibold text-3xl">Data Clients</h3>
             </div>
@@ -56,7 +59,7 @@
                     <div class="flex gap-3 items-center justify-start">
                         <p class="text-white text-xs md:text-sm">Show</p>
                         <div class="flex items-center bg-grey rounded-md md:rounded-lg justify-center py-0 md:py-1 w-[40px] md:w-[60px] px-1">
-                            <input type="number" value="{{ old('per_page', $client->perPage()) }}" name="per_page" min="1" class=" text-white w-full text-center bg-transparent outline-none" placeholder="5">
+                            <input type="number" value="{{ old('per_page', $client->perPage()) }}" name="per_page" min="1"  class=" text-white w-full text-center bg-transparent outline-none" placeholder="5">
                         </div>
                         <p class="text-white text-xs md:text-sm">entries</p>
                     </div>
@@ -76,8 +79,8 @@
         <div class=" hide-scrollbar w-full h-72 overflow-auto pr-2 relative">
             <table class=" w-full text-xs md:text-sm font-bold relative">
                 <thead class=" sticky top-0 bg-primary">
-                   <tr>
-                        <td align="center" class="py-3">No</td>
+                    <tr>
+                         <td align="center" class="py-3">No</td>
                         <td align="center" class="py-3">Nama Perusahaan</td>
                         <td align="center" class="py-3">Alamat</td>
                         <td align="center" class="py-3">PIC</td>
@@ -88,7 +91,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @if($client -> isEmpty())
+                     @if($client -> isEmpty())
                     <tr>
                         <td colspan="8" class="text-white text-center py-4">No Data.</td>
                     </tr>
@@ -137,8 +140,9 @@
         </div>
 
         <div class="flex items-center justify-center w-full">
+
             <div class="sticky bottom-0 pb-5 bg-darksecondary flex justify-center items-center gap-3">
-                {{ $client -> links('vendor.pagination.custom-pagination-client') }}
+               {{ $client -> links('vendor.pagination.custom-pagination-client') }}
             </div>
 
         </div>
@@ -167,6 +171,7 @@
     </div>
 </dialog>
 
+
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <script>
@@ -188,4 +193,7 @@
         form.submit();
     }
 </script>
+
     @endsection
+
+     @extends('admin.layouts.main')

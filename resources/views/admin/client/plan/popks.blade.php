@@ -215,7 +215,7 @@
                 <label for="" class="text-sm">
                     Tanggal
                 </label>
-                <input required type="number" maxlength="2" placeholder="00" class="w-10 text-black bg-white rounded-md p-2 outline-none" name="billing_due_date" value="{{ old('billing_due_date',@$field->billing_due_date)}}">
+                <input required type="number" maxlength="2" placeholder="00" class="w-14 text-black bg-white rounded-md p-2 outline-none" name="billing_due_date" value="{{ old('billing_due_date',@$field->billing_due_date)}}" onKeyPress="if(this.value.length==2) return false;">
                 <label for="" class="text-sm">
                     Setiap Bulan dan Pembayaran Selambat-Lambatnya
                 </label>

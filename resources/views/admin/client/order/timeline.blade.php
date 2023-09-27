@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Detail | Timeline</title>
+    <link rel="shortcut icon" href="https://lh3.google.com/u/2/d/1QSOrEITHjSK8BU-H1EcEn2iQ1Cl2yWOh=w1919-h983-iv1" type="image/x-icon">
+
     <link href="https://cdn.jsdelivr.net/npm/remixicon@2.2.0/fonts/remixicon.css" rel="stylesheet">
     @vite('resources/css/app.css')
     <style>
@@ -67,7 +69,7 @@
             <p class="text-center pt-1">{{ $lead -> business_name }}</p>
         </div>
 
-        <div class="flex justify-center items-end">
+        <div class="flex justify-center">
             <div class="mb-7 mr-10">
                 <a href="{{ url('/client/order/detail/'. $order -> id) }}" class="flex items-center justify-start mb-2">
                     <i class="ri-arrow-left-s-line md:hidden block text-3xl"></i>

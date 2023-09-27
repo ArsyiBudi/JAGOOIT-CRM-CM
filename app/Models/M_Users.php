@@ -24,6 +24,8 @@ class M_Users extends Model implements Authenticatable
         'xs1'
     ];
 
+    public $timestamps = false;
+
     //?Eloquent Relationship
     public function userTypes() : BelongsTo
     {
