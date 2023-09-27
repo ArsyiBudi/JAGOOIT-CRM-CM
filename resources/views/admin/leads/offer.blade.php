@@ -257,9 +257,6 @@
         const fileUploadLabel = document.getElementById('file-upload-label-tor');
         const canvasLoading = document.getElementById('canvas-loading-tor');
         
-
-
-
         if (fileInput.files && fileInput.files[0]) {
             fileUploadLabel.textContent = 'Ganti File';
             containerInput.style.width = 'auto';
