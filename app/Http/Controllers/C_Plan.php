@@ -511,10 +511,8 @@ class C_Plan extends Controller
             $selectedDate = new DateTime();
             $selectedDate->setTimestamp($currentTimestamp);
 
-            $offer = M_Offer::create();
             $update = M_Orders::find($order_id);
-            $update->offer_letter_id = $offer->id;
-            $update->order_status = 3;
+            $update->order_status = 4;
             $update->end_offer = $selectedDate;
             $update->start_appointment = $selectedDate;
             $status = $update->update();
@@ -579,7 +577,7 @@ class C_Plan extends Controller
             $selectedDate = new DateTime();
             $selectedDate->setTimestamp($currentTimestamp);
             $update = M_Orders::find($order_id);
-            $update->order_status = 4;
+            $update->order_status = 5;
             if (is_null($update->end_appointment) && is_null($update->start_probation)) {
                 $update->end_appointment = $selectedDate;
                 $update->start_probation = $selectedDate;
@@ -601,7 +599,7 @@ class C_Plan extends Controller
             $selectedDate = new DateTime();
             $selectedDate->setTimestamp($currentTimestamp);
             $update = M_Orders::find($order_id);
-            $update->order_status = 5;
+            $update->order_status = 6;
             $jumlahRekrutBaru = 0;
             if (!is_null($request->talents_id)) {
                 foreach ($request->talents_id as $talent_id) {
@@ -773,9 +771,7 @@ class C_Plan extends Controller
             $currentTimestamp = time();
             $selectedDate = new DateTime();
             $selectedDate->setTimestamp($currentTimestamp);
-            $offer = M_Offer::create();
             $update = M_Orders::find($order_id);
-            $update->offer_letter_id = $offer->id;
             $update->order_status = 7;
 
             if (is_null($update->end_popks)) {

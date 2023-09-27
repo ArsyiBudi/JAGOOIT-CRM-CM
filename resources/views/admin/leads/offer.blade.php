@@ -19,7 +19,7 @@
 
 @section('container')
 
-<form class=" hidden mt-24 md:mt-0 text-center lg:text-left" id="form3" action="{{ route('create_order') }}" method="post">
+<form class=" hidden mt-24 md:mt-0 text-center lg:text-left" id="form3" action="{{ route('create_order') }}" method="post" enctype="multipart/form-data">
     @csrf
     <h1 class="text-3xl font-semibold text-white">Create Order</h1>
     <div class="bg-primary rounded shadow-lg mt-6 p-6 h-[calc(85vh-85px)] overflow-y-auto hide-scrollbar">
@@ -257,9 +257,6 @@
         const fileUploadLabel = document.getElementById('file-upload-label-tor');
         const canvasLoading = document.getElementById('canvas-loading-tor');
         
-
-
-
         if (fileInput.files && fileInput.files[0]) {
             fileUploadLabel.textContent = 'Ganti File';
             containerInput.style.width = 'auto';
