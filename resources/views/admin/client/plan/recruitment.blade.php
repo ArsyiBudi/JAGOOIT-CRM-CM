@@ -1,55 +1,8 @@
 @extends('admin.layouts.main')
-
-<style>
-    .hide-scrollbar::-webkit-scrollbar {
-        width: 0.4em;
-        /* Width of the scrollbar */
-    }
-
-    .hide-scrollbar::-webkit-scrollbar-thumb {
-        background-color: #555555;
-        /* Color of the scrollbar thumb */
-        border-radius: 8px;
-        /* Rounded corners for the scrollbar thumb */
-    }
-
-    .hide-scrollbar::-webkit-scrollbar-thumb:hover {
-        background-color: #777777;
-        /* Color of the scrollbar thumb on hover */
-    }
-
-    .hide-scrollbar::-webkit-scrollbar-track {
-        background-color: #555555;
-        /* Color of the scrollbar track */
-    }
-
-    .hide-scrollbar::-webkit-scrollbar-track:hover {
-        background-color: #666666;
-        /* Color of the scrollbar track on hover */
-    }
-
-    /* Customize the appearance of the scrollbar wheel */
-    .hide-scrollbar {
-        scrollbar-width: thin;
-        scrollbar-color: #555555 #333333;
-    }
-
-    /* Customize the appearance of the scrollbar thumb icon */
-    .hide-scrollbar::-webkit-scrollbar-thumb:vertical {
-        background-color: #fff;
-        /* Color of the scrollbar thumb icon */
-    }
-
-    .custom-date-input::-webkit-calendar-picker-indicator {
-        filter: invert(1);
-        /* This inverts the icon color */
-    }
-</style>
-
 @section('container')
 <div class="pt-20 pb-2 lg:pt-0">
 </div>
-<div class="overflow-x-hidden overflow-y-auto pt-0 pb-10 h-[90vh] md:pr-5 px-5 md:px-0">
+<div class="overflow-x-hidden overflow-y-auto pt-0 pb-10 h-[90vh] md:pr-5 px-5 md:px-0 hide-scrollbar">
     <h1 class=" text-4xl">Recruitment</h1>
     <p class=" text-sm md:text-[16px] font-medium pt-3">Silakan pilih kandidat dengan jumlah melebihi yang dibutuhkan
         <br class=" hidden md:block"> untuk cadangan

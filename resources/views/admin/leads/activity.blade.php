@@ -1,45 +1,5 @@
 @extends('admin.layouts.main')
-<style>
-      .hide-scrollbar::-webkit-scrollbar {
-        width: 0.4em;
-        /* Width of the scrollbar */
-    }
-
-    .hide-scrollbar::-webkit-scrollbar-thumb {
-        background-color: #555555;
-        /* Color of the scrollbar thumb */
-        border-radius: 8px;
-        /* Rounded corners for the scrollbar thumb */
-    }
-
-    .hide-scrollbar::-webkit-scrollbar-thumb:hover {
-        background-color: #777777;
-        /* Color of the scrollbar thumb on hover */
-    }
-
-    .hide-scrollbar::-webkit-scrollbar-track {
-        background-color: #555555;
-        /* Color of the scrollbar track */
-    }
-
-    .hide-scrollbar::-webkit-scrollbar-track:hover {
-        background-color: #666666;
-        /* Color of the scrollbar track on hover */
-    }
-
-    /* Customize the appearance of the scrollbar wheel */
-    .hide-scrollbar {
-        scrollbar-width: thin;
-        scrollbar-color: #555555 #333333;
-    }
-
-    /* Customize the appearance of the scrollbar thumb icon */
-    .hide-scrollbar::-webkit-scrollbar-thumb:vertical {
-        background-color: #fff;
-        /* Color of the scrollbar thumb icon */
-    }
-
-    /* Width of the scrollbar */
+<style>  
     .animate-slide-up {
         animation: slide-up 0.3s ease-in-out;
     }
@@ -59,23 +19,6 @@
 
 
 @section('container')
-{{-- <div id="formContainer">
-    <form id="form3" class="hidden">
-        <div class="bg-white opacity-70 rounded-md w-full mb-4 p-2">
-            <textarea name="judulreport" id="judulreport" class="bg-transparent outline-none w-full p-2 resize-none text-black" placeholder="Judul"></textarea>
-        </div>
-        <div class="bg-white opacity-70 rounded-md w-full mb-4 p-4">
-            <input type="file" name="file" id="file" class="hidden w-full" placeholder="file"></input>
-            <label for="file" class="text-grey w-full block">File</label>
-        </div>
-        <div class="bg-white opacity-70 rounded-md w-full mb-4 p-2 h-[100px]">
-            <textarea name="deskripsireport" id="deskripsireport" class="bg-transparent outline-none p-2  rounded w-full h-full resize-none text-black" placeholder="Deskripsi"></textarea> 
-        </div>
-        <div class="w-[97px] mx-auto">
-            <input type="submit" class="bg-secondary text-white rounded-md mt-5 mr-3 px-4 py-2 h-[37px]">
-        </div>
-    </form>
-</div> --}}
 <div class=" overflow-auto h-[90vh] hide-scrollbar">
     <h6 class=" font-normal mb-4 text-2xl lg:mt-0 mt-24 lg:pl-0 pl-4 lg:text-left text-center">Create Activity</h6>
     <div class="bg-primary overflow-x-hidden md:p-9 p-4 rounded-lg  w-full">

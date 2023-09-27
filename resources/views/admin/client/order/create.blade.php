@@ -1,17 +1,4 @@
 @extends('admin.layouts.main')
-
-<style>
-    .hide-scrollbar::-webkit-scrollbar {
-        width: 0;
-    }
-
-    /* input::-webkit-outer-spin-button,
-    input::-webkit-inner-spin-button {
-        -webkit-appearance: none;
-        margin: 0;
-    } */
-</style>
-
 @section('container')
 <div class="mt-0 pt-28 lg:pt-0">
     <h1 class="text-3xl font-semibold text-white px-6 lg:px-0">Create Order</h1>
