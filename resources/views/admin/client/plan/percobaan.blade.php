@@ -2,7 +2,6 @@
 <style>
     .custom-date-input::-webkit-calendar-picker-indicator {
         filter: invert(1);
-        /* This inverts the icon color */
     }
 </style>
 
