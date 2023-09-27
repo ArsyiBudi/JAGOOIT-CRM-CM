@@ -21,7 +21,7 @@
             <h2 class="text-2xl font-semibold text-white">New Order</h2>
         </div>
 
-        <form action="{{ route('create_order') }}" method="POST">
+        <form action="{{ route('create_order') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="mb-4 block md:flex items-center gap-4">
                 <label for="order-id" class="text-sm text-white">Order/Request ID</label> <br class=" block md:hidden">
@@ -56,7 +56,7 @@
             </div>
 
             <div class="mb-4">
-                <label for="job-description" class="text-sm text-white">Job Description</label>
+                <label for="job-description" class="text-sm text-white">Deskripsi Pekerjaan</label>
                 <input required id="job-description" type="text" name="description" class="outline-none text-black rounded-lg px-2 py-1 w-full bg-white mt-2" placeholder="Deskripsi">
             </div>
 

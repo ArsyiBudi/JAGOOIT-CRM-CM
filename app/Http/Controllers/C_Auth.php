@@ -40,13 +40,16 @@ class C_Auth extends Controller
         return redirect('/');
     }
 
-    public function changePassword(Request $request, $id, $newPassword)
+    public function changePassword($id, $newPassword)
     {
+        if(session() -> has('user')){
+            $checkCurrentUser = session('user') -> id == $id;
+            if(!$checkCurrentUser) return back() -> with('error', "Kamu tidak bisa merubah password user lain");
 
-        $user = M_Users::find($id);
-        $user -> password = Hash::make($newPassword);
-        $status = $user -> save();
-
-        if($status) return response('berhasil');
+            $user = M_Users::find($id);
+            $user -> password = Hash::make($newPassword);
+            $status = $user -> save();
+            if($status) return back() -> with('success', "Password anda berhasil diubah");
+        }
     }
 }

@@ -53,35 +53,27 @@
                     </div>
                     <div class="pt-3">
                         <p>
-                            Alamat : <span class="font-bold"> {{ $data -> leadData -> address }}</span>
+                            Posisi Yang Dibutuhkan : <span class="font-bold"> {{ $data -> desired_position }}</span>
                         </p>
                     </div>
                     <div class="pt-3">
                         <p>
-                            Nama PIC : <span class="font-bold"> {{ $data -> leadData -> pic_name }}</span>
+                           Jumlah : <span class="font-bold">{{ $data -> needed_qty }}</span>
                         </p>
                     </div>
                     <div class="pt-3">
                         <p>
-                            No Telepon PIC : <span class="font-bold"> {{ $data -> leadData -> pic_contact_number }}</span>
+                            Deskripsi Pekerjaan : <span class="font-bold"> {{ $data ->  description }}</span>
                         </p>
                     </div>
                     <div class="pt-3">
                         <p>
-                            Aktivitas terakhir : <span class="font-bold">
-                                @if ($data-> leadData -> hasOneActivity)
-                                @if ($data -> leadData ->latestActivityParams)
-                                    {{ $data -> leadData ->latestActivityParams->params_name }}
-                                @endif
-                                @else
-                                    -
-                                @endif
-                            </span>
+                            Kriteria Keterampilan : <span class="font-bold"> {{ $data -> skills_desc }}</span>
                         </p>
                     </div>
                     <div class="pt-3">
                         <p>
-                           Status : <span class="font-bold"> {{ $data -> leadData -> statusParam -> params_name }}</span> 
+                            File TOR :  <a href="{{ route('detail_order.downloadPDF', ['order_id' => $data->id]) }}" class=" font-bold underline">Download File</a>
                         </p>
                     </div>
                     <hr>

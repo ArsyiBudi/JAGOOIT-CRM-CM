@@ -1,7 +1,42 @@
 @extends('admin.layouts.main')
 <style>
-    .hide-scrollbar::-webkit-scrollbar {
-        width: 0;
+      .hide-scrollbar::-webkit-scrollbar {
+        width: 0.4em;
+        /* Width of the scrollbar */
+    }
+
+    .hide-scrollbar::-webkit-scrollbar-thumb {
+        background-color: #555555;
+        /* Color of the scrollbar thumb */
+        border-radius: 8px;
+        /* Rounded corners for the scrollbar thumb */
+    }
+
+    .hide-scrollbar::-webkit-scrollbar-thumb:hover {
+        background-color: #777777;
+        /* Color of the scrollbar thumb on hover */
+    }
+
+    .hide-scrollbar::-webkit-scrollbar-track {
+        background-color: #555555;
+        /* Color of the scrollbar track */
+    }
+
+    .hide-scrollbar::-webkit-scrollbar-track:hover {
+        background-color: #666666;
+        /* Color of the scrollbar track on hover */
+    }
+
+    /* Customize the appearance of the scrollbar wheel */
+    .hide-scrollbar {
+        scrollbar-width: thin;
+        scrollbar-color: #555555 #333333;
+    }
+
+    /* Customize the appearance of the scrollbar thumb icon */
+    .hide-scrollbar::-webkit-scrollbar-thumb:vertical {
+        background-color: #fff;
+        /* Color of the scrollbar thumb icon */
     }
 
     /* Width of the scrollbar */
@@ -41,9 +76,9 @@
         </div>
     </form>
 </div> --}}
-<div class=" overflow-auto h-[90vh]">
-    <h6 class=" font-normal mb-4 text-2xl md:mt-0 mt-24 md:pl-0 pl-4 lg:text-left text-center">Create Activity</h6>
-    <div class="bg-grey overflow-x-hidden md:p-9 p-4 rounded-lg border-2 border-white  w-full">
+<div class=" overflow-auto h-[90vh] hide-scrollbar">
+    <h6 class=" font-normal mb-4 text-2xl lg:mt-0 mt-24 lg:pl-0 pl-4 lg:text-left text-center">Create Activity</h6>
+    <div class="bg-primary overflow-x-hidden md:p-9 p-4 rounded-lg  w-full">
         <div class='dropdown'>
             <select id="formSelector" class="mb-3 bg-transparent border m-1 btn p-2 outline-none border-spacing-1 rounded-md py-1 text-1xl text-white font-quicksand hover:bg-gray-300 hover:text-darkSecondary">
                 <option value="form1" class="bg-grey hover:bg-gray-300 hover:text-darkSecondary">Appointment</option>
@@ -145,12 +180,19 @@
 
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.11.338/pdf.min.js"></script>
+<script></script>
 
 <script>
     const my_modal_5 = document.getElementById('my_modal_5');
+    const currentURL = window.location.href;
+    const urlParts = currentURL.split('/');
+    const lastSegment = urlParts[urlParts.length - 1];
 
     function showModal() {
         my_modal_5.showModal();
+        setTimeout(() => {
+            window.location.href = '/leads/'+lastSegment+'/detail';
+        }, 1000);
     }
 
     function closeAlrt() {
@@ -179,66 +221,65 @@
         document.getElementById("form1").style.display = "block";
     });
 
-    async function previewFile() {
-        const fileInput = document.getElementById('file-tor');
-        const containerInput = document.getElementById('container-tor');
-        const fileNamePreview = document.getElementById('file-name-preview');
-        const canvas = document.getElementById('pdf-preview');
-        const fileUploadLabel = document.getElementById('file-upload-label');
-        const canvasLoading = document.getElementById('canvas-loading');
+ async function previewFile() {
+    const fileInput = document.getElementById("file-tor");
+    const containerInput = document.getElementById("container-tor");
+    const fileNamePreview = document.getElementById("file-name-preview");
+    const canvas = document.getElementById("pdf-preview");
+    const fileUploadLabel = document.getElementById("file-upload-label");
+    const canvasLoading = document.getElementById("canvas-loading");
 
-        if (fileInput.files && fileInput.files[0]) {
-            fileUploadLabel.textContent = 'Ganti File';
-            containerInput.style.width = 'auto';
-            containerInput.style.height = 'auto';
-            containerInput.style.backgroundColor = '#EC512E'
-        } else {
-            fileUploadLabel.innerHTML = '<i class="ri-upload-2-fill text-3xl text-black"></i>';
-        }
-
-        if (fileInput.files && fileInput.files[0]) {
-            canvasLoading.style.display = 'block';
-            const file = fileInput.files[0];
-            const fileURL = URL.createObjectURL(file);
-
-            fileNamePreview.style.color = 'white'
-            fileNamePreview.textContent = file.name;
-            fileNamePreview.style.display = 'block';
-
-            if (file.type === 'application/pdf') {
-
-                const loadingTask = pdfjsLib.getDocument(fileURL);
-                const pdf = await loadingTask.promise;
-
-                const pageNum = 1;
-                const page = await pdf.getPage(pageNum);
-
-                const viewport = page.getViewport({
-                    scale: 1
-                });
-                canvas.width = viewport.width;
-                canvas.height = 200;
-
-                const renderContext = {
-                    canvasContext: canvas.getContext('2d'),
-                    viewport
-                };
-
-                await page.render(renderContext).promise;
-                canvas.style.display = 'block';
-                canvasLoading.style.display = 'none';
-
-            } else {
-                canvas.style.display = 'none';
-                fileNamePreview.textContent = 'File harus berupa PDF!';
-                fileNamePreview.style.color = 'red'
-                canvasLoading.style.display = 'none';
-            }
-        } else {
-            fileNamePreview.style.display = 'none';
-            canvas.style.display = 'none';
-        }
+    if (fileInput.files && fileInput.files[0]) {
+        fileUploadLabel.textContent = "Ganti File";
+        containerInput.style.width = "auto";
+        containerInput.style.height = "auto";
+        containerInput.style.backgroundColor = "#EC512E";
+    } else {
+        fileUploadLabel.innerHTML =
+            '<i class="ri-upload-2-fill text-3xl text-black"></i>';
     }
+
+    if (fileInput.files && fileInput.files[0]) {
+        canvasLoading.style.display = "block";
+        const file = fileInput.files[0];
+        const fileURL = URL.createObjectURL(file);
+
+        fileNamePreview.style.color = "white";
+        fileNamePreview.textContent = file.name;
+        fileNamePreview.style.display = "block";
+
+        if (file.type === "application/pdf") {
+            const loadingTask = pdfjsLib.getDocument(fileURL);
+            const pdf = await loadingTask.promise;
+
+            const pageNum = 1;
+            const page = await pdf.getPage(pageNum);
+
+            const viewport = page.getViewport({
+                scale: 1,
+            });
+            canvas.width = viewport.width;
+            canvas.height = 200;
+
+            const renderContext = {
+                canvasContext: canvas.getContext("2d"),
+                viewport,
+            };
+
+            await page.render(renderContext).promise;
+            canvas.style.display = "block";
+            canvasLoading.style.display = "none";
+        } else {
+            canvas.style.display = "none";
+            fileNamePreview.textContent = "File harus berupa PDF!";
+            fileNamePreview.style.color = "red";
+            canvasLoading.style.display = "none";
+        }
+    } else {
+        fileNamePreview.style.display = "none";
+        canvas.style.display = "none";
+    }
+}
 
 </script>
 @endsection

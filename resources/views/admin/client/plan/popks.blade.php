@@ -70,7 +70,7 @@
 <div class="pt-20 pb-2 lg:pt-0">
 </div>
 <div class="hide-scrollbar overflow-y-auto  pt-0 h-[90vh] pb-10 w-full rounded-md overflow-x-hidden md:pr-5 px-5 md:px-0">
-    <h1 class="pl-4 text-4xl">PO & PKS</h1>
+    <h1 class="pl-4 text-4xl">PKS</h1>
     <p class=" text-[16px] font-medium pl-4 pt-3">Silakan input data kontrak</p>
 
     <div class="mt-5  w-full ">
@@ -94,7 +94,7 @@
         @csrf
         <div class="overflow-auto bg-grey mt-5 justify-between flex flex-col text-white px-8 py-10 rounded-md gap-y-3">
             <div class="border-b pb-3 mb-6">
-                <h2 class="text-2xl md:text-4xl text-white">Form Generate PO & PKS</h2>
+                <h2 class="text-2xl md:text-4xl text-white">Form Generate PKS</h2>
             </div>
 
             <div class="text-xl">JagooIT:</div>

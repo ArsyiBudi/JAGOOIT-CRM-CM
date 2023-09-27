@@ -72,11 +72,14 @@ Route::prefix('login')->group(function () {
     Route::view('/', 'admin.login')->name('login');
     Route::post('/', [C_Auth::class, 'login']);
 });
-Route::get('/change-password/{id}/{new_password}', [C_Auth::class, 'changePassword']);
 Route::get('/logout', [C_Auth::class, 'logout'])->name('logout');
 
 //!PROTECTED ROUTES
 Route::middleware('auth')->group(function () {
+    
+    //?This are for change password
+    Route::get('/change-password/{id}/{new_password}', [C_Auth::class, 'changePassword']);
+
     Route::prefix('leads')->group(function () {
         Route::get('/', [C_Leads::class, 'fetch'])->name('fetch_leads');
         Route::delete('/{id}', [C_Leads::class, 'delete'])->name('admin.leads.delete');
@@ -120,6 +123,7 @@ Route::middleware('auth')->group(function () {
             Route::prefix('detail')->group(function () {
                 Route::get('/{order_id}', [C_Orders::class, 'detail'])->name('detail_order');
                 Route::get('/{order_id}/timeline', [C_Orders::class, 'timeline']);
+                Route::get('/{order_id}/downloadTOR', [C_Orders::class, 'downloadPDF'])->name('detail_order.downloadPDF');
             });
 
             //?CREATE ORDER

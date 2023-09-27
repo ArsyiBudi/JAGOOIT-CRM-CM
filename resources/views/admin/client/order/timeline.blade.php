@@ -62,20 +62,24 @@
     Carbon::setLocale('id'); // 'id' is the locale code for Indonesian
     @endphp
 
-    <div class="pt-6">
+    <div class="pt-6 relative">
         <div class="pt-6">
             <h1 class="text-center text-3xl font-bold pt">Detail Timeline</h1>
             <p class="text-center pt-3">Order ID {{ $order -> id }}</p>
             <p class="text-center pt-1">{{ $lead -> business_name }}</p>
         </div>
 
-        <div class="flex justify-center">
-            <div class="mb-7 mr-10">
+
+
+        <div class="flex justify-center items-end relative">
+
+            <div class="mb-7 mr-10 absolute left-10 top-10 hidden md:block">
                 <a href="{{ url('/client/order/detail/'. $order -> id) }}" class="flex items-center justify-start mb-2">
                     <i class="ri-arrow-left-s-line md:hidden block text-3xl"></i>
                     <p class="text-left hidden md:block ml-2"> &lt; Kembali </p>
                 </a>
             </div>
+           
 
 
             <div class="flex items-center -ml-4">
