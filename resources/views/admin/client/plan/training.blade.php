@@ -73,7 +73,7 @@
                             <th align="center">No</th>
                             <th align="center">Nama Talent</th>
                             <th align="center">Pre-Test</th>
-                            <th align="center">Pre-Test</th>
+                            <th align="center">Post-Test</th>
                             <th align="center">Kelompok</th>
                             <th align="center">Akhir</th>
                             <th align="center">Rata-Rata</th>
@@ -122,8 +122,8 @@
                                         </div>
                                     </td>
                                     <td align="center">
-                                        <div class="w-[86px] h-[27px] rounded-md bg-white flex items-center justify-center">
-                                            <input disabled id='rata-rata' name='average_score' type="number" value="{{ old('average_score', ($data->pre_score + $data->post_score + $data->group_score + $data->final_score) / 4) }}" class='text-black w-full text-center outline-none bg-transparent' placeholder='0'>
+                                        <div class="w-[86px] h-[27px] rounded-md bg-darkSeconday flex items-center justify-center">
+                                            <input disabled id='rata-rata' name='average_score' type="number" value="{{ old('average_score', ($data->pre_score + $data->post_score + $data->group_score + $data->final_score) / 4) }}" class='py-0 my-0 text-white w-full text-center outline-none bg-transparent [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none' placeholder='0'>
                                         </div>
                                     </td>
                                     <td align="center"><input type="submit" class="bg-secondary text-white rounded-md w-[82px] h-[25px] cursor-pointer">
